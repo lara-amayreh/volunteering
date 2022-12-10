@@ -1,0 +1,25 @@
+.login {
+    display: flex;
+    flex-direction: column;
+
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%);
+  box-shadow: 0 0 10px black;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.login-form {
+  
+  width: 100%;
+}
+
+.inputs-field {
+  width: 100%;
+}
+.card-h{
+padding-bottom: 20px;
+
+}

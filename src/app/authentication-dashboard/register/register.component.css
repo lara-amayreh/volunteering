@@ -1,0 +1,30 @@
+.register-card {
+    padding: 30px;
+    max-width: 100%;
+
+
+}
+
+.container {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+
+}
+
+@media (min-width: 768px) {
+    .container {
+       flex-direction: row;
+        padding: 50px;
+        justify-content: center;
+        gap: 40px;
+    }
+
+    .register-card {
+        padding: 20px;
+        max-width: 400px;
+        box-shadow: 0 0 10px gray;
+    }
+}
