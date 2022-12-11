@@ -1,9 +1,12 @@
 .register-card {
     padding: 30px;
     max-width: 100%;
+    cursor:pointer;
 
 
 }
+
+
 
 .container {
     padding: 10px;
@@ -16,7 +19,7 @@
 
 @media (min-width: 768px) {
     .container {
-       flex-direction: row;
+        flex-direction: row;
         padding: 50px;
         justify-content: center;
         gap: 40px;
@@ -27,4 +30,7 @@
         max-width: 400px;
         box-shadow: 0 0 10px gray;
     }
+        .register-card:hover {
+            box-shadow: 0 0 20px black;
+        }
 }

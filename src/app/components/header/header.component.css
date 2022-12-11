@@ -1,8 +1,9 @@
-mat-toolbar{
+header mat-toolbar{
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 0 10px black;
+    
 }
 .btn-login{
 display: flex;
@@ -15,13 +16,11 @@ align-items: center;
 }
 
 
-.example-sidenav-content {
-    height: 100%;
-  
-}
+
 
 a{
     text-decoration: none;
+    cursor:pointer;
     
 }
 .nav-links{

@@ -13,6 +13,12 @@ import {MatInputModule} from '@angular/material/input';
 import { RegisterComponent } from './register/register.component';
 import { PersonRegesterComponent } from './person-regester/person-regester.component';
 import { OrganaizationRegesterComponent } from './organaization-regester/organaization-regester.component';
+import { PagenotfoundComponent } from '../components/pagenotfound/pagenotfound.component';
+import {MatStepperModule} from '@angular/material/stepper';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select';
+
+
 
 
  const routes:Routes=[
@@ -20,6 +26,7 @@ import { OrganaizationRegesterComponent } from './organaization-regester/organai
     {path:"organaization",component:OrganaizationRegesterComponent ,pathMatch:"full"},
 
   {path:'',component:RegisterComponent,pathMatch:"full"},
+  { path:"**", component:PagenotfoundComponent,pathMatch:"full"},
 
  ]
 
@@ -36,6 +43,9 @@ import { OrganaizationRegesterComponent } from './organaization-regester/organai
    MatFormFieldModule,
    MatCardModule,
    RouterModule.forChild(routes),
+   MatStepperModule,
+   ReactiveFormsModule,
+   MatSelectModule,
    
    
   ],exports:[LoginComponent, RegisterComponent, PersonRegesterComponent, OrganaizationRegesterComponent]
