@@ -1,6 +1,6 @@
 import { cities } from 'src/app/inteerfaces/cities';
 
-export const data:cities[] =[
+ const datasort:cities[] =[
   {
     "city": "Amman", 
     "lat": "31.9500", 
@@ -1003,4 +1003,9 @@ export const data:cities[] =[
     "population_proper": ""
   }
 ]
-console.log(data[0].city);
+
+export const data =  datasort.sort(function(a, b){
+    if(a.city < b.city) { return -1; }
+    if(a.city > b.city) { return 1; }
+    return 0;
+});

@@ -3,20 +3,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
 import { LoginComponent } from './authentication-dashboard/login/login.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
-import {MatButtonModule} from '@angular/material/button';
-import { ReactiveFormsModule } from '@angular/forms';
-
-
-
+import { SharedModuleModule } from './shared-module/shared-module.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 
  const routs : Routes=[
@@ -39,31 +34,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     ContactComponent,
     LandingComponent,
     PagenotfoundComponent,
-    
-
-   
-    
-
-     
-
-
   ],
   imports: [
     BrowserModule,
-        RouterModule.forRoot(routs),
-    BrowserAnimationsModule,
+    FormsModule ,
+    RouterModule.forRoot(routs),
     LayoutModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatButtonModule,
-        ReactiveFormsModule,
-        
-
-   
-   
-   
-
-
+    BrowserAnimationsModule,
+    SharedModuleModule
      ],
   providers: [],
   bootstrap: [AppComponent]
