@@ -1,5 +1,5 @@
 export interface organization {
-    id:number,
+    id?:number,
     Name:string,
 email:string,
 password:string,

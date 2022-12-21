@@ -1,0 +1,1 @@
+export const companytypes:string[]=['NGO','Government','Relegious']

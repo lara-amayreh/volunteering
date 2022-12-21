@@ -1,59 +1,64 @@
 <div class="form-container">
-    <form #form="ngForm">
+    <h2>Person Register Form</h2>
+    <form [formGroup]="form" (ngSubmit)="submit()">
 
         <mat-form-field>
             <mat-label>Full Name</mat-label>
-            <input name="fullName" matInput placeholder="First name Last name" required [(ngModel)]="person.fullName">
+            <input name="fullName" matInput placeholder="First name Last name" formControlName="fullName">
             <mat-error> Full Name is required</mat-error>
         </mat-form-field>
         <mat-form-field>
             <mat-label>City</mat-label>
-            <mat-select name="city" required [(ngModel)]="person.city">
+            <mat-select name="city" formControlName="city">
                 <mat-option *ngFor="let City of Cities" [value]="City.city">
                     {{City.city}}
                 </mat-option>
             </mat-select>
-            <mat-error>city is required</mat-error>
+            <mat-error>required field</mat-error>
         </mat-form-field>
         <mat-form-field>
             <mat-label>phoneNumber</mat-label>
-            <input name="phoneNumber" type="number" matInput #phoneNumber maxlength="10" placeholder="Ex. 0712345678"
-                min="0" required [(ngModel)]="person.phoneNumber">
+            <input name="phoneNumber" type="number" matInput #phoneNumber placeholder="Ex. 0712345678"
+            formControlName="phoneNumber">
             <mat-hint align="end">{{phoneNumber.value.length}} / 10</mat-hint>
-            <mat-error> phone number is required</mat-error>
+            <mat-error>required field</mat-error>
         </mat-form-field>
         <mat-form-field>
             <mat-label>Email</mat-label>
-            <input type="email" name="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
-                placeholder="Ex. pat@example.com" required [(ngModel)]="person.email">
-            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                Please enter a valid email address
+            <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
+                         <mat-error *ngIf="form.get('email')?.hasError('email') && !form.get('email')?.hasError('required')">
+                Please enter a  valid email address
             </mat-error>
-            <mat-error *ngIf="emailFormControl.hasError('required')">
-                Email is required
+            <mat-error *ngIf="form.get('email')?.hasError('required')">
+                Email is <strong>required</strong>
             </mat-error>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field  class="inputs-field">
             <mat-label>Enter your password</mat-label>
-            <input name="password" matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="person.password" required>
-            <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="hide">
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+            <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
+                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                <mat-error> password is required</mat-error>
-
             </button>
+            <mat-error *ngIf="form.get('password')?.hasError('required')">
+                password is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="form.get('password')?.hasError('pattern') && !form.get('password')?.hasError('required')">
+                Minimum eight characters: one Uppercase letter, one lowercase letter, one number and special character:
+
+            </mat-error>
         </mat-form-field>
         <mat-form-field>
             <mat-label>Skills</mat-label>
-            <mat-chip-grid name="skills" #chipGrid aria-label="skills selection" [(ngModel)]="person.skills" required>
-                <mat-chip-row *ngFor="let skill of skills" (removed)="remove(skill)">
+            <mat-chip-grid name="skills" #chipGrid aria-label="skills selection" formControlName="skills" >
+                <mat-chip-row *ngFor="let skill of skills" (removed)="remove(skill)" >
                     {{skill}}
                     <button matChipRemove [attr.aria-label]="'remove ' + skill">
                         <mat-icon>cancel</mat-icon>
                     </button>
                 </mat-chip-row>
             </mat-chip-grid>
-            <input placeholder="New skill..." #skillInput [formControl]="skillsCtrl" [matChipInputFor]="chipGrid"
+            <input placeholder="New skill..." #skillInput  [matChipInputFor]="chipGrid" 
                 [matAutocomplete]="auto" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                 (matChipInputTokenEnd)="add($event)" />
             <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
@@ -61,66 +66,37 @@
                     {{skill}}
                 </mat-option>
             </mat-autocomplete>
-            <mat-error> skills are required</mat-error>
+            <mat-error>required field</mat-error>
 
         </mat-form-field>
         <mat-form-field>
-            <mat-label>Experience</mat-label>
-            <mat-select name="experience" required [(ngModel)]="person.experience">
-                <mat-option value="Less than 3 months">Less than 3 months
-                </mat-option>
-                <mat-option value="3 months">3 months
-                </mat-option>
-                <mat-option value="6 months">6 months
-                </mat-option>
-                <mat-option value="more than 1 year">more than 1 year
+            <mat-label>Days</mat-label>
+            <mat-select name="city" formControlName="days" [multiple]="true">
+                <mat-option *ngFor="let day of days" [value]="day">
+                    {{day}}
                 </mat-option>
             </mat-select>
-            <mat-error>Experience is required</mat-error>
         </mat-form-field>
         <mat-form-field>
             <mat-label>courses</mat-label>
             <textarea name="courses" matInput matNativeControl placeholder="please enter your courses..."
-                [(ngModel)]="person.courses" required>
-
+            formControlName="courses">
          </textarea>
-            <mat-error> courses are required</mat-error>
+            <mat-error> required field</mat-error>
         </mat-form-field>
+     
     
-        <mat-card class="dayscontainer">
-            <mat-label>Available Days</mat-label>
-            <mat-selection-list #days name="days" [(ngModel)]="person.days" required>
-                <mat-list-option *ngFor="let day of allDays" [value]="day">
-                    {{day}}
-                </mat-list-option>
-
-            </mat-selection-list>
+      
 
 
 
 
            
-                <div class="time-container">
-                    <div class="stime">
-                        <mat-label>Start Time</mat-label>
-                        <input type="time" matNativeControl name="startTime" [(ngModel)]="person.time.startTime"
-                            required />
-
-                    </div>
-                    <mat-icon>schedule</mat-icon>
-                    <div class="etime">
-                        <mat-label>End Time</mat-label>
-                        <input type="time" matNativeControl name="endTime" [(ngModel)]="person.time.endTime" required />
-
-                    </div>
-                </div>
-          
-        </mat-card>
+               
 
         <button id="reset" mat-raised-button color="warn" (click)="form.reset()">Reset</button>
         <button [disabled]="form.invalid" mat-raised-button color="primary" (click)="submit()">Submit</button>
 
     </form>
-    {{this.persons| json}}
 
 </div>

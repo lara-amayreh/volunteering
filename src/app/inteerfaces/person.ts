@@ -9,10 +9,6 @@ password:string,
     phoneNumber:number,
     experience:string,
     days:string,
-    time:{
-        startTime:string,
-        endTime:string,
-    }
- 
+   
     
 }
