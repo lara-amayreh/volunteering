@@ -1,0 +1,22 @@
+.menu-button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 1rem;
+  
+   
+  }
+  mat-icon {
+    margin-right: 5px;
+  }
+  h4 {
+    margin-top: 8px;
+    font-weight: normal;
+  }
+  mat-divider {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+  }

@@ -1,18 +1,18 @@
 .login {
-    display: flex;
-    flex-direction: column;
 
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%);
+ /* position: relative;
+ left: 50%;
+ top: 20%; */
+ max-width: 550px;
+ /* transform: translate(-50%); */
   box-shadow: 0 0 10px black;
     border-radius: 5px;
     padding: 10px;
+    margin: 20px auto;
 }
 
 .login-form {
-  
+
   width: 100%;
 }
 

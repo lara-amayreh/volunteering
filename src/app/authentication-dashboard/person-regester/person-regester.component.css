@@ -6,11 +6,12 @@ form>mat-form-field{
     
 }
 
-.container{
+.form-container{
     max-width:1000px;
     display: flex;
     flex-direction: column;
     margin: 0 auto;
+    overflow: hidden;
    
 }
 #reset{

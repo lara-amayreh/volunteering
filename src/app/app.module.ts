@@ -12,6 +12,7 @@ import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.co
 import { SharedModuleModule } from './shared-module/shared-module.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { SideNavComponent } from './components/side-nav/side-nav.component';
 
 
  const routs : Routes=[
@@ -34,6 +35,7 @@ import { FormsModule } from '@angular/forms';
     ContactComponent,
     LandingComponent,
     PagenotfoundComponent,
+    SideNavComponent,
   ],
   imports: [
     BrowserModule,

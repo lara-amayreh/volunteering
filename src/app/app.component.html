@@ -1,4 +1,17 @@
-<app-header></app-header>
-<div class="container">
-  <router-outlet></router-outlet>
-</div>
+<mat-toolbar class="head">
+  <button mat-icon-button (click)="sidenav.toggle()">
+     <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+    <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+  </button>
+  <app-header></app-header>
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z6">
+ <app-side-nav></app-side-nav>
+</mat-sidenav>
+  <mat-sidenav-content>
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
