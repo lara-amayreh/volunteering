@@ -70,6 +70,14 @@
 
         </mat-form-field>
         <mat-form-field>
+            <mat-label>Experience</mat-label>
+            <mat-select name="Experience" formControlName="experience" [multiple]="false">
+                <mat-option *ngFor="let Experience of experienceList"  [value]="Experience">
+                    {{Experience}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
             <mat-label>Days</mat-label>
             <mat-select name="city" formControlName="days" [multiple]="true">
                 <mat-option *ngFor="let day of days" [value]="day">
@@ -77,19 +85,46 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
-        <mat-form-field>
+            <mat-form-field>
+                <mat-label>Enter a date range</mat-label>
+                <mat-date-range-input formGroupName='range' [rangePicker]="picker">
+                  <input matStartDate formControlName="start" placeholder="Start date">
+                  <input matEndDate formControlName="end" placeholder="End date">
+                </mat-date-range-input>
+                <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+              
+                <mat-error *ngIf="form.get('range')?.hasError('required')">Required field</mat-error>
+                <mat-error *ngIf="form.get('last')?.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+                <mat-error *ngIf="form.get('last')?.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+              </mat-form-field>
+              
+<div>
             <mat-label>courses</mat-label>
-            <textarea name="courses" matInput matNativeControl placeholder="please enter your courses..."
-            formControlName="courses">
-         </textarea>
-            <mat-error> required field</mat-error>
-        </mat-form-field>
+           <ng-container formArrayName="courses">
+           <ng-container *ngFor="let course of courses.controls; let i = index ;">
+<div class="course" [formGroupName]="i">
+
+    <mat-form-field>
+        <mat-label>title</mat-label>
+    <input matInput name="title" formControlName="title" ></mat-form-field>
+    <mat-form-field>
+        <mat-label>nimber of hours</mat-label>
+    <input matInput name="hours" formControlName="hours" ></mat-form-field>
+    <button id="delete" color="warn" (click)="deletecourse(i)"><mat-icon>remove</mat-icon></button>
+
+</div>
+</ng-container>
+           </ng-container>
+           <button id="add" mat-raised-button color="primary" (click)="addCourses()"><mat-icon>add</mat-icon></button>
+
      
     
       
 
 
-
+        </div>
 
            
                

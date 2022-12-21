@@ -1,5 +1,4 @@
 export interface person {
-    id:number,
     fullName:string,
     city:string,
     courses:string,

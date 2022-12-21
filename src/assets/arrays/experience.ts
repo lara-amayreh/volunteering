@@ -1,0 +1,1 @@
+export const experience:string[]=['less than 3 months','3 months','6 months','1 year','more than 1 year']

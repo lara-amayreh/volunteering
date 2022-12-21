@@ -1,12 +1,13 @@
-import {FormBuilder, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import { data } from 'citiesNames';
-import { days } from 'src/assets/arrays/days';
 import { allSkills } from 'src/assets/arrays/skills';
+import { experience } from 'src/assets/arrays/experience';
+import { days } from 'src/assets/arrays/days';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {MatChipInputEvent} from '@angular/material/chips';
-import {Observable} from 'rxjs';
+import {Observable, range} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { PersonsService } from '../persons.service';
 import { person } from 'src/app/inteerfaces/person';
@@ -27,7 +28,7 @@ import {FormGroup, FormControl} from '@angular/forms';
 export class PersonRegesterComponent implements OnInit {
   id:number= 1;
   persons:person[]=[];
-
+experienceList=experience;
  
 hide: boolean=true;
 
@@ -41,13 +42,18 @@ days:new FormControl('',[Validators.required]),
   email:new FormControl('',[Validators.required, Validators.email]),
   password:new FormControl('',[Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]),
   skills: new FormControl('',[Validators.required]),
-  courses: new FormControl('',[Validators.required]),
+  courses: new FormArray([]),
+range :new FormGroup({
+  start: new FormControl('',[Validators.required]),
+  end: new FormControl('',[Validators.required]),
+})
 
-  
+
 
     
 })
-  
+
+
     Cities =data;  
     days=days;
     allSkills= allSkills;
@@ -108,10 +114,31 @@ days:new FormControl('',[Validators.required]),
   }
 submit(){
 //  this.id=this.person.id++;
-   this.personservice.addPerson({...this.form.value} as person);
+  //this.personservice.addPerson({...this.form.value} as person);
+   console.log(this.form.value);
 }
 
- 
-  
+ get first(){
+  return this.form.get('first');
+ }
+ get last(){
+  return this.form.get('last');
+ }
+ get range(){
+  return this.form.get('range');
+ }
+get courses():FormArray{
+  return this.form.get('courses')as FormArray;
+}
+addCourses(){
+  const courseformarray = new FormGroup({
+    title:new FormControl('',[Validators.required]),
+    hours:new FormControl('',[Validators.required])
+})
+this.courses.push(courseformarray);
+}
+ deletecourse(index:number){
+  this.courses.removeAt(index);
+ }
 }
 
