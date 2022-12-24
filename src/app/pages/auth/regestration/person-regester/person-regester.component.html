@@ -41,13 +41,21 @@
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
             <mat-error *ngIf="form.get('password')?.hasError('required')">
-                password is <strong>required</strong>
+                required field
             </mat-error>
             <mat-error *ngIf="form.get('password')?.hasError('pattern') && !form.get('password')?.hasError('required')">
                 Minimum eight characters: one Uppercase letter, one lowercase letter, one number and special character:
 
             </mat-error>
         </mat-form-field>
+        <mat-form-field>
+            <mat-label>Confirm Password</mat-label>
+            <input matInput type="password" formControlName="confirmPassword">
+            <mat-error *ngIf="form.get('confirmPassword')?.hasError('required')"> required field</mat-error>
+        </mat-form-field>
+        <mat-error *ngIf="form.hasError('passwordDoesntMatch')">
+password and confirm password does'nt match  </mat-error>
+
         <mat-form-field>
             <mat-label>Skills</mat-label>
             <mat-chip-grid name="skills" #chipGrid aria-label="skills selection" formControlName="skills" >

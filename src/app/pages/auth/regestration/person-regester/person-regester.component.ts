@@ -9,13 +9,14 @@ import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {Observable, range} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import { PersonsService } from 'src/app/lib/services/auth/persons.service';
+import { PersonsService } from 'src/app/lib/services/person/persons.service';
 import { person } from 'src/app/lib/inteerfaces/person';
 
 import {FormGroup, FormControl} from '@angular/forms';
 import { Router } from '@angular/router';
 
-
+import { passwordMatchingValidator } from 'src/app/lib/validators/passwordmatching';
+import { AuthService } from 'src/app/lib/services/auth/auth.service';
 
 
 
@@ -43,17 +44,18 @@ form = new FormGroup({
 days:new FormControl('',[Validators.required]),
   email:new FormControl('',[Validators.required, Validators.email]),
   password:new FormControl('',[Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]),
+  confirmPassword:new FormControl('',[Validators.required]),
   skills: new FormControl('',[Validators.required]),
   courses: new FormArray([]),
 range :new FormGroup({
   start: new FormControl('',[Validators.required]),
   end: new FormControl('',[Validators.required]),
-})
+}),
 
-
+},
 
     
-})
+{validators: [passwordMatchingValidator]});
 
 
     Cities =data;  
@@ -71,7 +73,7 @@ range :new FormGroup({
 
  
 
-  constructor(private personservice:PersonsService ,private _formBuilder: FormBuilder,private router: Router) 
+  constructor(private personservice:PersonsService ,private _formBuilder: FormBuilder,private router: Router,private auth:AuthService) 
   {this.filteredSkills = this.skillsCtrl.valueChanges.pipe(
       startWith(null),
       map((skill: string | null) => (skill ? this._filter(skill) : this.allSkills.slice())),
@@ -115,12 +117,25 @@ range :new FormGroup({
     return this.allSkills.filter(skill => skill.toLowerCase().includes(filterValue));
   }
 submit(){
-//  this.id=this.person.id++;
-  //this.personservice.addPerson({...this.form.value} as person);
-   console.log(this.form.value);
-   this.router.navigate(['/pocompany-activity']);
 
-}
+    //register user in firebase
+    this.auth.signUp(
+      this.form.get('email')?.value+ '',
+      this.form.get('password')?.value+''
+    ).then((user)=> {
+
+      //save other form fields collection 
+
+      
+      this.router.navigate(['volunteer/']);
+
+      console.log(user);
+    }).catch((error)=> {
+      console.log(error)  
+    });
+  }
+
+
 
  get first(){
   return this.form.get('first');

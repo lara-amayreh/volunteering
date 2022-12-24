@@ -7,12 +7,21 @@
         <button mat-button routerLink='/about'>ABOUT</button>
     </div>
     <div class="regestration">
-        <button mat-raised-button routerLink="/auth/login" class="btn-login">
-            login <mat-icon>login</mat-icon>
+       
+
+        <button  *ngIf="authService.userState$ | async as user; else loginButton"  mat-raised-button routerLink="/auth/login" class="btn-login"  >
+            logout <mat-icon>logout</mat-icon>
         </button>
+        <ng-template #loginButton>
+            <button  mat-raised-button routerLink="/auth/login" class="btn-login">
+                login <mat-icon>login</mat-icon>
+            </button>
+        
+    
         <button mat-raised-button routerLink="/auth/register" class="btn-login">
             signup <mat-icon>person-add-alt</mat-icon>
         </button>
+    </ng-template>
     </div>
 
 </header>

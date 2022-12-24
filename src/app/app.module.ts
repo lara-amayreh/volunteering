@@ -14,8 +14,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { SideNavComponent } from './lib/Components/side-nav/side-nav.component';
-
-
+import {AngularFireModule} from '@angular/fire/compat';
+import {AngularFireAuthModule} from '@angular/fire/compat/auth';
+import { environment } from 'src/environments/environment';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +24,10 @@ import { SideNavComponent } from './lib/Components/side-nav/side-nav.component';
     HeaderComponent,
     ContactComponent,
     SideNavComponent,
+    LandingComponent,
+    PagenotfoundComponent
+  
+
    
   ],
   imports: [
@@ -31,7 +36,10 @@ import { SideNavComponent } from './lib/Components/side-nav/side-nav.component';
     LayoutModule,
     BrowserAnimationsModule,
     SharedModuleModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    
      ],
   providers: [],
   bootstrap: [AppComponent]
