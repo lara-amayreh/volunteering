@@ -1,0 +1,72 @@
+<div class="form-container">
+    <h2>Company Register Form</h2>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+        <mat-form-field>
+            <mat-label>Company Name</mat-label>
+            <input name="name" matInput placeholder="enter company name" formControlName="name">
+            <mat-error>required field</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Type</mat-label>
+            <mat-select name="type" formControlName="type">
+                <mat-option *ngFor="let type of types" [value]="type">
+                    {{type}}
+                </mat-option>
+            </mat-select>
+            <mat-error>required field</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>phoneNumber</mat-label>
+            <input name="phoneNumber" type="number" matInput #phoneNumber placeholder="Ex. 0712345678"
+            formControlName="phoneNumber">
+            <mat-hint align="end">{{phoneNumber.value.length}} / 10</mat-hint>
+            <mat-error>required field</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            
+            <input type="email" name="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
+                         <mat-error *ngIf="form.get('email')?.hasError('email') && !form.get('email')?.hasError('required')">
+                Please enter a  valid email address
+            </mat-error>
+            <mat-error *ngIf="form.get('email')?.hasError('required')">
+                Email is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>password</mat-label>
+            <input matInput name="password" [type]="hide ? 'password' : 'text'" formControlName="password">
+            <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
+                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="form.get('password')?.hasError('required')">
+                required field
+            </mat-error>
+            <mat-error *ngIf="form.get('password')?.hasError('pattern') && !form.get('password')?.hasError('required')">
+                Minimum eight characters: one Uppercase letter, one lowercase letter, one number and special character:
+
+            </mat-error>
+        </mat-form-field>
+       <mat-form-field>
+        <mat-label>Website URL         
+        </mat-label>
+        <input matInput type="url" name="url" formControlName="url">
+        <mat-error>required field</mat-error>
+       </mat-form-field>
+       <div class="logo">
+<label for="logo"> Logo*.........</label>
+       <input type="file" name="logo" formControlName="logo" accept="image/*" placeholder="upload logo.....">
+    </div>
+
+
+           
+               
+
+        <button id="reset" mat-raised-button color="warn" (click)="form.reset()">Reset</button>
+        <button [disabled]="form.invalid" mat-raised-button color="primary" (click)="submit()">Submit</button>
+
+    </form>
+
+</div>

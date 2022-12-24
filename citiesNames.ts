@@ -1,4 +1,4 @@
-import { cities } from 'src/app/inteerfaces/cities';
+import { cities } from 'src/app/lib/inteerfaces/cities';
 
  const datasort:cities[] =[
   {

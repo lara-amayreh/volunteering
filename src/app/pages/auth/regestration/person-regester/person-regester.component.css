@@ -1,0 +1,69 @@
+
+form>mat-form-field{
+   
+    width: 100%;
+    
+}
+h2{
+    padding-bottom: 10px;
+    
+}
+.course mat-form-field{
+margin-right: 5px;
+}
+.form-container{
+       max-width:1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    overflow: hidden;
+   
+}
+#reset{
+    margin-right: 5px;
+}
+mat-selection-list{
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+
+}
+mat-list-option{
+    display: flex;
+    padding: 0px;
+    margin: 0px;
+}
+.dayscontainer{
+    display: flex;
+    padding: 20px;
+    margin-bottom: 10px;
+    background-color: #eee;
+    margin-bottom: 10px;
+
+}
+.time-container{
+    padding-top: 10px;
+display: flex;
+justify-content: space-between;}
+.time-container input{
+
+border: none;
+margin-left: 10px;
+outline: none;
+background-color: transparent;
+}
+
+#add{
+    margin: 30px;
+}
+@media (min-width: 768px) {
+    mat-selection-list {
+            display: flex;
+            flex-wrap: nowrap;
+    
+        }
+                .time-container input {
+                    padding: 5px 20px;
+                    font-size: 20px;
+}
+}
