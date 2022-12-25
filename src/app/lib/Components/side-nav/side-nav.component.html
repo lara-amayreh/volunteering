@@ -6,19 +6,21 @@
       <mat-icon>home</mat-icon>
       <span>Home</span>
     </button>
-
+<span  *ngIf="authServise.userState$ | async as user">
     <button mat-button class="menu-button" routerLink="/profile">
       <mat-icon>person</mat-icon>
-      <span>Profile</span>
-    </button>
+      <span>Profile</span> </button>
+    </span>
+      <button mat-button class="menu-button" routerLink="/oportunities">
+        <mat-icon>badge</mat-icon>
+        <span>oportunities</span>
+      </button>
+
     <button mat-button class="menu-button" routerLink="/organizations">
         <mat-icon>apartment</mat-icon>
         <span>Organizations</span>
       </button>
-    <button mat-button class="menu-button" routerLink="/oportunities">
-      <mat-icon>badge</mat-icon>
-      <span>oportunities</span>
-    </button>
+     
    
     <mat-divider></mat-divider>
     <button mat-button class="menu-button" routerLink="/contact">
@@ -30,14 +32,18 @@
         <span>About</span>
       </button>
       <mat-divider></mat-divider>
-<ng-template #loginButton>
-      <button mat-button class="menu-button" routerLink="/register">
+<ng-template #log>
+      <button mat-button class="menu-button" routerLink="/auth/register">
         <mat-icon>person-add-alt</mat-icon>
         <span>signup </span>
       </button>
-      <button mat-button class="menu-button" routerLink="/login">
+      <button mat-button class="menu-button" routerLink="/auth/login">
           <mat-icon>login</mat-icon>
           <span>Login</span>
         </button>
      
       </ng-template>
+      <button (click)="authServise.signout()" *ngIf="authServise.userState$ | async as user; else log" mat-button class="menu-button" routerLink="/logout">
+
+        <mat-icon>logout</mat-icon> <span>logout</span></button>
+ 

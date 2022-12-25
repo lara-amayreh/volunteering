@@ -7,5 +7,5 @@ import { AuthService } from '../../services/auth/auth.service';
   styleUrls: ['./side-nav.component.css']
 })
 export class SideNavComponent {
-constructor(public authservise:AuthService){}
+constructor(public authServise:AuthService){}
 }

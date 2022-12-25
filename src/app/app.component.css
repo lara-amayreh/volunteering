@@ -3,6 +3,13 @@
   padding: 30px;
   overflow:hidden;
  }
+ .logo{
+  position: absolute;
+  top: 5px;
+  left: 100px;
+  cursor: pointer;
+  font-size: 15px;
+ }
 
 .head{
     display: flex;
@@ -38,6 +45,7 @@ align-items: center;
   
   mat-sidenav-content{
     overflow: hidden;
+    background-color: white;
   }
   
   mat-sidenav-container {

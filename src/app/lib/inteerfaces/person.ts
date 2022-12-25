@@ -8,6 +8,7 @@ password:string,
     phoneNumber:number,
     experience:string,
     days:string,
+    // role:string,
    
     
 }
