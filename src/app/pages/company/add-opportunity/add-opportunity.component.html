@@ -1,0 +1,84 @@
+<h1>Add New Opportunity</h1>
+
+<div mat-dialog-content class="form-container">
+   
+        <form [formGroup]="form" (ngSubmit)="submit()">
+    
+            <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input name="name" matInput placeholder="Opportunity name" formControlName="name">
+                <mat-error>required field</mat-error>
+            </mat-form-field>
+           
+            <mat-form-field>
+                <mat-label>Description</mat-label>
+                <input name="description" type="text" matInput placeholder="Enter description"
+                formControlName="description">
+                <mat-error>required field</mat-error>
+            </mat-form-field>
+           
+           
+                 
+            <mat-form-field>
+                <mat-label>Skills</mat-label>
+                <mat-chip-grid name="skills" #chipGrid aria-label="skills selection" formControlName="skills" >
+                    <mat-chip-row *ngFor="let skill of skills" (removed)="remove(skill)" >
+                        {{skill}}
+                        <button matChipRemove [attr.aria-label]="'remove ' + skill">
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </mat-chip-row>
+                </mat-chip-grid>
+                <input placeholder="New skill..." #skillInput  [matChipInputFor]="chipGrid" 
+                    [matAutocomplete]="auto" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    (matChipInputTokenEnd)="add($event)" />
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                    <mat-option *ngFor="let skill of filteredSkills | async" [value]="skill">
+                        {{skill}}
+                    </mat-option>
+                </mat-autocomplete>
+                <mat-error>required field</mat-error>
+            </mat-form-field>
+
+          
+           
+            <mat-form-field >
+                <mat-label>start  date</mat-label>
+                <input matInput [matDatepicker]="picker1" formControlName="start">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+                <mat-error>required field</mat-error>
+
+              </mat-form-field>
+              
+              
+            <mat-form-field >
+                <mat-label>End  date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="end">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error>required field</mat-error>
+                
+              </mat-form-field>
+           
+   
+    
+        <mat-form-field>
+            <mat-label>number Of Volunteers</mat-label>
+        <input matInput type="number" name="numberOfVolunteers" formControlName="numberOfVolunteers" ></mat-form-field>
+        <mat-error *ngIf="form.get('numberOfVolunteers')?.hasError('required')">required feild</mat-error>
+       
+
+          
+        </form>
+    
+    </div>
+
+
+<div mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close>No</button>
+    <button mat-raised-button  (click)="submit()">Yes</button>
+
+</div>

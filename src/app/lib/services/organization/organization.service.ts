@@ -1,15 +1,33 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { from, Observable } from 'rxjs';
 import { organization } from '../../inteerfaces/organization';
 @Injectable({
   providedIn: 'root'
 })
 export class OrganizationService {
-organizations:organization[]=[];
-  constructor() { }
-  addOrganization(organaization:organization){
-    this.organizations.push(organaization);
+  usersCollection!: AngularFirestoreCollection<organization>
+  constructor(private firestore: AngularFirestore) {
+    this.usersCollection = this.firestore.collection('users');
+   }
+  addStudent(student: organization){
+    
+     let addedStudent = this.usersCollection?.add(student);
+     return from(addedStudent);
+ 
   }
-  getOrganization():organization[]{
-return this.organizations;
+  getStudents(): Observable<organization[]>{
+
+      return this.usersCollection.valueChanges({"idField":'uid'});
   }
+  getStudentById(id : string){
+     return this.usersCollection.doc(id).valueChanges();
+  }
+  deleteStudent(id: string){
+    return from(this.usersCollection.doc(id).delete());
+  }
+  updateStudent(id: string, student: organization){
+    return from(this.usersCollection.doc(id).update({...student}));
+}
+
 }

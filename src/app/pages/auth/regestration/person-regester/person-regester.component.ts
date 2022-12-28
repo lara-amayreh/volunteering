@@ -57,6 +57,7 @@ range :new FormGroup({
     
 {validators: [passwordMatchingValidator]});
 
+role: string="volunteer";
 
     Cities =data;  
     days=days;
@@ -121,7 +122,8 @@ submit(){
     //register user in firebase
     this.auth.signUp(
       this.form.get('email')?.value+ '',
-      this.form.get('password')?.value+''
+      this.form.get('password')?.value+'',
+      // this.role
     ).then((user)=> {
 
       //save other form fields collection 

@@ -17,6 +17,8 @@ import { SideNavComponent } from './lib/Components/side-nav/side-nav.component';
 import {AngularFireModule} from '@angular/fire/compat';
 import {AngularFireAuthModule} from '@angular/fire/compat/auth';
 import { environment } from 'src/environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore/'; 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +27,8 @@ import { environment } from 'src/environments/environment';
     ContactComponent,
     SideNavComponent,
     LandingComponent,
-    PagenotfoundComponent
+    PagenotfoundComponent,
+    
   
 
    
@@ -39,6 +42,7 @@ import { environment } from 'src/environments/environment';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    AngularFirestoreModule
     
      ],
   providers: [],

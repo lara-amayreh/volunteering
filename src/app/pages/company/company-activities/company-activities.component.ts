@@ -3,6 +3,9 @@ import { FormControl, NgForm, Validators,  FormBuilder, FormGroup  } from '@angu
 import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { AppComponent } from 'src/app/app.component';
+import { opportunity } from 'src/app/lib/inteerfaces/opportunity';
+import { OportunitiesService } from 'src/app/lib/services/oportunities/oportunities.service';
+import { AddOpportunityComponent } from '../add-opportunity/add-opportunity.component';
 
 @Component({
   selector: 'app-company-activities',
@@ -15,32 +18,22 @@ import { AppComponent } from 'src/app/app.component';
 export class CompanyActivitiesComponent {
   @ViewChild('callAPIDialog')
   callAPIDialog!: TemplateRef<any>;
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog,public oportunityservice:OportunitiesService) { }
 
-  openDialog() {
-    let dialogRef = this.dialog.open(this.callAPIDialog);
-    dialogRef.afterClosed().subscribe(result => {
-        if (result !== undefined) {
-            if (result !== 'no') {
-              const enabled = "Y"
-                console.log(result);
-            } else if (result === 'no') {
-               console.log('User clicked no.');
-            }
-        }
-    })
-}
+  addoportunity(){
+    // console.log(id);
+    let dialogRef = this.dialog.open(AddOpportunityComponent, {
+       width: '500px',
+      
+     });
+     dialogRef.afterClosed().subscribe((result)=> {
+         console.log(result); 
+ 
+         //refresh table 
+         //this.students = this.studentsService.getStudents();
+        
+     })
+ 
+   }
 
-
-onSend(form: NgForm){  
-  if(form.status === 'INVALID')
-  {
-    // display error in your form
-  }else{
-      console.log(form.value)
-      this.dialog.closeAll(); // Close opened diaglo
-    // do whatever you want to do with your data
-  }
-  
-}
 }

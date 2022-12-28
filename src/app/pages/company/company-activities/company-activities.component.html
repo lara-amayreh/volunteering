@@ -1,14 +1,2 @@
-<div>
-    <button mat-raised-button (click)="openDialog()">Pick one</button>
-    </div>
-      <ng-template #callAPIDialog>
-            <form >
-            <h2 matDialogTitle>Add Organization</h2> 
-                <input  matInput type="text" placeholder="Your organization" name="organisationName" ngModel required >
-                <input matInput type="text" name="enabled" ngModel required>          
-                <div mat-dialog-actions> align ="end">
-                <button mat-button matDialogClose="no">Cancel</button>
-                <button type="submit" mat-button>Submit</button>
-                </div>
-        </form>
-        </ng-template>
+<button mat-icon-button (click)="addoportunity()">
+add</button>
