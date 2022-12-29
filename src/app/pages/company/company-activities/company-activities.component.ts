@@ -1,9 +1,13 @@
-import { Component,Input, TemplateRef, Injectable, ViewChild } from '@angular/core';
+import { X } from '@angular/cdk/keycodes';
+import { NgFor } from '@angular/common';
+import { Component,Input, TemplateRef, Injectable, ViewChild, OnInit } from '@angular/core';
 import { FormControl, NgForm, Validators,  FormBuilder, FormGroup  } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldControl } from '@angular/material/form-field';
+import { of, switchMap } from 'rxjs';
 import { AppComponent } from 'src/app/app.component';
 import { opportunity } from 'src/app/lib/inteerfaces/opportunity';
+import { AuthService } from 'src/app/lib/services/auth/auth.service';
 import { OportunitiesService } from 'src/app/lib/services/oportunities/oportunities.service';
 import { AddOpportunityComponent } from '../add-opportunity/add-opportunity.component';
 
@@ -15,10 +19,33 @@ import { AddOpportunityComponent } from '../add-opportunity/add-opportunity.comp
     { provide: MatFormFieldControl, useExisting: AppComponent}   
   ]
 })
-export class CompanyActivitiesComponent {
+export class CompanyActivitiesComponent implements OnInit {
   @ViewChild('callAPIDialog')
   callAPIDialog!: TemplateRef<any>;
-  constructor(public dialog: MatDialog,public oportunityservice:OportunitiesService) { }
+   opportunities: opportunity[]=[];
+
+  constructor(public dialog: MatDialog,public oportunityservice:OportunitiesService,private authservice:AuthService) { }
+  ngOnInit(): void {
+  
+  this.authservice.userState$
+  .pipe(switchMap( (value) => {
+  if(value){
+ 
+    return this.oportunityservice.getOpportunities(value?.uid);
+
+    }
+    else
+    return of(null);
+   
+  })).subscribe((response)=>{
+    if(response)
+ this.opportunities=response;
+ console.log(response);
+ 
+  })
+  
+  
+  }
 
   addoportunity(){
     // console.log(id);
@@ -34,6 +61,7 @@ export class CompanyActivitiesComponent {
         
      })
  
+    
    }
 
 }

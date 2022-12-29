@@ -42,26 +42,22 @@
 
           
            
-            <mat-form-field >
-                <mat-label>start  date</mat-label>
-                <input matInput [matDatepicker]="picker1" formControlName="start">
-                <mat-hint>MM/DD/YYYY</mat-hint>
-                <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
-                <mat-datepicker #picker1></mat-datepicker>
-                <mat-error>required field</mat-error>
-
-              </mat-form-field>
-              
-              
-            <mat-form-field >
-                <mat-label>End  date</mat-label>
-                <input matInput [matDatepicker]="picker" formControlName="end">
-                <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-form-field>
+                <mat-label>Available Date</mat-label>
+                <mat-date-range-input formGroupName="range" [rangePicker]="picker">
+                  <input matStartDate formControlName="start" placeholder="Start date">
+                  <input matEndDate formControlName="end" placeholder="End date">
+                </mat-date-range-input>
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-                <mat-error>required field</mat-error>
-                
+                <mat-date-range-picker #picker></mat-date-range-picker>
+              
+                <mat-error *ngIf="form.get('range')?.hasError('required')">Required field</mat-error>
+                <mat-error *ngIf="form.get('start')?.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+                <mat-error *ngIf="form.get('end')?.hasError('matEndDateInvalid')">Invalid end date</mat-error>
               </mat-form-field>
+              
+              
+            
            
    
     

@@ -1,15 +1,15 @@
 <header>
 
     <div class="nav-links">
-        <button  mat-button routerLink=''>ORGANIZATIONS</button>
-        <button  mat-button routerLink=''>OPPORTUNITIES </button>
+        <button  mat-button routerLink='/volunteer/organizations'>ORGANIZATIONS</button>
+        <button  mat-button routerLink='/volunteer/opportunities'>OPPORTUNITIES </button>
         <button mat-button routerLink='/contact'>CONTACT</button>
         <button mat-button routerLink='/about'>ABOUT</button>
     </div>
     <div class="regestration">
        
 
-        <button  *ngIf="authService.userState$ | async as user; else loginButton"  mat-raised-button routerLink="/auth/login" class="btn-login"  >
+        <button  *ngIf="authService.userState$ | async as user; else loginButton"  mat-raised-button  class="btn-login"  >
             logout <mat-icon>logout</mat-icon>
         </button>
         <ng-template #loginButton>

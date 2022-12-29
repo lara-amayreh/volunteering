@@ -10,24 +10,25 @@ export class OrganizationService {
   constructor(private firestore: AngularFirestore) {
     this.usersCollection = this.firestore.collection('users');
    }
-  addStudent(student: organization){
+  addorganization(organaization: organization){
     
-     let addedStudent = this.usersCollection?.add(student);
-     return from(addedStudent);
+     let addedorg = this.usersCollection?.add(organaization);
+     return from(addedorg);
  
   }
-  getStudents(): Observable<organization[]>{
+  getorganization(userid:string): Observable<organization[]>{
 
-      return this.usersCollection.valueChanges({"idField":'uid'});
-  }
-  getStudentById(id : string){
-     return this.usersCollection.doc(id).valueChanges();
-  }
-  deleteStudent(id: string){
-    return from(this.usersCollection.doc(id).delete());
-  }
-  updateStudent(id: string, student: organization){
-    return from(this.usersCollection.doc(id).update({...student}));
-}
+      // return this.usersCollection.valueChanges({"idField":'uid'});
+    return this.firestore.collection<organization>('users',ref=>ref.where('idField',"==","uid")).valueChanges();}
+
+  getAllOrganizations():Observable<organization[]>{
+    return this.firestore.collection<organization>('users',ref=>ref.where('role',"==","company")).valueChanges({ "idField": 'uid' });
+   }
+//   deleteStudent(id: string){
+//     return from(this.usersCollection.doc(id).delete());
+//   }
+//   updateStudent(id: string, student: organization){
+//     return from(this.usersCollection.doc(id).update({...student}));
+// }
 
 }

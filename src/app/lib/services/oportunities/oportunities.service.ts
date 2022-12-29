@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { where } from '@firebase/firestore';
-import { from } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { opportunity } from '../../inteerfaces/opportunity';
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,11 @@ this.opportunitiesCollection = this.firestore.collection('oppoptunities');
 let addedOpportunity = this.opportunitiesCollection.add(opportunity);console.log(addedOpportunity);
 return from(addedOpportunity);
    }
-   getOpportunities(uid:string){
-    return this.firestore.collection<opportunity>('oppoptunities',ref=>ref.where('uid',"==",uid)).valueChanges();
+   getOpportunities(userid:string):Observable<opportunity[]>{
+    return this.firestore.collection<opportunity>('oppoptunities',ref=>ref.where('userid',"==",userid)).valueChanges();
    }
+   getAllOpportunities(): Observable<opportunity[]>{
+
+    return this.opportunitiesCollection.valueChanges({"idField":'userid'});
+}
 }

@@ -1,1 +1,21 @@
-<p>all-activities works!</p>
+<div class="container">
+    <mat-card *ngFor="let opportunity of alloportunities" class="Opportunity-card">
+        <mat-card-header>
+          <mat-card-title>{{opportunity.name}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="card-content">
+           <div>Description:{{opportunity.description}}</div> 
+           <div ><span> date: {{opportunity.start}}</span> <span>end date:{{opportunity.end}}</span></div> 
+          
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button>Apply</button>
+        </mat-card-actions>
+        <mat-card-footer>{{opportunity.numberOfVolunteers}}</mat-card-footer>
+      </mat-card>
+      
+
+
+</div>

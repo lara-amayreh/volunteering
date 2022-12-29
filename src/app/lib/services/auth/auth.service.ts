@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { Firestore, collectionData, collection } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { getAuth, signOut } from "firebase/auth";
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,16 +17,21 @@ export class AuthService {
 
 
   signIn(email:string, password: string){
-
-
     return this.fireAuth.signInWithEmailAndPassword(email, password);
   }
   signUp(email: string, password: string){
     return this.fireAuth.createUserWithEmailAndPassword(email, password);
   }
+
   signout(){
-    return this.fireAuth.signOut();
-  }
+    const auth = getAuth();
+
+  signOut(auth).then(() => {
+    // Sign-out successful.
+    this.router.navigate(['/']);
+  }).catch((error) => {
+    // An error happened.
+  });
 }
   // public currentUser: any;
   // public userStatus!: string;
@@ -100,3 +107,4 @@ export class AuthService {
  
 
  
+}

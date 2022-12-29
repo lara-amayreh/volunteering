@@ -4,7 +4,7 @@ export interface opportunity{
     name:string,
     description:string,
     skills:string,
-    startDate:string,
-    endDate:string,
+     start:string,
+    end:string,
     numberOfVolunteers?:number,
 }

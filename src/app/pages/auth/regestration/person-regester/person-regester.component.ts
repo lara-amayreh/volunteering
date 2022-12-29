@@ -17,6 +17,9 @@ import { Router } from '@angular/router';
 
 import { passwordMatchingValidator } from 'src/app/lib/validators/passwordmatching';
 import { AuthService } from 'src/app/lib/services/auth/auth.service';
+import { opportunity } from 'src/app/lib/inteerfaces/opportunity';
+import { UserService } from 'src/app/lib/services/user/user.service';
+import { users } from 'src/app/lib/inteerfaces/users';
 
 
 
@@ -29,10 +32,19 @@ import { AuthService } from 'src/app/lib/services/auth/auth.service';
 
 })
 export class PersonRegesterComponent implements OnInit {
-  id:number= 1;
-  persons:person[]=[];
-experienceList=experience;
+  constructor(private userservice:UserService ,private _formBuilder: FormBuilder,private router: Router,private auth:AuthService) 
+  {this.filteredSkills = this.skillsCtrl.valueChanges.pipe(
+      startWith(null),
+      map((skill: string | null) => (skill ? this._filter(skill) : this.allSkills.slice())),
+    );}
  
+  ngOnInit(): void {
+  // this.persons$= this.userservice.getuser();
+  }
+experienceList=experience;
+person! :person;
+
+persons$ !:Observable<person[]>;
 hide: boolean=true;
 
 
@@ -52,13 +64,11 @@ range :new FormGroup({
   end: new FormControl('',[Validators.required]),
 }),
 
-},
-
-    
+},  
 {validators: [passwordMatchingValidator]});
 
-role: string="volunteer";
-
+  // role!: string;
+role:string="volunteer";
     Cities =data;  
     days=days;
     allSkills= allSkills;
@@ -74,16 +84,7 @@ role: string="volunteer";
 
  
 
-  constructor(private personservice:PersonsService ,private _formBuilder: FormBuilder,private router: Router,private auth:AuthService) 
-  {this.filteredSkills = this.skillsCtrl.valueChanges.pipe(
-      startWith(null),
-      map((skill: string | null) => (skill ? this._filter(skill) : this.allSkills.slice())),
-    );}
-  ngOnInit(): void {
-    
-    this.persons = this.personservice.getperson();
-  }
-
+  
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
@@ -117,33 +118,115 @@ role: string="volunteer";
 
     return this.allSkills.filter(skill => skill.toLowerCase().includes(filterValue));
   }
-submit(){
+// submit(){
+// console.log(this.form.value);
+//     //register user in firebase
+//     this.auth.signUp(
+//       this.form.get('email')?.value+ '',
+//       this.form.get('password')?.value+'',
+//       // this.role
+//     ).then((user)=> {
 
-    //register user in firebase
-    this.auth.signUp(
-      this.form.get('email')?.value+ '',
-      this.form.get('password')?.value+'',
-      // this.role
-    ).then((user)=> {
-
-      //save other form fields collection 
+//       //save other form fields collection 
 
       
-      this.router.navigate(['volunteer/']);
+//       this.router.navigate(['volunteer/']);
 
-      console.log(user);
-    }).catch((error)=> {
-      console.log(error)  
-    });
-  }
+//       console.log(user);
+//     }).catch((error)=> {
+//       console.log(error)  
+//     });
+//   }
+
+// submit(){
+//   //register user in firebase
+
+ 
+//  //  this.organization =this.form.value;
+//  //  this.organization.role=this.role;
+//   this.auth.signUp(
+//    this.form.get('email')?.value+ '',
+//    this.form.get('password')?.value+'',
+//    // this.role
+//  ).then((user)=> {
+  
+   
+//     this.person.city =this.form.get('city')?.value+'';
+//     this.person.courses =this.form.get('courses')?.value+'';
+//     this.person.days =this.form.get('days')?.value+'';
+//     this.person.experience = this.form.get('experience')?.value+'';
+//     this.person.fullName = this.form.get('fullName')?.value+'';
+//     this.person.password = this.form.get('password')?.value+'';
+// this.person.role =this.role;
+//   this.person.start =this.form.value.range?.start+'';
+//   this.person.end =this.form.value.range?.start+'';
+//   this.person.uid = user.user?.uid;
+//   this.person.email =this.form.get('email')?.value+'';
+//   this.person.phoneNumber =this.form.get('phoneNumber')?.value!;
+//   this.personservice.addStudent({...this.person} as person);
+//  this.router.navigate(['volunteer/']);
+
+     
+  
+   
+  
+  
+  
+  
 
 
+// //   this.role="volunteer";
+// //   this.person.role=this.role;
+// // this.person.start!=this.form.value.range?.start;
+// // this.person.end!=this.form.value.range?.start;
+// // this.person = { ...this.form.value }as person;
 
- get first(){
-  return this.form.get('first');
+// // // console.log(this.opportunity);
+// // // this.opportunity.role=this.role;
+// //    //save other form fields collection 
+// // this.personservice.addStudent({...this.person});
+
+// //    this.router.navigate(['volunteer/']);
+
+// //    console.log(user);
+//  }).catch((error)=> {
+//    console.log(error)   
+//  });
+// }
+submit(){
+  //register user in firebase
+
+  // this.role = "volunteer";
+ 
+ //  this.organization =this.form.value;
+ //  this.organization.role=this.role;
+  this.auth.signUp(
+   this.form.get('email')?.value+ '',
+   this.form.get('password')?.value+'',
+   // this.role
+ ).then((user)=> {
+  
+  this.person = {...this.form.value}as person;
+  this.person.role =this.role;
+  // this.person.role=this.role;
+  this.person.uid = user.user?.uid;
+   //save other form fields collection 
+this.userservice.adduser({...this.person} as users);
+
+   this.router.navigate(['volunteer/']);
+
+   console.log(user);
+ }).catch((error)=> {
+   console.log(error)   
+ });
+}
+
+
+ get start(){
+  return this.form.get('start');
  }
- get last(){
-  return this.form.get('last');
+ get end(){
+  return this.form.get('end');
  }
  get range(){
   return this.form.get('range');

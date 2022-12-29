@@ -1,6 +1,6 @@
 <div class="form-container">
     <h2>Person Register Form</h2>
-    <form [formGroup]="form" (ngSubmit)="submit()">
+    <form [formGroup]="form">
 
         <mat-form-field>
             <mat-label>Full Name</mat-label>
@@ -79,7 +79,7 @@ password and confirm password does'nt match  </mat-error>
         </mat-form-field>
         <mat-form-field>
             <mat-label>Experience</mat-label>
-            <mat-select name="Experience" formControlName="experience" [multiple]="false">
+            <mat-select name="experience" formControlName="experience" [multiple]="false">
                 <mat-option *ngFor="let Experience of experienceList"  [value]="Experience">
                     {{Experience}}
                 </mat-option>
@@ -88,7 +88,7 @@ password and confirm password does'nt match  </mat-error>
        
             <mat-form-field>
                 <mat-label>Available Date</mat-label>
-                <mat-date-range-input formGroupName='range' [rangePicker]="picker">
+                <mat-date-range-input formGroupName="range" [rangePicker]="picker">
                   <input matStartDate formControlName="start" placeholder="Start date">
                   <input matEndDate formControlName="end" placeholder="End date">
                 </mat-date-range-input>
@@ -96,8 +96,8 @@ password and confirm password does'nt match  </mat-error>
                 <mat-date-range-picker #picker></mat-date-range-picker>
               
                 <mat-error *ngIf="form.get('range')?.hasError('required')">Required field</mat-error>
-                <mat-error *ngIf="form.get('last')?.hasError('matStartDateInvalid')">Invalid start date</mat-error>
-                <mat-error *ngIf="form.get('last')?.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+                <mat-error *ngIf="form.get('start')?.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+                <mat-error *ngIf="form.get('end')?.hasError('matEndDateInvalid')">Invalid end date</mat-error>
               </mat-form-field>
               <mat-form-field>
                 <mat-label>Available Days</mat-label>
@@ -130,15 +130,11 @@ password and confirm password does'nt match  </mat-error>
 
 </div>
 </ng-container>
-           </ng-container>
-           <button id="add" mat-raised-button color="primary" (click)="addCourses()"><mat-icon>add</mat-icon></button>
+</ng-container>
 
-     
-    
-      
-
-
-        </div>
+     <button id="add" mat-raised-button color="primary" (click)="addCourses()">
+        <mat-icon>add</mat-icon></button>
+      </div>
 
            
                

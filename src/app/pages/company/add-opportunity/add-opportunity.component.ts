@@ -1,5 +1,5 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
@@ -15,8 +15,7 @@ import { allSkills } from 'src/assets/arrays/skills';
   templateUrl: './add-opportunity.component.html',
   styleUrls: ['./add-opportunity.component.css']
 })
-export class AddOpportunityComponent {
-  startDate = new Date().getDay();
+export class AddOpportunityComponent{
 
   constructor(private oportunityservice: OportunitiesService,private authservice:AuthService,
     private dialogRef: MatDialogRef<AddOpportunityComponent>,
@@ -26,6 +25,7 @@ export class AddOpportunityComponent {
       map((skill: string | null) => (skill ? this._filter(skill) : this.allSkills.slice())),
     );
   }
+ 
   allSkills= allSkills;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   skillsCtrl = new FormControl('');
@@ -34,19 +34,22 @@ export class AddOpportunityComponent {
  
   @ViewChild('skillInput')
   skillInput!: ElementRef<HTMLInputElement>;
+  // ngOnInit(): void {
   
-  form = new FormGroup({
+   form = new FormGroup({
     name:new FormControl('',[Validators.required]),
     description:new FormControl('',[Validators.required]),
     experience:new FormControl('',[Validators.required]),
     skills: new FormControl('',[Validators.required]),
     numberOfVolunteers: new FormControl<number|null>(null,[Validators.required, Validators.min(0)]),
-
-    start: new FormControl('',[Validators.required]),
-    end: new FormControl('',[Validators.required]),
-  
+    range :new FormGroup({
+      start: new FormControl('',[Validators.required]),
+      end: new FormControl('',[Validators.required]),
+    }),
+   
   
 });
+  
 
 add(event: MatChipInputEvent): void {
   const value = (event.value || '').trim();
@@ -80,7 +83,7 @@ private _filter(value: string): string[] {
   return this.allSkills.filter(skill => skill.toLowerCase().includes(filterValue));
 }
 submit(){
-  console.log(this.form);
+  console.log(this.form.value.range?.start);
 
 this.authservice.userState$
 .pipe(switchMap( (value) => {
@@ -91,12 +94,18 @@ return this.oportunityservice.addOpportunity({
   name:this.form.get('name')?.value +'',
   description:this.form.get('description')?.value+'',
   skills:this.form.get('skills')?.value+'',
-  startDate:this.form.get('start')?.value+"",
-  endDate:this.form.get('end')?.value+'',
   numberOfVolunteers:this.form.get('numberOfVolunteers')?.value!,
+  
+start:this.form.value.range?.start+'',
+end:this.form.value.range?.start+'',
+
+   
+
+ 
 
 
-})
+
+});
 }
   
   else{
@@ -109,4 +118,13 @@ return this.oportunityservice.addOpportunity({
 this.dialogRef.close(true);
 
 }
+get start(){
+  return this.form.get('start');
+ }
+ get end(){
+  return this.form.get('end');
+ }
+ get range(){
+  return this.form.get('range');
+ }
 }

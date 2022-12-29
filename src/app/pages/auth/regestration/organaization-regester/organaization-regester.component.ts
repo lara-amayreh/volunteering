@@ -14,9 +14,9 @@ import { Observable } from 'rxjs';
 })
 export class OrganaizationRegesterComponent implements OnInit {
   role: string="company";
-  organization! :organization;
+   organization! :organization;
   constructor(private organizationservice:OrganizationService , private auth:AuthService , private router:Router){}
-  organizations$ !:Observable<organization[]>;
+  // organizations$ !:Observable<organization[]>;
 types=companytypes;
 hide: boolean=true;
 form = new FormGroup({
@@ -32,7 +32,7 @@ form = new FormGroup({
     
 })
 ngOnInit(): void {
-  this.organizations$= this.organizationservice.getStudents();
+  // this.organizations$= this.organizationservice.getAllOrganizations();
 }
 submit(){
    //register user in firebase
@@ -49,8 +49,9 @@ submit(){
 this.organization = {...this.form.value} as organization;
 console.log(this.organization);
 this.organization.role=this.role;
+this.organization.uid=user.user?.uid;
     //save other form fields collection 
-this.organizationservice.addStudent({...this.organization});
+this.organizationservice.addorganization({...this.organization});
 
     this.router.navigate(['company/']);
 

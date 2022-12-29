@@ -1,2 +1,8 @@
-<button mat-icon-button (click)="addoportunity()">
-add</button>
+<button mat-icon-button (click)="addoportunity()"><span>add</span>
+
+</button>
+<ul>
+    <li *ngFor="let item of opportunities; let i = index">
+        {{item.name}}
+    </li>
+</ul>
