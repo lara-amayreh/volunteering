@@ -8,7 +8,7 @@ import { VolunteerProfileComponent } from './volunteer-profile/volunteer-profile
 import { AllActivitiesComponent } from './all-activities/all-activities.component';
 import { PastActivitiesComponent } from './past-activities/past-activities.component';
 import { AllCompaniesComponent } from './all-companies/all-companies.component';
-
+import { LayoutModule } from '@angular/cdk/layout';
 @NgModule({
   declarations: [
     VolunteerDashboardComponent,
@@ -22,6 +22,9 @@ import { AllCompaniesComponent } from './all-companies/all-companies.component';
     CommonModule,
     VolunteerRoutingModule,
     SharedModuleModule,
+    LayoutModule,
+  ],
+  exports:[
   ]
 })
 export class VolunteerModule { }

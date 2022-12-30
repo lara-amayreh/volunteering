@@ -30,7 +30,7 @@ export class AuthService {
     // Sign-out successful.
     this.router.navigate(['/']);
   }).catch((error) => {
-    // An error happened.
+    alert(error);
   });
 }
   // public currentUser: any;

@@ -1,22 +1,14 @@
+<div class="card" *ngFor="let company of allcompanies">
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>{{company.name}}</mat-card-title>
+    </mat-card-header>
+  </mat-card>
+  <br>
+  <mat-card>
+   <mat-card-content>
+    <img mat-card-image src= "{{company.logo}}"  alt="Photo of a Shiba Inu">
 
-<div class="container">
-    <mat-card *ngFor="let company of allcompanies" class="Opportunity-card">
-        <mat-card-header>
-          <mat-card-title>{{company.Name}}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <div class="card-content">
-           <!-- <div>Description:{{company.description}}</div>  -->
-           <!-- <div ><span> date: {{company.}}</span> <span>end date:{{company.end}}</span></div>  -->
-          
-          </div>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-raised-button>Apply</button>
-        </mat-card-actions>
-        <mat-card-footer>{{company.email}}</mat-card-footer>
-      </mat-card>
-      
-
-
+   </mat-card-content>
+  </mat-card>
 </div>
