@@ -10,6 +10,7 @@ import { OrganizationService } from 'src/app/lib/services/organization/organizat
 })
 export class AllCompaniesComponent {
   allcompanies:organization[]=[];
+
   constructor(private auth:AuthService,private organizationservice:OrganizationService){}
   ngOnInit(): void {
  this.organizationservice.getAllOrganizations().subscribe((response)=>{

@@ -22,6 +22,7 @@ export class OrganizationService {
     return this.firestore.collection<organization>('users',ref=>ref.where('idField',"==","uid")).valueChanges();}
 
   getAllOrganizations():Observable<organization[]>{
+    
     return this.firestore.collection<organization>('users',ref=>ref.where('role',"==","company")).valueChanges({ "idField": 'uid' });
    }
 //   deleteStudent(id: string){

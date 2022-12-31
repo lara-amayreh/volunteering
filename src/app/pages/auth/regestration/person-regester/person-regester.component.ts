@@ -19,7 +19,6 @@ import { passwordMatchingValidator } from 'src/app/lib/validators/passwordmatchi
 import { AuthService } from 'src/app/lib/services/auth/auth.service';
 import { opportunity } from 'src/app/lib/inteerfaces/opportunity';
 import { UserService } from 'src/app/lib/services/user/user.service';
-import { users } from 'src/app/lib/inteerfaces/users';
 
 
 
@@ -211,7 +210,7 @@ submit(){
   // this.person.role=this.role;
   this.person.uid = user.user?.uid;
    //save other form fields collection 
-this.userservice.adduser({...this.person} as users);
+this.userservice.adduser({...this.person} as person);
 
    this.router.navigate(['volunteer/']);
 

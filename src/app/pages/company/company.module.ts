@@ -6,6 +6,7 @@ import { AddOpportunityComponent } from './add-opportunity/add-opportunity.compo
 import { CompanyDetailsComponent } from '../volunteer/company-details/company-details.component';
 import { CompanyActivitiesComponent } from './company-activities/company-activities.component';
 import { CommonModule } from '@angular/common';
+import { UpdateCompanyComponent } from './update-company/update-company.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { CommonModule } from '@angular/common';
     AddOpportunityComponent,
     CompanyDetailsComponent,
     CompanyActivitiesComponent,
+    UpdateCompanyComponent,
 
 
     

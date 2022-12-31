@@ -19,7 +19,9 @@ export class AddOpportunityComponent{
 
   constructor(private oportunityservice: OportunitiesService,private authservice:AuthService,
     private dialogRef: MatDialogRef<AddOpportunityComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: any){
+    @Inject(MAT_DIALOG_DATA)
+     private data: any)
+     {
     this.filteredSkills = this.skillsCtrl.valueChanges.pipe(
       startWith(null),
       map((skill: string | null) => (skill ? this._filter(skill) : this.allSkills.slice())),

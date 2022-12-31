@@ -1,0 +1,30 @@
+mat-divider{
+    padding: 10px 5px;
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+
+}
+mat-card{
+    max-width: 300px;
+    padding: 15px;
+}
+.logo{
+    width: 100%;
+}
+mat-card-header{
+    padding-bottom: 5px;
+    font-size: 1.5rem;
+
+}
+
+@media (min-width: 992px) {
+
+    .card{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+    }
+}

@@ -5,7 +5,9 @@ import { companytypes } from 'src/assets/arrays/company-types';
 import { OrganizationService } from 'src/app/lib/services/organization/organization.service';
 import { AuthService } from 'src/app/lib/services/auth/auth.service';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { async, finalize, map, Observable } from 'rxjs';
+import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/compat/storage';
+import { UserService } from 'src/app/lib/services/user/user.service';
 
 @Component({
   selector: 'app-organaization-regester',
@@ -13,9 +15,16 @@ import { Observable } from 'rxjs';
   styleUrls: ['./organaization-regester.component.css']
 })
 export class OrganaizationRegesterComponent implements OnInit {
+  ref!: AngularFireStorageReference;
+  task!: AngularFireUploadTask;
+  uploadProgress!: Observable<number|any>;
+  uploadState!: Observable<string |any>;
+logo!:string;
+  downloadURL!: string |any;
+
   role: string="company";
    organization! :organization;
-  constructor(private organizationservice:OrganizationService , private auth:AuthService , private router:Router){}
+  constructor( private afStorage: AngularFireStorage ,private userservice:UserService , private auth:AuthService , private router:Router){}
   // organizations$ !:Observable<organization[]>;
 types=companytypes;
 hide: boolean=true;
@@ -50,8 +59,13 @@ this.organization = {...this.form.value} as organization;
 console.log(this.organization);
 this.organization.role=this.role;
 this.organization.uid=user.user?.uid;
+
+// this.organization.logo= this.downloadURL;
+// console.log(this.organization.logo);
+
+
     //save other form fields collection 
-this.organizationservice.addorganization({...this.organization});
+this.userservice.adduser({...this.organization} as organization);
 
     this.router.navigate(['company/']);
 
@@ -60,4 +74,30 @@ this.organizationservice.addorganization({...this.organization});
     console.log(error)   
   });
 }
+
+// function to upload file
+ upload = (event:any) => {
+  // create a random id
+  const randomId = Math.random().toString(36).substring(2);
+  // create a reference to the storage bucket location
+  this.ref = this.afStorage.ref('/images/' + randomId);
+  // the put method creates an AngularFireUploadTask
+  // and kicks off the upload
+  this.task = this.ref.put(event.target.files[0]);
+  this.uploadState = this.task.snapshotChanges().pipe(map(s => s!.state));
+  
+  // AngularFireUploadTask provides observable
+  // to get uploadProgress value
+  // this.uploadProgress = this.task.snapshotChanges()
+  // .pipe(map(s => (s.bytesTransferred / s.totalBytes) * 100));
+  
+  // observe upload progress
+  this.uploadProgress = this.task.percentageChanges();
+  // get notified when the download URL is available
+  this.task.snapshotChanges().pipe(
+    finalize(() => this.downloadURL = this.ref.getDownloadURL())
+  )
+  .subscribe();
+}
+
 }

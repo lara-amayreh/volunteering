@@ -1,1 +1,9 @@
-<p>company-profile works!</p>
+<button mat-icon-button (click)="updateorganization(id)"><span>add</span>
+
+</button>
+<ul>
+    <li *ngFor="let item of organization; let i = index">
+        {{item.name}}
+    </li> 
+  
+</ul>

@@ -19,6 +19,8 @@ import {AngularFireAuthModule} from '@angular/fire/compat/auth';
 import { environment } from 'src/environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore/'; 
 import { CommonModule } from '@angular/common';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+
 
 
 
@@ -46,7 +48,8 @@ import { CommonModule } from '@angular/common';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    CommonModule
+    CommonModule,
+    AngularFireStorageModule
     
      ],
   providers: [
