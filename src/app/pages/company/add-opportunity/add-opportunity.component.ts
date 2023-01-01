@@ -16,7 +16,7 @@ import { allSkills } from 'src/assets/arrays/skills';
   styleUrls: ['./add-opportunity.component.css']
 })
 export class AddOpportunityComponent{
-
+  numberOfVolunteers!:number
   constructor(private oportunityservice: OportunitiesService,private authservice:AuthService,
     private dialogRef: MatDialogRef<AddOpportunityComponent>,
     @Inject(MAT_DIALOG_DATA)
@@ -43,7 +43,7 @@ export class AddOpportunityComponent{
     description:new FormControl('',[Validators.required]),
     experience:new FormControl('',[Validators.required]),
     skills: new FormControl('',[Validators.required]),
-    numberOfVolunteers: new FormControl<number|null>(null,[Validators.required, Validators.min(0)]),
+    numberOfVolunteers: new FormControl<number>(0,[Validators.required, Validators.min(0)]),
     range :new FormGroup({
       start: new FormControl('',[Validators.required]),
       end: new FormControl('',[Validators.required]),
@@ -84,7 +84,7 @@ private _filter(value: string): string[] {
 
   return this.allSkills.filter(skill => skill.toLowerCase().includes(filterValue));
 }
-submit(){
+confirm(){
   console.log(this.form.value.range?.start);
 
 this.authservice.userState$
@@ -96,10 +96,10 @@ return this.oportunityservice.addOpportunity({
   name:this.form.get('name')?.value +'',
   description:this.form.get('description')?.value+'',
   skills:this.form.get('skills')?.value+'',
-  numberOfVolunteers:this.form.get('numberOfVolunteers')?.value!,
+  numberOfVolunteers:Number(this.form.get('numberOfVolunteers')?.value+''),
   
 start:this.form.value.range?.start+'',
-end:this.form.value.range?.start+'',
+end:this.form.value.range?.end+'',
 
    
 

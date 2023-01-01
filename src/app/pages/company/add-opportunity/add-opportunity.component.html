@@ -2,7 +2,7 @@
 
 <div mat-dialog-content class="form-container">
    
-        <form [formGroup]="form" (ngSubmit)="submit()">
+        <form [formGroup]="form" (ngSubmit)="confirm()">
     
             <mat-form-field>
                 <mat-label>Name</mat-label>
@@ -51,9 +51,9 @@
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-date-range-picker #picker></mat-date-range-picker>
               
-                <mat-error *ngIf="form.get('range')?.hasError('required')">Required field</mat-error>
+                <!-- <mat-error *ngIf="form.get('range')?.hasError('required')">Required field</mat-error>
                 <mat-error *ngIf="form.get('start')?.hasError('matStartDateInvalid')">Invalid start date</mat-error>
-                <mat-error *ngIf="form.get('end')?.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+                <mat-error *ngIf="form.get('end')?.hasError('matEndDateInvalid')">Invalid end date</mat-error> -->
               </mat-form-field>
               
               
@@ -63,19 +63,18 @@
     
         <mat-form-field>
             <mat-label>number Of Volunteers</mat-label>
-        <input matInput type="number" name="numberOfVolunteers" formControlName="numberOfVolunteers" ></mat-form-field>
+        <input matInput type="number" name="numberOfVolunteers" formControlName="numberOfVolunteers" >
         <mat-error *ngIf="form.get('numberOfVolunteers')?.hasError('required')">required feild</mat-error>
-       
+    </mat-form-field>
 
-          
+        <div mat-dialog-actions>
+            <button mat-raised-button mat-dialog-close>No</button>
+            <button  mat-raised-button>Yes</button>
+        
+        </div>
         </form>
     
         
     </div>
 
 
-<div mat-dialog-actions>
-    <button mat-raised-button mat-dialog-close>No</button>
-    <button mat-raised-button  (click)="submit()">Yes</button>
-
-</div>
