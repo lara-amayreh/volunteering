@@ -22,6 +22,9 @@ canActivate: [LogedinGuard]
 {path:"home", component:LandingComponent},
 
 
+
+
+
 ];
 
 

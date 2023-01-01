@@ -16,14 +16,13 @@ import { UpdateCompanyComponent } from './update-company/update-company.componen
     CompanyActivitiesComponent,
     UpdateCompanyComponent,
 
-
     
   ],
   imports: [
     
     CompanyRoutingModule,
     CommonModule,
-    SharedModuleModule
+    SharedModuleModule,
 
   ]
 })

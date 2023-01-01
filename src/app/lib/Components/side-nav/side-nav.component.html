@@ -7,9 +7,9 @@
       <span>Home</span>
     </button>
 <span  *ngIf="authServise.userState$ | async as user">
-    <button mat-button class="menu-button" routerLink="/profile/:id">
+    <button *ngIf="loged"  mat-button class="menu-button" routerLink="/{{loged}}/profile">
       <mat-icon>person</mat-icon>
-      <span>Profile</span> </button>
+      <span>{{loged}}</span> </button>
     </span>
       <button mat-button class="menu-button" routerLink="/volunteer/opportunities">
         <mat-icon>badge</mat-icon>
