@@ -11,7 +11,10 @@
       <mat-icon>person</mat-icon>
       <span>profile</span> </button>
     </span>
-    
+    <button *ngIf='role=="company"' mat-button  class="btn-login" routerLink="/company/opportunities">
+      <mat-icon>task</mat-icon>
+      <span>your Activities</span>
+  </button>
       <button mat-button class="menu-button" routerLink="/volunteer/opportunities">
         <mat-icon>badge</mat-icon>
         <span>opportunities</span>

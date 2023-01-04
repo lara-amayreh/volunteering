@@ -20,11 +20,11 @@ export class HeaderComponent implements OnInit {
   constructor(public authService: AuthService ,private fs:AngularFirestore, private fireAuth:AngularFireAuth){}
   ngOnInit(): void {
      this.authService.userState$.subscribe((val)=>{
-if(val)
+if(val){
 this.com=val;
 console.log(val.role);
 this.role=val.role;
-
+}
     })
   }
 }

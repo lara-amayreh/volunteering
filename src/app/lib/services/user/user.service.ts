@@ -13,10 +13,10 @@ this.usercollection = this.firestore.collection('users');
 
 
    }
-   adduser(user:organization|person){
-let addeduser = this.usercollection.add(user);console.log(addeduser);
-return from(addeduser);
-   }
+//    adduser(user:organization|person){
+// let addeduser = this.usercollection.add(user);console.log(addeduser);
+// return from(addeduser);
+//    }
    getuser(userid:string):Observable<person | organization | undefined>{
 return this.usercollection.doc(userid).valueChanges();   }
 
@@ -24,7 +24,7 @@ return this.usercollection.doc(userid).valueChanges();   }
     return from(this.usercollection.doc(id).delete());
   }
   updateuser(id: string, user: organization|person){
-    return this.firestore.collection('users').doc(id).update(user);
+    return this.firestore.collection('users').doc(id).update({...user});
   }
 
   

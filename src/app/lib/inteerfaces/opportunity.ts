@@ -4,7 +4,11 @@ export interface opportunity{
     name:string,
     description:string,
     skills:string,
-     start:string,
-    end:string,
+    range:range,
     numberOfVolunteers:number,
+}
+
+export interface range{
+    start:any,
+    end:any,
 }

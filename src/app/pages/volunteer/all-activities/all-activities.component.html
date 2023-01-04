@@ -1,20 +1,34 @@
 <div class="container">
+  <h1>All opportunities</h1>
     <mat-card *ngFor="let opportunity of alloportunities" class="Opportunity-card">
         <mat-card-header>
-          <mat-card-title>{{opportunity.name}}</mat-card-title>
+          <mat-card-title class="title">{{opportunity.name}}</mat-card-title>
         </mat-card-header>
+       <mat-divider></mat-divider>
         <mat-card-content>
           <div class="card-content">
-           <div>Description:{{opportunity.description}}</div> 
-           <div ><span> date: {{opportunity.start}}</span> <span>end date:{{opportunity.end}}</span></div> 
+           <div class="item"><b>Description : </b>{{opportunity.description}}</div> 
+           <div class="item"><span> <b>Duration : </b>{{(opportunity.range.start).toDate()| date}}</span> <span>  -  {{(opportunity.range.end).toDate()| date}}</span></div> 
           
           </div>
+
         </mat-card-content>
-        <mat-card-actions>
-          <button mat-raised-button>Apply</button>
+        <mat-divider></mat-divider>
+        <mat-card-footer>
+        <mat-card-actions class="apply">
+          <button  mat-raised-button color="primary">Apply</button>
         </mat-card-actions>
-        <mat-card-footer>{{opportunity.numberOfVolunteers}} volunteers</mat-card-footer>
+        <mat-progress-bar 
+        class="item"
+        [value]="100*5/opportunity.numberOfVolunteers"
+        mode="determinate"
+        [bufferValue]="0">
+    </mat-progress-bar>
+       <div class="item">
+        {{opportunity.numberOfVolunteers}} volunteers</div></mat-card-footer>
       </mat-card>
+      <!-- [value]="100* number of applied volunteers/ number of volunteers" -->
+
       
 
 

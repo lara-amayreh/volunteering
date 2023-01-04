@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   // res: organization[];
 constructor( private auth: AuthService,private userservice:UserService, public router:Router, public organizationservise:OrganizationService){}
 hide: boolean=true;
-role!:string;
+role:string='';
   form = new FormGroup({
 email:new FormControl('',[Validators.required, Validators.email]),
 password:new FormControl('',[Validators.required]),
@@ -30,7 +30,7 @@ password:new FormControl('',[Validators.required]),
   ngOnInit(): void {
     this.auth.userState$.subscribe((value)=>{
       if(value)
-      this.role = value.role+'';
+      this.role = value.role;
     })
     
         }

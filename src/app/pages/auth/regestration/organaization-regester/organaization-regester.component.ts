@@ -99,7 +99,8 @@ submit(){
   this.task.snapshotChanges().pipe(
     finalize(() => this.downloadURL = this.ref.getDownloadURL())
   )
-  .subscribe();
+  .subscribe(this.downloadURL);
+  console.log(this.downloadURL);
 }
 
 }

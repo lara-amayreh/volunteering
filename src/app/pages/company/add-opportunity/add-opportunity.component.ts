@@ -41,17 +41,16 @@ export class AddOpportunityComponent{
    form = new FormGroup({
     name:new FormControl('',[Validators.required]),
     description:new FormControl('',[Validators.required]),
-    experience:new FormControl('',[Validators.required]),
     skills: new FormControl('',[Validators.required]),
-    numberOfVolunteers: new FormControl<number>(0,[Validators.required, Validators.min(0)]),
+    numberOfVolunteers: new FormControl<number|null>(null,[Validators.required, Validators.min(0)]),
     range :new FormGroup({
       start: new FormControl('',[Validators.required]),
-      end: new FormControl('',[Validators.required]),
+      end: new FormControl(''),
     }),
    
   
 });
-  
+
 
 add(event: MatChipInputEvent): void {
   const value = (event.value || '').trim();
@@ -88,11 +87,9 @@ confirm(){
  
 
 
-  console.log(this.form.value.range?.start);
 
 this.authservice.userState$
 .pipe(switchMap( (value) => {
-   console.log(value);
   if(value){
 return this.oportunityservice.addOpportunity({
   userid : value.id,
@@ -100,9 +97,9 @@ return this.oportunityservice.addOpportunity({
   description:this.form.get('description')?.value+'',
   skills:this.form.get('skills')?.value+'',
   numberOfVolunteers:Number(this.form.get('numberOfVolunteers')?.value+''),
-  
-start:this.form.value.range?.start+''.slice(0,12),
-end:this.form.value.range?.end+''.slice(0,12),
+  range:this.range?.value
+// start:this.form.value.range?.start+''.slice(0,12),
+// end:this.form.value.range?.end+''.slice(0,12),
 
    
 
@@ -111,6 +108,7 @@ end:this.form.value.range?.end+''.slice(0,12),
 
 
 });
+
 }
   
   else{
@@ -129,7 +127,7 @@ get start(){
  get end(){
   return this.form.get('end');
  }
- get range(){
-  return this.form.get('range');
+ get range() :FormGroup{
+  return this.form.get('range') as FormGroup;
  }
 }

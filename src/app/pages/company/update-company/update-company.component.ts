@@ -26,7 +26,7 @@ logo!:string;
 orga$!:Observable<any>;
   role: string="company";
    organization! :organization;
-  constructor( private afStorage :AngularFireStorage, private organizationservice:OrganizationService ,private authservice:AuthService,
+  constructor( private userservice:UserService, private afStorage :AngularFireStorage, private organizationservice:OrganizationService ,private authservice:AuthService,
     private dialogRef: MatDialogRef<UpdateCompanyComponent>, public firestore:AngularFirestore,
     @Inject(MAT_DIALOG_DATA) public data: {id: string, company:any})
      {}
@@ -34,6 +34,7 @@ orga$!:Observable<any>;
   ngOnInit(): void {
    
 this.authservice.userState$.subscribe((value)=>{
+  console.log(value);
   this.form.get('name')?.setValue(value.name);
   this.form.get('phoneNumber')?.setValue(value.phoneNumber);
   this.form.get('email')?.setValue(value.email);
@@ -66,7 +67,7 @@ this.authservice.userState$.subscribe((value)=>{
    
      submit(){
 
-      this.organizationservice.updateStudent(this.data.id,{... this.form.value} as organization);
+      this.userservice.updateuser(this.data.id,{... this.form.value} as organization);
 
 
   //  this.firestore.collection<organization>('users').doc(this.data.id).update(this.form.value as organization);

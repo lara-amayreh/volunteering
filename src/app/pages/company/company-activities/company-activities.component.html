@@ -1,31 +1,36 @@
-<button mat-icon-button (click)="addoportunity()">
+<button mat-fab color="primary" (click)="addoportunity()">
     <mat-icon>add</mat-icon>
 
-</button>
-<!-- <ul>
-    <li *ngFor="let item of opportunities; let i = index">
-        {{item.name}}
-    </li> 
-  
-</ul> -->
-
-<div class="container">
-    <mat-card *ngFor="let opportunity of opportunities; let i = index" class="Opportunity-card">
+</button><div class="container">
+  <h1> your opportunities</h1>
+    <mat-card *ngFor="let opportunity of opportunities" class="Opportunity-card">
+     
         <mat-card-header>
-          <mat-card-title>{{opportunity.name}}</mat-card-title>
+          <mat-card-title class="title">{{opportunity.name}}</mat-card-title>
         </mat-card-header>
+       <mat-divider></mat-divider>
         <mat-card-content>
           <div class="card-content">
-           <div>Description:{{opportunity.description}}</div> 
-           <div ><span> start date: {{opportunity.start.slice(0,16)}}</span><mat-icon>alarm</mat-icon><span> end date:{{opportunity.end.slice(0,16)}}</span></div> 
+           <div class="item"><b>Description : </b>{{opportunity.description}}</div> 
+           <div class="item"><span> <b>Duration : </b>{{(opportunity.range.start).toDate()| date}}</span> <span>  -  {{(opportunity.range.end).toDate()| date}}</span></div> 
           
           </div>
+
         </mat-card-content>
-        <mat-card-actions>
-          <button mat-raised-button>Apply</button>
-        </mat-card-actions>
-        <mat-card-footer>{{opportunity.numberOfVolunteers}} volunteers</mat-card-footer>
+        <mat-divider></mat-divider>
+        <mat-card-footer>
+        
+        <mat-progress-bar 
+        class="item"
+        [value]="100*5/opportunity.numberOfVolunteers"
+        mode="determinate"
+        [bufferValue]="0">
+    </mat-progress-bar>
+       <div class="item">
+        {{opportunity.numberOfVolunteers}} volunteers</div></mat-card-footer>
       </mat-card>
+      <!-- [value]="100* number of applied volunteers/ number of volunteers" -->
+
       
 
 

@@ -28,6 +28,14 @@ $volunteering-theme: mat.define-light-theme((
   )
 ));
 
+// $volunteering-theme: mat.define-dark-theme((
+//   color: (
+//     primary: $volunteering-primary,
+//     accent: $volunteering-accent,
+//     warn: $volunteering-warn,
+//   )
+// ));
+
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.

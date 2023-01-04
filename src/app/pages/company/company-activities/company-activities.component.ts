@@ -23,7 +23,8 @@ export class CompanyActivitiesComponent implements OnInit {
   @ViewChild('callAPIDialog')
   callAPIDialog!: TemplateRef<any>;
    opportunities: opportunity[]=[];
-
+start!:string;
+end!:string;
   constructor(public dialog: MatDialog,public oportunityservice:OportunitiesService,private authservice:AuthService) { }
   ngOnInit(): void {
   

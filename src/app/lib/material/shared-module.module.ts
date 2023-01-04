@@ -17,8 +17,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import {MatDialogModule} from '@angular/material/dialog';
-
-
+import { MatDividerModule } from '@angular/material/divider';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 export const MaterialImports =[
@@ -38,7 +38,9 @@ MatChipsModule,
 MatCheckboxModule,
 MatDatepickerModule,
 MatNativeDateModule,
-MatAutocompleteModule
+MatAutocompleteModule,
+MatDividerModule,
+MatProgressBarModule,
 
 
 
