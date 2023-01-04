@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { Firestore, collectionData, collection } from '@angular/fire/firestore';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of, switchMap } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { getAuth, signOut } from "firebase/auth";
+import { organization } from '../../inteerfaces/organization';
+import { person } from '../../inteerfaces/person';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +14,65 @@ import { getAuth, signOut } from "firebase/auth";
 export class AuthService {
 
   constructor(private fireAuth:AngularFireAuth,private firestore: AngularFirestore , private router: Router) { }
-  userState$ = this.fireAuth.authState;
+  userState$ = this.fireAuth.authState.pipe(
+    switchMap((value)=>{
+if(!value)
+return of(null);
+else
+return this.firestore.collection<any>('users').doc(value.uid).valueChanges();
+    })
 
+    
+  )
 
 
   signIn(email:string, password: string){
     return this.fireAuth.signInWithEmailAndPassword(email, password);
   }
-  signUp(email: string, password: string){
-    return this.fireAuth.createUserWithEmailAndPassword(email, password);
+  signUpPerson(email: string, password: string, 
+    fullName:string,phoneNumber:number,city:string,skills:string,experience:string,
+    courses:string[],days:string,start:string,end:string){
+    return this.fireAuth.createUserWithEmailAndPassword(email, password).then((val)=>{
+    let user:person={
+id:val.user?.uid,
+fullName:fullName,
+phoneNumber:phoneNumber,
+city:city,
+skills:skills,
+experience:experience,
+courses:courses,
+days:days,
+start:start,
+end:end,
+role:"person",
+
+    };
+    this.firestore.collection<any>('users').doc(val.user?.uid).set(user);
+      } ,
+
+    );
+  }
+
+  signUpCompany(email: string, password: string,
+    name:string,phoneNumber:number,city:string,logo:string,
+    type:string,url:string){
+    return this.fireAuth.createUserWithEmailAndPassword(email, password).then((val)=>{
+    let user:organization={
+id:val.user?.uid,
+name:name,
+phoneNumber:phoneNumber,
+city:city,
+url:url,
+logo:logo,
+type:type,
+email:email,
+role:"company",
+
+    };
+    this.firestore.collection<any>('users').doc(val.user?.uid).set(user);
+      } ,
+
+    );
   }
 
   signout(){
@@ -33,78 +85,4 @@ export class AuthService {
     alert(error);
   });
 }
-  // public currentUser: any;
-  // public userStatus!: string;
-  // public userStatusChanges: BehaviorSubject<string> = new BehaviorSubject<string>(this.userStatus);
-  
-
-  // setUserStatus(userStatus: any): void {
-  //   this.userStatus = userStatus;
-  //   this.userStatusChanges.next(userStatus);
-  // }
-
-//   signIn(email: string, password: string) {
-      
-//     this.angularfireauth.signInWithEmailAndPassword(email, password)
-//     .then((user)=>{
-//       this.firestore.collection("users").ref.where("username", "==", user.user?.email).onSnapshot(snap =>{
-//         snap.forEach(userRef => {
-//           console.log("userRef", userRef.data());
-//           this.currentUser = userRef.data();
-//           //setUserStatus
-//           this.setUserStatus(this.currentUser)
-//           if(userRef.get('role') == "volunteer") {
-//             this.router.navigate(["volunteer/"]);
-//           }else{
-//             this.router.navigate(["company"]);
-//           }
-//         })
-//       })
-     
-//     }).catch(err => err)
-// }
-  //  signIn(email:string, password: string){
-
-
-  //  return this.angularfireauth.signInWithEmailAndPassword(email, password);
-  // }
-  // // signUp(email: string, password: string){
-  // //   return this.angularfireauth.createUserWithEmailAndPassword(email, password);
-  // // }
-  // async signUp(email:string, password:string,role:string){
-  
-    
-  //   try {
-  //     const userResponse = await this.angularfireauth.createUserWithEmailAndPassword(email, password);
-  //     // add the user to the "users" database
-  //     let user = {
-  //       id: userResponse.user?.uid,
-  //       username: userResponse.user?.email,
-  //       role: role,
-        
-  //     };
-
-      //add the user to the database
-    //   this.firestore.collection("users").add(user)
-    //     .then(user_1 => {
-    //       user_1.get().then(x => {
-    //         //return the user data
-    //         console.log(x.data());
-    //         this.currentUser = x.data();
-    //         this.setUserStatus(this.currentUser);
-    //         this.router.navigate(["/"]);
-    //       });
-    //     }).catch((err: any) => {
-    //       console.log(err);
-    //     });
-    // } catch (err_1) {
-    //   console.log("An error ocurred: ", err_1);
-    // }
- 
-    // }
-
-  
- 
-
- 
 }

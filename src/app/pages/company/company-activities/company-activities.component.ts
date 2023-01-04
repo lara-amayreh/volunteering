@@ -31,7 +31,7 @@ export class CompanyActivitiesComponent implements OnInit {
   .pipe(switchMap( (value) => {
   if(value){
  
-    return this.oportunityservice.getOpportunities(value?.uid);
+    return this.oportunityservice.getOpportunities(value?.id+'');
 
     }
     else
@@ -56,7 +56,6 @@ export class CompanyActivitiesComponent implements OnInit {
      dialogRef.afterClosed().subscribe((result)=> {
          console.log(result); 
  
-         //refresh table 
          //this.students = this.studentsService.getStudents();
         
      })

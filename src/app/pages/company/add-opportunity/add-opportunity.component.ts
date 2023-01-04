@@ -85,6 +85,9 @@ private _filter(value: string): string[] {
   return this.allSkills.filter(skill => skill.toLowerCase().includes(filterValue));
 }
 confirm(){
+ 
+
+
   console.log(this.form.value.range?.start);
 
 this.authservice.userState$
@@ -92,14 +95,14 @@ this.authservice.userState$
    console.log(value);
   if(value){
 return this.oportunityservice.addOpportunity({
-  userid : value.uid,
+  userid : value.id,
   name:this.form.get('name')?.value +'',
   description:this.form.get('description')?.value+'',
   skills:this.form.get('skills')?.value+'',
   numberOfVolunteers:Number(this.form.get('numberOfVolunteers')?.value+''),
   
-start:this.form.value.range?.start+'',
-end:this.form.value.range?.end+'',
+start:this.form.value.range?.start+''.slice(0,12),
+end:this.form.value.range?.end+''.slice(0,12),
 
    
 

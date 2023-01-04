@@ -24,7 +24,7 @@ logo!:string;
 
   role: string="company";
    organization! :organization;
-  constructor( private afStorage: AngularFireStorage ,private userservice:UserService , private auth:AuthService , private router:Router){}
+  constructor( private afStorage: AngularFireStorage , public auth:AuthService , private router:Router){}
   // organizations$ !:Observable<organization[]>;
 types=companytypes;
 hide: boolean=true;
@@ -36,9 +36,9 @@ form = new FormGroup({
   email:new FormControl('',[Validators.required, Validators.email]),
   password:new FormControl('',[Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]),
   type: new FormControl('',[Validators.required]),
-  
 
-    
+
+
 })
 ngOnInit(): void {
   // this.organizations$= this.organizationservice.getAllOrganizations();
@@ -47,31 +47,33 @@ submit(){
    //register user in firebase
 
    this.role="company";
-  
+
   //  this.organization =this.form.value;
   //  this.organization.role=this.role;
-   this.auth.signUp(
+   this.auth.signUpCompany(
     this.form.get('email')?.value+ '',
     this.form.get('password')?.value+'',
+    this.form.get('name')?.value+ '',
+    this.form.get('phoneNumber')?.value as number,
+    this.form.get('city')?.value+ '',
+    // this.downloadURL,
+    this.form.get('logo')?.value+ '',
+    this.form.get('type')?.value+'',
+    this.form.get('url')?.value+ '',
     // this.role
   ).then((user)=> {
-this.organization = {...this.form.value} as organization;
-console.log(this.organization);
-this.organization.role=this.role;
-this.organization.uid=user.user?.uid;
+
 
 // this.organization.logo= this.downloadURL;
 // console.log(this.organization.logo);
 
 
-    //save other form fields collection 
-this.userservice.adduser({...this.organization} as organization);
-
+    //save other form fields collection
     this.router.navigate(['company/']);
 
     console.log(user);
   }).catch((error)=> {
-    console.log(error)   
+    console.log(error)
   });
 }
 
@@ -85,12 +87,12 @@ this.userservice.adduser({...this.organization} as organization);
   // and kicks off the upload
   this.task = this.ref.put(event.target.files[0]);
   this.uploadState = this.task.snapshotChanges().pipe(map(s => s!.state));
-  
+
   // AngularFireUploadTask provides observable
   // to get uploadProgress value
   // this.uploadProgress = this.task.snapshotChanges()
   // .pipe(map(s => (s.bytesTransferred / s.totalBytes) * 100));
-  
+
   // observe upload progress
   this.uploadProgress = this.task.percentageChanges();
   // get notified when the download URL is available

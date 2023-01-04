@@ -16,11 +16,9 @@ export class OrganizationService {
      return from(addedorg);
  
   }
-  getorganization(userid:string): Observable<organization[]>{
-
-      // return this.usersCollection.valueChanges({"idField":'uid'});
-    return this.firestore.collection<organization>('users',ref=>ref.where('idField',"==","uid")).valueChanges();}
-
+  getorganization(userid:string):Observable<organization | undefined>{
+    return this.usersCollection.doc(userid).valueChanges({ "idField": 'uid' });;   }
+    
   getAllOrganizations():Observable<organization[]>{
     
     return this.firestore.collection<organization>('users',ref=>ref.where('role',"==","company")).valueChanges({ "idField": 'uid' });
@@ -28,8 +26,8 @@ export class OrganizationService {
 //   deleteStudent(id: string){
 //     return from(this.usersCollection.doc(id).delete());
 //   }
-//   updateStudent(id: string, student: organization){
-//     return from(this.usersCollection.doc(id).update({...student}));
-// }
+ updateStudent(id: string, student: organization){   
+   return from(this.usersCollection.doc(id).update({...student}));
+}
 
 }

@@ -9,31 +9,18 @@ import { UserService } from '../../services/user/user.service';
   styleUrls: ['./side-nav.component.css']
 })
 export class SideNavComponent implements OnInit {
-  loged!:any;
+  role!:string;
 constructor(public authServise:AuthService, private userservice:UserService){}
 ngOnInit(): void {
   
-  this.authServise.userState$
-  .pipe(switchMap( (value) => {
-  if(value){
- console.log(value);
- console.log(value.uid);
-
-    return this.userservice.getuser(value?.uid);
-
-   
-  }
-    else
-    return of(null);
-   
-  })).subscribe((response)=>{
-    if(response)
- this.loged =response[0].role;
- console.log(this.loged[0].role);
+  this.authServise.userState$.subscribe((value)=>{
+    if(value)
+    this.role=value.role+'';
+  });
  
-  })
+   
   
-  
+ 
   }
 
 

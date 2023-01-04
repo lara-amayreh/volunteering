@@ -17,37 +17,23 @@ export class LoginComponent implements OnInit {
   // res: organization[];
 constructor( private auth: AuthService,private userservice:UserService, public router:Router, public organizationservise:OrganizationService){}
 hide: boolean=true;
-loged!:any;
+role!:string;
   form = new FormGroup({
 email:new FormControl('',[Validators.required, Validators.email]),
 password:new FormControl('',[Validators.required]),
   })
 
   
-    ngOnInit(): void {
-  
-      this.auth.userState$
-      .pipe(switchMap( (value) => {
-      if(value){
-     console.log(value);
-     console.log(value.uid);
-
-        return this.userservice.getuser(value?.uid);
+   
+      
+      
+  ngOnInit(): void {
+    this.auth.userState$.subscribe((value)=>{
+      if(value)
+      this.role = value.role+'';
+    })
     
-       
-      }
-        else
-        return of(null);
-       
-      })).subscribe((response)=>{
-        if(response)
-     this.loged=response;
-     console.log(this.loged[0].role);
-     
-      })
-      
-      
-      }
+        }
   
   submit(){
     
@@ -55,11 +41,12 @@ password:new FormControl('',[Validators.required]),
       this.form.get('email')?.value+'',
       this.form.get('password')?.value+''
       ).then((user)=> {
-        //navigate to admin/
-      if(this.loged[0].role=="volunteer")        
-         this.router.navigate(['volunteer/']);
-         else
-         this.router.navigate(['company/']);
+       if(this.role=="company")
+this.router.navigate(['company/']);
+else
+this.router.navigate(['volunteer/']);
+
+
 
       }).catch((error)=> {
         console.log(error)

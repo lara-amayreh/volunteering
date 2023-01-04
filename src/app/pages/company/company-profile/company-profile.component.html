@@ -1,9 +1,32 @@
-<button mat-icon-button (click)="updateorganization(id)"><span>add</span>
 
-</button>
-<ul>
-    <li *ngFor="let item of organization; let i = index">
-        {{item.name}}
-    </li> 
-  
-</ul>
+<div class="container" *ngIf="organization">
+    <mat-card>
+        <mat-card-header>
+<h3>{{organization.name }} profile </h3>
+<button mat-icon-button (click)="updateorganization(id)"> 
+    <mat-icon>edit</mat-icon></button>
+</mat-card-header>
+<mat-divider></mat-divider>
+<mat-card-content>
+    <div class="card-content">
+    <h4>company information</h4>
+    <div class="card-item"><h5> company Name : </h5>{{organization.name}}</div>
+    <div class="card-item"><h5> Company Type : </h5>{{organization.type}}</div>
+    <div class="card-item"> <h5> Company location : </h5>{{organization.city}}</div>
+
+<mat-divider></mat-divider>
+
+    <h4>contact information</h4>
+    <div class="card-item"><h5> company website : </h5>{{organization.url}}</div>
+    <div class="card-item"><h5> Email Address: </h5>{{organization.email}}</div>
+<div class="card-item"><h5> phone Number : </h5>{{organization.phoneNumber}}</div>
+<mat-divider></mat-divider>
+ <h4>about information</h4>
+ <h5> Abot Company: {{organization.about}}</h5>
+
+</div>
+</mat-card-content>
+
+
+</mat-card>
+    </div>

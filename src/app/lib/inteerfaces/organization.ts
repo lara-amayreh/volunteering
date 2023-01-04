@@ -1,13 +1,14 @@
 export interface organization {
-    uid?:string,
+    id?:string,
     name:string,
+    city?:string,
 email:string,
-password:string,
-    phoneNumber:number,
+phoneNumber:number,
  type:string,
  url:string,
- role:string,
- logo:string
+ role?:string,
+ logo:string,
+ about?:string
  
  
     

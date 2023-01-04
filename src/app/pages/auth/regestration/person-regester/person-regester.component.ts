@@ -31,7 +31,7 @@ import { UserService } from 'src/app/lib/services/user/user.service';
 
 })
 export class PersonRegesterComponent implements OnInit {
-  constructor(private userservice:UserService ,private _formBuilder: FormBuilder,private router: Router,private auth:AuthService) 
+  constructor(private router: Router, public auth:AuthService) 
   {this.filteredSkills = this.skillsCtrl.valueChanges.pipe(
       startWith(null),
       map((skill: string | null) => (skill ? this._filter(skill) : this.allSkills.slice())),
@@ -199,19 +199,22 @@ submit(){
  
  //  this.organization =this.form.value;
  //  this.organization.role=this.role;
-  this.auth.signUp(
+  this.auth.signUpPerson(
    this.form.get('email')?.value+ '',
    this.form.get('password')?.value+'',
+   this.form.get('fullName')?.value+ '',
+   this.form.get('phoneNumber')?.value as number,
+   this.form.get('city')?.value+ '',
+   this.form.get('skills')?.value+'',
+   this.form.get('experience')?.value+ '',
+   this.form.get('courses')?.value as string[],
+   this.form.get('start')?.value+ '',
+   this.form.get('end')?.value+'',
+   this.form.get('days')?.value+'',
+
    // this.role
  ).then((user)=> {
   
-  this.person = {...this.form.value}as person;
-  this.person.role =this.role;
-  // this.person.role=this.role;
-  this.person.uid = user.user?.uid;
-   //save other form fields collection 
-this.userservice.adduser({...this.person} as person);
-
    this.router.navigate(['volunteer/']);
 
    console.log(user);

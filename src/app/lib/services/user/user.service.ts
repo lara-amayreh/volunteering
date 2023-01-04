@@ -17,9 +17,8 @@ this.usercollection = this.firestore.collection('users');
 let addeduser = this.usercollection.add(user);console.log(addeduser);
 return from(addeduser);
    }
-   getuser(userid:string):Observable<person[]|organization[]>{
-    return this.firestore.collection<any> ('users',ref=>ref.where('uid',"==",userid)).valueChanges();
-   }
+   getuser(userid:string):Observable<person | organization | undefined>{
+return this.usercollection.doc(userid).valueChanges();   }
 
    deleteuser(id: string){
     return from(this.usercollection.doc(id).delete());

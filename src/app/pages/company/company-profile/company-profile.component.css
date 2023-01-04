@@ -1,0 +1,16 @@
+mat-card-header{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    align-items: center;
+}
+
+.card-item{
+display:flex;
+gap:20px;
+padding-top: 15px;
+padding-left: 10px;
+}
+mat-divider{
+    padding: 10px;
+}

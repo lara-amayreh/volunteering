@@ -15,42 +15,31 @@ import { UpdateCompanyComponent } from '../update-company/update-company.compone
 export class CompanyProfileComponent {
   @ViewChild('callAPIDialog')
   callAPIDialog!: TemplateRef<any>;
-   organization: organization[]=[];
-   id:string='';
+   organization!: organization;
+   public id:string='';
 
-  constructor(public dialog: MatDialog,public userservice:UserService,private authservice:AuthService) { }
+  constructor(public dialog: MatDialog, private orgservice:OrganizationService, public userservice:UserService,public authservice:AuthService) { }
   ngOnInit(): void {
   
-  this.authservice.userState$
-  .pipe(switchMap( (value) => {
-  if(value){
- 
-    return this.userservice.getuser(value?.uid);
-
-    }
-    else
-    return of(null);
-   
-  })).subscribe((response)=>{
-    if(response){
- console.log(response);
- this.id =response[0].uid!}
+  this.authservice.userState$.subscribe((value)=>{
+    if(value)
+    this.id = value.id+'';
+    this.organization= value as organization;
   })
   
   
   }
 
   updateorganization(id:string){
-    // console.log(id);
+   console.log(id);
     let dialogRef = this.dialog.open(UpdateCompanyComponent, {
        width: '500px',
-      data:{id:id}
+      data:{id:id,data:this.organization}
      });
      dialogRef.afterClosed().subscribe((result)=> {
          console.log(result); 
  
          //refresh table 
-        //  this.organization = this.userservice.getuser();
         
         
      })
