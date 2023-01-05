@@ -15,7 +15,7 @@ ngOnInit(): void {
   
   this.authServise.userState$.subscribe((value)=>{
     if(value)
-    this.role=value.role+'';
+    this.role=value.role;
   });
  
    

@@ -3,7 +3,7 @@
     <mat-card>
         <mat-card-header>
 <h3>{{organization.name }} profile </h3>
-<button mat-icon-button (click)="updateorganization(id)"> 
+<button mat-icon-button color="primary" (click)="updateorganization(id)"> 
     <mat-icon>edit</mat-icon></button>
 </mat-card-header>
 <mat-divider></mat-divider>
@@ -16,13 +16,13 @@
 
 <mat-divider></mat-divider>
 
-    <h4>contact information</h4>
-    <div class="card-item"><h5> company website : </h5>{{organization.url}}</div>
-    <div class="card-item"><h5> Email Address: </h5>{{organization.email}}</div>
+    <h4>Contact information</h4>
+    <div class="card-item"><h5> Company website : </h5>{{organization.url}}</div>
+    <div class="card-item"><h5> company Email Address: </h5>{{organization.email}}</div>
 <div class="card-item"><h5> phone Number : </h5>{{organization.phoneNumber}}</div>
 <mat-divider></mat-divider>
- <h4>about information</h4>
- <h5> Abot Company: {{organization.about}}</h5>
+ <h4>About information</h4>
+ <div class="card-item"><h5> Abot Company: </h5>{{organization.about}}</div>
 
 </div>
 </mat-card-content>

@@ -10,11 +10,18 @@ import { OportunitiesService } from 'src/app/lib/services/oportunities/oportunit
 })
 export class AllActivitiesComponent implements OnInit{
   alloportunities!:opportunity[];
+  role:string='';
+  allskills!:string;
   constructor(private auth:AuthService,private oportunityservices:OportunitiesService){}
   ngOnInit(): void {
  this.oportunityservices.getAllOpportunities().subscribe((response)=>{
 if(response){
   this.alloportunities=response;
+
+  console.log(response);
+  this.auth.userState$.subscribe((value)=>{
+    this.role=value.role;
+  })
   console.log(this.alloportunities);
 }
 })

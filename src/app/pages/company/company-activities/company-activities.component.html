@@ -15,7 +15,14 @@
            <div class="item"><span> <b>Duration : </b>{{(opportunity.range.start).toDate()| date}}</span> <span>  -  {{(opportunity.range.end).toDate()| date}}</span></div> 
           
           </div>
+          <div class="item"><b>skills required:</b>
+            <mat-chip-listbox aria-label="skills required">
 
+              <mat-chip *ngFor="let skill of (opportunity.skills).split(',')">
+                       {{skill}}
+              </mat-chip>
+              </mat-chip-listbox>
+            </div>
         </mat-card-content>
         <mat-divider></mat-divider>
         <mat-card-footer>

@@ -60,6 +60,8 @@ this.authservice.userState$.subscribe((value)=>{
        url:new FormControl('',[Validators.required,Validators.pattern('(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})')]),
        email:new FormControl('',[Validators.required, Validators.email]),
        type: new FormControl('',[Validators.required]),
+       about:new FormControl(''),
+
        
      
          

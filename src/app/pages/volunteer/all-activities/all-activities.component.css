@@ -18,12 +18,14 @@ mat-card-title{
     font-size: 1.5rem;
 text-shadow: 0 0 3px gray;}
 .item{
-    padding: 5px 10px;
+    padding: 10px;
     font-size: 1.2rem;
     text-shadow: 0 0 1px gray;}
 
 
-
+    mat-chip-listbox{
+        padding: 10px;
+    }
 .apply{
     display: flex;
     justify-content: end;

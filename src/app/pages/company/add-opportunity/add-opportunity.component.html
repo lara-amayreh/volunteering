@@ -1,7 +1,7 @@
-<h1>Add New Opportunity</h1>
+
 
 <div mat-dialog-content class="form-container">
-   
+    <h1>Add New Opportunity</h1>
         <form [formGroup]="form" (ngSubmit)="confirm()">
     
             <mat-form-field>
@@ -9,7 +9,7 @@
                 <input name="name" matInput placeholder="Opportunity name" formControlName="name">
                 <mat-error >required field</mat-error>
             </mat-form-field>
-           <br>
+           
             <mat-form-field>
                 <mat-label>Description</mat-label>
                 <input name="description" type="text" matInput placeholder="Enter description"
@@ -58,8 +58,7 @@
               
               
             
-           
-   
+            
     
         <mat-form-field>
             <mat-label>number Of Volunteers</mat-label>
@@ -68,8 +67,8 @@
     </mat-form-field>
 
         <div mat-dialog-actions>
-            <button mat-raised-button mat-dialog-close>No</button>
-            <button [disabled]="form.invalid" mat-raised-button>Yes</button>
+            <button mat-raised-button color="warn" mat-dialog-close>No</button>
+            <button  color="primary" [disabled]="form.invalid" mat-raised-button>Yes</button>
         
         </div>
         </form>

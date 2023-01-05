@@ -1,5 +1,5 @@
 export interface opportunity{
-    // id?:string,
+    id?:string,
     userid?:string,
     name:string,
     description:string,

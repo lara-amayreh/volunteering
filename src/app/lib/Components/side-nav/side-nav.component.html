@@ -6,15 +6,20 @@
       <mat-icon>home</mat-icon>
       <span>Home</span>
     </button>
-<span  *ngIf="authServise.userState$ | async as user">
-    <button *ngIf="role"  mat-button class="menu-button" routerLink="/{{role}}/profile">
+  <span  *ngIf="authServise.userState$">
+      <button *ngIf='role=="person"'  mat-button class="menu-button" routerLink="/volunteer/profile">
+        <mat-icon>person</mat-icon>
+        <span>profile</span> </button>
+       
+   
+    <button *ngIf='role=="company"'  mat-button class="menu-button" routerLink="/company/profile">
       <mat-icon>person</mat-icon>
       <span>profile</span> </button>
-    </span>
+   
     <button *ngIf='role=="company"' mat-button  class="btn-login" routerLink="/company/opportunities">
       <mat-icon>task</mat-icon>
       <span>your Activities</span>
-  </button>
+  </button> </span>
       <button mat-button class="menu-button" routerLink="/volunteer/opportunities">
         <mat-icon>badge</mat-icon>
         <span>opportunities</span>

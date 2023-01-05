@@ -1,4 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { person } from 'src/app/lib/inteerfaces/person';
+import { AuthService } from 'src/app/lib/services/auth/auth.service';
+import { OrganizationService } from 'src/app/lib/services/organization/organization.service';
+import { UserService } from 'src/app/lib/services/user/user.service';
+import { UpdateVolunteerComponent } from '../update-volunteer/update-volunteer.component';
 
 @Component({
   selector: 'app-volunteer-profile',
@@ -6,5 +12,40 @@ import { Component } from '@angular/core';
   styleUrls: ['./volunteer-profile.component.css']
 })
 export class VolunteerProfileComponent {
+  @ViewChild('callAPIDialog')
+  callAPIDialog!: TemplateRef<any>;
+   person!: person;
+   public id:string='';
 
-}
+  constructor(public dialog: MatDialog, private orgservice:OrganizationService, public userservice:UserService,public authservice:AuthService) { }
+
+  ngOnInit(): void {
+  
+    this.authservice.userState$.subscribe((value)=>{
+      if(value)
+      this.id = value.id+'';
+      this.person= value as person;
+    })
+    
+    
+    }
+  
+    updateorganization(id:string){
+     console.log(id);
+      let dialogRef = this.dialog.open(UpdateVolunteerComponent, {
+         width: '500px',
+        data:{id:id,data:this.person}
+       });
+       dialogRef.afterClosed().subscribe((result)=> {
+           console.log(result); 
+   
+           //refresh table 
+          
+          
+       })
+   
+      
+     }
+  }
+  
+

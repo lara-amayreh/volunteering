@@ -1,8 +1,8 @@
-<h1>Add New Opportunity</h1>
+
 <div mat-dialog-content class="form-container">
    
-    <div class="form-container">a
-        <h2>Company Register Form</h2>
+    <div class="form">
+        <h2>Update profile</h2>
         <form [formGroup]="form" (ngSubmit)="submit()">
     
             <mat-form-field>
@@ -29,6 +29,9 @@
                 <input type="email" name="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
                            
     
+            </mat-form-field>
+            <mat-form-field>
+                <textarea matInput formControlName="about" placeholder="Enter information about your company"></textarea>
             </mat-form-field>
            
            <mat-form-field>

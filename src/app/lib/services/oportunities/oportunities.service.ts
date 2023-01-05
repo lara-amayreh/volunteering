@@ -32,7 +32,7 @@ return from(addedOpportunity);
    }
 
    getOpportunities(userid:string):Observable<opportunity[]>{
-    return this.firestore.collection<opportunity>('oportunities',ref=>ref.where('userid',"==",userid)).valueChanges({"idField":'uid'});
+    return this.firestore.collection<opportunity>('oportunities',ref=>ref.where('userid',"==",userid)).valueChanges({"idField":'id'});
    }
    getAllOpportunities(): Observable<opportunity[]>{
 

@@ -1,0 +1,54 @@
+mat-card-header{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+.card-item{
+display:flex;
+gap:20px;
+padding-top: 15px;
+padding-left: 10px;
+font-size: 1.2rem;
+}
+mat-divider{
+    padding: 10px;
+    margin-top: 10px;
+}
+
+h5{
+    font-size: 1.2rem;
+}
+h4{
+    text-shadow: 0 0 1px gray;
+    font-size: 1.5rem;
+
+}
+.container{
+    padding: 20px 50px;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+
+}
+mat-card{
+    box-shadow: 0 0 8px gray;
+padding: 20px;
+}
+
+@media (min-width: 768px) { 
+    .container{
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+    
+    }
+    mat-card{
+        box-shadow: 0 0 8px gray;
+    padding: 50px;
+    width: 700px;
+    }
+}

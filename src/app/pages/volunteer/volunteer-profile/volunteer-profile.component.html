@@ -1,1 +1,32 @@
-<p>volunteer-profile works!</p>
+
+<div class="container" *ngIf="person">
+    <mat-card>
+        <mat-card-header>
+<h3>{{person.fullName }} profile </h3>
+<button mat-icon-button color="primary" (click)="updateorganization(id)"> 
+    <mat-icon>edit</mat-icon></button>
+</mat-card-header>
+<mat-divider></mat-divider>
+<mat-card-content>
+    <div class="card-content">
+    <h4>company information</h4>
+    <div class="card-item"><h5> company Name : </h5>{{person.fullName}}</div>
+    <!-- <div class="card-item"><h5> Company Type : </h5>{{person.}}</div> -->
+    <!-- <div class="card-item"> <h5> Company location : </h5>{{organization.city}}</div> -->
+
+<mat-divider></mat-divider>
+
+    <h4>Contact information</h4>
+    <!-- <div class="card-item"><h5> Company website : </h5>{{organization.url}}</div> -->
+    <!-- <div class="card-item"><h5> company Email Address: </h5>{{organization.email}}</div> -->
+<!-- <div class="card-item"><h5> phone Number : </h5>{{organization.phoneNumber}}</div> -->
+<mat-divider></mat-divider>
+ <h4>About information</h4>
+ <!-- <div class="card-item"><h5> Abot Company: </h5>{{organization.about}}</div> -->
+
+</div>
+</mat-card-content>
+
+
+</mat-card>
+    </div>

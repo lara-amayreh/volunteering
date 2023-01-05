@@ -9,6 +9,7 @@ import { AllActivitiesComponent } from './all-activities/all-activities.componen
 import { PastActivitiesComponent } from './past-activities/past-activities.component';
 import { AllCompaniesComponent } from './all-companies/all-companies.component';
 import { LayoutModule } from '@angular/cdk/layout';
+import { UpdateVolunteerComponent } from './update-volunteer/update-volunteer.component';
 @NgModule({
   declarations: [
     VolunteerDashboardComponent,
@@ -16,7 +17,8 @@ import { LayoutModule } from '@angular/cdk/layout';
     VolunteerProfileComponent,
     AllActivitiesComponent,
     PastActivitiesComponent,
-    AllCompaniesComponent
+    AllCompaniesComponent,
+    UpdateVolunteerComponent
   ],
   imports: [
     CommonModule,
