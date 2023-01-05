@@ -10,7 +10,7 @@ import {MatChipInputEvent} from '@angular/material/chips';
 import {Observable, range} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { PersonsService } from 'src/app/lib/services/person/persons.service';
-import { person } from 'src/app/lib/inteerfaces/person';
+import { courses, person } from 'src/app/lib/inteerfaces/person';
 
 import {FormGroup, FormControl} from '@angular/forms';
 import { Router } from '@angular/router';
@@ -205,12 +205,11 @@ submit(){
    this.form.get('fullName')?.value+ '',
    this.form.get('phoneNumber')?.value as number,
    this.form.get('city')?.value+ '',
-   this.form.get('skills')?.value+'',
-   this.form.get('experience')?.value+ '',
-   this.form.get('courses')?.value as string[],
-   this.form.get('start')?.value+ '',
-   this.form.get('end')?.value+'',
    this.form.get('days')?.value+'',
+   this.form.get('experience')?.value+ '',
+   this.form.get('courses')?.value as courses[],
+   this.form.get('skills')?.value+'',
+   this.range?.value,
 
    // this.role
  ).then((user)=> {
@@ -230,8 +229,8 @@ submit(){
  get end(){
   return this.form.get('end');
  }
- get range(){
-  return this.form.get('range');
+ get range() :FormGroup{
+  return this.form.get('range') as FormGroup;
  }
 get courses():FormArray{
   return this.form.get('courses')as FormArray;

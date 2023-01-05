@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { Firestore, collectionData, collection } from '@angular/fire/firestore';
-import { BehaviorSubject, Observable, of, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, of, range, switchMap } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { getAuth, signOut } from "firebase/auth";
 import { organization } from '../../inteerfaces/organization';
-import { person } from '../../inteerfaces/person';
+import { drange, person } from '../../inteerfaces/person';
+import { courses } from '../../inteerfaces/person';
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +31,8 @@ return this.firestore.collection<any>('users').doc(value.uid).valueChanges();
     return this.fireAuth.signInWithEmailAndPassword(email, password);
   }
   signUpPerson(email: string, password: string, 
-    fullName:string,phoneNumber:number,city:string,skills:string,experience:string,
-    courses:string[],days:string,start:string,end:string){
+    fullName:string,phoneNumber:number,city:string,days:string,experience:string,
+    courses:courses[],skills:string,daterange:drange){
     return this.fireAuth.createUserWithEmailAndPassword(email, password).then((val)=>{
     let user:person={
 id:val.user?.uid,
@@ -42,8 +43,7 @@ skills:skills,
 experience:experience,
 courses:courses,
 days:days,
-start:start,
-end:end,
+range:daterange,
 role:"person",
 
     };

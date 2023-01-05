@@ -1,6 +1,6 @@
 
 <div class="container" *ngIf="person">
-    <mat-card>
+    <mat-card class="card-item main-card">
         <mat-card-header>
 <h3>{{person.fullName }} profile </h3>
 <button mat-icon-button color="primary" (click)="updateorganization(id)"> 
@@ -9,22 +9,56 @@
 <mat-divider></mat-divider>
 <mat-card-content>
     <div class="card-content">
-    <h4>company information</h4>
-    <div class="card-item"><h5> company Name : </h5>{{person.fullName}}</div>
-    <!-- <div class="card-item"><h5> Company Type : </h5>{{person.}}</div> -->
-    <!-- <div class="card-item"> <h5> Company location : </h5>{{organization.city}}</div> -->
+    <h4>personal information</h4>
+    <div class="card-item"><h5> Full Name : </h5>{{person.fullName}}</div>
+    <div class="card-item"><h5> city  : </h5>{{person.city}}</div>
 
 <mat-divider></mat-divider>
 
     <h4>Contact information</h4>
-    <!-- <div class="card-item"><h5> Company website : </h5>{{organization.url}}</div> -->
-    <!-- <div class="card-item"><h5> company Email Address: </h5>{{organization.email}}</div> -->
-<!-- <div class="card-item"><h5> phone Number : </h5>{{organization.phoneNumber}}</div> -->
-<mat-divider></mat-divider>
- <h4>About information</h4>
- <!-- <div class="card-item"><h5> Abot Company: </h5>{{organization.about}}</div> -->
+<div class="card-item"><h5> phone Number : </h5>{{person.phoneNumber}}</div>
 
-</div>
+
+<mat-divider></mat-divider>
+ <h4>Availability</h4>
+ <div class="card-item"><h5> Available time: </h5>{{(person.range.start).toDate()| date}} <span> -  {{(person.range.end).toDate()|date}}</span></div>
+ 
+    <mat-chip-listbox class="card-item" aria-label="days">
+       <h5> Available days: </h5>
+        <mat-chip color="primary" *ngFor="let day of (person.days).split(',')">
+                 {{day}}
+        </mat-chip>
+        </mat-chip-listbox></div>
+        <mat-divider></mat-divider>
+
+
+        <h4>Qualifications</h4>
+        <div class="card-item"><h5> job experience : </h5>{{person.experience}}</div>
+        <mat-chip-listbox class="card-item" aria-label="days">
+            <h5> skills : </h5>
+             <mat-chip color="primary" *ngFor="let skill of (person.skills).split(',')">
+                      {{skill}}
+             </mat-chip>
+             </mat-chip-listbox>
+             <h5> Courses: </h5>
+             <div class="courses">
+                
+<mat-card class="courses-card"  *ngFor=" let course of person.courses">
+    <mat-card-title class="card-item"><h5>course Name:</h5>{{course.title}}
+   </mat-card-title>
+   <mat-divider></mat-divider>
+   <mat-card-content>
+    <div class="card-item"><h5>institution:</h5>{{course.organization}}</div>
+    <div class="card-item"><h5>Numner of hours:</h5>{{course.hours}}</div>
+   </mat-card-content>
+</mat-card>
+
+             </div>
+             <mat-divider></mat-divider>
+        
+        
+
+
 </mat-card-content>
 
 
