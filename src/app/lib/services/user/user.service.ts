@@ -23,9 +23,14 @@ return this.usercollection.doc(userid).valueChanges();   }
    deleteuser(id: string){
     return from(this.usercollection.doc(id).delete());
   }
-  updateuser(id: string, user: organization|person){
+  updateuser(id: string, user: any){
     return this.firestore.collection('users').doc(id).update({...user});
   }
+  getuserById(id : string):Observable<any>{
+    console.log(this.usercollection.doc(id).valueChanges());
+
+    return this.usercollection.doc(id).valueChanges();
+ }
 
   
 }

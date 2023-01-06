@@ -7,7 +7,7 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "lng": "35.9333", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Al ‘Āşimah", 
+    "admin_name": "Al Asimah", 
     "capital": "primary", 
     "population": "4007526", 
     "population_proper": "4007526"
@@ -24,34 +24,34 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "population_proper": "1088100"
   }, 
   {
-    "city": "Az Zarqā’", 
+    "city": "Az ZarqA", 
     "lat": "32.0833", 
     "lng": "36.1000", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Az Zarqā’", 
+    "admin_name": "Az ZarqA", 
     "capital": "admin", 
     "population": "481300", 
     "population_proper": "481300"
   }, 
   {
-    "city": "Al ‘Aqabah", 
+    "city": "Al Aqabah", 
     "lat": "29.5167", 
     "lng": "35.0000", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Al ‘Aqabah", 
+    "admin_name": "Al Aqabah", 
     "capital": "admin", 
     "population": "140000", 
     "population_proper": "140000"
   }, 
   {
-    "city": "As Salţ", 
+    "city": "As Salt", 
     "lat": "32.0333", 
     "lng": "35.7333", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Al Balqā’", 
+    "admin_name": "Al BalqA", 
     "capital": "admin", 
     "population": "88900", 
     "population_proper": "88900"
@@ -79,18 +79,18 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "population_proper": "50745"
   }, 
   {
-    "city": "Ma‘ān", 
+    "city": "MaAn", 
     "lat": "30.1920", 
     "lng": "35.7360", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Ma‘ān", 
+    "admin_name": "MaAn", 
     "capital": "admin", 
     "population": "50350", 
     "population_proper": "50350"
   }, 
   {
-    "city": "Aţ Ţurrah", 
+    "city": "At turrah", 
     "lat": "32.6368", 
     "lng": "35.9900", 
     "country": "Jordan", 
@@ -101,12 +101,12 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "population_proper": "34948"
   }, 
   {
-    "city": "Aţ Ţafīlah", 
+    "city": "At tafilah", 
     "lat": "30.8375", 
     "lng": "35.6042", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Aţ Ţafīlah", 
+    "admin_name": "At tafilah", 
     "capital": "admin", 
     "population": "25429", 
     "population_proper": "25429"
@@ -123,34 +123,34 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "population_proper": "21678"
   }, 
   {
-    "city": "Al ‘Abdallī", 
+    "city": "Al Abdalli", 
     "lat": "31.9650", 
     "lng": "35.9082", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Al ‘Āşimah", 
+    "admin_name": "Al Asimah", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Ar Ruşayfah", 
+    "city": "Ar Rusayfah", 
     "lat": "32.0178", 
     "lng": "36.0464", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Az Zarqā’", 
+    "admin_name": "Az ZarqA", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Mārkā", 
+    "city": "MArkA", 
     "lat": "31.9863", 
     "lng": "35.9965", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Al ‘Āşimah", 
+    "admin_name": "Al Asimah", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
@@ -161,7 +161,7 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "lng": "35.8644", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Al ‘Āşimah", 
+    "admin_name": "Al Asimah", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
@@ -172,68 +172,68 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "lng": "35.9500", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Al ‘Āşimah", 
+    "admin_name": "Al Asimah", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Mādabā", 
+    "city": "MAdabA", 
     "lat": "31.7167", 
     "lng": "35.8000", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Ma’dabā", 
+    "admin_name": "MadabA", 
     "capital": "admin", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "‘Ajlūn", 
+    "city": "Ajlun", 
     "lat": "32.3325", 
     "lng": "35.7517", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "‘Ajlūn", 
+    "admin_name": "Ajlun", 
     "capital": "admin", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "‘Ayn al Bāshā", 
+    "city": "Ayn al BAshA", 
     "lat": "32.0573", 
     "lng": "35.8311", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Al Balqā’", 
+    "admin_name": "Al BalqA", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Wādī as Sīr", 
+    "city": "WAdi as Sir", 
     "lat": "31.9545", 
     "lng": "35.8183", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Al ‘Āşimah", 
+    "admin_name": "Al Asimah", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Al Fuḩayş", 
+    "city": "Al Fuhays", 
     "lat": "32.0047", 
     "lng": "35.7809", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Al Balqā’", 
+    "admin_name": "Al BalqA", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Al Mazār ash Shamālī", 
+    "city": "Al MazAr ash ShamAli", 
     "lat": "32.4704", 
     "lng": "35.7969", 
     "country": "Jordan", 
@@ -255,7 +255,7 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "population_proper": ""
   }, 
   {
-    "city": "Al Ḩişn", 
+    "city": "Al hisn", 
     "lat": "32.4845", 
     "lng": "35.8841", 
     "country": "Jordan", 
@@ -266,7 +266,7 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "population_proper": ""
   }, 
   {
-    "city": "Dayr Abū Sa‘īd", 
+    "city": "Dayr Abu Said", 
     "lat": "32.4982", 
     "lng": "35.6867", 
     "country": "Jordan", 
@@ -277,7 +277,7 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "population_proper": ""
   }, 
   {
-    "city": "Aţ Ţayyibah", 
+    "city": "At tayyibah", 
     "lat": "32.5430", 
     "lng": "35.7176", 
     "country": "Jordan", 
@@ -288,7 +288,7 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "population_proper": ""
   }, 
   {
-    "city": "Ash Shūnah ash Shamālīyah", 
+    "city": "Ash Shunah ash ShamAliyah", 
     "lat": "32.6100", 
     "lng": "35.6080", 
     "country": "Jordan", 
@@ -299,29 +299,29 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "population_proper": ""
   }, 
   {
-    "city": "Nā‘ūr", 
+    "city": "NAur", 
     "lat": "31.8744", 
     "lng": "35.8247", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Al ‘Āşimah", 
+    "admin_name": "Al Asimah", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "‘Irjān", 
+    "city": "IrjAn", 
     "lat": "32.3945", 
     "lng": "35.7334", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "‘Ajlūn", 
+    "admin_name": "Ajlun", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Ar Ramthā", 
+    "city": "Ar RamthA", 
     "lat": "32.5592", 
     "lng": "36.0069", 
     "country": "Jordan", 
@@ -332,7 +332,7 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "population_proper": ""
   }, 
   {
-    "city": "Muthallath Jāmi‘at Āl al Bayt", 
+    "city": "Muthallath JAmiat Al al Bayt", 
     "lat": "32.3459", 
     "lng": "36.2335", 
     "country": "Jordan", 
@@ -348,24 +348,24 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "lng": "35.7000", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "‘Ajlūn", 
+    "admin_name": "Ajlun", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Al Hāshimīyah", 
+    "city": "Al HAshimiyah", 
     "lat": "32.1333", 
     "lng": "36.1167", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Az Zarqā’", 
+    "admin_name": "Az ZarqA", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Sammā ar Rawsān", 
+    "city": "SammA ar RawsAn", 
     "lat": "32.6379", 
     "lng": "35.8266", 
     "country": "Jordan", 
@@ -376,18 +376,18 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "population_proper": ""
   }, 
   {
-    "city": "Şakhrah", 
+    "city": "sakhrah", 
     "lat": "32.3709", 
     "lng": "35.8427", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "‘Ajlūn", 
+    "admin_name": "Ajlun", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Al Maşţabah", 
+    "city": "Al Mastabah", 
     "lat": "32.1843", 
     "lng": "35.8559", 
     "country": "Jordan", 
@@ -403,13 +403,13 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "lng": "35.8000", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Ma’dabā", 
+    "admin_name": "MadabA", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Manshīyat Banī Ḩasan", 
+    "city": "Manshiyat Bani hasan", 
     "lat": "32.3707", 
     "lng": "36.0793", 
     "country": "Jordan", 
@@ -420,51 +420,51 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "population_proper": ""
   }, 
   {
-    "city": "Ḩisbān", 
+    "city": "hisbAn", 
     "lat": "31.7982", 
     "lng": "35.8099", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Al ‘Āşimah", 
+    "admin_name": "Al Asimah", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "‘Allān", 
+    "city": "AllAn", 
     "lat": "32.1182", 
     "lng": "35.7435", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Al Balqā’", 
+    "admin_name": "Al BalqA", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Umm al Basātīn", 
+    "city": "Umm al BasAtin", 
     "lat": "31.8245", 
     "lng": "35.8779", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Al ‘Āşimah", 
+    "admin_name": "Al Asimah", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Dayr ‘Allā", 
+    "city": "Dayr AllA", 
     "lat": "32.1889", 
     "lng": "35.6031", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Al Balqā’", 
+    "admin_name": "Al BalqA", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Al Khālidīyah", 
+    "city": "Al KhAlidiyah", 
     "lat": "32.1790", 
     "lng": "36.3033", 
     "country": "Jordan", 
@@ -475,7 +475,7 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "population_proper": ""
   }, 
   {
-    "city": "‘Ayy", 
+    "city": "Ayy", 
     "lat": "31.1337", 
     "lng": "35.6437", 
     "country": "Jordan", 
@@ -486,7 +486,7 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "population_proper": ""
   }, 
   {
-    "city": "Samā as Sirḩān", 
+    "city": "SamA as SirhAn", 
     "lat": "32.4686", 
     "lng": "36.2436", 
     "country": "Jordan", 
@@ -502,24 +502,24 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "lng": "36.2801", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Az Zarqā’", 
+    "admin_name": "Az ZarqA", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Ash Shūnah al Janūbīyah", 
+    "city": "Ash Shunah al Janubiyah", 
     "lat": "31.8915", 
     "lng": "35.6178", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Al Balqā’", 
+    "admin_name": "Al BalqA", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Al Mazār al Janūbī", 
+    "city": "Al MazAr al Janubi", 
     "lat": "31.0672", 
     "lng": "35.6949", 
     "country": "Jordan", 
@@ -530,7 +530,7 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "population_proper": ""
   }, 
   {
-    "city": "Umm al Jimāl", 
+    "city": "Umm al JimAl", 
     "lat": "32.3286", 
     "lng": "36.3679", 
     "country": "Jordan", 
@@ -541,7 +541,7 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "population_proper": ""
   }, 
   {
-    "city": "Al Ḩusaynīyah", 
+    "city": "Al husayniyah", 
     "lat": "31.0261", 
     "lng": "35.7229", 
     "country": "Jordan", 
@@ -552,7 +552,7 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "population_proper": ""
   }, 
   {
-    "city": "Bal‘amā", 
+    "city": "BalamA", 
     "lat": "32.2365", 
     "lng": "36.0881", 
     "country": "Jordan", 
@@ -563,18 +563,18 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "population_proper": ""
   }, 
   {
-    "city": "Mulayḩ", 
+    "city": "Mulayh", 
     "lat": "31.5881", 
     "lng": "35.8125", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Ma’dabā", 
+    "admin_name": "MadabA", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Fuqū‘", 
+    "city": "Fuqu", 
     "lat": "31.3681", 
     "lng": "35.7022", 
     "country": "Jordan", 
@@ -585,7 +585,7 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "population_proper": ""
   }, 
   {
-    "city": "Irḩāb", 
+    "city": "IrhAb", 
     "lat": "32.3234", 
     "lng": "36.0909", 
     "country": "Jordan", 
@@ -596,7 +596,7 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "population_proper": ""
   }, 
   {
-    "city": "Burmā", 
+    "city": "BurmA", 
     "lat": "32.2193", 
     "lng": "35.7851", 
     "country": "Jordan", 
@@ -607,18 +607,18 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "population_proper": ""
   }, 
   {
-    "city": "Aş Şubayḩī", 
+    "city": "As subayhi", 
     "lat": "32.1484", 
     "lng": "35.7053", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Al Balqā’", 
+    "admin_name": "Al BalqA", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Ḩawshā", 
+    "city": "hawshA", 
     "lat": "32.4514", 
     "lng": "36.0990", 
     "country": "Jordan", 
@@ -629,40 +629,40 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "population_proper": ""
   }, 
   {
-    "city": "Saḩāb", 
+    "city": "SahAb", 
     "lat": "31.8703", 
     "lng": "36.0048", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Al ‘Āşimah", 
+    "admin_name": "Al Asimah", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Wādī Mūsá", 
+    "city": "WAdi Musá", 
     "lat": "30.3289", 
     "lng": "35.4403", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Ma‘ān", 
+    "admin_name": "MaAn", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Al Fayşalīyah", 
+    "city": "Al Faysaliyah", 
     "lat": "31.7491", 
     "lng": "35.7692", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Ma’dabā", 
+    "admin_name": "MadabA", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Al Qaşr", 
+    "city": "Al Qasr", 
     "lat": "31.3141", 
     "lng": "35.7439", 
     "country": "Jordan", 
@@ -673,7 +673,7 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "population_proper": ""
   }, 
   {
-    "city": "Umm al Qiţţayn", 
+    "city": "Umm al Qittayn", 
     "lat": "32.3145", 
     "lng": "36.6283", 
     "country": "Jordan", 
@@ -684,34 +684,34 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "population_proper": ""
   }, 
   {
-    "city": "Yarqā", 
+    "city": "YarqA", 
     "lat": "31.9758", 
     "lng": "35.6964", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Al Balqā’", 
+    "admin_name": "Al BalqA", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Bīrayn", 
+    "city": "Birayn", 
     "lat": "32.0994", 
     "lng": "35.9578", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Az Zarqā’", 
+    "admin_name": "Az ZarqA", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Buşayrā", 
+    "city": "BusayrA", 
     "lat": "30.7326", 
     "lng": "35.6094", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Aţ Ţafīlah", 
+    "admin_name": "At tafilah", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
@@ -728,7 +728,7 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "population_proper": ""
   }, 
   {
-    "city": "Ghawr aş Şāfī", 
+    "city": "Ghawr as sAfi", 
     "lat": "31.0369", 
     "lng": "35.4877", 
     "country": "Jordan", 
@@ -739,18 +739,18 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "population_proper": ""
   }, 
   {
-    "city": "Rujm ash Shāmī al Gharbī", 
+    "city": "Rujm ash ShAmi al Gharbi", 
     "lat": "31.8333", 
     "lng": "36.0167", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Al ‘Āşimah", 
+    "admin_name": "Al Asimah", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Şabḩā", 
+    "city": "sabhA", 
     "lat": "32.3270", 
     "lng": "36.5016", 
     "country": "Jordan", 
@@ -761,23 +761,23 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "population_proper": ""
   }, 
   {
-    "city": "Dhībān", 
+    "city": "DhibAn", 
     "lat": "31.4989", 
     "lng": "35.7829", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Ma’dabā", 
+    "admin_name": "MadabA", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Mā‘īn", 
+    "city": "MAin", 
     "lat": "31.6800", 
     "lng": "35.7320", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Ma’dabā", 
+    "admin_name": "MadabA", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
@@ -788,7 +788,7 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "lng": "35.5363", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Ma‘ān", 
+    "admin_name": "MaAn", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
@@ -799,13 +799,13 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "lng": "36.1088", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Al ‘Āşimah", 
+    "admin_name": "Al Asimah", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Ghawr al Mazra‘ah", 
+    "city": "Ghawr al Mazraah", 
     "lat": "31.2659", 
     "lng": "35.5167", 
     "country": "Jordan", 
@@ -821,7 +821,7 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "lng": "35.5714", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Ma‘ān", 
+    "admin_name": "MaAn", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
@@ -838,29 +838,29 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "population_proper": ""
   }, 
   {
-    "city": "Al ‘Arīḑ", 
+    "city": "Al Ariḑ", 
     "lat": "31.5584", 
     "lng": "35.6574", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Ma’dabā", 
+    "admin_name": "MadabA", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Adhruḩ", 
+    "city": "Adhruh", 
     "lat": "30.3281", 
     "lng": "35.5986", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Ma‘ān", 
+    "admin_name": "MaAn", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Muthallath Şabḩā", 
+    "city": "Muthallath sabhA", 
     "lat": "32.2601", 
     "lng": "36.4678", 
     "country": "Jordan", 
@@ -871,34 +871,34 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "population_proper": ""
   }, 
   {
-    "city": "Al Ḩusaynīyah", 
+    "city": "Al husayniyah", 
     "lat": "30.5955", 
     "lng": "35.7970", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Ma‘ān", 
+    "admin_name": "MaAn", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Al Jīzah", 
+    "city": "Al Jizah", 
     "lat": "31.6989", 
     "lng": "35.9553", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Al ‘Āşimah", 
+    "admin_name": "Al Asimah", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Al Ḩasā", 
+    "city": "Al hasA", 
     "lat": "30.8213", 
     "lng": "35.9750", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Aţ Ţafīlah", 
+    "admin_name": "At tafilah", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
@@ -909,7 +909,7 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "lng": "35.5231", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Ma‘ān", 
+    "admin_name": "MaAn", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
@@ -920,24 +920,24 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "lng": "35.3111", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Al ‘Aqabah", 
+    "admin_name": "Al Aqabah", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Ad Dīsah", 
+    "city": "Ad Disah", 
     "lat": "29.6528", 
     "lng": "35.5112", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Al ‘Aqabah", 
+    "admin_name": "Al Aqabah", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Al Qaţrānah", 
+    "city": "Al QatrAnah", 
     "lat": "31.2508", 
     "lng": "36.0493", 
     "country": "Jordan", 
@@ -948,12 +948,12 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "population_proper": ""
   }, 
   {
-    "city": "Umm ar Raşāş", 
+    "city": "Umm ar RasAs", 
     "lat": "31.5122", 
     "lng": "35.9184", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Al ‘Āşimah", 
+    "admin_name": "Al Asimah", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
@@ -964,18 +964,18 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "lng": "36.8149", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Az Zarqā’", 
+    "admin_name": "Az ZarqA", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
   }, 
   {
-    "city": "Ar Rīshah", 
+    "city": "Ar Rishah", 
     "lat": "30.2243", 
     "lng": "35.2167", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Al ‘Aqabah", 
+    "admin_name": "Al Aqabah", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""
@@ -997,7 +997,7 @@ import { cities } from 'src/app/lib/inteerfaces/cities';
     "lng": "36.1777", 
     "country": "Jordan", 
     "iso2": "JO", 
-    "admin_name": "Ma‘ān", 
+    "admin_name": "MaAn", 
     "capital": "minor", 
     "population": "", 
     "population_proper": ""

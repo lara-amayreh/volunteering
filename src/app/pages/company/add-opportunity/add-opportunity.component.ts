@@ -17,6 +17,7 @@ import { allSkills } from 'src/assets/arrays/skills';
 })
 export class AddOpportunityComponent{
   numberOfVolunteers!:number
+  id:string='';
   constructor(private oportunityservice: OportunitiesService,private authservice:AuthService,
     private dialogRef: MatDialogRef<AddOpportunityComponent>,
     @Inject(MAT_DIALOG_DATA)
@@ -85,21 +86,28 @@ private _filter(value: string): string[] {
 }
 confirm(){
  
-
-
+  // this.shirtCollection = afs.collection<Shirt>('shirts');
+  // .snapshotChanges() returns a DocumentChangeAction[], which contains
+  // a lot of information about "what happened" with each change. If you want to
+  // get the data and the id use the map operator.
+  
 
 this.authservice.userState$
 .pipe(switchMap( (value) => {
   if(value){
+    console.log(value);
+
 return this.oportunityservice.addOpportunity({
   userid : value.id,
+id:this.id,
+companyName:value.name,
+logo:value.logo,
   name:this.form.get('name')?.value +'',
   description:this.form.get('description')?.value+'',
   skills:this.form.get('skills')?.value+'',
   numberOfVolunteers:Number(this.form.get('numberOfVolunteers')?.value+''),
-  range:this.range?.value
-// start:this.form.value.range?.start+''.slice(0,12),
-// end:this.form.value.range?.end+''.slice(0,12),
+  range:this.range?.value,
+
 
    
 
@@ -107,7 +115,7 @@ return this.oportunityservice.addOpportunity({
 
 
 
-});
+})
 
 }
   
@@ -116,6 +124,10 @@ return this.oportunityservice.addOpportunity({
 })).subscribe((value)=>{
   if(!value)
   alert("connot add opportunity");
+  else
+  this.id=value.id;
+  this.oportunityservice.updatid(this.id);
+  console.log(value);
 })
 
 this.dialogRef.close(true);

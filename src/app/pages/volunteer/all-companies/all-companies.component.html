@@ -1,7 +1,27 @@
 <div class="container">
-<h1>All Comanies</h1>
+<h1>All Organizations</h1>
+<div class="wrapper">
+  <mat-card class="search-card">
+   
+      <mat-card-title><mat-icon>search</mat-icon>Filter Organizations</mat-card-title>
+  <form [formGroup]="form">
+  <mat-form-field>
+    <mat-label>Type</mat-label>
+    <mat-select  (selectionChange)="filterontype()"  name="type" formControlName="type">
+        <mat-option *ngFor="let type of types" [value]="type">
+            {{type}}
+        </mat-option>
+    </mat-select>
+    <mat-error>required field</mat-error>
+</mat-form-field>
+<mat-form-field>
+  <input matInput type="text" formControlName="name" placeholder="search by name.." name="name"(keyup)="filteronname()">
+</mat-form-field>
+</form>
+</mat-card>
+<!-- <button (click)='filterontype(value)'></button> -->
 <div class="card-container">
-<mat-card  *ngFor="let company of allcompanies">
+<mat-card  *ngFor="let company of allcompanies|async">
     <mat-card-header>
       <mat-card-title>{{company.name}}</mat-card-title>
       <mat-card-subtitle>{{company.type}}</mat-card-subtitle>
@@ -11,7 +31,8 @@
     <img class="logo" mat-card-md-image src= "../../../../assets/images/company-profile.png" alt="company logo">
     <mat-divider></mat-divider>
    </mat-card-content>
-   <mat-card-footer routerlink="/details">view details</mat-card-footer>
+   <mat-card-footer><a [routerLink]="['./details', company.id]">view details</a></mat-card-footer>
   </mat-card>
+</div>
 </div>
 </div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { map, Observable, of } from 'rxjs';
 import { opportunity } from 'src/app/lib/inteerfaces/opportunity';
 import { AuthService } from 'src/app/lib/services/auth/auth.service';
 import { OportunitiesService } from 'src/app/lib/services/oportunities/oportunities.service';
@@ -11,20 +13,34 @@ import { OportunitiesService } from 'src/app/lib/services/oportunities/oportunit
 export class AllActivitiesComponent implements OnInit{
   alloportunities!:opportunity[];
   role:string='';
-  allskills!:string;
+  allcompanies!:Observable<opportunity[] | undefined>;
+  allcompaniescopy!:Observable<opportunity[] | undefined>;
+
+
+
   constructor(private auth:AuthService,private oportunityservices:OportunitiesService){}
   ngOnInit(): void {
- this.oportunityservices.getAllOpportunities().subscribe((response)=>{
-if(response){
-  this.alloportunities=response;
-
-  console.log(response);
-  this.auth.userState$.subscribe((value)=>{
-    this.role=value.role;
-  })
-  console.log(this.alloportunities);
-}
-})
+    this.allcompanies= this.oportunityservices.getAllOpportunities();
+    this.allcompaniescopy =this.allcompanies;
   }
+
+
+form=new FormGroup({
+  type: new FormControl(''),
+  name: new FormControl('')
+
+
+})
+  filterontype(){
+    // this.allcompanies=this.allcompaniescopy.pipe(map(companies => companies!.filter(item => item.type==this.form.get('type')?.value)))
+   
+  }
+  filteronname(){
+    this.allcompanies=this.allcompaniescopy.pipe(map(companies => companies!.filter(item => (item.companyName).startsWith( this.form.get('name')?.value+''))))
+
+  }
+
+
+ 
 
 }

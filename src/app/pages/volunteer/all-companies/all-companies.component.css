@@ -5,16 +5,28 @@ mat-divider{
     display: flex;
     flex-direction: column;
   align-items: center;
-  padding: 20px;
   row-gap:20px;
 
 
+}
+h1{
+    text-align: center;
+    padding-bottom:20px ;
+}
+.input{
+width: 100%;
 }
 mat-card{
     width: 100%;
     padding: 10px;
     box-shadow: 0 0 10px gray;
 
+}
+.search-card mat-card-title{
+padding-bottom: 10px;
+}
+.search-card{
+    padding: 10px;
 }
 .logo{
     width: 100%;
@@ -35,14 +47,25 @@ mat-card-header{
     .card-container{
         display: grid;
         grid-template-columns: repeat(3,1fr);
-        gap:10px;
-        padding: 30px;
+        gap:20px;
     }
     .container{
         display: flex;
         flex-direction: column;
-align-items: center;      
   padding: 20px 40px;
     }
+    .wrapper{
+        display: flex;
+        justify-content: space-around;
+        padding: 20px 10px;
+        gap: 20px;
+    }
+    .search-card{
+        display: flex;
+        max-width: 250px;
+        max-height:200px;
+    }
+
+    
    
 }

@@ -1,8 +1,26 @@
 <div class="container">
   <h1>All opportunities</h1>
-    <mat-card *ngFor="let opportunity of alloportunities" class="Opportunity-card">
+  <mat-card class="search-card">
+   
+    <mat-card-title><mat-icon>search</mat-icon>Filter Organizations</mat-card-title>
+<form [formGroup]="form">
+
+<mat-form-field>
+<input matInput type="text" formControlName="name" placeholder="search by name.." name="name"(keyup)="filteronname()">
+</mat-form-field>
+</form>
+</mat-card>
+  
+
+
+
+
+
+    <mat-card *ngFor="let opportunity of allcompanies |async" class="Opportunity-card">
         <mat-card-header>
           <mat-card-title class="title">{{opportunity.name}}</mat-card-title>
+          <mat-card-subtitle class="title">{{opportunity.companyName}}</mat-card-subtitle>
+
         </mat-card-header>
        <mat-divider></mat-divider>
         <mat-card-content>
