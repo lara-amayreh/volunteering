@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
   role!: string;
   name!:string;
   com!:any;
+  profileImg:string='../../../../../assets/images/profile-img.png';
   userState$!:Observable<any>;
   constructor(public authService: AuthService ,private fs:AngularFirestore, private fireAuth:AngularFireAuth){}
   ngOnInit(): void {
@@ -24,7 +25,16 @@ if(val){
 this.com=val;
 console.log(val.role);
 this.role=val.role;
+if(val.profileImg)
+this.profileImg=val.profileImg;
 }
     })
+  }
+
+
+  geturl(){
+ 
+    let x= `url("${this.profileImg}")` ;
+    return x;
   }
 }

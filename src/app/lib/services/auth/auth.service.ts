@@ -15,7 +15,9 @@ import { courses } from '../../inteerfaces/person';
 export class AuthService {
 
   constructor(private fireAuth:AngularFireAuth,private firestore: AngularFirestore , private router: Router) { }
-  userState$ = this.fireAuth.authState.pipe(
+  userState$
+  
+   = this.fireAuth.authState.pipe(
     switchMap((value)=>{
 if(!value)
 return of(null);
@@ -32,7 +34,7 @@ return this.firestore.collection<any>('users').doc(value.uid).valueChanges();
   }
   signUpPerson(email: string, password: string, 
     fullName:string,phoneNumber:number,city:string,days:string,experience:string,
-    courses:courses[],skills:string,daterange:drange){
+    courses:courses[],skills:string,daterange:drange, profileImg:string){
     return this.fireAuth.createUserWithEmailAndPassword(email, password).then((val)=>{
     let user:person={
 id:val.user?.uid,
@@ -45,6 +47,7 @@ courses:courses,
 days:days,
 range:daterange,
 role:"person",
+profileImg:profileImg,
 
     };
     this.firestore.collection<any>('users').doc(val.user?.uid).set(user);
@@ -63,7 +66,7 @@ name:name,
 phoneNumber:phoneNumber,
 city:city,
 url:url,
-logo:logo,
+profileImg:logo,
 type:type,
 email:email,
 role:"company",

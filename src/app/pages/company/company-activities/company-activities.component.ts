@@ -4,7 +4,7 @@ import { Component,Input, TemplateRef, Injectable, ViewChild, OnInit } from '@an
 import { FormControl, NgForm, Validators,  FormBuilder, FormGroup  } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldControl } from '@angular/material/form-field';
-import { of, switchMap } from 'rxjs';
+import { Observable, of, switchMap } from 'rxjs';
 import { AppComponent } from 'src/app/app.component';
 import { opportunity } from 'src/app/lib/inteerfaces/opportunity';
 import { AuthService } from 'src/app/lib/services/auth/auth.service';
@@ -23,6 +23,11 @@ export class CompanyActivitiesComponent implements OnInit {
   @ViewChild('callAPIDialog')
   callAPIDialog!: TemplateRef<any>;
    opportunities: opportunity[]=[];
+   userState$!:Observable<any>;
+   profileImg!:string;
+cname!:string;
+
+
 start!:string;
 end!:string;
   constructor(public dialog: MatDialog,public oportunityservice:OportunitiesService,private authservice:AuthService) { }
@@ -31,7 +36,7 @@ end!:string;
   this.authservice.userState$
   .pipe(switchMap( (value) => {
   if(value){
- 
+
     return this.oportunityservice.getOpportunities(value?.id+'');
 
     }

@@ -1,0 +1,69 @@
+
+ .container{
+    padding: 30px;
+    overflow:hidden;
+   }
+   .logo{
+    position: absolute;
+    top: 5px;
+    left: 100px;
+    cursor: pointer;
+    font-size: 15px;
+   }
+  
+  .head{
+      display: flex;
+      position: sticky;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      justify-content: space-between;
+      align-items: center;
+  box-shadow: 0 0 10px black; 
+  } 
+  .btn-login{
+  display: flex;
+  align-items: center;
+  }
+  .regestration{
+      display: flex;
+          align-items: center;
+          gap: 5px;
+  }
+  
+  
+  
+    
+    mat-sidenav {
+    
+      width: 200px;
+      background-image: linear-gradient(to bottom, rgba(13, 66, 136), rgb(165, 194, 214));
+    color: white;
+      padding: 16px;
+      text-align: center;
+    }
+    
+    mat-sidenav-content{
+      overflow: hidden;
+      background-color: white;
+    }
+    
+    mat-sidenav-container {
+      min-height:calc(100vh - 66px);
+      ;
+    }
+    app-header{
+      display: none;
+          }
+    @media (min-width: 768px) {
+      app-header{
+  display: flex;
+      }
+    }
+   
+   
+    
+   
+  
+    
+    

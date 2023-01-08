@@ -2,11 +2,17 @@
     <h2>Company Register Form</h2>
     <form [formGroup]="form" (ngSubmit)="submit()">
 
-        <mat-form-field>
-            <mat-label>Company Name</mat-label>
-            <input name="name" matInput placeholder="enter company name" formControlName="name">
-            <mat-error>required field</mat-error>
-        </mat-form-field>
+       
+        <div class="profile-img"><div class="avatar" [style.backgroundImage]="geturl()"></div>
+
+            <input type="file" (change)="upload($event)" name="profileImg" accept="image/*" placeholder="upload logo.....">
+     
+     </div>
+     <mat-form-field>
+        <mat-label>Company Name</mat-label>
+        <input name="name" matInput placeholder="enter company name" formControlName="name">
+        <mat-error>required field</mat-error>
+    </mat-form-field>
         <mat-form-field>
             <mat-label>Type</mat-label>
             <mat-select name="type" formControlName="type">
@@ -55,25 +61,14 @@
         <input matInput type="url" name="url" formControlName="url">
         <mat-error>required field</mat-error>
        </mat-form-field>
-       <div class="logo">
-<label for="logo"> Logo*.........</label>
-       <input type="file" (change)="upload($event)" name="logo" formControlName="logo" accept="image/*" placeholder="upload logo.....">
-       <progress max="100" [value]="(uploadProgress | async)"></progress>
-<div class="result" *ngIf="downloadURL | async; let uploadSrc">
-    <a [href]="uploadSrc">You just uploaded this file!</a>
-</div>
+      
 
-<section class="control-bar" *ngIf="uploadState | async; let state">
-  <button (click)="task.pause()" [disabled]="state === 'paused'">Pause</button>
-  <button (click)="task.cancel()" [disabled]="!(state === 'paused' || state === 'running')">Cancel</button>
-  <button (click)="task.resume()" [disabled]="state === 'running'">Resume</button>
-</section>
+       
 
-<div class="container" *ngIf="downloadURL | async ; let url">
-    <img [src]="url" alt="Image from AngularFireStorage">
-</div>
+<!-- <div>
+    <img alt="Image from AngularFireStorage">
+</div> -->
            
-       </div>        
 
         <button id="reset" mat-raised-button color="warn" (click)="form.reset()">Reset</button>
         <button [disabled]="form.invalid" mat-raised-button color="primary" (click)="submit()">Submit</button>

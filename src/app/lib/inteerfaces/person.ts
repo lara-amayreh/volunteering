@@ -1,5 +1,6 @@
 export interface person {
     id?:string,
+    profileImg?:string,
     fullName:string,
     city:string,
     courses:courses[],

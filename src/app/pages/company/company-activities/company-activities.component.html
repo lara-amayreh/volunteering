@@ -1,13 +1,19 @@
 <button mat-fab color="primary" (click)="addoportunity()">
     <mat-icon>add</mat-icon>
 
-</button><div class="container">
-  <h1> your opportunities</h1>
+</button>
+<div class="container">
+  <h1> My Activities</h1>
     <mat-card *ngFor="let opportunity of opportunities" class="Opportunity-card">
      
         <mat-card-header>
           <mat-card-title class="title">{{opportunity.name}}</mat-card-title>
+          <mat-card-title class="title">{{opportunity.companyName}}</mat-card-title>
+
         </mat-card-header>
+        <div class="img-div">
+          <img clas="profile" mat-card-image src={{opportunity.companyLogo}} alt="company profile img"></div>
+          
        <mat-divider></mat-divider>
         <mat-card-content>
           <div class="card-content">

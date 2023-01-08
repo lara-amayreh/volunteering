@@ -8,6 +8,7 @@ import { CompanyActivitiesComponent } from './company-activities/company-activit
 import { CommonModule } from '@angular/common';
 import { UpdateCompanyComponent } from './update-company/update-company.component';
 import { CompanyProfileComponent } from './company-profile/company-profile.component';
+import { AllVolunteersComponent } from './all-volunteers/all-volunteers.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { CompanyProfileComponent } from './company-profile/company-profile.compo
     CompanyDetailsComponent,
     CompanyActivitiesComponent,
     UpdateCompanyComponent,
-    CompanyProfileComponent
+    CompanyProfileComponent,
+    AllVolunteersComponent,
 
     
   ],

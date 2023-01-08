@@ -1,3 +1,5 @@
+
+
 mat-card-header{
     display: flex;
     justify-content: space-around;
@@ -17,6 +19,14 @@ mat-divider{
     padding: 10px;
     margin-top: 10px;
 }
+.avatar {
+    border-radius: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 96px;
+    height: 96px;
+  }
 
 h5{
     font-size: 1.2rem;
@@ -36,6 +46,12 @@ h4{
 mat-card{
     box-shadow: 0 0 8px gray;
 padding: 20px;
+}
+.logo{
+border-radius: 50%;
+object-fit: contain;
+width: 200px;
+
 }
 
 @media (min-width: 768px) { 

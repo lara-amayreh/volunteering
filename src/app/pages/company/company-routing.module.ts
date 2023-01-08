@@ -7,11 +7,31 @@ import { CompanyActivitiesComponent } from './company-activities/company-activit
 import { CompanyProfileComponent } from './company-profile/company-profile.component';
 import { LogedinGuard } from 'src/app/lib/guards/logedin.guard';
 import { AuthGuard } from 'src/app/lib/guards/auth.guard';
+import { LandingComponent } from '../landing/landing.component';
+import { AllCompaniesComponent } from '../volunteer/all-companies/all-companies.component';
+import { CompanyDetailsComponent } from '../volunteer/company-details/company-details.component';
+import { AllVolunteersComponent } from './all-volunteers/all-volunteers.component';
+import { VolunteerDetailsComponent } from './volunteer-details/volunteer-details.component';
 
 const routes: Routes = [
-  {path:'', component: CompanyDashboardComponent},
- {path:'opportunities', component: CompanyActivitiesComponent},
- {path:'profile', component: CompanyProfileComponent, canActivate: [AuthGuard]}
+
+  {path:'',
+  children:[
+    {path:'',component:LandingComponent,pathMatch:'full'},
+
+    {path:'opportunities', component:AllActivitiesComponent},
+    {path:'organizations', component:AllCompaniesComponent},
+    {path:'your-Activities', component:CompanyActivitiesComponent},
+    {path:'All-Volunteers', component:AllVolunteersComponent},
+    {path:'All-Volunteers/details/:id', component: VolunteerDetailsComponent, canActivate: [AuthGuard]},
+
+      {path:'organizations/details/:id', component: CompanyDetailsComponent, canActivate: [AuthGuard]},
+  ]}, 
+
+
+
+
+{path:'profile', component: CompanyProfileComponent, canActivate: [AuthGuard]}
 
 ]
 

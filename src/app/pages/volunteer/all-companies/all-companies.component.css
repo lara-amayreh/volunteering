@@ -5,7 +5,8 @@ mat-divider{
     display: flex;
     flex-direction: column;
   align-items: center;
-  row-gap:20px;
+  gap:20px;
+  max-height: fit-content;
 
 
 }
@@ -37,18 +38,21 @@ mat-card-header{
 
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) { 
     mat-card{
         max-width: 400px;
          padding: 10px;
 
     
     }
-    .card-container{
-        display: grid;
-        grid-template-columns: repeat(3,1fr);
-        gap:20px;
-    }
+.card-container{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
+    
+}
+
+
     .container{
         display: flex;
         flex-direction: column;

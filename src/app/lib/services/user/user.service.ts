@@ -7,17 +7,14 @@ import { person } from '../../inteerfaces/person';
   providedIn: 'root'
 })
 export class UserService {
-  private usercollection! : AngularFirestoreCollection<person|organization>;
+  private usercollection! : AngularFirestoreCollection<any>;
   constructor(private firestore :AngularFirestore) {
 this.usercollection = this.firestore.collection('users');
 
 
    }
-//    adduser(user:organization|person){
-// let addeduser = this.usercollection.add(user);console.log(addeduser);
-// return from(addeduser);
-//    }
-   getuser(userid:string):Observable<person | organization | undefined>{
+
+   getuser(userid:string):Observable<any>{
 return this.usercollection.doc(userid).valueChanges();   }
 
    deleteuser(id: string){
@@ -31,6 +28,9 @@ return this.usercollection.doc(userid).valueChanges();   }
 
     return this.usercollection.doc(id).valueChanges();
  }
-
+ getAllusersByRole(role:string):Observable<any[]>{
+    
+  return this.firestore.collection<any>('users',ref=>ref.where('role',"==",role)).valueChanges({ "idField": 'id' });
+ }
   
 }

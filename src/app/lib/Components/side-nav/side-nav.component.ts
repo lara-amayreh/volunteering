@@ -10,18 +10,29 @@ import { UserService } from '../../services/user/user.service';
 })
 export class SideNavComponent implements OnInit {
   role!:string;
+  profileImg:string='../../../../../assets/images/profile-img.png';
+
 constructor(public authServise:AuthService, private userservice:UserService){}
 ngOnInit(): void {
   
   this.authServise.userState$.subscribe((value)=>{
-    if(value)
-    this.role=value.role;
+    if(value){
+      this.role=value.role;
+
+      if(value.profileImg)
+this.profileImg=value.profileImg;
+    }
   });
  
-   
+}
+  geturl(){
+ 
+    let x= `url("${this.profileImg}")` ;
+    return x;
+  }
   
  
-  }
+  
 
 
 

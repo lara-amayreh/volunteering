@@ -42,7 +42,7 @@ password:new FormControl('',[Validators.required]),
       this.form.get('email')?.value+'',
       this.form.get('password')?.value+''
       ).then((user)=> {
-       if(this.role =="company ")
+       if(this.role.startsWith("company"))
 this.router.navigate(['company/']);
 else
 this.router.navigate(['volunteer/']);

@@ -1,7 +1,11 @@
 <div class="form-container">
     <h2>Person Register Form</h2>
     <form [formGroup]="form">
+        <div class="profile-img"><div class="avatar" [style.backgroundImage]="geturl()"></div>
 
+        <input type="file" (change)="upload($event)" name="profileImg" accept="image/*" placeholder="upload logo.....">
+ 
+ </div>
         <mat-form-field>
             <mat-label>Full Name</mat-label>
             <input name="fullName" matInput placeholder="First name Last name" formControlName="fullName">

@@ -8,15 +8,19 @@ import { RegisterComponent } from './regestration/register/register.component';
 
 
 const routes: Routes = [
-  {path:'login', component: LoginComponent},
-  {path:'', component: LoginComponent},
+  {path:'',children:[
+    {path:'',component:LoginComponent,pathMatch:'full'},
+    {path:'login', component: LoginComponent},
+    {path:'register', loadChildren: ()=> import('./regestration/regestration.module').then((m)=> m.RegestrationModule), 
+    //   canActivate: [AuthGuard]
+     },
+    { path:"**", component:PagenotfoundComponent,pathMatch:"full"},
+  
+  ]},
+  
 
    
-  {path:'register', loadChildren: ()=> import('./regestration/regestration.module').then((m)=> m.RegestrationModule), 
-  //   canActivate: [AuthGuard]
-   },
-  { path:"**", component:PagenotfoundComponent,pathMatch:"full"},
-
+  
 
 ];
 @NgModule({

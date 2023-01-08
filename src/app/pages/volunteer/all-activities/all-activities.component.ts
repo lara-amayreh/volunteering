@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FormControl, FormGroup } from '@angular/forms';
-import { map, Observable, of } from 'rxjs';
+import { combineLatest, filter, map, Observable, of, switchMap } from 'rxjs';
 import { opportunity } from 'src/app/lib/inteerfaces/opportunity';
+import { organization } from 'src/app/lib/inteerfaces/organization';
 import { AuthService } from 'src/app/lib/services/auth/auth.service';
 import { OportunitiesService } from 'src/app/lib/services/oportunities/oportunities.service';
+import { UserService } from 'src/app/lib/services/user/user.service';
 
 @Component({
   selector: 'app-all-activities',
@@ -11,20 +15,30 @@ import { OportunitiesService } from 'src/app/lib/services/oportunities/oportunit
   styleUrls: ['./all-activities.component.css']
 })
 export class AllActivitiesComponent implements OnInit{
-  alloportunities!:opportunity[];
+   alloportunities!:opportunity [];
+  // alloportunities:any[]=[];
+
   role:string='';
-  allcompanies!:Observable<opportunity[] | undefined>;
-  allcompaniescopy!:Observable<opportunity[] | undefined>;
+ 
+  profileImg!: string;
+  cname!: string;
 
 
 
-  constructor(private auth:AuthService,private oportunityservices:OportunitiesService){}
-  ngOnInit(): void {
-    this.allcompanies= this.oportunityservices.getAllOpportunities();
-    this.allcompaniescopy =this.allcompanies;
+  constructor( private af:AngularFirestore
+   ,public auth:AuthService,private oportunityservices:OportunitiesService,private userservice:UserService){}
+ 
+
+ngOnInit(): void {
+this.oportunityservices.getAllOpportunities().subscribe((val)=>{
+   if(val)
+   this.alloportunities = val as opportunity[];
   }
-
-
+  )
+  
+}
+  
+     
 form=new FormGroup({
   type: new FormControl(''),
   name: new FormControl('')
@@ -36,7 +50,7 @@ form=new FormGroup({
    
   }
   filteronname(){
-    this.allcompanies=this.allcompaniescopy.pipe(map(companies => companies!.filter(item => (item.companyName).startsWith( this.form.get('name')?.value+''))))
+    // this.allcompanies=this.allcompaniescopy.pipe(map(companies => companies!.filter(item => (item.companyName).startsWith( this.form.get('name')?.value+''))))
 
   }
 

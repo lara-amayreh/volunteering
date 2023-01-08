@@ -1,1 +1,54 @@
-<p>all-volunteers works!</p>
+<div class="container">
+    <h1>All Volunteers</h1>
+   <div class="card-container">
+      <mat-card [routerLink]="['./details', volunteer.id]" *ngFor='let volunteer of  AllVolunteers; let i = index;' class="Opportunity-card">
+        <mat-card-header>
+            <div class="p-avatar">
+                <div >
+                    <img class="avatar" mat-card-image [src]="volunteer.profileImg" alt="company profile img"></div>
+                  
+            <mat-card-subtitle class="title">{{volunteer.fullName}}</mat-card-subtitle>
+            </div>
+          </mat-card-header>
+          <mat-divider></mat-divider>
+
+          <mat-card-content>
+            <div class="content-container">
+                <h4>personal information</h4>
+                <div class="card-item"><h5> phone Number : </h5>{{volunteer.phoneNumber}}</div>
+
+            <mat-divider></mat-divider>
+            <h4>Skills</h4>
+                  <div class="item">
+            <mat-chip-listbox aria-label="skills required">
+              <mat-chip *ngFor="let skill of (volunteer.skills).split(',')">
+                       {{skill}}
+              </mat-chip>
+              </mat-chip-listbox>
+            </div>
+
+<mat-divider></mat-divider>
+
+
+
+
+
+            </div></mat-card-content>
+          <!-- <mat-card-footer> -->
+          <!-- <mat-progress-bar 
+          class="item"
+          [value]="100*5/opportunity.numberOfVolunteers"
+          mode="determinate"
+          [bufferValue]="0">
+      </mat-progress-bar>
+         <div class="item">
+          {{opportunity.numberOfVolunteers}} volunteers</div></mat-card-footer> -->
+    
+        <!-- [value]="100* number of applied volunteers/ number of volunteers" -->
+             </mat-card> 
+            </div>
+       </div> 
+        
+  
+  
+  

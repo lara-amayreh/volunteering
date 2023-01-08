@@ -7,6 +7,20 @@
   
    
   }
+  .p-avatar{
+display: flex;
+flex-direction: column;
+align-items: center;
+  }
+  .avatar {
+    border-radius: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+    border: 1px solid gray;
+  }
   mat-icon {
     margin-right: 5px;
   }

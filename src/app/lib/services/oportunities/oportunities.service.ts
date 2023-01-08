@@ -14,17 +14,7 @@ private opportunitiesCollection! : AngularFirestoreCollection<opportunity>;
           this.opportunitiesCollection = this.firestore.collection("oportunities");
 }
 
-
-    userState$ = this.fireAuth.authState.pipe(
-      switchMap((value)=>{
-  if(!value)
-  return of(null);
-  else//return user opportunities
-  return this.firestore.collection<opportunity>('oportunities').doc(value.uid).valueChanges({ "idField": 'id'})
-      })
-  
-      
-    )
+    
   
 
    
@@ -43,8 +33,5 @@ return from(addedOpportunity);
 }
 updatid(id: string){
   return from(this.opportunitiesCollection.doc<opportunity>(id).update({id: id}));
-}
-updatcompany(id: string,name:string,logo:string){
-  return from(this.firestore.collection<opportunity>('oportunities',ref=>ref.where('userid',"==",id)).doc().update({companyName: name, logo:logo}));
 }
 }

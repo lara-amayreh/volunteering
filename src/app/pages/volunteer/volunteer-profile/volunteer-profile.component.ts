@@ -22,6 +22,7 @@ export class VolunteerProfileComponent {
   ngOnInit(): void {
   
     this.authservice.userState$.subscribe((value)=>{
+      console.log(value);
       if(value)
       this.id = value.id+'';
       this.person= value as person;
@@ -33,7 +34,8 @@ export class VolunteerProfileComponent {
     updateorganization(id:string){
      console.log(id);
       let dialogRef = this.dialog.open(UpdateVolunteerComponent, {
-         width: '500px',
+         width: '1000px',
+         height:'400px',
         data:{id:id,data:this.person}
        });
        dialogRef.afterClosed().subscribe((result)=> {

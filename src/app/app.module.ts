@@ -20,7 +20,7 @@ import { environment } from 'src/environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore/'; 
 import { CommonModule } from '@angular/common';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-
+import { LayoutComponent } from './lib/Components/layout/layout.component';
 
 
 
@@ -33,6 +33,7 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
     SideNavComponent,
     LandingComponent,
     PagenotfoundComponent,
+    LayoutComponent,
     
   
 

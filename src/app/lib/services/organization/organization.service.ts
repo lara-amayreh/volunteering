@@ -28,7 +28,7 @@ export class OrganizationService {
 //     return from(this.usersCollection.doc(id).delete());
 //   }
  updateStudent(id: string, org: organization){   
-  this.oppservice.updatcompany(id,org.name, org.logo);
+  // this.oppservice.updatcompany(id,org.name, org.logo);
    return from(this.usersCollection.doc(id).update({...org}));
 }
 

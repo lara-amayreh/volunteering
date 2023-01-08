@@ -24,12 +24,16 @@ export class CompanyProfileComponent {
   this.authservice.userState$.subscribe((value)=>{
     if(value)
     this.id = value.id+'';
-    this.organization= value as organization;
+    this.organization = value as organization;
   })
   
   
   }
-
+geturl(){
+ 
+	let x= `url("${this.organization.profileImg}")` ;
+  return x;
+}
   updateorganization(id:string){
    console.log(id);
     let dialogRef = this.dialog.open(UpdateCompanyComponent, {

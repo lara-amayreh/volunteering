@@ -1,8 +1,11 @@
 
-<div class="container" *ngIf="organization">
+<div class="container" *ngIf="authservice.userState$ |async as user">
     <mat-card>
         <mat-card-header>
-<h3>{{organization.name }} profile </h3>
+<h3>{{user.name }} profile </h3>
+<div class="avatar" [style.backgroundImage]="geturl()"></div> 
+
+<!-- <img [src]="organization.logo" class="card-item logo-img"/> -->
 <button mat-icon-button color="primary" (click)="updateorganization(id)"> 
     <mat-icon>edit</mat-icon></button>
 </mat-card-header>
@@ -10,19 +13,21 @@
 <mat-card-content>
     <div class="card-content">
     <h4>company information</h4>
-    <div class="card-item"><h5> company Name : </h5>{{organization.name}}</div>
-    <div class="card-item"><h5> Company Type : </h5>{{organization.type}}</div>
-    <div class="card-item"> <h5> Company location : </h5>{{organization.city}}</div>
+    <div class="card-item"><h5> company Name : </h5>{{user.name}}</div>
+    
+
+    <div class="card-item"><h5> Company Type : </h5>{{user.type}}</div>
+    <div class="card-item"> <h5> Company location : </h5>{{user.city}}</div>
 
 <mat-divider></mat-divider>
 
     <h4>Contact information</h4>
-    <div class="card-item"><h5> Company website : </h5>{{organization.url}}</div>
-    <div class="card-item"><h5> company Email Address: </h5>{{organization.email}}</div>
-<div class="card-item"><h5> phone Number : </h5>{{organization.phoneNumber}}</div>
+    <div class="card-item"><h5> Company website : </h5>{{user.url}}</div>
+    <div class="card-item"><h5> company Email Address: </h5>{{user.email}}</div>
+<div class="card-item"><h5> phone Number : </h5>{{user.phoneNumber}}</div>
 <mat-divider></mat-divider>
  <h4>About information</h4>
- <div class="card-item"><h5> Abot Company: </h5>{{organization.about}}</div>
+ <div class="card-item"><h5> Abot Company: </h5>{{user.about}}</div>
 
 </div>
 </mat-card-content>

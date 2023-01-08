@@ -5,6 +5,7 @@ import { OrganizationService } from 'src/app/lib/services/organization/organizat
 import { map, Observable } from 'rxjs';
 import { companytypes } from 'src/assets/arrays/company-types';
 import { FormControl, FormGroup } from '@angular/forms';
+import { UserService } from 'src/app/lib/services/user/user.service';
 
 @Component({
   selector: 'app-all-companies',
@@ -12,15 +13,17 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./all-companies.component.css']
 })
 export class AllCompaniesComponent {
-  allcompanies!:Observable<organization[] | undefined>;
+  allcompanies!:organization[];
   allcompaniescopy!:Observable<organization[] | undefined>;
 
 
-  constructor(private auth:AuthService,private organizationservice:OrganizationService){}
+  constructor(private auth:AuthService,private organizationservice:OrganizationService,private userservice:UserService){}
   types=companytypes;
   ngOnInit(): void {
- this.allcompanies= this.organizationservice.getAllOrganizations();
- this.allcompaniescopy =this.allcompanies;
+this.userservice.getAllusersByRole('company').subscribe((val)=>{
+  this.allcompanies = val;
+
+})
  
 
 
@@ -32,11 +35,11 @@ form=new FormGroup({
 
 })
   filterontype(){
-    this.allcompanies=this.allcompaniescopy.pipe(map(companies => companies!.filter(item => item.type==this.form.get('type')?.value)))
+    // this.allcompanies=this.allcompaniescopy.pipe(map(companies => companies!.filter(item => item.type==this.form.get('type')?.value)))
    
   }
   filteronname(){
-    this.allcompanies=this.allcompaniescopy.pipe(map(companies => companies!.filter(item => (item.name).startsWith( this.form.get('name')?.value+''))))
+    // this.allcompanies=this.allcompaniescopy.pipe(map(companies => companies!.filter(item => (item.name).startsWith( this.form.get('name')?.value+''))))
 
   }
 }

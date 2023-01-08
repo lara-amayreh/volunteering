@@ -19,6 +19,8 @@ import { passwordMatchingValidator } from 'src/app/lib/validators/passwordmatchi
 import { AuthService } from 'src/app/lib/services/auth/auth.service';
 import { opportunity } from 'src/app/lib/inteerfaces/opportunity';
 import { UserService } from 'src/app/lib/services/user/user.service';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { StorageService } from 'src/app/lib/services/storage/storage.service';
 
 
 
@@ -31,7 +33,8 @@ import { UserService } from 'src/app/lib/services/user/user.service';
 
 })
 export class PersonRegesterComponent implements OnInit {
-  constructor(private router: Router, public auth:AuthService) 
+  downloadurl:string='../../../../../assets/images/profile-img.png';
+  constructor( private afStorage: AngularFireStorage ,private router: Router, public auth:AuthService, private storge:StorageService) 
   {this.filteredSkills = this.skillsCtrl.valueChanges.pipe(
       startWith(null),
       map((skill: string | null) => (skill ? this._filter(skill) : this.allSkills.slice())),
@@ -53,6 +56,8 @@ form = new FormGroup({
   city:new FormControl('',[Validators.required]),
   experience:new FormControl('',[Validators.required]),
 days:new FormControl('',[Validators.required]),
+profileImg:new FormControl(''),
+
   email:new FormControl('',[Validators.required, Validators.email]),
   password:new FormControl('',[Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]),
   confirmPassword:new FormControl('',[Validators.required]),
@@ -67,7 +72,7 @@ range :new FormGroup({
 {validators: [passwordMatchingValidator]});
 
   // role!: string;
-role:string="volunteer";
+role:string="person";
     Cities =data;  
     days=days;
     allSkills= allSkills;
@@ -117,88 +122,9 @@ role:string="volunteer";
 
     return this.allSkills.filter(skill => skill.toLowerCase().includes(filterValue));
   }
-// submit(){
-// console.log(this.form.value);
-//     //register user in firebase
-//     this.auth.signUp(
-//       this.form.get('email')?.value+ '',
-//       this.form.get('password')?.value+'',
-//       // this.role
-//     ).then((user)=> {
 
-//       //save other form fields collection 
-
-      
-//       this.router.navigate(['volunteer/']);
-
-//       console.log(user);
-//     }).catch((error)=> {
-//       console.log(error)  
-//     });
-//   }
-
-// submit(){
-//   //register user in firebase
-
- 
-//  //  this.organization =this.form.value;
-//  //  this.organization.role=this.role;
-//   this.auth.signUp(
-//    this.form.get('email')?.value+ '',
-//    this.form.get('password')?.value+'',
-//    // this.role
-//  ).then((user)=> {
-  
-   
-//     this.person.city =this.form.get('city')?.value+'';
-//     this.person.courses =this.form.get('courses')?.value+'';
-//     this.person.days =this.form.get('days')?.value+'';
-//     this.person.experience = this.form.get('experience')?.value+'';
-//     this.person.fullName = this.form.get('fullName')?.value+'';
-//     this.person.password = this.form.get('password')?.value+'';
-// this.person.role =this.role;
-//   this.person.start =this.form.value.range?.start+'';
-//   this.person.end =this.form.value.range?.start+'';
-//   this.person.uid = user.user?.uid;
-//   this.person.email =this.form.get('email')?.value+'';
-//   this.person.phoneNumber =this.form.get('phoneNumber')?.value!;
-//   this.personservice.addStudent({...this.person} as person);
-//  this.router.navigate(['volunteer/']);
-
-     
-  
-   
-  
-  
-  
-  
-
-
-// //   this.role="volunteer";
-// //   this.person.role=this.role;
-// // this.person.start!=this.form.value.range?.start;
-// // this.person.end!=this.form.value.range?.start;
-// // this.person = { ...this.form.value }as person;
-
-// // // console.log(this.opportunity);
-// // // this.opportunity.role=this.role;
-// //    //save other form fields collection 
-// // this.personservice.addStudent({...this.person});
-
-// //    this.router.navigate(['volunteer/']);
-
-// //    console.log(user);
-//  }).catch((error)=> {
-//    console.log(error)   
-//  });
-// }
 submit(){
-  //register user in firebase
 
-  // this.role = "volunteer";
- 
- //  this.organization =this.form.value;
- //  this.organization.role=this.role;
   this.auth.signUpPerson(
    this.form.get('email')?.value+ '',
    this.form.get('password')?.value+'',
@@ -210,6 +136,8 @@ submit(){
    this.form.get('courses')?.value as courses[],
    this.form.get('skills')?.value+'',
    this.range?.value,
+   this.downloadurl,
+
 
    // this.role
  ).then((user)=> {
@@ -246,5 +174,20 @@ this.courses.push(courseformarray);
  deletecourse(index:number){
   this.courses.removeAt(index);
  }
+
+
+ upload(event:Event){
+  console.log(event);
+  let file = (event.target as HTMLInputElement)?.files?.[0];
+  if(file)
+  {this.storge.uploadimg(file).subscribe((value)=>{
+    this.downloadurl=value;
+  })}
+}
+geturl(){
+ 
+	let x= `url("${this.downloadurl}")` ;
+  return x;
+}
 }
 
