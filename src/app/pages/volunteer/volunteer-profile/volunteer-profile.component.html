@@ -1,8 +1,8 @@
-<div class="container" *ngIf="person">
+<div class="container" *ngIf="authservice.userState$">
   <mat-card class="card-item main-card">
     <mat-card-header>
-      <h3>{{ person.fullName }} profile</h3>
-      <button mat-icon-button color="primary" (click)="updateorganization(id)">
+      <h3>{{person.fullName}} profile</h3>
+      <button mat-icon-button color="primary" (click)="updateprofile(id)">
         <mat-icon>edit</mat-icon>
       </button>
     </mat-card-header>
@@ -12,11 +12,11 @@
         <h4>personal information</h4>
         <div class="card-item">
           <h5>Full Name :</h5>
-          {{ person.fullName }}
+          {{person.fullName}}
         </div>
         <div class="card-item">
           <h5>city :</h5>
-          {{ person.city }}
+          {{person.city}}
         </div>
 
         <mat-divider></mat-divider>
@@ -24,40 +24,39 @@
         <h4>Contact information</h4>
         <div class="card-item">
           <h5>phone Number :</h5>
-          {{ person.phoneNumber }}
+          {{person.phoneNumber}}
         </div>
 
         <mat-divider></mat-divider>
         <h4>Availability</h4>
         <div class="card-item">
           <h5>Available time:</h5>
-          {{ person.range.start
-          }}<span> - {{ person.range.end | date : "yyyy/MM/dd" }}</span>
+          {{person.range.start.toDate() | date:'yyyy/MM/dd'
+          }}<span> - {{ person.range.end.toDate() | date:'yyyy/MM/dd'}}</span>
         </div>
 
-        <!-- <mat-chip-listbox class="card-item" aria-label="days">
+        <mat-chip-listbox class="card-item" aria-label="days">
           <h5>Available days:</h5>
           <mat-chip
             color="primary"
-            *ngFor="let day of person.days as array; let i = index"
-          >
-            {{ day }}
+            *ngFor="let day of person.days.split(',') ">
+            {{day}}
           </mat-chip>
-        </mat-chip-listbox> -->
+        </mat-chip-listbox>
       </div>
       <mat-divider></mat-divider>
 
       <h4>Qualifications</h4>
       <div class="card-item">
         <h5>job experience :</h5>
-        {{ person.experience }}
+        {{person.experience}}
       </div>
-      <!-- <mat-chip-listbox class="card-item" aria-label="days">
+      <mat-chip-listbox class="card-item" aria-label="days">
         <h5>skills :</h5>
-        <mat-chip color="primary" *ngFor="let skill of person.skills">
+        <mat-chip color="primary" *ngFor="let skill of (person.skills).split(',') ">
           {{ skill }}
         </mat-chip>
-      </mat-chip-listbox> -->
+      </mat-chip-listbox>
       <h5>Courses:</h5>
       <div class="courses">
         <mat-card class="courses-card" *ngFor="let course of person.courses">

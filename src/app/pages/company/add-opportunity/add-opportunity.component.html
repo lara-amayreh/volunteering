@@ -41,10 +41,13 @@
             </mat-form-field>
 
           
-           
+
+              }
             <mat-form-field>
                 <mat-label>Available Date</mat-label>
-                <mat-date-range-input formGroupName="range" [rangePicker]="picker">
+                <mat-date-range-input formGroupName="range" 
+                [rangePicker]="picker"
+                [dateFilter]="unavailableDates">
                   <input matStartDate formControlName="start" placeholder="Start date">
                   <input matEndDate formControlName="end" placeholder="End date">
                 </mat-date-range-input>

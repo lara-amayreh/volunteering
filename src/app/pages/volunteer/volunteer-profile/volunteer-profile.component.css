@@ -19,7 +19,9 @@ mat-divider{
 
 }
 .courses{
-   
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
     margin: 10px;
 }
  .courses mat-card{
@@ -28,11 +30,11 @@ mat-divider{
 border-radius: 7px;
 } 
 h5{
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 h4{
     text-shadow: 0 0 1px gray;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 
 }
 .container{

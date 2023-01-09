@@ -31,6 +31,7 @@ export class UpdateVolunteerComponent implements OnInit {
   hide: boolean=true;
     Cities = data;  
     days=days;
+    aldays:string='';
     allSkills= allSkills;
     id:string='';
   separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -43,7 +44,8 @@ export class UpdateVolunteerComponent implements OnInit {
 
   constructor(private storage:StorageService, private afStorage :AngularFireStorage, private userservice:UserService, private authservice:AuthService,     private dialogRef: MatDialogRef<UpdateVolunteerComponent>, public firestore:AngularFirestore,
  
-      @Inject(MAT_DIALOG_DATA) public Data: {id: string, company:any}) {this.filteredSkills = this.skillsCtrl.valueChanges.pipe(
+      @Inject(MAT_DIALOG_DATA) public Data: {id: string, company:any})
+       {this.filteredSkills = this.skillsCtrl.valueChanges.pipe(
         startWith(null),
         map((skill: string | null) => (skill ? this._filter(skill) : this.allSkills.slice())),
       );}
@@ -77,16 +79,20 @@ export class UpdateVolunteerComponent implements OnInit {
  
   ngOnInit(): void {
     this.authservice.userState$.subscribe((value)=>{
-      console.log(value);
-      this.id = value.id
+      value.courses.forEach((val:person)=>{
+         this.addCourse(val)})
+      
+        this.id = value.id
       this.form.get('fullName')?.setValue(value.fullName);
       this.form.get('phoneNumber')?.setValue(value.phoneNumber);
       this.form.get('city')?.setValue(value.city);
-      this.form.get('experience')?.setValue(value.experience)
-      this.role=value.role;
-      this.downloadurl=value.profileImg;
-    
-       
+      this.form.get('experience')?.setValue(value.experience);
+      this.role = value.role;
+      this.downloadurl = value.profileImg;
+     
+
+
+
   })
 }
 
@@ -131,14 +137,18 @@ export class UpdateVolunteerComponent implements OnInit {
   days:new FormControl('',[Validators.required]),
   profileImg:new FormControl(''),
   
-    // skills: new FormControl('',[Validators.required]),
+    //  skills: new FormControl('',[Validators.required]),
     courses: new FormArray([]),
-  // range :new FormGroup({
-  //   start: new FormControl('',[Validators.required]),
-  //   end: new FormControl('',[Validators.required]),
-  // })
-})
+    Daterange: new FormGroup({
+      start: new FormControl(),
+      end: new FormControl()
 
+    })
+  
+})
+unavailableDates(calenderDate:Date):boolean{
+  return calenderDate < new Date();
+}
 
 submit(){
   this.userservice.updateuser(this.id,
@@ -164,9 +174,7 @@ get start(){
  get end(){
   return this.form.get('end');
  }
-//  get range() :FormGroup{
-//   return this.form.get('range') as FormGroup;
-//  }
+ 
 get courses():FormArray{
   return this.form.get('courses')as FormArray;
 }

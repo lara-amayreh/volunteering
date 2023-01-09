@@ -18,7 +18,7 @@ export class AllActivitiesComponent implements OnInit{
    alloportunities!:opportunity [];
   // alloportunities:any[]=[];
 
-  role:string='';
+  role!:string;
  
   profileImg!: string;
   cname!: string;
@@ -26,10 +26,16 @@ export class AllActivitiesComponent implements OnInit{
 
 
   constructor( private af:AngularFirestore
-   ,public auth:AuthService,private oportunityservices:OportunitiesService,private userservice:UserService){}
+   ,public auth:AuthService, private oportunityservices:OportunitiesService,private userservice:UserService){}
  
 
 ngOnInit(): void {
+  this.auth.userState$.subscribe((val)=>{
+    if (val){
+      this.role = val.role;
+      console.log(this.role);
+    }
+  })
 this.oportunityservices.getAllOpportunities().subscribe((val)=>{
    if(val)
    this.alloportunities = val as opportunity[];

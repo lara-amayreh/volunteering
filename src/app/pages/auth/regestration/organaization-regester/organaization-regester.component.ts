@@ -44,8 +44,7 @@ ngOnInit(): void {
 }
 submit(){
    //register user in firebase
-
-   this.role="company";
+this.role = "company";
 
   //  this.organization =this.form.value;
   //  this.organization.role=this.role;
@@ -58,7 +57,7 @@ submit(){
      this.downloadurl,
     this.form.get('type')?.value+'',
     this.form.get('url')?.value+ '',
-    // this.role
+    this.role,
   ).then((user)=> {
 
 

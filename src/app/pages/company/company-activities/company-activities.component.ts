@@ -52,7 +52,8 @@ end!:string;
   
   
   }
-
+ 
+  
   addoportunity(){
     // console.log(id);
     let dialogRef = this.dialog.open(AddOpportunityComponent, {

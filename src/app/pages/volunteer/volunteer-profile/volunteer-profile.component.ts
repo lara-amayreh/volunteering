@@ -31,7 +31,7 @@ export class VolunteerProfileComponent {
     
     }
   
-    updateorganization(id:string){
+    updateprofile(id:string){
      console.log(id);
       let dialogRef = this.dialog.open(UpdateVolunteerComponent, {
          width: '1000px',
@@ -40,8 +40,8 @@ export class VolunteerProfileComponent {
        });
        dialogRef.afterClosed().subscribe((result)=> {
            console.log(result); 
+          // this.person = result;
    
-           //refresh table 
           
           
        })

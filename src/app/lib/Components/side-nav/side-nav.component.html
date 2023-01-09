@@ -1,7 +1,7 @@
 <div  *ngIf="authServise.userState$ | async as user" class="p-avatar">
   <div class="avatar" [style.backgroundImage]="geturl()"></div> 
-  <div class="p-link" routerLink="/volunteer/profile"   *ngIf="user.role=='person'"> {{user.fullName}}</div>
-  <div class="p-link" routerLink="/company/profile" *ngIf="user.role=='company'"> {{user.name}}</div>
+  <div class="p-link" routerLink="/volunteer/profile"   *ngIf="user.role =='person'"> {{user.fullName}}</div>
+  <div class="p-link" routerLink="/company/profile" *ngIf="user.role =='company'"> {{user.name}}</div>
 
 </div>
     <mat-divider></mat-divider>
@@ -13,16 +13,16 @@
 
   <div  *ngIf="authServise.userState$">
     
-      <button *ngIf='role=="person"'  mat-button class="menu-button" routerLink="/volunteer/profile">
+      <button *ngIf='role =="person"'  mat-button class="menu-button" routerLink="/volunteer/profile">
         <mat-icon>person</mat-icon>
         <span>profile</span> </button>
        
    
-    <button *ngIf='role=="company"'  mat-button class="menu-button" routerLink="/company/profile">
+    <button *ngIf='role =="company"'  mat-button class="menu-button" routerLink="/company/profile">
       <mat-icon>person</mat-icon>
       <span>profile</span> </button>
    
-    <button *ngIf='role=="company"' mat-button  class="menu-button" routerLink="/company/your-Activities">
+    <button *ngIf='role =="company"' mat-button  class="menu-button" routerLink="/company/your-Activities">
       <mat-icon>task</mat-icon>
       <span>My Activities</span>
   </button>

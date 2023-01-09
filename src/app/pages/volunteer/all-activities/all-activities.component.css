@@ -46,12 +46,16 @@ mat-card-title{
     font-size: 1.5rem;
 text-shadow: 0 0 3px gray;}
 .item{
-    padding: 10px;
+    padding: 5px;
     font-size: 1.2rem;
     text-shadow: 0 0 1px gray;}
 .img-div{
     width: 100%;
    
+}
+.avatar-headre{
+display: flex;
+flex-direction: column;
 }
 
 
@@ -63,6 +67,7 @@ display: flex;    }
 .apply{
     display: flex;
     justify-content: end;
+    padding: 5px 20px;
 }
 
 @media (min-width: 768px) { 

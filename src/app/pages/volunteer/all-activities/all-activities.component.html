@@ -15,17 +15,22 @@
  
 
     <mat-card class="Opportunity-card" *ngFor="let opportunity of alloportunities; let i= index ;">
-      <mat-card-header>
+      <mat-card-header class="avatar-headre">
+        <div>
+      </div>
         <div class="p-avatar">
             <div >
                 <img class="avatar" mat-card-image [src]="opportunity.companyLogo" alt="company profile img"></div>
               
         <mat-card-subtitle class="title">{{opportunity.companyName}}</mat-card-subtitle>
         </div>
+        <mat-divider></mat-divider>
+        <mat-card-title>{{opportunity.name}}</mat-card-title>
+
       </mat-card-header>
         <mat-card-content>
           <div class="content-container">
-       
+            
         <div class="item"><b>skills required:</b>
           <mat-chip-listbox aria-label="skills required">
 
@@ -49,9 +54,9 @@
        <div class="item">
         {{opportunity.numberOfVolunteers}} volunteers
       </div>
-      <mat-card-actions class="apply">
-        <button *ngIf='role.startsWith("person")'  mat-raised-button color="primary">Apply</button>
-      </mat-card-actions>
+      <div class="apply">
+        <button mat-raised-button *ngIf="role ==('person') "  color="primary">Apply</button>
+      </div>
       <mat-card-footer>
       <div class="item"><span>{{(opportunity.range.start).toDate()| date}}</span> <span>  -  {{(opportunity.range.end).toDate()| date}}</span>
            

@@ -1,7 +1,7 @@
 <header>
 
     <div class="nav-links">
-        <button  *ngIf="authService.userState$ && role=='company' " mat-button routerLink='./company/All-Volunteers'>All VOLUNTEERS</button>
+        <button  *ngIf="authService.userState$ && role =='company' " mat-button routerLink='./company/All-Volunteers'>All VOLUNTEERS</button>
         <button  mat-button routerLink='./volunteer/organizations'>ORGANIZATIONS</button>
         <button  mat-button routerLink='/volunteer/opportunities'>OPPORTUNITIES </button>
         <button mat-button routerLink='/contact'>CONTACT</button>
@@ -14,8 +14,8 @@
    
     <div class="p-avatar">
     <div class="avatar" [style.backgroundImage]="geturl()"></div> 
-    <div class="p-link" routerLink="/volunteer/profile"   *ngIf="user.role=='person'"> {{user.fullName}}</div>
-    <div class="p-link" routerLink="/company/profile" *ngIf="user.role=='company'"> {{user.name}}</div>
+    <div class="p-link" routerLink="/volunteer/profile"   *ngIf="user.role =='person'"> {{user.fullName}}</div>
+    <div class="p-link" routerLink="/company/profile" *ngIf="user.role =='company'"> {{user.name}}</div>
 
     </div>
     <button  (click)="authService.signout()"   mat-raised-button  class="btn-login" >

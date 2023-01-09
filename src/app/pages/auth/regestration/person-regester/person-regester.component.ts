@@ -72,7 +72,7 @@ range :new FormGroup({
 {validators: [passwordMatchingValidator]});
 
   // role!: string;
-role:string="person";
+role:string ="person";
     Cities =data;  
     days=days;
     allSkills= allSkills;
@@ -124,7 +124,7 @@ role:string="person";
   }
 
 submit(){
-
+this.role = "person";
   this.auth.signUpPerson(
    this.form.get('email')?.value+ '',
    this.form.get('password')?.value+'',
@@ -136,6 +136,7 @@ submit(){
    this.form.get('courses')?.value as courses[],
    this.form.get('skills')?.value+'',
    this.range?.value,
+   this.role,
    this.downloadurl,
 
 

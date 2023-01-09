@@ -26,7 +26,7 @@
         
      
        
-        <mat-form-field>
+        <!-- <mat-form-field>
             <mat-label>Skills</mat-label>
             <mat-chip-grid name="skills" #chipGrid aria-label="skills selection" formControlName="skills" >
                 <mat-chip-row *ngFor="let skill of skills" (removed)="remove(skill)" >
@@ -46,7 +46,7 @@
             </mat-autocomplete>
             <mat-error>required field</mat-error>
 
-        </mat-form-field>
+        </mat-form-field> -->
         <mat-form-field>
             <mat-label>Experience</mat-label>
             <mat-select name="experience" formControlName="experience" [multiple]="false">
@@ -56,9 +56,10 @@
             </mat-select>
         </mat-form-field>
        
-            <!-- <mat-form-field>
+            <mat-form-field>
                 <mat-label>Available Date</mat-label>
-                <mat-date-range-input formGroupName="range" [rangePicker]="picker">
+                <mat-date-range-input formGroupName ="Daterange" [rangePicker]="picker" 
+                [dateFilter]="unavailableDates">
                   <input matStartDate formControlName="start" placeholder="Start date">
                   <input matEndDate formControlName="end" placeholder="End date">
                 </mat-date-range-input>
@@ -68,15 +69,15 @@
                 <mat-error *ngIf="form.get('range')?.hasError('required')">Required field</mat-error>
                 <mat-error *ngIf="form.get('start')?.hasError('matStartDateInvalid')">Invalid start date</mat-error>
                 <mat-error *ngIf="form.get('end')?.hasError('matEndDateInvalid')">Invalid end date</mat-error>
-              </mat-form-field> -->
-              <mat-form-field>
+              </mat-form-field>  
+              <!-- <mat-form-field>
                 <mat-label>Available Days</mat-label>
                 <mat-select name="city" formControlName="days" [multiple]="true">
                     <mat-option *ngFor="let day of days" [value]="day">
                         {{day}}
                     </mat-option>
                 </mat-select>
-            </mat-form-field>
+            </mat-form-field> -->
 <div>
             <mat-label>Courses</mat-label>
            <ng-container formArrayName="courses">

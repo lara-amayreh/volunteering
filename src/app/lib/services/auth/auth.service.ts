@@ -34,7 +34,7 @@ return this.firestore.collection<any>('users').doc(value.uid).valueChanges();
   }
   signUpPerson(email: string, password: string, 
     fullName:string,phoneNumber:number,city:string,days:string,experience:string,
-    courses:courses[],skills:string,daterange:drange, profileImg:string){
+    courses:courses[],skills:string,daterange:drange,role:string, profileImg:string){
     return this.fireAuth.createUserWithEmailAndPassword(email, password).then((val)=>{
     let user:person={
 id:val.user?.uid,
@@ -46,7 +46,7 @@ experience:experience,
 courses:courses,
 days:days,
 range:daterange,
-role:"person",
+role:role,
 profileImg:profileImg,
 
     };
@@ -58,7 +58,7 @@ profileImg:profileImg,
 
   signUpCompany(email: string, password: string,
     name:string,phoneNumber:number,city:string,logo:string,
-    type:string,url:string){
+    type:string,url:string,role:string){
     return this.fireAuth.createUserWithEmailAndPassword(email, password).then((val)=>{
     let user:organization={
 id:val.user?.uid,
@@ -69,7 +69,7 @@ url:url,
 profileImg:logo,
 type:type,
 email:email,
-role:"company",
+role:role,
 
     };
     this.firestore.collection<any>('users').doc(val.user?.uid).set(user);
