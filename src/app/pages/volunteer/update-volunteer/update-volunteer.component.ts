@@ -79,9 +79,12 @@ export class UpdateVolunteerComponent implements OnInit {
  
   ngOnInit(): void {
     this.authservice.userState$.subscribe((value)=>{
-      value.courses.forEach((val:person)=>{
-         this.addCourse(val)})
+    (value.courses).forEach((val:courses)=>{
+     this.addCourse(val)
       
+     
+   
+    })
         this.id = value.id
       this.form.get('fullName')?.setValue(value.fullName);
       this.form.get('phoneNumber')?.setValue(value.phoneNumber);
@@ -134,35 +137,36 @@ export class UpdateVolunteerComponent implements OnInit {
     phoneNumber:new FormControl<number |null>(null,[Validators.required,Validators.min(0)]),
     city:new FormControl('',[Validators.required]),
     experience:new FormControl('',[Validators.required]),
-  days:new FormControl('',[Validators.required]),
+  // days:new FormControl('',[Validators.required]),
   profileImg:new FormControl(''),
   
     //  skills: new FormControl('',[Validators.required]),
     courses: new FormArray([]),
-    Daterange: new FormGroup({
-      start: new FormControl(),
-      end: new FormControl()
+    // Daterange: new FormGroup({
+    //   start: new FormControl(),
+    //   end: new FormControl()
 
-    })
+    // })
   
 })
-unavailableDates(calenderDate:Date):boolean{
-  return calenderDate < new Date();
-}
+// unavailableDates(calenderDate:Date):boolean{
+//   return calenderDate < new Date();
+// }
 
 submit(){
-  this.userservice.updateuser(this.id,
+  this.userservice.updateuser(this.id,(
     {
-      fullName:this.form.get('fullName')?.value+ '',
-      phoneNumber: this.form.get('phoneNumber')?.value as number,
-      city:this.form.get('city')?.value+ '',
-       profileImg:this.downloadurl,
-      experience:this.form.get('experience')?.value+'',
-      courses:this.form.get('courses')?.value as courses[],
+   fullName:this.form.get('fullName')?.value+ '',
+   phoneNumber: this.form.get('phoneNumber')?.value as number,
+   city:this.form.get('city')?.value+ '',
+    profileImg:this.downloadurl,
+   experience:this.form.get('experience')?.value+'',
+ courses:this.form.get('courses')?.value,
       
 
 
-    } );
+  } ))
+  this.dialogRef.close(true);
 
 
 }

@@ -102,6 +102,8 @@ id:this.id,
   range:this.range?.value,
   companyName:value.name,
   companyLogo:value.profileImg,
+  numberOfApplicants:0,
+  active:true,
 
 
    

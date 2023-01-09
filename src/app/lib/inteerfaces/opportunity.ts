@@ -8,6 +8,8 @@ export interface opportunity{
     numberOfVolunteers:number,
     companyName?:string,
     companyLogo?:string,
+    numberOfApplicants:number,
+    active:boolean;
 }
 
 export interface range{

@@ -1,6 +1,11 @@
 
 <div class="container">
   <h1> My Activities</h1>
+  <div class="apply">
+    <button mat-fab color="primary" (click)="addoportunity()" >
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
     <mat-card *ngFor="let opportunity of opportunities" class="Opportunity-card">
      
       <mat-card-header>
@@ -34,12 +39,12 @@
         
         <mat-progress-bar 
         class="item"
-        [value]="100*5/opportunity.numberOfVolunteers"
+        [value]="100*(opportunity.numberOfApplicants)/opportunity.numberOfVolunteers"
         mode="determinate"
         [bufferValue]="0">
     </mat-progress-bar>
        <div class="item">
-        {{opportunity.numberOfVolunteers}} volunteers
+        {{opportunity.numberOfApplicants}} / {{opportunity.numberOfVolunteers}} volunteers
       </div>
       
       <mat-card-footer>

@@ -1,1 +1,55 @@
-<p>apply-on-activity works!</p>
+
+<div mat-dialog-content class="form-container">
+   
+    <div class="form">
+        <h2>Apply on Activity</h2>
+        <form [formGroup]="form" (ngSubmit)="submit()">
+    
+            <mat-form-field>
+                <mat-label>What can you volunteer in ?</mat-label>
+                <input name="name" matInput placeholder="what can you volunteer in" formControlName="volunteerin">
+            </mat-form-field>
+           
+            <mat-form-field>
+                <mat-label>why you are volunteering ?</mat-label>
+                <textarea matInput formControlName="whyvolunteer" placeholder="why you are volunteering"></textarea>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Available Date</mat-label>
+                <mat-date-range-input formGroupName="range" 
+                [rangePicker]="picker"
+                [min]="startDate"
+                [max]="endDate"
+             >
+               
+                
+                                  <input matStartDate formControlName="start" placeholder="Start date" 
+                                 >
+                  <input matEndDate formControlName="end" placeholder="End date"
+                  [min]="startDate "
+                  [max]="endDate">
+                </mat-date-range-input>
+                <mat-datepicker-toggle  matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+              
+                 <mat-error *ngIf="form.get('range')?.hasError('required')">Required field</mat-error>
+                <mat-error *ngIf="form.get('range')?.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+                <mat-error *ngIf="form.get('range')?.hasError('matEndDateInvalid')">Invalid end date</mat-error> 
+              </mat-form-field>
+              
+           
+   
+            
+               
+    
+              </form>
+    
+    </div>
+       
+
+
+<div mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close  [mat-dialog-close]="false">No</button>
+    <button [disabled]="form.invalid"  [mat-dialog-close]="true" mat-raised-button  (click)="submit()">Yes</button>
+</div>
+</div>
