@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CompanyRoutingModule } from './company-routing.module';
-import { CompanyDashboardComponent } from './company-dashboard/company-dashboard.component';
 import { MaterialImports, SharedModuleModule } from 'src/app/lib/material/shared-module.module';
 import { AddOpportunityComponent } from './add-opportunity/add-opportunity.component';
 import { CompanyDetailsComponent } from '../volunteer/company-details/company-details.component';
@@ -12,7 +11,6 @@ import { AllVolunteersComponent } from './all-volunteers/all-volunteers.componen
 
 @NgModule({
   declarations: [
-    CompanyDashboardComponent,
     AddOpportunityComponent,
     CompanyDetailsComponent,
     CompanyActivitiesComponent,

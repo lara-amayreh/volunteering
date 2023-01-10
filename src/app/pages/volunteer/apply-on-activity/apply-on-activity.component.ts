@@ -8,7 +8,7 @@ import { UpdateVolunteerComponent } from '../update-volunteer/update-volunteer.c
 import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { opportunity } from 'src/app/lib/inteerfaces/opportunity';
 import { person } from 'src/app/lib/inteerfaces/person';
-import { Timestamp } from '@angular/fire/firestore';
+
 
 
 @Component({
@@ -20,8 +20,8 @@ export class ApplyOnActivityComponent {
   personid:string='';
   oportunity!:opportunity;
   userdetails!:person;
-  startDate!:Date;
-  endDate!:Date;
+  startDate!:any;
+  endDate!:any;
 
   constructor(private oportunityservice:OportunitiesService, private userservice:UserService, private auth:AuthService, private dialogRef: MatDialogRef<UpdateVolunteerComponent>, public firestore:AngularFirestore,
  
@@ -50,6 +50,10 @@ export class ApplyOnActivityComponent {
   this.oportunityservice.getoportunityById(this.data.id).subscribe((val)=>{
      if(val){
      this.oportunity = val as opportunity;
+       this.startDate = val.range.start;
+
+    
+     
 //     //  const currentYear = new Date().getDate();
 //     this.startDate = val.range.start;
 //     // this.endDate = new Date(currentYear);

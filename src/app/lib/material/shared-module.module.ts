@@ -19,6 +19,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatTabsModule} from '@angular/material/tabs';
+
 
 
 export const MaterialImports =[
@@ -41,6 +43,8 @@ MatNativeDateModule,
 MatAutocompleteModule,
 MatDividerModule,
 MatProgressBarModule,
+MatTabsModule,
+
 
 
 

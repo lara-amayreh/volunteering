@@ -1,6 +1,7 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { of, switchMap } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { Observable, of, switchMap } from 'rxjs';
 import { organization } from 'src/app/lib/inteerfaces/organization';
 import { AuthService } from 'src/app/lib/services/auth/auth.service';
 import { OrganizationService } from 'src/app/lib/services/organization/organization.service';
@@ -17,18 +18,37 @@ export class CompanyProfileComponent {
   callAPIDialog!: TemplateRef<any>;
    organization!: organization;
    public id:string='';
+   role!:string;
+   organization$!: Observable <organization | undefined>;
 
-  constructor(public dialog: MatDialog, private orgservice:OrganizationService, public userservice:UserService,public authservice:AuthService) { }
-  ngOnInit(): void {
+  constructor(public dialog: MatDialog, private route:ActivatedRoute, private orgservice:OrganizationService, public userservice:UserService,public authservice:AuthService) 
+  { 
+
+    this.organization$ = this.route.paramMap.pipe(
+      switchMap((value)=> {
+        this.id = value.get('id')+'';
+        console.log(this.id);
+        return this.userservice.getuserById(this.id);
   
-  this.authservice.userState$.subscribe((value)=>{
-    if(value)
-    this.id = value.id+'';
-    this.organization = value as organization;
-  })
   
+      
+      }  )
+      )}
+      
+      ngOnInit(): void {
   
-  }
+        this.authservice.userState$.subscribe((value)=>{
+         if(value)
+         this.role = value.role;
+     })
+        
+        
+       }
+  
+    
+  
+    
+  
 geturl(){
  
 	let x= `url("${this.organization.profileImg}")` ;

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LandingComponent } from '../landing/landing.component';
 import { PagenotfoundComponent } from '../pagenotfound/pagenotfound.component';
 import { LoginComponent } from './login/login.component';
 import { OrganaizationRegesterComponent } from './regestration/organaization-regester/organaization-regester.component';
@@ -9,7 +10,7 @@ import { RegisterComponent } from './regestration/register/register.component';
 
 const routes: Routes = [
   {path:'',children:[
-    {path:'',component:LoginComponent,pathMatch:'full'},
+    {path:'',component:LandingComponent,pathMatch:'full'},
     {path:'login', component: LoginComponent},
     {path:'register', loadChildren: ()=> import('./regestration/regestration.module').then((m)=> m.RegestrationModule), 
     //   canActivate: [AuthGuard]

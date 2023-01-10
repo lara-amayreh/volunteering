@@ -1,12 +1,12 @@
 
-<div class="container" *ngIf="authservice.userState$ |async as user">
+<div class="container" *ngIf="organization$ |async as user">
     <mat-card>
         <mat-card-header>
 <h3>{{user.name }} profile </h3>
-<div class="avatar" [style.backgroundImage]="geturl()"></div> 
+<!-- <div class="avatar" [style.backgroundImage]="geturl()"></div>  -->
 
 <!-- <img [src]="organization.logo" class="card-item logo-img"/> -->
-<button mat-icon-button color="primary" (click)="updateorganization(id)"> 
+<button *ngIf ="role ==='company' " mat-icon-button color="primary" (click)="updateorganization(id)"> 
     <mat-icon>edit</mat-icon></button>
 </mat-card-header>
 <mat-divider></mat-divider>

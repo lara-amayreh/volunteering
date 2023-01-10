@@ -1,7 +1,7 @@
 <div class="container">
   <h1>All opportunities</h1>
 
-  <mat-card class="search-card">
+  <!-- <mat-card class="search-card">
    
     <mat-card-title><mat-icon>search</mat-icon>Filter Organizations</mat-card-title>
 <form [formGroup]="form">
@@ -10,11 +10,11 @@
 <input matInput type="text" formControlName="name" placeholder="search by name.." name="name"(keyup)="filteronname()">
 </mat-form-field>
 </form>
-</mat-card>
+</mat-card> -->
   <div class="card-container">
  
 
-    <mat-card class="Opportunity-card" *ngFor="let opportunity of alloportunities; let i= index ;">
+    <mat-card   [routerLink]="['./',opportunity.id]"  class="Opportunity-card" *ngFor="let opportunity of alloportunities; let i= index ;">
       <mat-card-header class="avatar-headre">
         <div>
       </div>
@@ -32,9 +32,9 @@
           <div class="content-container">
             
         <div class="item"><b>skills required:</b>
-          <mat-chip-listbox aria-label="skills required">
+          <mat-chip-listbox class="skills" aria-label="skills required">
 
-            <mat-chip *ngFor="let skill of (opportunity.skills).split(',')">
+            <mat-chip  *ngFor="let skill of (opportunity.skills).split(',')">
                      {{skill}}
             </mat-chip>
             </mat-chip-listbox>
@@ -63,7 +63,6 @@
       </div> 
     </mat-card-footer>
       </mat-card>
-      <!-- [value]="100* number of applied volunteers/ number of volunteers" -->
     </div>
     </div>
       

@@ -1,0 +1,23 @@
+ .example-large-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 16px;
+    padding: 16px;
+    border-radius: 8px;
+  }
+  
+  .company-card{
+width: 300px;
+height: 200px;
+  }
+  img{
+    max-width: 100%;
+    max-height: 50%;
+
+  }
+  .example-large-box {
+    height: 300px;
+    width: 100%
+  }
+  

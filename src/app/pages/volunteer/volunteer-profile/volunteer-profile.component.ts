@@ -1,5 +1,7 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
+import { Observable, switchMap } from 'rxjs';
 import { person } from 'src/app/lib/inteerfaces/person';
 import { AuthService } from 'src/app/lib/services/auth/auth.service';
 import { OrganizationService } from 'src/app/lib/services/organization/organization.service';
@@ -14,18 +16,27 @@ import { UpdateVolunteerComponent } from '../update-volunteer/update-volunteer.c
 export class VolunteerProfileComponent {
   @ViewChild('callAPIDialog')
   callAPIDialog!: TemplateRef<any>;
-   person!: person;
+   person$!:Observable <person | undefined>;
    public id:string='';
+role!:string;
+  constructor(private route:ActivatedRoute, public dialog: MatDialog, private orgservice:OrganizationService, public userservice:UserService,public authservice:AuthService)
+  {this.person$ = this.route.paramMap.pipe(
+    switchMap((value)=> {
+      this.id = value.get('id')+'';
+      console.log(this.id);
+      return this.userservice.getuserById(this.id);
 
-  constructor(public dialog: MatDialog, private orgservice:OrganizationService, public userservice:UserService,public authservice:AuthService) { }
+
+    
+    }  )
+    )}
 
   ngOnInit(): void {
   
     this.authservice.userState$.subscribe((value)=>{
       console.log(value);
       if(value)
-      this.id = value.id+'';
-      this.person= value as person;
+      this.role = value.role;
     })
     
     
@@ -36,7 +47,7 @@ export class VolunteerProfileComponent {
       let dialogRef = this.dialog.open(UpdateVolunteerComponent, {
          width: '1000px',
          height:'400px',
-        data:{id:id,data:this.person}
+        data:{id:id}
        });
        dialogRef.afterClosed().subscribe((result)=> {
            console.log(result); 

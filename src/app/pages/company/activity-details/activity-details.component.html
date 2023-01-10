@@ -1,1 +1,20 @@
-<p>activity-details works!</p>
+<div class="container">
+<mat-tab-group dynamicHeight >
+    <mat-tab label="opportunity Details">
+      <div class="example-large-box mat-elevation-z4" *ngIf="opportunity$ | async as opportunity">
+        <mat-card class="company-card"  >
+            <mat-card-header>
+              <mat-card-title  [routerLink]="['/company/profile',opportunity.userid]">{{opportunity.companyName}}</mat-card-title>
+            </mat-card-header>
+            <img mat-card-image [src]="opportunity.companyLogo" >
+
+          </mat-card>
+      </div>
+    </mat-tab>
+    <mat-tab label="Volunteers">
+      <div class="example-large-box mat-elevation-z4">
+        Large content
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

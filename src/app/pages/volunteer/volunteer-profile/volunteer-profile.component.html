@@ -1,8 +1,8 @@
-<div class="container" *ngIf="authservice.userState$">
+<div class="container" *ngIf="person$ |async as person">
   <mat-card class="card-item main-card">
     <mat-card-header>
       <h3>{{person.fullName}} profile</h3>
-      <button mat-icon-button color="primary" (click)="updateprofile(id)">
+      <button *ngIf="role ==='person' " mat-icon-button color="primary" (click)="updateprofile(id)">
         <mat-icon>edit</mat-icon>
       </button>
     </mat-card-header>

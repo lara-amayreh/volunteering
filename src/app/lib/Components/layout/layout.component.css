@@ -45,12 +45,12 @@
     
     mat-sidenav-content{
       overflow: hidden;
-      background-color: white;
     }
     
     mat-sidenav-container {
       min-height:calc(100vh - 66px);
-      ;
+      background-color: white;
+
     }
     app-header{
       display: none;

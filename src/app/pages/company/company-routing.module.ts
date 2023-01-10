@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { CompanyDashboardComponent } from './company-dashboard/company-dashboard.component';
 import { AllActivitiesComponent } from '../volunteer/all-activities/all-activities.component';
 import { CompanyActivitiesComponent } from './company-activities/company-activities.component';
 import { CompanyProfileComponent } from './company-profile/company-profile.component';
@@ -18,7 +17,6 @@ const routes: Routes = [
   {path:'',
   children:[
     {path:'',component:LandingComponent,pathMatch:'full'},
-
     {path:'opportunities', component:AllActivitiesComponent},
     {path:'organizations', component:AllCompaniesComponent},
     {path:'your-Activities', component:CompanyActivitiesComponent},
@@ -31,7 +29,7 @@ const routes: Routes = [
 
 
 
-{path:'profile', component: CompanyProfileComponent, canActivate: [AuthGuard]}
+{path:'profile/:id', component: CompanyProfileComponent, canActivate: [AuthGuard]}
 
 ]
 

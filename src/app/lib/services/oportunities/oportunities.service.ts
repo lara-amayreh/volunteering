@@ -49,6 +49,10 @@ addApplicant(activityid:string, obj:apply) {
     return from(this.opportunitiesCollection.doc<opportunity>(activityid).update({numberOfApplicants: numberOfApplicants}));
     
   }
+  getAppliedOpportunities(userid:string,activityid:string):Observable<apply | any>{
+    return this.firestore.collection('oportunities/' + activityid + '/applicants',ref=>ref.where('uid',"==",userid)).valueChanges();
+
+  }
 updatid(id: string){
   return from(this.opportunitiesCollection.doc<opportunity>(id).update({id: id}));
 }

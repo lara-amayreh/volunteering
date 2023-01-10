@@ -1,7 +1,7 @@
 <div class="container">
 <h1>All Organizations</h1>
 <div class="wrapper">
-  <mat-card class="search-card">
+  <mat-card class="search-card" >
    
       <mat-card-title><mat-icon>search</mat-icon>Filter Organizations</mat-card-title>
   <form [formGroup]="form">
@@ -21,7 +21,7 @@
 </mat-card>
 <!-- <button (click)='filterontype(value)'></button> -->
 <div class="card-container">
-<mat-card  *ngFor="let company of allcompanies">
+<mat-card [routerLink]="['./profile',company.id]" *ngFor="let company of allcompanies">
     <mat-card-header>
       <mat-card-title>{{company.name}}</mat-card-title>
       <mat-card-subtitle>{{company.type}}</mat-card-subtitle>
@@ -32,7 +32,7 @@
     <mat-divider></mat-divider>
    </mat-card-content>
    <mat-card-footer>
-    <a [routerLink]="['./details', company.id]">view details</a>
+    <a [routerLink]="['./profile',company.id]">view details</a>
   </mat-card-footer>
   </mat-card>
 </div>

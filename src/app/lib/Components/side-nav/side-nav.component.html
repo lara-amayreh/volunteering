@@ -11,9 +11,9 @@
       <span>Home</span>
     </button>
 
-  <div  *ngIf="authServise.userState$">
+  <div  *ngIf="authServise.userState$ | async as user">
     
-      <button *ngIf='role =="person"'  mat-button class="menu-button" routerLink="/volunteer/profile">
+      <button *ngIf='role =="person"'  mat-button class="menu-button" [routerLink]="['/volunteer/profile',user.id]">
         <mat-icon>person</mat-icon>
         <span>profile</span> </button>
        
@@ -26,6 +26,10 @@
       <mat-icon>task</mat-icon>
       <span>My Activities</span>
   </button>
+  <button *ngIf='role =="person"' mat-button  class="menu-button" routerLink="/volunteer/my-Activities">
+    <mat-icon>task</mat-icon>
+    <span>My Activities</span>
+</button>
 
       <button mat-button class="menu-button" routerLink="/volunteer/opportunities">
         <mat-icon>badge</mat-icon>

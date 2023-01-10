@@ -18,18 +18,18 @@
     <div class="p-link" routerLink="/company/profile" *ngIf="user.role =='company'"> {{user.name}}</div>
 
     </div>
-    <button  (click)="authService.signout()"   mat-raised-button  class="btn-login" >
-        logout <mat-icon>logout</mat-icon>
+    <button  (click)="authService.signout()"   mat-button  class="btn-login" >
+         <mat-icon>logout</mat-icon>
     </button>
 
 </div>
         <ng-template #loginButton>
-            <button  mat-raised-button routerLink="/auth/login" class="btn-login">
+            <button  mat-button routerLink="/auth/login" class="btn-login">
                 login <mat-icon>login</mat-icon>
             </button>
     
-        <button mat-raised-button routerLink="/auth/register" class="btn-login">
-            signup <mat-icon>person-add-alt</mat-icon>
+        <button mat-button routerLink="/auth/register" class="btn-login">
+             signup<mat-icon>person-add-alt</mat-icon>
         </button>
     </ng-template>
     </div>
