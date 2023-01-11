@@ -1,69 +1,107 @@
-<div  *ngIf="authServise.userState$ | async as user" class="p-avatar">
-  <div class="avatar" [style.backgroundImage]="geturl()"></div> 
-  <div class="p-link" routerLink="/volunteer/profile"   *ngIf="user.role =='person'"> {{user.fullName}}</div>
-  <div class="p-link" routerLink="/company/profile" *ngIf="user.role =='company'"> {{user.name}}</div>
+<div *ngIf="authServise.userState$ | async as user" class="p-avatar">
+  <div
+    [routerLink]="['/person/profile', user.id]"
+    *ngIf="user.role == 'person'"
+  >
+    <div class="avatar" [style.backgroundImage]="geturl()"></div>
+    <div class="p-link">
+      {{ user.fullName }}
+    </div>
+  </div>
+  <div
+    [routerLink]="['/company/profile', user.id]"
+    *ngIf="user.role == 'company'"
+  >
+  <div class="avatar" [style.backgroundImage]="geturl()"></div>
 
+    <div class="p-link">
+      {{ user.name }}
+    </div>
+  </div>
 </div>
-    <mat-divider></mat-divider>
+<mat-divider></mat-divider>
 
-    <button mat-button class="menu-button" routerLink="/">
-      <mat-icon>home</mat-icon>
-      <span>Home</span>
-    </button>
-
-  <div  *ngIf="authServise.userState$ | async as user">
-    
-      <button *ngIf='role =="person"'  mat-button class="menu-button" [routerLink]="['/volunteer/profile',user.id]">
-        <mat-icon>person</mat-icon>
-        <span>profile</span> </button>
-       
-   
-    <button *ngIf='role =="company"'  mat-button class="menu-button" routerLink="/company/profile">
-      <mat-icon>person</mat-icon>
-      <span>profile</span> </button>
-   
-    <button *ngIf='role =="company"' mat-button  class="menu-button" routerLink="/company/your-Activities">
-      <mat-icon>task</mat-icon>
-      <span>My Activities</span>
-  </button>
-  <button *ngIf='role =="person"' mat-button  class="menu-button" routerLink="/volunteer/my-Activities">
-    <mat-icon>task</mat-icon>
-    <span>My Activities</span>
+<button mat-button class="menu-button" routerLink="/">
+  <mat-icon>home</mat-icon>
+  <span>Home</span>
 </button>
 
-      <button mat-button class="menu-button" routerLink="/volunteer/opportunities">
-        <mat-icon>badge</mat-icon>
-        <span>opportunities</span>
-      </button>
+<div *ngIf="authServise.userState$ | async as user">
+  <button
+    *ngIf="role == 'person'"
+    mat-button
+    class="menu-button"
+    [routerLink]="['/volunteer/profile', user.id]"
+  >
+    <mat-icon>person</mat-icon>
+    <span>profile</span>
+  </button>
 
-    <button mat-button class="menu-button" routerLink="/volunteer/organizations">
-        <mat-icon>apartment</mat-icon>
-        <span>Organizations</span>
-      </button>
-     
-   
-    <mat-divider></mat-divider>
-    <button mat-button class="menu-button" routerLink="/contact">
-      <mat-icon>contact_page</mat-icon>
-      <span>Contact</span>
-    </button>
-    <button mat-button class="menu-button" routerLink="/about">
-        <mat-icon>info</mat-icon>
-        <span>About</span>
-      </button>
-      <mat-divider></mat-divider>
+  <button
+    *ngIf="role == 'company'"
+    mat-button
+    class="menu-button"
+    [routerLink]="['/company/profile', user.id]"
+  >
+    <mat-icon>person</mat-icon>
+    <span>profile</span>
+  </button>
+
+  <button
+    *ngIf="role == 'company'"
+    mat-button
+    class="menu-button"
+    routerLink="/company/your-Activities"
+  >
+    <mat-icon>task</mat-icon>
+    <span>My Activities</span>
+  </button>
+  <button
+    *ngIf="role == 'person'"
+    mat-button
+    class="menu-button"
+    routerLink="/volunteer/my-Activities"
+  >
+    <mat-icon>task</mat-icon>
+    <span>My Activities</span>
+  </button>
+</div>
+
+<button mat-button class="menu-button" routerLink="/volunteer/opportunities">
+  <mat-icon>badge</mat-icon>
+  <span>opportunities</span>
+</button>
+
+<button mat-button class="menu-button" routerLink="/volunteer/organizations">
+  <mat-icon>apartment</mat-icon>
+  <span>Organizations</span>
+</button>
+
+<mat-divider></mat-divider>
+<button mat-button class="menu-button" routerLink="/contact">
+  <mat-icon>contact_page</mat-icon>
+  <span>Contact</span>
+</button>
+<button mat-button class="menu-button" routerLink="/about">
+  <mat-icon>info</mat-icon>
+  <span>About</span>
+</button>
+<mat-divider></mat-divider>
 <ng-template #log>
-      <button mat-button class="menu-button" routerLink="/auth/register">
-        <mat-icon>person-add-alt</mat-icon>
-        <span>signup </span>
-      </button>
-      <button mat-button class="menu-button" [routerLink]="['/auth/login']">
-          <mat-icon>login</mat-icon>
-          <span>Login</span>
-        </button>
-     
-      </ng-template>
-      <button (click)="authServise.signout()" *ngIf="authServise.userState$ | async as user; else log" mat-button class="menu-button">
-
-        <mat-icon>logout</mat-icon> <span>logout</span></button>
- 
+  <button mat-button class="menu-button" routerLink="/auth/register">
+    <mat-icon>person-add-alt</mat-icon>
+    <span>signup </span>
+  </button>
+  <button mat-button class="menu-button" [routerLink]="['/auth/login']">
+    <mat-icon>login</mat-icon>
+    <span>Login</span>
+  </button>
+</ng-template>
+<button
+  (click)="authServise.signout()"
+  *ngIf="authServise.userState$ | async as user; else log"
+  mat-button
+  class="menu-button"
+>
+  <mat-icon>logout</mat-icon> <span>logout</span>
+</button>

@@ -3,12 +3,12 @@ import { person } from "./person";
 
 export interface apply{
     uid?:string,
+    oportunityId?:string,
     availabledate:range
     whyApply:string,
     VolunteerIn:string,
     userdetails:person,
    state?:MyEnum
-        
     }
 
 

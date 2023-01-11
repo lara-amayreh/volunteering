@@ -18,6 +18,7 @@ export class VolunteerProfileComponent {
   callAPIDialog!: TemplateRef<any>;
    person$!:Observable <person | undefined>;
    public id:string='';
+   userid!:string;
 role!:string;
   constructor(private route:ActivatedRoute, public dialog: MatDialog, private orgservice:OrganizationService, public userservice:UserService,public authservice:AuthService)
   {this.person$ = this.route.paramMap.pipe(
@@ -37,6 +38,7 @@ role!:string;
       console.log(value);
       if(value)
       this.role = value.role;
+      this.userid = value.id;
     })
     
     

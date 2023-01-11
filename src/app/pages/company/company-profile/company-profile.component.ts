@@ -19,6 +19,7 @@ export class CompanyProfileComponent {
    organization!: organization;
    public id:string='';
    role!:string;
+   userid!:string;
    organization$!: Observable <organization | undefined>;
 
   constructor(public dialog: MatDialog, private route:ActivatedRoute, private orgservice:OrganizationService, public userservice:UserService,public authservice:AuthService) 
@@ -28,6 +29,7 @@ export class CompanyProfileComponent {
       switchMap((value)=> {
         this.id = value.get('id')+'';
         console.log(this.id);
+       
         return this.userservice.getuserById(this.id);
   
   
@@ -38,8 +40,11 @@ export class CompanyProfileComponent {
       ngOnInit(): void {
   
         this.authservice.userState$.subscribe((value)=>{
-         if(value)
+         if(value){
          this.role = value.role;
+         this.userid =value.id 
+         console.log(this.userid);
+        }
      })
         
         

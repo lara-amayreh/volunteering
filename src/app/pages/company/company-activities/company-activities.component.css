@@ -8,13 +8,20 @@ img {
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
   }
+  .mat-mdc-card-header{
+    display: block;
+  }
+  
 .add{
     position: fixed;
+    right: 105x;
     display: flex;
+    margin-bottom: 10px;
     align-self: flex-end;
+    z-index:100 ;
 }
   .avatar{
     display: flex;
@@ -29,6 +36,7 @@ mat-card{
     width: 100%;
     max-height: 600px;
     box-shadow: 0 0 10px gray;
+    cursor: pointer;
 }
 mat-divider{
     margin:10px 5px;
@@ -41,8 +49,19 @@ text-align: center;
 color: white;
 
 }
+.header-container{
+display: flex;
+justify-content: space-between;
+gap: 20px;
+}
+.activity-name{
+    font-size: 1.3rem;
+    opacity: 0.9;
+    display: flex;
+    align-self: flex-end;
 
 
+}
 .content-container{
     display: grid;
 grid-template-columns: repeat(2,1fr);}
@@ -83,7 +102,7 @@ display: flex;    }
 
 @media (min-width: 768px) { 
     mat-card{
-        max-width: 400px;
+        max-width: 700px;
 
     
     }

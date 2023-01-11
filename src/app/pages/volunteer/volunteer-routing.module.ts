@@ -23,7 +23,8 @@ const routes: Routes = [
     {path:'organizations', component:AllCompaniesComponent},
     
 
-      {path:'company/organizations/profile/:id', component: CompanyProfileComponent, canActivate: [AuthGuard]},
+      {path:'organizations/profile/:id', component: CompanyProfileComponent, canActivate: [AuthGuard]},
+      
         // {path:'details/:id', component: CompanyDetailsComponent, canActivate: [AuthGuard]},  
       
 

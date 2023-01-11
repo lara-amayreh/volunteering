@@ -1,37 +1,63 @@
 <header>
-
-    <div class="nav-links">
-        <button  *ngIf="authService.userState$ && role =='company' " mat-button routerLink='./company/All-Volunteers'>All VOLUNTEERS</button>
-        <button  mat-button routerLink='./volunteer/organizations'>ORGANIZATIONS</button>
-        <button  mat-button routerLink='/volunteer/opportunities'>OPPORTUNITIES </button>
-        <button mat-button routerLink='/contact'>CONTACT</button>
-        <button mat-button routerLink='/about'>ABOUT</button>
-    </div>
-    <div class="regestration">
-       
-
-<div class="avatar-container"  *ngIf="authService.userState$ | async as user; else loginButton">
-   
-    <div class="p-avatar">
-    <div class="avatar" [style.backgroundImage]="geturl()"></div> 
-    <div class="p-link" routerLink="/volunteer/profile"   *ngIf="user.role =='person'"> {{user.fullName}}</div>
-    <div class="p-link" routerLink="/company/profile" *ngIf="user.role =='company'"> {{user.name}}</div>
-
-    </div>
-    <button  (click)="authService.signout()"   mat-button  class="btn-login" >
-         <mat-icon>logout</mat-icon>
+  <div class="nav-links">
+    <button
+      *ngIf="authService.userState$ && role == 'company'"
+      mat-button
+      routerLink="./company/All-Volunteers"
+    >
+      All VOLUNTEERS
     </button>
+    <button mat-button routerLink="./volunteer/organizations">
+      ORGANIZATIONS
+    </button>
+    <button mat-button routerLink="/volunteer/opportunities">
+      OPPORTUNITIES
+    </button>
+    <button mat-button routerLink="/contact">CONTACT</button>
+    <button mat-button routerLink="/about">ABOUT</button>
+  
+  <div class="regestration">
+    <div
+      class="avatar-container"
+      *ngIf="authService.userState$ | async as user; else loginButton"
+    >
+      <div [routerLink]="['/volunteer/profile', user.id]"
+      *ngIf="user.role == 'person'" >
+        <div class="p-avatar">
+          <div class="avatar" [style.backgroundImage]="geturl()"></div>
+          <div
+            class="p-link"
+           
+          >
+            {{ user.fullName }}
+          </div>
+        </div>
+        </div>
+        <div [routerLink]="['/company/profile', user.id]"
+      *ngIf="user.role == 'company' " >
+      <div class="p-avatar">
+      <div class="avatar" [style.backgroundImage]="geturl()"></div>
 
-</div>
-        <ng-template #loginButton>
-            <button  mat-button routerLink="/auth/login" class="btn-login">
-                login <mat-icon>login</mat-icon>
-            </button>
-    
-        <button mat-button routerLink="/auth/register" class="btn-login">
-             signup<mat-icon>person-add-alt</mat-icon>
-        </button>
-    </ng-template>
+        <div
+          class="p-link"
+            >
+          {{ user.name }}
+        </div>
+        </div>
     </div>
+      </div>
+      <button (click)="authService.signout()" mat-button class="btn-login">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </div>
+    <ng-template #loginButton>
+      <button mat-button routerLink="/auth/login" class="btn-login">
+        login <mat-icon>login</mat-icon>
+      </button>
 
+      <button mat-button routerLink="/auth/register" class="btn-login">
+        signup<mat-icon>person-add-alt</mat-icon>
+      </button>
+    </ng-template>
+  </div>
 </header>

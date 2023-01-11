@@ -1,7 +1,7 @@
 <div class="container">
     <h1>All Volunteers</h1>
    <div class="card-container">
-      <mat-card [routerLink]="['./details', volunteer.id]" *ngFor='let volunteer of  AllVolunteers; let i = index;' class="Opportunity-card">
+      <mat-card [routerLink]="['/volunteer/profile', volunteer.id]" *ngFor='let volunteer of  AllVolunteers; let i = index;' class="Opportunity-card">
         <mat-card-header>
             <div class="p-avatar">
                 <div >

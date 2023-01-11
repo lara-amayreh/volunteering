@@ -13,8 +13,8 @@ display:flex;
 gap:20px;
 padding-top: 15px;
 padding-left: 10px;
-font-size: 1.2rem;
 }
+
 mat-divider{
     padding: 10px;
     margin-top: 10px;
@@ -33,11 +33,10 @@ h5{
 }
 h4{
     text-shadow: 0 0 1px gray;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 
 }
 .container{
-    padding: 20px 50px;
     display: flex;
     flex-direction: column;
     /* align-items: center; */

@@ -1,15 +1,54 @@
- .example-large-box {
+ .details-box {
     display: flex;
-    align-items: center;
-    justify-content: center;
     margin: 16px;
     padding: 16px;
     border-radius: 8px;
+    justify-content: space-evenly;
+    gap: 15px;
   }
   
   .company-card{
 width: 300px;
 height: 200px;
+cursor: pointer;
+box-shadow: 0 0 5px gray;
+
+  }
+  .circle{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .active{
+    background-color:rgb(16, 208, 16);
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    display: inline-block;
+
+  }
+  .item{
+    margin-top: 10px;
+    padding: 5px;
+    font-size: 1.2rem;
+    text-shadow: 0 0 1px gray;}
+
+    
+  .notactive{
+    background-color:rgb(231, 9, 9);
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    display: inline-block;
+
+  }
+  mat-tab{
+    display: flex;
+    gap: 20px;
+  }
+  .company-card:hover{
+    box-shadow: 0 0 10px gray;
   }
   img{
     max-width: 100%;

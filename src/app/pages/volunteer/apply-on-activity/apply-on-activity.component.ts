@@ -80,13 +80,19 @@ submit(){
 
 this.oportunityservice.addApplicant(this.oportunity.id+'' ,({
   uid: this.personid,
+  oportunityId:this.oportunity.id,
 VolunteerIn:this.form.get('volunteerin')?.value+'',
 whyApply:this.form.get('whyvolunteer')?.value+'',
  availabledate:this.range?.value,
  userdetails:this.userdetails,
-}) )
+})  ).then((val)=> {
+  if(this.oportunity.applicantsIds == null) this.oportunity.applicantsIds = [];
+  this.oportunity.applicantsIds.push(this.personid);
+  this.oportunityservice.updatecount(this.oportunity.id+'',(this.oportunity.numberOfApplicants)+1,this.oportunity.applicantsIds);
 
- this.oportunityservice.updatecount(this.oportunity.id+'',(this.oportunity.numberOfApplicants)+1);
+}
+)
+
 
 console.log(this.form.value);
 if(this.form.valid)

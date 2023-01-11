@@ -40,6 +40,8 @@ this.authservice.userState$.subscribe((value)=>{
   this.form.get('url')?.setValue(value.url);
   this.role=value.role;
   this.downloadurl=value.profileImg;
+  this.form.get('about')?.setValue(value.about);
+
 
 
 
@@ -75,6 +77,8 @@ this.authservice.userState$.subscribe((value)=>{
            profileImg:this.downloadurl,
           type:this.form.get('type')?.value+'',
           url:this.form.get('url')?.value+ '',
+          about:this.form.get('about')?.value+ '',
+
 
         } );
 

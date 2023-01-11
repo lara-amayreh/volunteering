@@ -11,6 +11,8 @@
 display: flex;
 flex-direction: column;
 align-items: center;
+cursor: pointer;
+
   }
   .avatar {
     border-radius: 100%;
@@ -20,6 +22,7 @@ align-items: center;
     width: 40px;
     height: 40px;
     border: 1px solid gray;
+    cursor: pointer;
   }
   mat-icon {
     margin-right: 5px;

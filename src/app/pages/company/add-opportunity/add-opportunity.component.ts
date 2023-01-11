@@ -104,6 +104,7 @@ id:this.id,
   companyLogo:value.profileImg,
   numberOfApplicants:0,
   active:true,
+applicantsIds:[],
 
 
    

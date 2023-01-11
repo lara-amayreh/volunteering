@@ -6,24 +6,24 @@
 <!-- <div class="avatar" [style.backgroundImage]="geturl()"></div>  -->
 
 <!-- <img [src]="organization.logo" class="card-item logo-img"/> -->
-<button *ngIf ="role ==='company' " mat-icon-button color="primary" (click)="updateorganization(id)"> 
+<button *ngIf ="role == 'company' && userid == id " mat-icon-button color="primary" (click)="updateorganization(id)"> 
     <mat-icon>edit</mat-icon></button>
 </mat-card-header>
 <mat-divider></mat-divider>
 <mat-card-content>
     <div class="card-content">
     <h4>company information</h4>
-    <div class="card-item"><h5> company Name : </h5>{{user.name}}</div>
+    <div class="card-item"><h5> Name : </h5>{{user.name}}</div>
     
 
-    <div class="card-item"><h5> Company Type : </h5>{{user.type}}</div>
-    <div class="card-item"> <h5> Company location : </h5>{{user.city}}</div>
+    <div class="card-item"><h5>  Type : </h5>{{user.type}}</div>
+    <div class="card-item"> <h5>  location : </h5>{{user.city}}</div>
 
 <mat-divider></mat-divider>
 
     <h4>Contact information</h4>
-    <div class="card-item"><h5> Company website : </h5>{{user.url}}</div>
-    <div class="card-item"><h5> company Email Address: </h5>{{user.email}}</div>
+    <div class="card-item"><h5>  website : </h5>{{user.url}}</div>
+    <div class="card-item"><h5>Email Address: </h5>{{user.email}}</div>
 <div class="card-item"><h5> phone Number : </h5>{{user.phoneNumber}}</div>
 <mat-divider></mat-divider>
  <h4>About information</h4>

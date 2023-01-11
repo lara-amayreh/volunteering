@@ -11,6 +11,7 @@ import { AllCompaniesComponent } from '../volunteer/all-companies/all-companies.
 import { CompanyDetailsComponent } from '../volunteer/company-details/company-details.component';
 import { AllVolunteersComponent } from './all-volunteers/all-volunteers.component';
 import { VolunteerDetailsComponent } from './volunteer-details/volunteer-details.component';
+import { ActivityDetailsComponent } from './activity-details/activity-details.component';
 
 const routes: Routes = [
 
@@ -19,9 +20,10 @@ const routes: Routes = [
     {path:'',component:LandingComponent,pathMatch:'full'},
     {path:'opportunities', component:AllActivitiesComponent},
     {path:'organizations', component:AllCompaniesComponent},
-    {path:'your-Activities', component:CompanyActivitiesComponent},
+    {path:'your-Activities', component:CompanyActivitiesComponent,pathMatch:'full'},
     {path:'All-Volunteers', component:AllVolunteersComponent},
     {path:'All-Volunteers/details/:id', component: VolunteerDetailsComponent, canActivate: [AuthGuard]},
+    {path:'your-Activities/:id', component: ActivityDetailsComponent, canActivate: [AuthGuard]},
 
       {path:'organizations/details/:id', component: CompanyDetailsComponent, canActivate: [AuthGuard]},
   ]}, 
