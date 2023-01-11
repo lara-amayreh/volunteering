@@ -1,4 +1,6 @@
 <header>
+      
+
   <div class="nav-links">
     <button
       *ngIf="authService.userState$ && role == 'company'"
@@ -45,11 +47,16 @@
         </div>
         </div>
     </div>
+    <icon class ="notification" mat-button color="primary" (click)="openNotification()"
+    matBadge="8"  matBadgeColor="warn">
+    <mat-icon>notifications</mat-icon>
+</icon>
       </div>
       <button (click)="authService.signout()" mat-button class="btn-login">
         <mat-icon>logout</mat-icon>
       </button>
     </div>
+   
     <ng-template #loginButton>
       <button mat-button routerLink="/auth/login" class="btn-login">
         login <mat-icon>login</mat-icon>

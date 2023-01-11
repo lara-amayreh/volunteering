@@ -3,12 +3,13 @@ import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { map, Observable, of, startWith, switchMap } from 'rxjs';
 import { opportunity } from 'src/app/lib/inteerfaces/opportunity';
 import { AuthService } from 'src/app/lib/services/auth/auth.service';
 import { OportunitiesService } from 'src/app/lib/services/oportunities/oportunities.service';
 import { allSkills } from 'src/assets/arrays/skills';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-add-opportunity',
@@ -20,8 +21,8 @@ export class AddOpportunityComponent{
   id:string='';
   constructor(private oportunityservice: OportunitiesService,private authservice:AuthService,
     private dialogRef: MatDialogRef<AddOpportunityComponent>,
-    @Inject(MAT_DIALOG_DATA)
-     private data: any)
+    @Inject(MAT_DIALOG_DATA) public data: any)
+
      {
     this.filteredSkills = this.skillsCtrl.valueChanges.pipe(
       startWith(null),

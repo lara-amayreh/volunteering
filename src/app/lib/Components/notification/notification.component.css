@@ -1,0 +1,10 @@
+.close{
+    cursor: pointer;
+    padding: 15px;
+}
+
+.container{
+    display:flex;
+    flex-direction: column;
+    gap:20px;
+align-items:center;}

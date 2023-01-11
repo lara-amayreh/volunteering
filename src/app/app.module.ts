@@ -21,7 +21,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore/';
 import { CommonModule } from '@angular/common';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { LayoutComponent } from './lib/Components/layout/layout.component';
-
+import { NotificationComponent } from './lib/Components/notification/notification.component';
 
 
 @NgModule({
@@ -34,6 +34,7 @@ import { LayoutComponent } from './lib/Components/layout/layout.component';
     LandingComponent,
     PagenotfoundComponent,
     LayoutComponent,
+    NotificationComponent,
     
   
 

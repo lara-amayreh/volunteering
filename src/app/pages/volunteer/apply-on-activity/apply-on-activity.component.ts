@@ -14,6 +14,7 @@ import {
 } from '@angular/core';
 import { opportunity } from 'src/app/lib/inteerfaces/opportunity';
 import { person } from 'src/app/lib/inteerfaces/person';
+import { MyEnum } from 'src/app/lib/inteerfaces/apply';
 
 @Component({
   selector: 'app-apply-on-activity',
@@ -75,6 +76,7 @@ export class ApplyOnActivityComponent {
         whyApply: this.form.get('whyvolunteer')?.value + '',
         availabledate: this.range?.value,
         userdetails: this.userdetails,
+        state:MyEnum.wait,
       })
       .then((val) => {
         if (this.oportunity.applicantsIds == null)
@@ -91,6 +93,7 @@ export class ApplyOnActivityComponent {
           this.oportunity.numberOfApplicants + 1,
           this.oportunity.applicantsIds,
           this.oportunity.active,
+
         );
       });
 

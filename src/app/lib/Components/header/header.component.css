@@ -8,6 +8,9 @@
     align-items: center;
     
 } 
+.notification{
+    cursor: pointer;
+}
 .avatar-container{
 display: flex;
 justify-content: center;
