@@ -31,7 +31,6 @@ export class UpdateVolunteerComponent implements OnInit {
   hide: boolean=true;
     Cities = data;  
     days=days;
-    aldays:string='';
     allSkills= allSkills;
     id:string='';
   separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -79,6 +78,15 @@ export class UpdateVolunteerComponent implements OnInit {
  
   ngOnInit(): void {
     this.authservice.userState$.subscribe((value)=>{
+     (value.skills).split(',')
+     .forEach((skill:any)=>{
+        this.skills.push(skill)});
+        // (value.days).split(',')
+        // .forEach((day:any)=>{
+        //    this.aldays.push(day)});
+        // console.log(this.skills);
+        // this.aldays = value.days;
+
     (value.courses).forEach((val:courses)=>{
      this.addCourse(val)
       
@@ -89,6 +97,7 @@ export class UpdateVolunteerComponent implements OnInit {
       this.form.get('fullName')?.setValue(value.fullName);
       this.form.get('phoneNumber')?.setValue(value.phoneNumber);
       this.form.get('city')?.setValue(value.city);
+      // this.form.get('days')?.updateValueAndValidity(this.aldays as never);
       this.form.get('experience')?.setValue(value.experience);
       this.role = value.role;
       this.downloadurl = value.profileImg;
@@ -140,7 +149,7 @@ export class UpdateVolunteerComponent implements OnInit {
   // days:new FormControl('',[Validators.required]),
   profileImg:new FormControl(''),
   
-    //  skills: new FormControl('',[Validators.required]),
+  skills: new FormControl('',[Validators.required]),
     courses: new FormArray([]),
     // Daterange: new FormGroup({
     //   start: new FormControl(),
@@ -162,6 +171,7 @@ submit(){
     profileImg:this.downloadurl,
    experience:this.form.get('experience')?.value+'',
  courses:this.form.get('courses')?.value,
+ skills:this.form.get('skills')?.value+'',
       
 
 

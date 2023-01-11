@@ -15,12 +15,12 @@ import { ActivityDetailsComponent } from '../company/activity-details/activity-d
 import { CompanyProfileComponent } from '../company/company-profile/company-profile.component';
 
 const routes: Routes = [
-  {path:'',redirectTo:'LandingComponent',pathMatch:'full'},
- 
+  {path:'',component:LandingComponent,pathMatch:'full'},
+
     {path:'opportunities', component:AllActivitiesComponent},
     {path:'opportunities/:id', component: ActivityDetailsComponent},
 
-    {path:'organizations', component:AllCompaniesComponent},
+    {path:'organizations', component:AllCompaniesComponent,pathMatch:'full'},
     
 
       {path:'organizations/profile/:id', component: CompanyProfileComponent, canActivate: [AuthGuard]},

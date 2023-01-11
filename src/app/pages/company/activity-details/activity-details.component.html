@@ -16,8 +16,8 @@
         <div class="icon-div"><mat-icon color="primary"> volunteer_activism </mat-icon> {{opportunity.numberOfVolunteers}} Volunteers</div>
         <div class="icon-div"><mat-icon color="primary"> date_range </mat-icon> {{(opportunity.range.start).toDate()| date:'yyyy/MM/dd'}}
         <mat-icon color="primary">history</mat-icon> {{(opportunity.range.end).toDate()| date:'yyyy/MM/dd'}} </div>
-         <div *ngIf="opportunity.active" class="icon-div"><span [class.active] = "opportunity.active"></span>Available</div>
-         <div *ngIf="!opportunity.active" class="icon-div"><span [class.notactive] = "!opportunity.active"></span> Not Available</div>
+         <div *ngIf='opportunity.numberOfApplicants < opportunity.numberOfVolunteers' class="icon-div"><span class="active" ></span>Available</div>
+         <div *ngIf='opportunity.numberOfApplicants >= opportunity.numberOfVolunteers' class="icon-div"><span  span class="notactive" ></span> Not Available</div>
          <mat-progress-bar 
          class="item"
          [value]="100*(opportunity.numberOfApplicants) /opportunity.numberOfVolunteers"

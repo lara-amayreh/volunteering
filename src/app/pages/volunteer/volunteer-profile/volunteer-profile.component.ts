@@ -24,7 +24,7 @@ role!:string;
   {this.person$ = this.route.paramMap.pipe(
     switchMap((value)=> {
       this.id = value.get('id')+'';
-      console.log(this.id);
+      // console.log(this.id);
       return this.userservice.getuserById(this.id);
 
 
@@ -35,7 +35,7 @@ role!:string;
   ngOnInit(): void {
   
     this.authservice.userState$.subscribe((value)=>{
-      console.log(value);
+      // console.log(value);
       if(value)
       this.role = value.role;
       this.userid = value.id;
@@ -45,14 +45,16 @@ role!:string;
     }
   
     updateprofile(id:string){
-     console.log(id);
+    //  console.log(id);
       let dialogRef = this.dialog.open(UpdateVolunteerComponent, {
          width: '1000px',
          height:'400px',
         data:{id:id}
        });
        dialogRef.afterClosed().subscribe((result)=> {
-           console.log(result); 
+        if(result)
+        alert('your profile updated successfully')
+          //  console.log(result); 
           // this.person = result;
    
           

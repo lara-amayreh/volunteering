@@ -84,13 +84,11 @@ private _filter(value: string): string[] {
 
   return this.allSkills.filter(skill => skill.toLowerCase().includes(filterValue));
 }
+
 confirm(){
- 
- 
 this.authservice.userState$
 .pipe(switchMap( (value) => {
   if(value){
-
     console.log(value);
 return this.oportunityservice.addOpportunity({
   userid : value.id,
@@ -105,10 +103,6 @@ id:this.id,
   numberOfApplicants:0,
   active:true,
 applicantsIds:[],
-
-
-   
-
 })
 
 }
@@ -123,8 +117,8 @@ applicantsIds:[],
   this.oportunityservice.updatid(this.id);
   console.log(value);}
 })
-
 this.dialogRef.close(true);
+
 
 }
 get start(){

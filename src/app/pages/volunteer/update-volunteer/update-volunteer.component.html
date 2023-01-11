@@ -70,9 +70,9 @@
                 <mat-error *ngIf="form.get('start')?.hasError('matStartDateInvalid')">Invalid start date</mat-error>
                 <mat-error *ngIf="form.get('end')?.hasError('matEndDateInvalid')">Invalid end date</mat-error>
               </mat-form-field>   -->
-              <!-- <mat-form-field>
+               <!-- <mat-form-field>
                 <mat-label>Available Days</mat-label>
-                <mat-select name="city" formControlName="days" [multiple]="true">
+                <mat-select [(value)]="modeSelect" name="days" formControlName="days" [multiple]="true">
                     <mat-option *ngFor="let day of days" [value]="day">
                         {{day}}
                     </mat-option>
