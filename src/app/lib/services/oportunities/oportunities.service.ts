@@ -36,8 +36,8 @@ getoportunityById(id : string):Observable<opportunity | undefined>{
 addApplicant(activityid:string, obj:apply) {
   return this.firestore.collection('oportunities/' + activityid + '/applicants').add(obj);
  }
- countApplicant(activityid:string):Observable<any> {
- return this.firestore.collection('oportunities/' + activityid + '/applicants').snapshotChanges();
+ getOpportunityApplicants(activityid:string):Observable<any> {
+ return this.firestore.collection('oportunities/' + activityid + '/applicants').valueChanges();
     
   }
   updatecount(activityid:string, numberOfApplicants:number, applicantsIds: string [], active:boolean){
@@ -45,11 +45,11 @@ addApplicant(activityid:string, obj:apply) {
     return from(this.opportunitiesCollection.doc<opportunity>(activityid).update({numberOfApplicants: numberOfApplicants, applicantsIds:applicantsIds, active:active}));
   }
   getAppliedOpportunities(userid:string,activityid:string):Observable<apply | any>{
-    return this.firestore.collection('oportunities/' + activityid + '/applicants',ref=>ref.where('uid',"==",userid)).valueChanges();
+    return this.firestore.collection('oportunities/' + activityid + '/applicants',ref=>ref.where('oportunityId',"==",activityid)).valueChanges();
 
   }
   getUserOpportunities(userid:string):Observable<opportunity | any>{
-        return this.firestore.collection("oportunities", ref=> ref.where("applicantIds", "array-contains",userid))
+        return this.firestore.collection("oportunities", ref=> ref.where('applicantsIds', "array-contains",userid))
         .valueChanges({"idField": "id"});
 
   }

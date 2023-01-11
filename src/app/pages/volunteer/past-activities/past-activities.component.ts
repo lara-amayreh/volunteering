@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { switchMap } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import { apply } from 'src/app/lib/inteerfaces/apply';
+import { opportunity } from 'src/app/lib/inteerfaces/opportunity';
 import { AuthService } from 'src/app/lib/services/auth/auth.service';
 import { OportunitiesService } from 'src/app/lib/services/oportunities/oportunities.service';
 
@@ -12,24 +13,24 @@ import { OportunitiesService } from 'src/app/lib/services/oportunities/oportunit
 })
 export class PastActivitiesComponent implements OnInit {
   userid!:string;
-  activities:any[]=[];
+  role!:string;
+  activities$!:Observable<opportunity[]|undefined>;
   constructor(private oportunityservice:OportunitiesService, public auth:AuthService, private fs:AngularFirestore ){}
   ngOnInit(): void {
-    this.auth.userState$.subscribe((value)=>{
-      if(value){
-        this.userid=value.id;
-      }
+    this.auth.userState$.subscribe((val)=>{
+this.userid = val.id;
+this.role = val.role;
+this.activities$= this.oportunityservice.getUserOpportunities(this.userid)
     })
-   this.oportunityservice.getAllOpportunities().subscribe((val)=>{
-    if(val){
-      val.forEach((ele)=>{
-         return this.oportunityservice.getAppliedOpportunities(this.userid,ele.id+'').subscribe((values)=>{
-          this.activities.push(values);
-        })
-      })
-    }console.log(this.activities);
-   })
-   
+    }
 
-}
+    chickapply(applicantsIds:string[],active:boolean){
+      let stat:boolean = false;
+      applicantsIds.forEach((val)=>{
+      if(val== this.userid || !active)
+      stat= true;
+      
+      })
+      return stat;
+        }
 }

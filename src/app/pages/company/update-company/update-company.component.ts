@@ -41,6 +41,8 @@ this.authservice.userState$.subscribe((value)=>{
   this.role=value.role;
   this.downloadurl=value.profileImg;
   this.form.get('about')?.setValue(value.about);
+  this.form.get('adress')?.setValue(value.city);
+
 
 
 
@@ -61,6 +63,8 @@ this.authservice.userState$.subscribe((value)=>{
        email:new FormControl('',[Validators.required, Validators.email]),
        type: new FormControl('',[Validators.required]),
        about:new FormControl(''),
+       adress:new FormControl(''),
+
 
        
      

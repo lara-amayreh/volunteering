@@ -31,6 +31,7 @@ const routes: Routes = [
 
     
       {path:'my-Activities', component: PastActivitiesComponent, canActivate: [AuthGuard]},
+      {path:'my-Activities/:id', component: ActivityDetailsComponent,pathMatch:"full", canActivate: [AuthGuard]},
 
   {path:'apply', component:ApplyOnActivityComponent,canActivate: [AuthGuard]},
   {path:'profile/:id', component: VolunteerProfileComponent},

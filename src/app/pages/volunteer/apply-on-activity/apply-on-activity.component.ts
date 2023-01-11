@@ -80,9 +80,12 @@ export class ApplyOnActivityComponent {
         if (this.oportunity.applicantsIds == null)
           this.oportunity.applicantsIds = [];
         this.oportunity.applicantsIds.push(this.personid);
-        if(this.oportunity.numberOfApplicants >= this.oportunity.numberOfVolunteers)
+        if(this.oportunity.numberOfApplicants < this.oportunity.numberOfVolunteers)
+        this.oportunity.active = true;
+        else
         this.oportunity.active = false;
-        console.log(this.oportunity.active);
+
+
         this.oportunityservice.updatecount(
           this.oportunity.id + '',
           this.oportunity.numberOfApplicants + 1,
