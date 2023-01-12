@@ -110,13 +110,14 @@ box-shadow: 0 0 5px gray;
   /* tab-2 */
   
 
- .second-tab-container img {
+ img.avatar {
   border-radius: 100%;
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
 }
 .second-tab-container .avatar{
   display: flex;
@@ -154,7 +155,7 @@ box-shadow: 0 0 5px gray;
       margin:10px 5px;
   
   }
-  .second-tab-container .card-item{
+  .card-item{
       display:flex;
       gap:20px;
       padding-top: 15px;
