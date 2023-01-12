@@ -48,6 +48,7 @@ export class ApplyOnActivityComponent {
   });
 
   ngOnInit(): void {
+    console.log('test');
     this.auth.userState$.subscribe((val) => {
       if (val) {
         this.personid = val.id;
@@ -55,8 +56,15 @@ export class ApplyOnActivityComponent {
       }
     });
     this.oportunityservice.getoportunityById(this.data.id).subscribe((val) => {
+      console.log(val);
       if (val) {
+      
         this.oportunity = val as opportunity;
+        this.startDate = this.oportunity.range.start?.toDate();
+        this.endDate = this.oportunity.range.end?.toDate();
+
+        console.log(this.startDate);
+        console.log(this.endDate);
       }
     });
   }
