@@ -17,7 +17,7 @@ export class ActivityDetailsComponent implements OnInit  {
   waitting!:Observable<apply[]>;
   approved!:Observable<apply[]>;
   rejected! :Observable<apply[]>;
-
+numberofapplicants:number=0;
 
 
   id!: string;
@@ -49,6 +49,9 @@ export class ActivityDetailsComponent implements OnInit  {
     })
     // this.opportunityservice.getoportunityById()
   }
+
+
+
 approve(uid:string,oportunityId:string){
   this.opportunityservice.getvolunteer(uid,oportunityId).subscribe((v)=>{
     // console.log(v[0].id)
@@ -59,7 +62,25 @@ approve(uid:string,oportunityId:string){
 
 }
 reject(uid:string,oportunityId:string){
+  this.opportunityservice.getvolunteer(uid,oportunityId).subscribe((v)=>{
+    // console.log(v[0].id)
+    this.opportunityservice.updateState(v[0].id,MyEnum.reject,oportunityId);
+    this.opportunityservice.getoportunityById(oportunityId).subscribe((oportunity)=>
+   
+    { let arr:string[] = oportunity?.applicantsIds!;
+      if(oportunity){
+        arr.forEach((id,index)=>{
+        if(id == uid)
+        (arr).slice(index,1);
+        console.log(arr);
+      })
+    this.numberofapplicants= oportunity.numberOfApplicants;
+      this.opportunityservice.updatecount(oportunityId,(this.numberofapplicants)-1 , {...arr} ,true);
+    }
+  }
+    )
+
+})
 
 }
-
 }
