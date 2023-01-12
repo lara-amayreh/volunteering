@@ -41,7 +41,7 @@ this.authservice.userState$.subscribe((value)=>{
   this.role=value.role;
   this.downloadurl=value.profileImg;
   this.form.get('about')?.setValue(value.about);
-  this.form.get('adress')?.setValue(value.city);
+  this.form.get('adress')?.setValue(value.city)+'';
 
 
 
@@ -77,7 +77,7 @@ this.authservice.userState$.subscribe((value)=>{
         {
           name:this.form.get('name')?.value+ '',
           phoneNumber: this.form.get('phoneNumber')?.value as number,
-          city:this.form.get('city')?.value+ '',
+          city:this.form.get('adress')?.value+ '',
            profileImg:this.downloadurl,
           type:this.form.get('type')?.value+'',
           url:this.form.get('url')?.value+ '',
@@ -85,7 +85,7 @@ this.authservice.userState$.subscribe((value)=>{
 
 
         } );
-
+        
 
 
   //  this.firestore.collection<opportunity>('oportunities').doc(this.data.id).update(this.form.value as organization);

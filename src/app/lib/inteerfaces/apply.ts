@@ -13,7 +13,7 @@ export interface apply{
 
 
    export enum MyEnum {
-        wait,
-        reject,
-        approve,
+        wait='waitting',
+        reject='rejected',
+        approve='approved',
       }
