@@ -17,6 +17,8 @@
             <mat-form-field>
                 <mat-label>Available Date</mat-label>
                 <mat-date-range-input formGroupName="range" 
+                [min]="startDate"
+                [max]="endDate"
                 [rangePicker]="picker"
                
              >
@@ -25,8 +27,7 @@
                                   <input matStartDate formControlName="start" placeholder="Start date" 
                                  >
                   <input matEndDate formControlName="end" placeholder="End date"
-                  [min]="startDate "
-                  [max]="endDate">
+                >
                 </mat-date-range-input>
                 <mat-datepicker-toggle  matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-date-range-picker #picker></mat-date-range-picker>
