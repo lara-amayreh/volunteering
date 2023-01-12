@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, switchMap } from 'rxjs';
 
-import { apply } from 'src/app/lib/inteerfaces/apply';
+import { apply, MyEnum } from 'src/app/lib/inteerfaces/apply';
 import { opportunity } from 'src/app/lib/inteerfaces/opportunity';
 import { AuthService } from 'src/app/lib/services/auth/auth.service';
 import { OportunitiesService } from 'src/app/lib/services/oportunities/oportunities.service';
@@ -15,8 +15,8 @@ import { OportunitiesService } from 'src/app/lib/services/oportunities/oportunit
 export class ActivityDetailsComponent implements OnInit  {
   opportunity$!: Observable <opportunity | undefined>;
   waitting!:Observable<apply[]>;
-  approved!:apply[];
-  rejected! :apply[];
+  approved!:Observable<apply[]>;
+  rejected! :Observable<apply[]>;
 
 
 
@@ -39,13 +39,27 @@ export class ActivityDetailsComponent implements OnInit  {
   ngOnInit(): void {
    this.auth.userState$.subscribe((value)=>{
       if(value){
-      this.waitting = this.opportunityservice.getApplicantsByState(this.id,'waitting')
-       
+      this.waitting = this.opportunityservice.getApplicantsByState(this.id,MyEnum.wait)
+      this.approved = this.opportunityservice.getApplicantsByState(this.id,MyEnum.approve)
+      this.rejected = this.opportunityservice.getApplicantsByState(this.id,MyEnum.reject)
+
       
 // this.userid=value.id;
     }
     })
     // this.opportunityservice.getoportunityById()
   }
+approve(uid:string,oportunityId:string){
+  this.opportunityservice.getvolunteer(uid,oportunityId).subscribe((v)=>{
+    // console.log(v[0].id)
+    this.opportunityservice.updateState(v[0].id,MyEnum.approve,oportunityId).subscribe((val)=>{
+    //  console.log(val);
+     })
+  })
+
+}
+reject(uid:string,oportunityId:string){
+
+}
 
 }

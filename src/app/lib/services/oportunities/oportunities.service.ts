@@ -4,7 +4,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
 import { collection, collectionChanges } from '@angular/fire/firestore';
 import { where } from '@firebase/firestore';
 import { from, map, Observable, of, switchMap } from 'rxjs';
-import { apply } from '../../inteerfaces/apply';
+import { apply, MyEnum } from '../../inteerfaces/apply';
 import { opportunity } from '../../inteerfaces/opportunity';
 @Injectable({
   providedIn: 'root'
@@ -36,7 +36,7 @@ getoportunityById(id : string):Observable<opportunity | undefined>{
 addApplicant(activityid:string, obj:apply) {
   return this.firestore.collection<apply>('oportunities/' + activityid + '/applicants').add(obj);
  }
- getApplicantsByState(activityid:string,filterstate:string){
+ getApplicantsByState(activityid:string,filterstate:MyEnum){
  return this.firestore.collection<apply>('oportunities/' + activityid + '/applicants',ref=>ref.where('state',"==",filterstate)).valueChanges();
 
     
@@ -45,8 +45,16 @@ addApplicant(activityid:string, obj:apply) {
     // console.log(numberOfApplicants);
     return from(this.opportunitiesCollection.doc<opportunity>(activityid).update({numberOfApplicants: numberOfApplicants, applicantsIds:applicantsIds, active:active}));
   }
+  updateState(userid:string,state:MyEnum,activityid:string){
+    // console.log(numberOfApplicants);
+    return from(this.firestore.collection<apply>('oportunities/' + activityid + '/applicants').doc(userid).update({state:state}));
+  }
   getAppliedOpportunities(userid:string,activityid:string):Observable<apply | any>{
     return this.firestore.collection('oportunities/' + activityid + '/applicants',ref=>ref.where('oportunityId',"==",activityid)).valueChanges();
+
+  }
+  getvolunteer(userid:string,activityid:string):Observable<apply | any>{
+    return this.firestore.collection('oportunities/' + activityid + '/applicants',ref=>ref.where('uid',"==",userid)).valueChanges({"idField": "id"});
 
   }
   getUserOpportunities(userid:string):Observable<opportunity | any>{
