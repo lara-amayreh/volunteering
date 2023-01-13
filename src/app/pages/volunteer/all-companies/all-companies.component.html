@@ -1,25 +1,8 @@
 <div class="container">
 <h1>All Organizations</h1>
 <div class="wrapper">
-  <mat-card class="search-card" >
-   
-      <mat-card-title><mat-icon>search</mat-icon>Filter Organizations</mat-card-title>
-  <form [formGroup]="form">
-  <mat-form-field>
-    <mat-label>Type</mat-label>
-    <mat-select  (selectionChange)="filterontype()"  name="type" formControlName="type">
-        <mat-option *ngFor="let type of types" [value]="type">
-            {{type}}
-        </mat-option>
-    </mat-select>
-    <mat-error>required field</mat-error>
-</mat-form-field>
-<mat-form-field>
-  <input matInput type="text" formControlName="name" placeholder="search by name.." name="name"(keyup)="filteronname()">
-</mat-form-field>
-</form>
-</mat-card>
-<!-- <button (click)='filterontype(value)'></button> -->
+ 
+
 <div class="card-container">
 <mat-card [routerLink]="['./profile',company.id]" *ngFor="let company of allcompanies">
     <mat-card-header>
@@ -36,5 +19,24 @@
   </mat-card-footer>
   </mat-card>
 </div>
+<mat-card class="search-card" >
+  <!-- (selectionChange)="filterontype()" (keyup)="filteronname()" -->
+    <mat-card-title><mat-icon>search</mat-icon>Filter Organizations</mat-card-title>
+<form [formGroup]="form" (ngsubmit)="filter()">
+<mat-form-field>
+  <mat-label>Type</mat-label>
+  <mat-select (selectionChange)="filter()" name="type" formControlName="type">
+      <mat-option *ngFor="let type of types" [value]="type">
+          {{type}}
+      </mat-option>
+  </mat-select>
+
+</mat-form-field>
+<mat-form-field>
+<input matInput type="text" formControlName="name" (keyup)="filter()" placeholder="search by name.." name="name">
+</mat-form-field>
+<button mat-raised-button type="submit" color="primary" (click)="filter()">Filter</button>
+</form>
+</mat-card>
 </div>
 </div>

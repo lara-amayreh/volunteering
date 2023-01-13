@@ -43,7 +43,7 @@ addApplicant(activityid:string, obj:apply) {
   }
   updatecount(activityid:string, numberOfApplicants:number, applicantsIds: string [], active:boolean){
     // console.log(numberOfApplicants);
-    return from(this.opportunitiesCollection.doc<opportunity>(activityid).update({numberOfApplicants: numberOfApplicants, applicantsIds:applicantsIds, active:active}));
+    return from(this.opportunitiesCollection.doc<opportunity>(activityid).update({numberOfApplicants: numberOfApplicants , applicantsIds, active:active}));
   }
   updateState(userid:string,state:MyEnum,activityid:string){
     // console.log(numberOfApplicants);

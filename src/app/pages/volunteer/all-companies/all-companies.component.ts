@@ -34,12 +34,26 @@ form=new FormGroup({
 
 
 })
-  filterontype(){
-    // this.allcompanies=this.allcompaniescopy.pipe(map(companies => companies!.filter(item => item.type==this.form.get('type')?.value)))
+get name(){
+  return this.form.get('name')?.value;
+}
+get type(){
+  return this.form.get('type')?.value;
+}
+  // filterontype(){
+  //   // this.allcompanies=this.allcompaniescopy.pipe(map(companies => companies!.filter(item => item.type==this.form.get('type')?.value)))
    
-  }
-  filteronname(){
-    // this.allcompanies=this.allcompaniescopy.pipe(map(companies => companies!.filter(item => (item.name).startsWith( this.form.get('name')?.value+''))))
+  // }
+  // filteronname(){
+  //   // this.allcompanies=this.allcompaniescopy.pipe(map(companies => companies!.filter(item => (item.name).startsWith( this.form.get('name')?.value+''))))
 
+  // }
+  filter(){
+    console.log(this.name+'',this.type+'')
+    this.userservice.getfilteredusers('company',this.name?.toLocaleLowerCase()+'',this.type+'').subscribe((val)=>{
+      console.log(val);
+      this.allcompanies = val;
+    
+    })
   }
 }

@@ -46,7 +46,6 @@ end!:string;
   })).subscribe((response)=>{
     if(response)
  this.opportunities=response;
- console.log(response);
  
   })
   

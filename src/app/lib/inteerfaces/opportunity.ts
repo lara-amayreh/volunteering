@@ -10,7 +10,7 @@ export interface opportunity{
     companyLogo?:string,
     numberOfApplicants:number,
     active:boolean;
-    applicantsIds?:string[],
+    applicantsIds:string[],
 }
 
 export interface range{

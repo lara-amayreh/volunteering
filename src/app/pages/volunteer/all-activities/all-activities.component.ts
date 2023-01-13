@@ -90,11 +90,16 @@ export class AllActivitiesComponent implements OnInit {
   }
   chickapply(applicantsIds:string[],active:boolean){
 let stat:boolean = false;
-applicantsIds.forEach((val)=>{
-if(val== this.uid || !active)
-stat= true;
-
-})
+for (let i = 0; i < applicantsIds.length ; i++) {
+if((applicantsIds[i]==this.uid)|| !active)
+stat = true
+}
 return stat;
+// applicantsIds.forEach((val)=>{
+// if(val== this.uid || !active)
+// stat= true;
+
+// });
+// return stat;
   }
 }

@@ -42,7 +42,6 @@ numberofapplicants:number=0;
       this.waitting = this.opportunityservice.getApplicantsByState(this.id,MyEnum.wait)
       this.approved = this.opportunityservice.getApplicantsByState(this.id,MyEnum.approve)
       this.rejected = this.opportunityservice.getApplicantsByState(this.id,MyEnum.reject)
-
       
 // this.userid=value.id;
     }
@@ -64,23 +63,31 @@ approve(uid:string,oportunityId:string){
 reject(uid:string,oportunityId:string){
   this.opportunityservice.getvolunteer(uid,oportunityId).subscribe((v)=>{
     // console.log(v[0].id)
-    this.opportunityservice.updateState(v[0].id,MyEnum.reject,oportunityId);
+    this.opportunityservice.updateState(v[0].id,MyEnum.reject,oportunityId);})
     this.opportunityservice.getoportunityById(oportunityId).subscribe((oportunity)=>
    
-    { let arr:string[] = oportunity?.applicantsIds!;
+    { 
+      let arr:string[] = oportunity?.applicantsIds!;
+      
       if(oportunity){
-        arr.forEach((id,index)=>{
-        if(id == uid)
-        (arr).slice(index,1);
-        console.log(arr);
-      })
-    this.numberofapplicants= oportunity.numberOfApplicants;
-      this.opportunityservice.updatecount(oportunityId,(this.numberofapplicants)-1 , {...arr} ,true);
+        for (let i = 0; i < arr.length ; i++) {
+          if(arr[i]==uid)
+          arr.splice(i,1);
+        }
+
+
+      //   arr.forEach((value, index) => {
+      //     if(value == uid)
+      //   arr.splice(index,1);
+      //   console.log(arr);
+      // });
+       
+      this.opportunityservice.updatecount(oportunityId,arr.length, arr ,true);
     }
   }
     )
 
-})
+
 
 }
 }

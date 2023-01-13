@@ -15,6 +15,7 @@ import {
 import { opportunity } from 'src/app/lib/inteerfaces/opportunity';
 import { person } from 'src/app/lib/inteerfaces/person';
 import { MyEnum } from 'src/app/lib/inteerfaces/apply';
+import { toArray } from 'rxjs';
 
 @Component({
   selector: 'app-apply-on-activity',
@@ -36,7 +37,8 @@ export class ApplyOnActivityComponent {
     public firestore: AngularFirestore,
 
     @Inject(MAT_DIALOG_DATA) public data: { id: string; obj: opportunity }
-  ) {}
+  ) 
+  {}
 
   form = new FormGroup({
     volunteerin: new FormControl('', [Validators.required]),
@@ -56,15 +58,13 @@ export class ApplyOnActivityComponent {
       }
     });
     this.oportunityservice.getoportunityById(this.data.id).subscribe((val) => {
-      console.log(val);
       if (val) {
       
-        this.oportunity = val as opportunity;
+        this.oportunity = val;
         this.startDate = this.oportunity.range.start?.toDate();
         this.endDate = this.oportunity.range.end?.toDate();
 
-        console.log(this.startDate);
-        console.log(this.endDate);
+       
       }
     });
   }
@@ -89,7 +89,9 @@ export class ApplyOnActivityComponent {
       .then((val) => {
         if (this.oportunity.applicantsIds == null)
           this.oportunity.applicantsIds = [];
-        this.oportunity.applicantsIds.push(this.personid);
+console.log(this.oportunity.applicantsIds);
+console.log(typeof(this.oportunity.applicantsIds));
+     (this.oportunity.applicantsIds as Array<string>).push(this.personid);
         if(this.oportunity.numberOfApplicants < this.oportunity.numberOfVolunteers)
         this.oportunity.active = true;
         else
@@ -105,7 +107,6 @@ export class ApplyOnActivityComponent {
         );
       });
 
-    console.log(this.form.value);
     if (this.form.valid) this.dialogRef.close(true);
     else this.dialogRef.close(false);
   }
