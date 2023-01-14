@@ -19,7 +19,9 @@ export class AllCompaniesComponent {
 
   constructor(private auth:AuthService,private organizationservice:OrganizationService,private userservice:UserService){}
   types=companytypes;
+  
   ngOnInit(): void {
+    this.types.push('All Types');
 this.userservice.getAllusersByRole('company').subscribe((val)=>{
   this.allcompanies = val;
 
@@ -49,9 +51,7 @@ get type(){
 
   // }
   filter(){
-    console.log(this.name+'',this.type+'')
     this.userservice.getfilteredusers('company',this.name?.toLocaleLowerCase()+'',this.type+'').subscribe((val)=>{
-      console.log(val);
       this.allcompanies = val;
     
     })

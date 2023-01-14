@@ -5,10 +5,16 @@
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    width: 40px;
-    height: 40px;
-  }
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
 
+  }
+.img{
+    border-radius: 100%;
+
+
+}
   .avatar{
     display: flex;
     flex-direction: column;
@@ -50,16 +56,24 @@
         }
         @media (min-width: 768px) {
             mat-card{
-                max-width: 400px;
+                width: 500px;
                  padding: 10px;
         
             
             }
         .card-container{
-            display: grid;
-            grid-template-columns: repeat(2,1fr);
+            display: flex;
+            flex-direction: column;
             gap: 10px;
             
         }
-        
+        .search-card{
+            display: flex;
+            max-width: 250px;
+            max-height:260px;
+            position: fixed;
+            z-index: 5;
+            top:100px;
+            right:30px;
+        }
         }
