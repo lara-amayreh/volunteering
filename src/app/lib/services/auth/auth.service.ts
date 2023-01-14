@@ -8,6 +8,7 @@ import { getAuth, signOut } from "firebase/auth";
 import { organization } from '../../inteerfaces/organization';
 import { drange, person } from '../../inteerfaces/person';
 import { courses } from '../../inteerfaces/person';
+import { cities } from '../../inteerfaces/cities';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +35,7 @@ return this.firestore.collection<any>('users').doc(value.uid).valueChanges();
   }
   signUpPerson(email: string, password: string, 
     fullName:string,phoneNumber:number,city:string,days:string,experience:string,
-    courses:courses[],skills:string,daterange:drange,role:string, profileImg:string){
+    courses:courses[],skills:string[],daterange:drange,role:string, profileImg:string){
     return this.fireAuth.createUserWithEmailAndPassword(email, password).then((val)=>{
     let user:person={
 id:val.user?.uid,

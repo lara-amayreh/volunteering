@@ -21,6 +21,7 @@ import { opportunity } from 'src/app/lib/inteerfaces/opportunity';
 import { UserService } from 'src/app/lib/services/user/user.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { StorageService } from 'src/app/lib/services/storage/storage.service';
+import { cities } from 'src/app/lib/inteerfaces/cities';
 
 
 
@@ -34,15 +35,23 @@ import { StorageService } from 'src/app/lib/services/storage/storage.service';
 })
 export class PersonRegesterComponent implements OnInit {
   downloadurl:string='../../../../../assets/images/profile-img.png';
+  filteredOptions!: Observable<cities[]>;
+  Allcities = data;
+  skills = allSkills;
+
   constructor( private afStorage: AngularFireStorage ,private router: Router, public auth:AuthService, private storge:StorageService) 
-  {this.filteredSkills = this.skillsCtrl.valueChanges.pipe(
-      startWith(null),
-      map((skill: string | null) => (skill ? this._filter(skill) : this.allSkills.slice())),
-    );}
+  {}
  
   ngOnInit(): void {
   // this.persons$= this.userservice.getuser();
+
+  this.filteredOptions = this.form.controls.city.valueChanges.pipe(
+    startWith(''),
+    map(value => this._filter(value || '')),
+  );
+
   }
+
 experienceList=experience;
 person! :person;
 
@@ -61,7 +70,7 @@ profileImg:new FormControl(''),
   email:new FormControl('',[Validators.required, Validators.email]),
   password:new FormControl('',[Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]),
   confirmPassword:new FormControl('',[Validators.required]),
-  skills: new FormControl('',[Validators.required]),
+  skill: new FormControl<string []>([],[Validators.required]),
   courses: new FormArray([]),
 range :new FormGroup({
   start: new FormControl('',[Validators.required]),
@@ -73,58 +82,21 @@ range :new FormGroup({
 
   // role!: string;
 role:string ="person";
-    Cities =data;  
     days=days;
-    allSkills= allSkills;
-  separatorKeysCodes: number[] = [ENTER, COMMA];
-  skillsCtrl = new FormControl('');
-  filteredSkills: Observable<string[]>;
-  skills: string[] = [];
  
-  @ViewChild('skillInput')
-  skillInput!: ElementRef<HTMLInputElement>;
-
-
+ 
 
  
 
   
 
-  add(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
-    // Add our skill
-    if (value) {
-      this.skills.push(value);
-    }
-
-    // Clear the input value
-    event.chipInput!.clear();
-
-    this.skillsCtrl.setValue(null);
-  }
-
-  remove(skill: string): void {
-    const index = this.skills.indexOf(skill);
-
-    if (index >= 0) {
-      this.skills.splice(index, 1);
-    }
-  }
-
-  selected(event: MatAutocompleteSelectedEvent): void {
-    this.skills.push(event.option.viewValue);
-    this.skillInput.nativeElement.value = '';
-    this.skillsCtrl.setValue(null);
-  }
-
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.allSkills.filter(skill => skill.toLowerCase().includes(filterValue));
-  }
+ 
+ 
 
 submit(){
 this.role = "person";
+console.log(this.form.get('skill')?.value);
+
   this.auth.signUpPerson(
    this.form.get('email')?.value+ '',
    this.form.get('password')?.value+'',
@@ -134,8 +106,8 @@ this.role = "person";
    this.form.get('days')?.value+'',
    this.form.get('experience')?.value+ '',
    this.form.get('courses')?.value as courses[],
-   this.form.get('skills')?.value+'',
-   this.range?.value,
+   this.form.get('skill')?.value!,
+      this.range?.value,
    this.role,
    this.downloadurl,
 
@@ -166,6 +138,9 @@ unavailableDates(calenderDate:Date):boolean{
 get courses():FormArray{
   return this.form.get('courses')as FormArray;
 }
+get skill(){
+  return this.form.get('skill');
+}
 addCourses(){
   const courseformarray = new FormGroup({
     title:new FormControl('',[Validators.required]),
@@ -191,6 +166,13 @@ geturl(){
  
 	let x= `url("${this.downloadurl}")` ;
   return x;
+}
+
+
+private _filter(value: string): cities[] {
+  const filterValue = value.toLowerCase();
+
+  return this.Allcities.filter(option => option.city.toLowerCase().includes(filterValue));
 }
 }
 

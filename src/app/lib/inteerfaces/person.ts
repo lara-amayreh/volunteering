@@ -4,7 +4,7 @@ export interface person {
     fullName:string,
     city:string,
     courses:courses[],
-    skills:string,
+    skills:string[],
     phoneNumber:number,
     experience:string,
     range:drange,

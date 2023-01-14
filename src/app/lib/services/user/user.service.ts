@@ -24,34 +24,38 @@ return this.usercollection.doc(userid).valueChanges();   }
     return this.firestore.collection('users').doc(id).update({...user});
   }
   getuserById(id : string):Observable<any>{
-    console.log(this.usercollection.doc(id).valueChanges());
+    console.log(this.usercollection.doc(id).valueChanges({ "idField": 'id' }));
 
-    return this.usercollection.doc(id).valueChanges();
+    return this.usercollection.doc(id).valueChanges({ "idField": 'id' });
  }
  getAllusersByRole(role:string):Observable<any[]>{
     
   return this.firestore.collection<any>('users',ref=>ref.where('role',"==",role)).valueChanges({ "idField": 'id' });
  }
 
- getfilteredusers(role:string,name:string,type:string):Observable<any[]>{
+ getfilteredusers(role:string,name:string,type:string){
     
   return this.firestore.collection<any>('users',
   ref=>{
+    if(type== "All Types" && name != ''){
+      return ref.where('role',"==",role).where('name'.toLowerCase(),"==",name);
+    }
+else
+    if(type== "All Types"){
+      return ref.where('role',"==",role);
+    }
+else
     if(name != '' && type != ''){
-      console.log(name,type);
       return ref.where('role',"==",role).where('name'.toLowerCase(),"==",name+'').where('type',"==",type+'');
     }
     else{
       if(name != '' && type == ''){
-        console.log('n');
         return ref.where('role',"==",role).where('name'.toLowerCase(),"==",name);
       }
      else if(name == '' && type != '' ){
-      console.log('t');
         return ref.where('role',"==",role).where('type',"==",type);
       }
       else {
-        console.log('not');
         return  ref.where('role',"==",role);
   
       }
@@ -61,5 +65,38 @@ return this.usercollection.doc(userid).valueChanges();   }
   }
  ).valueChanges({ "idField": 'id' });
  }
+
+
+
+ getfilteredvolunteers(skills:string[] | any,city:string){
+  return this.firestore.collection<any>('users',
+  ref=>{
+    
+   
+
+    if(skills.length > 0 && city == '' ){
+      return ref.where('role',"==",'person').where('skills',"array-contains-any",skills);
+    }
+   else
+    if(skills.length > 0 && city != '' ){
+      return ref.where('role',"==",'person').where('skills',"array-contains-any",skills).where('city',"==",city);;
+    }
+   else if(skills.length == 0 && city != '' ){
+     return ref.where('role',"==",'person').where('city',"==",city);
+  }
+      else {        return  ref.where('role',"==",'person');
+
+      }
+    
+  }
   
+  
+ ).valueChanges({ "idField": 'id' });
+ }
+  
+
+
+
+
+
 }
