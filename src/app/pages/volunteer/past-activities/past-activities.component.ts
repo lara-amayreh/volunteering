@@ -18,10 +18,11 @@ export class PastActivitiesComponent implements OnInit {
   constructor(private oportunityservice:OportunitiesService, public auth:AuthService, private fs:AngularFirestore ){}
   ngOnInit(): void {
     this.auth.userState$.subscribe((val)=>{
+      if(val){
 this.userid = val.id;
 this.role = val.role;
 this.activities$= this.oportunityservice.getUserOpportunities(this.userid)
-    })
+   } })
     }
 
     chickapply(applicantsIds:string[],active:boolean){

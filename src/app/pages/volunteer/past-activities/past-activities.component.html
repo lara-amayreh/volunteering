@@ -58,7 +58,7 @@
         <button [disabled]="chickapply(oppo.applicantsIds!,oppo.active)" mat-raised-button *ngIf="role ==('person') && oppo.numberOfApplicants < oppo.numberOfVolunteers"  color="primary" (click)="Apply(oppo.id+'')">Apply</button>
       </div> -->
       <mat-card-footer>
-      <div class="item"><span>{{(oppo.range.start)| date:'yyyy/MM/dd'}}</span> <span>  -  {{(oppo.range.end)| date:'yyyy/MM/dd'}}</span>
+      <div class="item"><span>{{(oppo.range.start).toDate()| date:'yyyy/MM/dd'}}</span> <span>  -  {{(oppo.range.end).toDate()| date:'yyyy/MM/dd'}}</span>
            
       </div> 
     </mat-card-footer>

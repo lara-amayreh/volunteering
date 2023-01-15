@@ -106,7 +106,7 @@ export class AllActivitiesComponent implements OnInit {
   filter(){
     console.log((this.range.value.start));
   
-      this.alloportunities$ = this.oportunityservices.getfilteredopportunities(this.skill ,this.comname+'',this.type+'',this.range.value)
+      this.alloportunities$ = this.oportunityservices.getfilteredopportunities(this.skill ,this.comname,this.type,this.range.value)
      
 
 
