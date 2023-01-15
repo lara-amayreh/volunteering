@@ -31,7 +31,7 @@
           <div class="item"><b>skills required:</b>
             <mat-chip-listbox aria-label="skills required">
 
-              <mat-chip *ngFor="let skill of (opportunity.skills).split(',')">
+              <mat-chip *ngFor="let skill of (opportunity.skills)">
                        {{skill}}
               </mat-chip>
               </mat-chip-listbox>

@@ -1,42 +1,56 @@
 <div class="container">
-<h1>All Organizations</h1>
-<div class="wrapper">
- 
-
-<div class="card-container">
-<mat-card [routerLink]="['./profile',company.id]" *ngFor="let company of allcompanies">
-    <mat-card-header>
-      <mat-card-title>{{company.name}}</mat-card-title>
-      <mat-card-subtitle>{{company.type}}</mat-card-subtitle>
-    </mat-card-header>
-<mat-divider></mat-divider>
-   <mat-card-content>
-    <img class="logo" mat-card-md-image [src]= 'company.profileImg' alt="company logo">
-    <mat-divider></mat-divider>
-   </mat-card-content>
-   <mat-card-footer>
-    <a [routerLink]="['./profile',company.id]">view details</a>
-  </mat-card-footer>
-  </mat-card>
-</div>
-<mat-card class="search-card" >
-  <!-- (selectionChange)="filterontype()" (keyup)="filteronname()" -->
-    <mat-card-title><mat-icon>search</mat-icon>Filter Organizations</mat-card-title>
-<form [formGroup]="form" (ngsubmit)="filter()">
-<mat-form-field>
-  <mat-label>Type</mat-label>
-  <mat-select (selectionChange)="filter()" name="type" formControlName="type">
-      <mat-option *ngFor="let type of types" [value]="type">
-          {{type}}
+  <h1>All Organizations</h1>
+  <div class="wrapper">
+   
+  
+  <div class="card-container">
+  <mat-card [routerLink]="['./profile',company.id]" *ngFor="let company of allcompanies">
+      <mat-card-header>
+        <mat-card-title>{{company.name}}</mat-card-title>
+        <mat-card-subtitle>{{company.type}}</mat-card-subtitle>
+      </mat-card-header>
+  <mat-divider></mat-divider>
+     <mat-card-content>
+      <img class="logo" mat-card-md-image [src]= 'company.profileImg' alt="company logo">
+      <mat-divider></mat-divider>
+     </mat-card-content>
+     <mat-card-footer>
+      <a [routerLink]="['./profile',company.id]">view details</a>
+    </mat-card-footer>
+    </mat-card>
+  </div>
+  <mat-card class="search-card" >
+    <!-- (selectionChange)="filterontype()" (keyup)="filteronname()" -->
+      <mat-card-title><mat-icon>search</mat-icon>Filter Organizations</mat-card-title>
+  <form [formGroup]="form" (ngsubmit)="filter()">
+  <mat-form-field>
+    <mat-label>Type</mat-label>
+    <mat-select (selectionChange)="filter()" name="type" formControlName="type">
+        <mat-option *ngFor="let type of types" [value]="type">
+            {{type}}
+        </mat-option>
+    </mat-select>
+  
+  </mat-form-field>
+  <!-- <mat-form-field>
+  <input matInput type="text" formControlName="name" (keyup)="filter()" placeholder="search by name.." name="name">
+  </mat-form-field> -->
+  <mat-form-field>
+    <mat-label>City</mat-label>
+    <input type="text"
+           placeholder="choose company Name"
+           aria-label="name"
+           matInput
+           formControlName="name"
+           [matAutocomplete]="auto">
+    <mat-autocomplete (selectionChange)="filter()" autoActiveFirstOption #auto="matAutocomplete">
+      <mat-option *ngFor="let name of filteredOptions | async" [value]="name">
+        {{name}}
       </mat-option>
-  </mat-select>
-
-</mat-form-field>
-<mat-form-field>
-<input matInput type="text" formControlName="name" (keyup)="filter()" placeholder="search by name.." name="name">
-</mat-form-field>
-<button mat-raised-button type="submit" color="primary" (click)="filter()">Filter</button>
-</form>
-</mat-card>
-</div>
-</div>
+    </mat-autocomplete>
+  </mat-form-field>
+  <button mat-raised-button type="submit" color="primary" (click)="filter()">Filter</button>
+  </form>
+  </mat-card>
+  </div>
+  </div>

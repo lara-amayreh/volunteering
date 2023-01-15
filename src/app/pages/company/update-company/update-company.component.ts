@@ -8,6 +8,7 @@ import { opportunity } from 'src/app/lib/inteerfaces/opportunity';
 import { organization } from 'src/app/lib/inteerfaces/organization';
 import { person } from 'src/app/lib/inteerfaces/person';
 import { AuthService } from 'src/app/lib/services/auth/auth.service';
+import { OportunitiesService } from 'src/app/lib/services/oportunities/oportunities.service';
 import { OrganizationService } from 'src/app/lib/services/organization/organization.service';
 import { StorageService } from 'src/app/lib/services/storage/storage.service';
 import { UserService } from 'src/app/lib/services/user/user.service';
@@ -25,7 +26,7 @@ export class UpdateCompanyComponent implements OnInit{
 orga$!:Observable<any>;
   role: string="company";
    organization! :organization;
-  constructor(private storage:StorageService, private userservice:UserService, private afStorage :AngularFireStorage, private organizationservice:OrganizationService ,private authservice:AuthService,
+  constructor(private opportunityservice:OportunitiesService, private storage:StorageService, private userservice:UserService, private afStorage :AngularFireStorage, private organizationservice:OrganizationService ,private authservice:AuthService,
     private dialogRef: MatDialogRef<UpdateCompanyComponent>, public firestore:AngularFirestore,
     @Inject(MAT_DIALOG_DATA) public data: {id: string, company:any})
      {}
@@ -85,10 +86,17 @@ this.authservice.userState$.subscribe((value)=>{
 
 
         } );
-        
+  this.opportunityservice.getUserOpportunities(this.data.id).subscribe((val)=>{
+    if(val as opportunity[])
+    val.forEach((element:opportunity ) => {
+      this.firestore.collection<opportunity>('oportunitiy').doc(element.id).update({
+        // companyLogo:this.
+      })
+  })
+  });
 
 
-  //  this.firestore.collection<opportunity>('oportunities').doc(this.data.id).update(this.form.value as organization);
+
 
     
        

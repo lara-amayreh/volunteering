@@ -10,6 +10,7 @@ import { organization } from 'src/app/lib/inteerfaces/organization';
 import { AuthService } from 'src/app/lib/services/auth/auth.service';
 import { OportunitiesService } from 'src/app/lib/services/oportunities/oportunities.service';
 import { UserService } from 'src/app/lib/services/user/user.service';
+import { companytypes } from 'src/assets/arrays/company-types';
 import { allSkills } from 'src/assets/arrays/skills';
 import { ApplyOnActivityComponent } from '../apply-on-activity/apply-on-activity.component';
 
@@ -33,6 +34,8 @@ export class AllActivitiesComponent implements OnInit {
   filteredOptions!: Observable<string[]>;
   
   allcompanies : string[]=[];
+  types=companytypes;
+
   constructor(
     private af: AngularFirestore,
     public dialog: MatDialog,
@@ -45,12 +48,12 @@ export class AllActivitiesComponent implements OnInit {
 
    
     // this.counter = this.oportunityservices.countApplicant(this.activityid);
+    this.types.push('All Types');
 
     this.auth.userState$.subscribe((val) => {
       if (val) {
         this.role = val.role;
         this.uid = val.id;
-        console.log(this.role);
         // this.oportunityservices.countApplicant(this.activityid).subscribe((val)=>{
         //   console.log(val.length);
         //   this.counter = val.length});
@@ -58,11 +61,9 @@ export class AllActivitiesComponent implements OnInit {
     });
     this.oportunityservices.getAllOpportunities().subscribe((val) => {
      this.alloportunities = val as opportunity[];
-     console.log(val[0].companyName);
      val.forEach((vall, index) => {
-      //   // 👇️ name Tom 0, country Chile 1
-      this.allcompanies?.push(val[index].companyName+'');
-      console.log(val[index].companyName);
+      if (!this.allcompanies.includes(vall.companyName+''))
+      this.allcompanies?.push(vall.companyName+'');
 
        });
       
@@ -74,8 +75,10 @@ export class AllActivitiesComponent implements OnInit {
   }
 
   form=new FormGroup({
-    skill: new FormControl(''),
-    comname :new FormControl('')
+    skill: new FormControl<string[]>([]),
+    comname :new FormControl(''),
+    type: new FormControl(''),
+
   
   
   
@@ -87,12 +90,15 @@ export class AllActivitiesComponent implements OnInit {
   get comname(){
     return this.form.get('comname')?.value;
   }
+  get type(){
+    return this.form.get('skill')?.value;
+  }
   
    
   filter(){
     console.log(this.form.get('skill')?.value)
     if(this.form.get('skill')?.value){
-     this.userservice.getfilteredvolunteers(this.form?.get('skill')?.value,this.comname+'').subscribe((val)=>{
+     this.oportunityservices.getfilteredopportunities(this.skill ,this.comname+'',this.type+'').subscribe((val)=>{
       if(val != null)
       this.alloportunities = val
      console.log(val);

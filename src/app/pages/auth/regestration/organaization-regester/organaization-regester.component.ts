@@ -9,6 +9,7 @@ import { async, finalize, map, Observable } from 'rxjs';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/compat/storage';
 import { UserService } from 'src/app/lib/services/user/user.service';
 import { StorageService } from 'src/app/lib/services/storage/storage.service';
+import { passwordMatchingValidator } from 'src/app/lib/validators/passwordmatching';
 
 @Component({
   selector: 'app-organaization-regester',
@@ -34,11 +35,12 @@ form = new FormGroup({
   url:new FormControl('',[Validators.required,Validators.pattern('(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})')]),
   email:new FormControl('',[Validators.required, Validators.email]),
   password:new FormControl('',[Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]),
+  confirmPassword:new FormControl('',[Validators.required]),
   type: new FormControl('',[Validators.required]),
 
 
 
-})
+},{validators: [passwordMatchingValidator]});
 ngOnInit(): void {
   // this.organizations$= this.organizationservice.getAllOrganizations();
 }

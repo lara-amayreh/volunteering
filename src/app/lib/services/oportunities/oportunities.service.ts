@@ -16,7 +16,6 @@ private opportunitiesCollection : AngularFirestoreCollection<opportunity>;
 }
    
   addOpportunity(opportunity:opportunity){
-    console.log(opportunity);
 let addedOpportunity = this.opportunitiesCollection.add(opportunity);console.log(addedOpportunity);
 return from(addedOpportunity);
    }
@@ -24,10 +23,16 @@ return from(addedOpportunity);
    getOpportunities(userid:string){
     return this.firestore.collection<opportunity>('oportunities',ref=>ref.where('userid',"==",userid)).valueChanges({"idField":'id'});
    }
-   getAllOpportunities(): Observable<opportunity[]>{
-
-    return this.firestore.collection<opportunity>('oportunities').valueChanges({ "idField": 'id'});
+   getAllOpportunities(){
+   
+  return this.firestore.collection<opportunity>('oportunities').valueChanges({ "idField": 'id'});
 }
+  
+
+  
+
+
+
 getoportunityById(id : string):Observable<opportunity | undefined>{
 
   return this.opportunitiesCollection.doc(id).valueChanges();
@@ -68,4 +73,45 @@ addApplicant(activityid:string, obj:apply) {
 updatid(id: string){
   return from(this.opportunitiesCollection.doc<opportunity>(id).update({id: id}));
 }
+
+
+getfilteredopportunities(skills:string[] | any,name:string,type:string){
+  console.log(skills, name,type);
+  if(skills.length > 0 || name != ''){
+    console.log(skills, name,type);
+    return this.firestore.collection<opportunity>('oportunities',
+    ref=>{
+      
+        if( skills.length > 0 && name == ''){
+        return ref.where('skills',"array-contains-any",skills);
+      }
+     else
+      if( skills.length == 0 && name != ''){
+        return ref.where('skills',"array-contains-any",skills).where('companyName',"==",name);
+      }
+     else  if(skills.length > 0 && name != ''){
+      return ref.where('companyName',"==",name).where('skills',"array-contains-any",skills);
+    }
+    else
+    if(skills.length == 0 && name == '' && type != '' ){
+      return ref.where('skills',"array-contains-any",skills).where('type',"==",type);
+    }
+   else  if(skills.length == 0&& name == '' && type != '' ){
+    return ref.where('type',"==",type);
+  }
+  else
+    
+      return ref.where('skills',"array-contains-any",skills).where('type',"==",type).where('companyName',"==",name);
+   
+          
+      
+    }
+    
+    
+   ).valueChanges({ "idField": 'id' });
+}
+else 
+return this.getAllOpportunities();
+ }
+
 }

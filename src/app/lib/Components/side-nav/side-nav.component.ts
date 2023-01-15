@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { of, switchMap } from 'rxjs';
 import { AuthService } from '../../services/auth/auth.service';
 import { UserService } from '../../services/user/user.service';
@@ -11,8 +12,8 @@ import { UserService } from '../../services/user/user.service';
 export class SideNavComponent implements OnInit {
   role!:string;
   profileImg:string='../../../../../assets/images/profile-img.png';
-
-constructor(public authServise:AuthService, private userservice:UserService){}
+email!:string;
+constructor(public authServise:AuthService, private userservice:UserService,private fireAuth:AngularFireAuth){}
 ngOnInit(): void {
   
   this.authServise.userState$.subscribe((value)=>{
@@ -23,8 +24,13 @@ ngOnInit(): void {
 this.profileImg=value.profileImg;
     }
   });
+
+  this.fireAuth.authState.subscribe((val)=>{
+    if(val)
+  this.email = val.email+'';})
+    }
  
-}
+
   geturl(){
  
     let x= `url("${this.profileImg}")` ;

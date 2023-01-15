@@ -1,42 +1,46 @@
 .menu-button {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    font-size: 1rem;
-  
-   
-  }
-  .p-avatar{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 1rem;
+
+ 
+}
+.avatar-container{
+display: flex;
+flex-direction: column;
+align-items: center;}
+.p-avatar{
 display: flex;
 flex-direction: column;
 align-items: center;
 cursor: pointer;
 
-  }
-  .avatar {
-    border-radius: 100%;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    width: 40px;
-    height: 40px;
-    border: 1px solid gray;
-    cursor: pointer;
-  }
-  mat-icon {
-    margin-right: 5px;
-  }
-  h4 {
-    margin-top: 8px;
-    font-weight: normal;
-  }
-  mat-divider {
-  width: 100%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-    background-color: rgba(255, 255, 255, 0.5);
-  }
-  mat-sidenav-content{
-    background-color: white;
-  }
+}
+.avatar {
+  border-radius: 100%;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
+  border: 1px solid gray;
+  cursor: pointer;
+}
+mat-icon {
+  margin-right: 5px;
+}
+h4 {
+  margin-top: 8px;
+  font-weight: normal;
+}
+mat-divider {
+width: 100%;
+margin-top: 10px;
+margin-bottom: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+mat-sidenav-content{
+  background-color: white;
+}

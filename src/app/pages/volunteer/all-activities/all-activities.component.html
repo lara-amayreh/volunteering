@@ -33,7 +33,15 @@
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
-
+      <mat-form-field>
+        <mat-label>Type</mat-label>
+        <mat-select (selectionChange)="filter()" name="type" formControlName="type">
+            <mat-option *ngFor="let type of types" [value]="type">
+                {{type}}
+            </mat-option>
+        </mat-select>
+      
+      </mat-form-field>
     
 
 

@@ -3,11 +3,12 @@ export interface opportunity{
     userid?:string,
     name:string,
     description:string,
-    skills:string,
+    skills:string[],
     range:range,
     numberOfVolunteers:number,
     companyName?:string,
     companyLogo?:string,
+    companyType?:string,
     numberOfApplicants:number,
     active:boolean;
     applicantsIds:string[],

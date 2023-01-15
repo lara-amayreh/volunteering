@@ -55,6 +55,13 @@
 
             </mat-error>
         </mat-form-field>
+        <mat-form-field>
+            <mat-label>Confirm Password</mat-label>
+            <input matInput type="password" formControlName="confirmPassword">
+            <mat-error *ngIf="form.get('confirmPassword')?.hasError('required')"> required field</mat-error>
+        </mat-form-field>
+        <mat-error *ngIf="form.hasError('passwordDoesntMatch')">
+password and confirm password does'nt match  </mat-error>
        <mat-form-field>
         <mat-label>Website URL         
         </mat-label>

@@ -19,31 +19,32 @@ import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog
 export class AddOpportunityComponent{
   numberOfVolunteers!:number
   id:string='';
+  skills = allSkills;
   constructor(private oportunityservice: OportunitiesService,private authservice:AuthService,
     private dialogRef: MatDialogRef<AddOpportunityComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any)
 
      {
-    this.filteredSkills = this.skillsCtrl.valueChanges.pipe(
-      startWith(null),
-      map((skill: string | null) => (skill ? this._filter(skill) : this.allSkills.slice())),
-    );
+   
   }
+
+  ngOnInit(): void {
+    // this.persons$= this.userservice.getuser();
+  
+    // this.filteredOptions = this.form.controls.city.valueChanges.pipe(
+    //   startWith(''),
+    //   map(value => this._filter(value || '')),
+    // );
+  
+    }
  
-  allSkills= allSkills;
-  separatorKeysCodes: number[] = [ENTER, COMMA];
-  skillsCtrl = new FormControl('');
-  filteredSkills !: Observable<string[]>;
-  skills: string[] = [];
  
-  @ViewChild('skillInput')
-  skillInput!: ElementRef<HTMLInputElement>;
-  // ngOnInit(): void {
+ 
   
    form = new FormGroup({
     name:new FormControl('',[Validators.required]),
     description:new FormControl('',[Validators.required]),
-    skills: new FormControl('',[Validators.required]),
+    skill: new FormControl<string []>([],[Validators.required]),
     numberOfVolunteers: new FormControl<number|null>(null,[Validators.required, Validators.min(0)]),
     range :new FormGroup({
       start: new FormControl('',[Validators.required]),
@@ -54,37 +55,13 @@ export class AddOpportunityComponent{
 });
 
 
-add(event: MatChipInputEvent): void {
-  const value = (event.value || '').trim();
-  // Add our skill
-  if (value) {
-    this.skills.push(value);
-  }
 
-  // Clear the input value
-  event.chipInput!.clear();
 
-  this.skillsCtrl.setValue(null);
-}
-remove(skill: string): void {
-  const index = this.skills.indexOf(skill);
 
-  if (index >= 0) {
-    this.skills.splice(index, 1);
-  }
-}
 
-selected(event: MatAutocompleteSelectedEvent): void {
-  this.skills.push(event.option.viewValue);
-  this.skillInput.nativeElement.value = '';
-  this.skillsCtrl.setValue(null);
-}
 
-private _filter(value: string): string[] {
-  const filterValue = value.toLowerCase();
 
-  return this.allSkills.filter(skill => skill.toLowerCase().includes(filterValue));
-}
+
 
 confirm(){
 this.authservice.userState$
@@ -96,7 +73,7 @@ return this.oportunityservice.addOpportunity({
 id:this.id,
   name:this.form.get('name')?.value +'',
   description:this.form.get('description')?.value+'',
-  skills:this.form.get('skills')?.value+'',
+  skills:   this.form.get('skill')?.value!,
   numberOfVolunteers:Number(this.form.get('numberOfVolunteers')?.value+''),
   range:this.range?.value,
   companyName:value.name,
@@ -104,6 +81,7 @@ id:this.id,
   numberOfApplicants:0,
   active:true,
 applicantsIds:[],
+companyType:value.type,
 })
 
 }

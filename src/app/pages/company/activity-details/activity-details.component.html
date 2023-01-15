@@ -1,166 +1,51 @@
 <div class="container" *ngIf="opportunity$ | async as opportunity">
-<mat-tab-group dynamicHeight >
-    <mat-tab label="opportunity Details">
-
-      <div class="mat-elevation-z4 first-box" >
-
-        <div class="wrapper">
-
-        <div class="c">
-        <mat-card class="company-card"  [routerLink]="['/company/profile',opportunity.userid]" >
-            <mat-card-header class="company-card-header">
-              <mat-card-title >{{opportunity.companyName}}</mat-card-title>
+  <mat-tab-group dynamicHeight >
+      <mat-tab label="opportunity Details">
+  
+        <div class="mat-elevation-z4 first-box" >
+  
+          <div class="wrapper">
+  
+          <div class="c">
+          <mat-card class="company-card"  [routerLink]="['/company/profile',opportunity.userid]" >
+              <mat-card-header class="company-card-header">
+                <mat-card-title >{{opportunity.companyName}}</mat-card-title>
+              </mat-card-header>
+              <img class="company-card-logo" mat-card-image [src]="opportunity.companyLogo" >
+  
+            </mat-card>
+          </div>
+  
+          <mat-card class="form-details">
+            <mat-card-header class="form-details-header">
+              <mat-card-title>opportunity Details:</mat-card-title>
             </mat-card-header>
-            <img class="company-card-logo" mat-card-image [src]="opportunity.companyLogo" >
-
-          </mat-card>
+              <mat-divider></mat-divider>
+        <div class="details-container">
+          <div class="icon-div"><mat-icon color="primary"> badge </mat-icon> {{opportunity.name}}</div>
+          <div class="icon-div"><mat-icon color="primary"> volunteer_activism </mat-icon> {{opportunity.numberOfVolunteers}} Volunteers</div>
+          <div class="icon-div"><mat-icon color="primary"> date_range </mat-icon> {{(opportunity.range.start).toDate()| date:'yyyy/MM/dd'}}
+          <mat-icon color="primary">history</mat-icon> {{(opportunity.range.end).toDate()| date:'yyyy/MM/dd'}} </div>
+           <div *ngIf='opportunity.numberOfApplicants < opportunity.numberOfVolunteers' class="icon-div"><span class="active" ></span>Available</div>
+           <div *ngIf='opportunity.numberOfApplicants >= opportunity.numberOfVolunteers' class="icon-div"><span  span class="notactive" ></span> Not Available</div>
+           <mat-progress-bar 
+           class="item"
+           [value]="100*(opportunity.numberOfApplicants) /opportunity.numberOfVolunteers"
+           mode="determinate"
+           [bufferValue]="0">
+       </mat-progress-bar>
+          <div class="item">
+          {{opportunity.numberOfApplicants}} / {{opportunity.numberOfVolunteers}} volunteers
+         </div>
         </div>
-
-        <mat-card class="form-details">
-          <mat-card-header class="form-details-header">
-            <mat-card-title>opportunity Details:</mat-card-title>
-          </mat-card-header>
-            <mat-divider></mat-divider>
-      <div class="details-container">
-        <div class="icon-div"><mat-icon color="primary"> badge </mat-icon> {{opportunity.name}}</div>
-        <div class="icon-div"><mat-icon color="primary"> volunteer_activism </mat-icon> {{opportunity.numberOfVolunteers}} Volunteers</div>
-        <div class="icon-div"><mat-icon color="primary"> date_range </mat-icon> {{(opportunity.range.start).toDate()| date:'yyyy/MM/dd'}}
-        <mat-icon color="primary">history</mat-icon> {{(opportunity.range.end).toDate()| date:'yyyy/MM/dd'}} </div>
-         <div *ngIf='opportunity.numberOfApplicants < opportunity.numberOfVolunteers' class="icon-div"><span class="active" ></span>Available</div>
-         <div *ngIf='opportunity.numberOfApplicants >= opportunity.numberOfVolunteers' class="icon-div"><span  span class="notactive" ></span> Not Available</div>
-         <mat-progress-bar 
-         class="item"
-         [value]="100*(opportunity.numberOfApplicants) /opportunity.numberOfVolunteers"
-         mode="determinate"
-         [bufferValue]="0">
-     </mat-progress-bar>
-        <div class="item">
-        {{opportunity.numberOfApplicants}} / {{opportunity.numberOfVolunteers}} volunteers
-       </div>
-      </div>
-       </mat-card>
-
-        </div>
-      <mat-card class="decribe">
-        <mat-card-header class="details-card-header">
-          <mat-card-title>Description:</mat-card-title>
-          <mat-card-content>{{opportunity.description}}</mat-card-content>
-        </mat-card-header>
-      </mat-card>
-    </div>
-    </mat-tab>
-    <mat-tab label="Approved">
-      <div class=" mat-elevation-z4">
-        <div class="details-box mat-elevation-z4"  *ngFor="let volunteer of  approved|async" >
-          <div class="c">
-            <mat-card class="card-volunteer" [routerLink]="['/volunteer/profile', volunteer.uid]">
-              <mat-card-header>
-                  <div class="p-avatar">
-                      <div >
-                          <img class="avatar" mat-card-image [src]="volunteer.userdetails.profileImg" alt="volunteer profile img"></div>
-                        
-                  <mat-card-subtitle class="title">{{volunteer.userdetails.fullName}}</mat-card-subtitle>
-                  </div>
-                </mat-card-header>
-                <mat-divider></mat-divider>
-      
-                <mat-card-content>
-                  <div class="content-container">
-                      <h4>personal information</h4>
-                      <div class="card-item"><h5> phone Number : </h5>{{volunteer.userdetails.phoneNumber}}</div>
-      
-                  <mat-divider></mat-divider>
-                  <h4>Skills</h4>
-                        <div class="item">
-                  <mat-chip-listbox aria-label="skills required">
-                    <mat-chip *ngFor="let skill of (volunteer.userdetails.skills)">
-                             {{skill}}
-                    </mat-chip>
-                    </mat-chip-listbox>
-                  </div>
-      
-      <mat-divider></mat-divider>
-                        </div></mat-card-content>
-                   </mat-card> 
-        
-        
+         </mat-card>
+  
           </div>
-        <mat-card class="form-details">
-          <mat-card-header class="form-details-header">
-            <mat-card-title>Applicant Form Details:</mat-card-title>
+        <mat-card class="decribe">
+          <mat-card-header class="details-card-header">
+            <mat-card-title>Description:</mat-card-title>
+            <mat-card-content>{{opportunity.description}}</mat-card-content>
           </mat-card-header>
-            <mat-divider></mat-divider>
-            <mat-card-content  class="form-details-content">
-              <div class="form-item"><span>What Can You Volunteer In ?</span>{{volunteer.VolunteerIn}}</div>
-              <div class="form-item"><span>why Do You Want to Volunteer ?</span>{{volunteer.whyApply}}</div>
-              <div class="icon-div form-item"><mat-icon color="primary"> date_range </mat-icon>Available Date: {{(volunteer.availabledate.start).toDate()| date:'yyyy/MM/dd'}}
-                <mat-icon color="primary">history</mat-icon> {{(volunteer.availabledate.end).toDate()| date:'yyyy/MM/dd'}} </div>
-              <mat-card-actions>  <button (click)="reject(volunteer.uid+'',volunteer.oportunityId+'')" mat-raised-button color="warn">Reject</button></mat-card-actions>
-
-
-            </mat-card-content>
-         
-        </mat-card>
-      </div>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
-
-<mat-divider></mat-divider>
- <!-- second tab group -->
- <div class="second-tab-container" *ngIf="auth.userState$| async as user">
-  <mat-tab-group *ngIf="user.id == opportunity.userid" dynamicHeight >
-      <mat-tab label="Waitting Requests" >
-        <div class="details-box mat-elevation-z4"  *ngFor="let volunteer of  waitting|async" >
-          <div class="c">
-            <mat-card class="card-volunteer" [routerLink]="['/volunteer/profile', volunteer.uid]">
-              <mat-card-header>
-                  <div class="p-avatar">
-                      <div >
-                          <img class="avatar" mat-card-image [src]="volunteer.userdetails.profileImg" alt="volunteer profile img"></div>
-                        
-                  <mat-card-subtitle class="title">{{volunteer.userdetails.fullName}}</mat-card-subtitle>
-                  </div>
-                </mat-card-header>
-                <mat-divider></mat-divider>
-      
-                <mat-card-content>
-                  <div class="content-container">
-                      <h4>personal information</h4>
-                      <div class="card-item"><h5> phone Number : </h5>{{volunteer.userdetails.phoneNumber}}</div>
-      
-                  <mat-divider></mat-divider>
-                  <h4>Skills</h4>
-                        <div class="item">
-                  <mat-chip-listbox aria-label="skills required">
-                    <mat-chip *ngFor="let skill of (volunteer.userdetails.skills)">
-                             {{skill}}
-                    </mat-chip>
-                    </mat-chip-listbox>
-                  </div>
-      
-      <mat-divider></mat-divider>
-                        </div></mat-card-content>
-                   </mat-card> 
-        
-        
-          </div>
-        <mat-card class="form-details">
-          <mat-card-header class="form-details-header">
-            <mat-card-title>Applicant Form Details:</mat-card-title>
-          </mat-card-header>
-            <mat-divider></mat-divider>
-            <mat-card-content  class="form-details-content">
-              <div class="form-item"><span>What Can You Volunteer In ?</span>{{volunteer.VolunteerIn}}</div>
-              <div class="form-item"><span>why Do You Want to Volunteer ?</span>{{volunteer.whyApply}}</div>
-              <div class="icon-div form-item"><mat-icon color="primary"> date_range </mat-icon>Available Date: {{(volunteer.availabledate.start).toDate()| date:'yyyy/MM/dd'}}
-                <mat-icon color="primary">history</mat-icon> {{(volunteer.availabledate.end).toDate()| date:'yyyy/MM/dd'}} </div>
-               <mat-card-actions><button (click)="approve(volunteer.uid+'',volunteer.oportunityId+'')" mat-raised-button color="primary">Approve</button>
-                <button (click)="reject(volunteer.uid+'',volunteer.oportunityId+'')" mat-raised-button color="warn">Reject</button></mat-card-actions>
-
-
-            </mat-card-content>
-         
         </mat-card>
       </div>
       </mat-tab>
@@ -219,9 +104,14 @@
         </div>
         </div>
       </mat-tab>
-      <mat-tab label="Rejected">
-        <div class=" mat-elevation-z4">
-          <div class="details-box mat-elevation-z4"  *ngFor="let volunteer of  rejected|async" >
+    </mat-tab-group>
+  
+  <mat-divider></mat-divider>
+   <!-- second tab group -->
+   <div class="second-tab-container" *ngIf="auth.userState$| async as user">
+    <mat-tab-group *ngIf="user.id == opportunity.userid" dynamicHeight >
+        <mat-tab label="Waitting Requests" >
+          <div class="details-box mat-elevation-z4"  *ngFor="let volunteer of  waitting|async" >
             <div class="c">
               <mat-card class="card-volunteer" [routerLink]="['/volunteer/profile', volunteer.uid]">
                 <mat-card-header>
@@ -265,20 +155,131 @@
                 <div class="form-item"><span>why Do You Want to Volunteer ?</span>{{volunteer.whyApply}}</div>
                 <div class="icon-div form-item"><mat-icon color="primary"> date_range </mat-icon>Available Date: {{(volunteer.availabledate.start).toDate()| date:'yyyy/MM/dd'}}
                   <mat-icon color="primary">history</mat-icon> {{(volunteer.availabledate.end).toDate()| date:'yyyy/MM/dd'}} </div>
-                <mat-card-actions>  <button (click)="reject(volunteer.uid+'',volunteer.oportunityId+'')" mat-raised-button color="warn">Reject</button></mat-card-actions>
+                 <mat-card-actions><button (click)="approve(volunteer.uid+'',volunteer.oportunityId+'')" mat-raised-button color="primary">Approve</button>
+                  <button (click)="reject(volunteer.uid+'',volunteer.oportunityId+'')" mat-raised-button color="warn">Reject</button></mat-card-actions>
   
   
               </mat-card-content>
            
           </mat-card>
         </div>
-        </div>
-      </mat-tab>
-    </mat-tab-group>
+        </mat-tab>
+        <mat-tab label="Approved">
+          <div class=" mat-elevation-z4">
+            <div class="details-box mat-elevation-z4"  *ngFor="let volunteer of  approved|async" >
+              <div class="c">
+                <mat-card class="card-volunteer" [routerLink]="['/volunteer/profile', volunteer.uid]">
+                  <mat-card-header>
+                      <div class="p-avatar">
+                          <div >
+                              <img class="avatar" mat-card-image [src]="volunteer.userdetails.profileImg" alt="volunteer profile img"></div>
+                            
+                      <mat-card-subtitle class="title">{{volunteer.userdetails.fullName}}</mat-card-subtitle>
+                      </div>
+                    </mat-card-header>
+                    <mat-divider></mat-divider>
+          
+                    <mat-card-content>
+                      <div class="content-container">
+                          <h4>personal information</h4>
+                          <div class="card-item"><h5> phone Number : </h5>{{volunteer.userdetails.phoneNumber}}</div>
+          
+                      <mat-divider></mat-divider>
+                      <h4>Skills</h4>
+                            <div class="item">
+                      <mat-chip-listbox aria-label="skills required">
+                        <mat-chip *ngFor="let skill of (volunteer.userdetails.skills)">
+                                 {{skill}}
+                        </mat-chip>
+                        </mat-chip-listbox>
+                      </div>
+          
+          <mat-divider></mat-divider>
+                            </div></mat-card-content>
+                       </mat-card> 
+            
+            
+              </div>
+            <mat-card class="form-details">
+              <mat-card-header class="form-details-header">
+                <mat-card-title>Applicant Form Details:</mat-card-title>
+              </mat-card-header>
+                <mat-divider></mat-divider>
+                <mat-card-content  class="form-details-content">
+                  <div class="form-item"><span>What Can You Volunteer In ?</span>{{volunteer.VolunteerIn}}</div>
+                  <div class="form-item"><span>why Do You Want to Volunteer ?</span>{{volunteer.whyApply}}</div>
+                  <div class="icon-div form-item"><mat-icon color="primary"> date_range </mat-icon>Available Date: {{(volunteer.availabledate.start).toDate()| date:'yyyy/MM/dd'}}
+                    <mat-icon color="primary">history</mat-icon> {{(volunteer.availabledate.end).toDate()| date:'yyyy/MM/dd'}} </div>
+                  <mat-card-actions>  <button (click)="reject(volunteer.uid+'',volunteer.oportunityId+'')" mat-raised-button color="warn">Reject</button></mat-card-actions>
+    
+    
+                </mat-card-content>
+             
+            </mat-card>
+          </div>
+          </div>
+        </mat-tab>
+        <mat-tab label="Rejected">
+          <div class=" mat-elevation-z4">
+            <div class="details-box mat-elevation-z4"  *ngFor="let volunteer of  rejected|async" >
+              <div class="c">
+                <mat-card class="card-volunteer" [routerLink]="['/volunteer/profile', volunteer.uid]">
+                  <mat-card-header>
+                      <div class="p-avatar">
+                          <div >
+                              <img class="avatar" mat-card-image [src]="volunteer.userdetails.profileImg" alt="volunteer profile img"></div>
+                            
+                      <mat-card-subtitle class="title">{{volunteer.userdetails.fullName}}</mat-card-subtitle>
+                      </div>
+                    </mat-card-header>
+                    <mat-divider></mat-divider>
+          
+                    <mat-card-content>
+                      <div class="content-container">
+                          <h4>personal information</h4>
+                          <div class="card-item"><h5> phone Number : </h5>{{volunteer.userdetails.phoneNumber}}</div>
+          
+                      <mat-divider></mat-divider>
+                      <h4>Skills</h4>
+                            <div class="item">
+                      <mat-chip-listbox aria-label="skills required">
+                        <mat-chip *ngFor="let skill of (volunteer.userdetails.skills)">
+                                 {{skill}}
+                        </mat-chip>
+                        </mat-chip-listbox>
+                      </div>
+          
+          <mat-divider></mat-divider>
+                            </div></mat-card-content>
+                       </mat-card> 
+            
+            
+              </div>
+            <mat-card class="form-details">
+              <mat-card-header class="form-details-header">
+                <mat-card-title>Applicant Form Details:</mat-card-title>
+              </mat-card-header>
+                <mat-divider></mat-divider>
+                <mat-card-content  class="form-details-content">
+                  <div class="form-item"><span>What Can You Volunteer In ?</span>{{volunteer.VolunteerIn}}</div>
+                  <div class="form-item"><span>why Do You Want to Volunteer ?</span>{{volunteer.whyApply}}</div>
+                  <div class="icon-div form-item"><mat-icon color="primary"> date_range </mat-icon>Available Date: {{(volunteer.availabledate.start).toDate()| date:'yyyy/MM/dd'}}
+                    <mat-icon color="primary">history</mat-icon> {{(volunteer.availabledate.end).toDate()| date:'yyyy/MM/dd'}} </div>
+                  <mat-card-actions>  <button (click)="reject(volunteer.uid+'',volunteer.oportunityId+'')" mat-raised-button color="warn">Reject</button></mat-card-actions>
+    
+    
+                </mat-card-content>
+             
+            </mat-card>
+          </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  
+  
+  
+  
   </div>
-
-
-
-
-</div>
-
+  
+  

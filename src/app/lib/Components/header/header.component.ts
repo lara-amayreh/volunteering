@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit {
   role!: string;
   name!:string;
   com!:any;
+  email!:string;
   @ViewChild('callAPIDialog')
   callAPIDialog!: TemplateRef<any>;
   profileImg:string='../../../../../assets/images/profile-img.png';
@@ -27,12 +28,14 @@ export class HeaderComponent implements OnInit {
      this.authService.userState$.subscribe((val)=>{
 if(val){
 this.com=val;
-console.log(val.role);
 this.role=val.role;
 if(val.profileImg)
 this.profileImg=val.profileImg;
 }
     })
+    this.fireAuth.authState.subscribe((value)=>{
+  if(value)
+this.email = value.email+'';})
   }
 
 
