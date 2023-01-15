@@ -22,7 +22,7 @@ import { ApplyOnActivityComponent } from '../apply-on-activity/apply-on-activity
 export class AllActivitiesComponent implements OnInit {
   @ViewChild('callAPIDialog')
   callAPIDialog!: TemplateRef<any>;
-  alloportunities!: opportunity[];
+  alloportunities$!: Observable< opportunity[]>;
   // alloportunities:any[]=[];
   activityid: string = '';
   role!: string;
@@ -48,7 +48,7 @@ export class AllActivitiesComponent implements OnInit {
 
    
     // this.counter = this.oportunityservices.countApplicant(this.activityid);
-    this.types.push('All Types');
+    // this.types.push('All Types');
 
     this.auth.userState$.subscribe((val) => {
       if (val) {
@@ -59,14 +59,16 @@ export class AllActivitiesComponent implements OnInit {
         //   this.counter = val.length});
       }
     });
-    this.oportunityservices.getAllOpportunities().subscribe((val) => {
-     this.alloportunities = val as opportunity[];
-     val.forEach((vall, index) => {
-      if (!this.allcompanies.includes(vall.companyName+''))
-      this.allcompanies?.push(vall.companyName+'');
+    this.alloportunities$=this.oportunityservices.getAllOpportunities();
 
-       });
-      
+
+    this.alloportunities$.subscribe((val) => {
+      val.forEach((vall, index) => {
+       if (!this.allcompanies.includes(vall.companyName+''))
+       this.allcompanies?.push(vall.companyName+'');
+ 
+        });
+       
     });
     this.filteredOptions = this.form.controls.comname.valueChanges.pipe(
       startWith(''),
@@ -78,12 +80,18 @@ export class AllActivitiesComponent implements OnInit {
     skill: new FormControl<string[]>([]),
     comname :new FormControl(''),
     type: new FormControl(''),
-
-  
+    range: new FormGroup({
+      start: new FormControl(''),
+      end: new FormControl(''),
+    }),
+   
   
   
   
   })
+  get range(): FormGroup {
+    return this.form.get('range') as FormGroup;
+  }
   get skill(){
     return this.form.get('skill')?.value;
   }
@@ -91,18 +99,20 @@ export class AllActivitiesComponent implements OnInit {
     return this.form.get('comname')?.value;
   }
   get type(){
-    return this.form.get('skill')?.value;
+    return this.form.get('type')?.value;
   }
   
    
   filter(){
-    console.log(this.form.get('skill')?.value)
-    if(this.form.get('skill')?.value){
-     this.oportunityservices.getfilteredopportunities(this.skill ,this.comname+'',this.type+'').subscribe((val)=>{
-      if(val != null)
-      this.alloportunities = val
-     console.log(val);
-     })}
+    console.log((this.range.value.start));
+  
+      this.alloportunities$ = this.oportunityservices.getfilteredopportunities(this.skill ,this.comname+'',this.type+'',this.range.value)
+     
+
+
+
+     
+     
      }
   
     private _filter(value: string): string[] {

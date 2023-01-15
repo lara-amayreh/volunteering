@@ -5,7 +5,7 @@ import { collection, collectionChanges } from '@angular/fire/firestore';
 import { where } from '@firebase/firestore';
 import { from, map, Observable, of, switchMap } from 'rxjs';
 import { apply, MyEnum } from '../../inteerfaces/apply';
-import { opportunity } from '../../inteerfaces/opportunity';
+import { opportunity, range } from '../../inteerfaces/opportunity';
 @Injectable({
   providedIn: 'root'
 })
@@ -25,7 +25,7 @@ return from(addedOpportunity);
    }
    getAllOpportunities(){
    
-  return this.firestore.collection<opportunity>('oportunities').valueChanges({ "idField": 'id'});
+  return this.firestore.collection<opportunity>('oportunities').valueChanges();
 }
   
 
@@ -75,33 +75,52 @@ updatid(id: string){
 }
 
 
-getfilteredopportunities(skills:string[] | any,name:string,type:string){
-  console.log(skills, name,type);
-  if(skills.length > 0 || name != ''){
-    console.log(skills, name,type);
+getfilteredopportunities(skills:string[] | any,name:string,type:string,range:any){
+  if(skills.length > 0 || name != '' || type != '' || range!= null){
+    console.log(range.start);
     return this.firestore.collection<opportunity>('oportunities',
     ref=>{
-      
-        if( skills.length > 0 && name == ''){
-        return ref.where('skills',"array-contains-any",skills);
+      if(range && skills.length >0 && type != '' && name != ''){
+        return ref.where('range',">=",range).where('companyType',"==",type)
+        .where('skills',"array-contains-any",skills).where('companyName',"==",name);
       }
+      else 
+      if(range && skills.length >0 && type != '' && name == ''){
+        return ref.where('range',">=",range).where('companyType',"==",type)
+        .where('skills',"array-contains-any",skills);
+
+        // return ref.where('skills',"array-contains-any",skills).where('companyType',"==",type);
+      }
+
+
+
+
+
+      else
+      if(skills.length == 0 && name == '' && type == '' && range ==null ){
+        return ref.where('range',">=",range).where('companyType',"==",type)
+        .where('skills',"array-contains-any",skills);
+
+        // return ref.where('skills',"array-contains-any",skills).where('companyType',"==",type);
+      }
+       
      else
-      if( skills.length == 0 && name != ''){
+      if( skills.length == 0 && name != '' && type == '' ){
         return ref.where('skills',"array-contains-any",skills).where('companyName',"==",name);
       }
      else  if(skills.length > 0 && name != ''){
       return ref.where('companyName',"==",name).where('skills',"array-contains-any",skills);
     }
     else
-    if(skills.length == 0 && name == '' && type != '' ){
-      return ref.where('skills',"array-contains-any",skills).where('type',"==",type);
+    if( skills.length > 0 && name == ''){
+      return ref.where('skills',"array-contains-any",skills);
     }
    else  if(skills.length == 0&& name == '' && type != '' ){
-    return ref.where('type',"==",type);
+    return ref.where('companyType',"==",type);
   }
   else
     
-      return ref.where('skills',"array-contains-any",skills).where('type',"==",type).where('companyName',"==",name);
+      return ref.where('skills',"array-contains-any",skills).where('companyType',"==",type).where('companyName',"==",name);
    
           
       

@@ -1,10 +1,10 @@
 <div class="container">
-  <h1>All opportunities</h1>
+  <h1> Opportunities</h1>
 
 
   <mat-card class="search-card" >
     <!-- (selectionChange)="filterontype()" (keyup)="filteronname()" -->
-      <mat-card-title><mat-icon>search</mat-icon>Filter Organizations</mat-card-title>
+      <mat-card-title><mat-icon>search</mat-icon>Filter</mat-card-title>
   <form [formGroup]="form" (ngsubmit)="filter()">
   <mat-form-field>
     <mat-label>Skills</mat-label>
@@ -43,6 +43,27 @@
       
       </mat-form-field>
     
+      <mat-form-field>
+        <mat-label>Available Date</mat-label>
+        <mat-date-range-input formGroupName="range" 
+      
+        [rangePicker]="picker"
+       
+     >
+       
+        
+                          <input matStartDate formControlName="start" placeholder="Start date" 
+                         >
+          <input matEndDate formControlName="end" placeholder="End date"
+        >
+        </mat-date-range-input>
+        <mat-datepicker-toggle  matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      
+         <mat-error *ngIf="form.get('range')?.hasError('required')">Required field</mat-error>
+        <mat-error *ngIf="form.get('range')?.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+        <mat-error *ngIf="form.get('range')?.hasError('matEndDateInvalid')">Invalid end date</mat-error> 
+      </mat-form-field>
 
 
   <!-- code -->
@@ -71,7 +92,7 @@
   <div class="card-container">
  
 
-    <mat-card   [routerLink]="['./',opportunity.id]"  class="Opportunity-card" *ngFor="let opportunity of alloportunities; let i= index ;">
+    <mat-card   [routerLink]="['./',opportunity.id]"  class="Opportunity-card" *ngFor="let opportunity of alloportunities$ | async; let i= index ;">
       <mat-card-header class="avatar-headre">
         <div>
       </div>

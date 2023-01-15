@@ -93,5 +93,18 @@ display: flex;    }
     gap: 20px;
     
 }
+.search-card{
+    display: flex;
+    max-width: 200px;
+    max-height:400px;
+    position: fixed;
+    z-index: 5;
+    top:100px;
+    right:30px;
+    padding: 20px;
+}
+.search-card mat-form-field{
+    width: 100%;
+}
 
 }
