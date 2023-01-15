@@ -4,12 +4,13 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { data } from 'citiesNames';
-import { combineLatest, filter, map, Observable, of, switchMap } from 'rxjs';
+import { combineLatest, filter, map, Observable, of, startWith, switchMap } from 'rxjs';
 import { opportunity } from 'src/app/lib/inteerfaces/opportunity';
 import { organization } from 'src/app/lib/inteerfaces/organization';
 import { AuthService } from 'src/app/lib/services/auth/auth.service';
 import { OportunitiesService } from 'src/app/lib/services/oportunities/oportunities.service';
 import { UserService } from 'src/app/lib/services/user/user.service';
+import { allSkills } from 'src/assets/arrays/skills';
 import { ApplyOnActivityComponent } from '../apply-on-activity/apply-on-activity.component';
 
 @Component({
@@ -28,7 +29,10 @@ export class AllActivitiesComponent implements OnInit {
   profileImg!: string;
   cname!: string;
   counter: number = 0;
-
+  skills = allSkills;
+  filteredOptions!: Observable<string[]>;
+  
+  allcompanies : string[]=[];
   constructor(
     private af: AngularFirestore,
     public dialog: MatDialog,
@@ -38,6 +42,8 @@ export class AllActivitiesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
+   
     // this.counter = this.oportunityservices.countApplicant(this.activityid);
 
     this.auth.userState$.subscribe((val) => {
@@ -51,21 +57,53 @@ export class AllActivitiesComponent implements OnInit {
       }
     });
     this.oportunityservices.getAllOpportunities().subscribe((val) => {
-      if (val) this.alloportunities = val as opportunity[];
+     this.alloportunities = val as opportunity[];
+     console.log(val[0].companyName);
+     val.forEach((vall, index) => {
+      //   // 👇️ name Tom 0, country Chile 1
+      this.allcompanies?.push(val[index].companyName+'');
+      console.log(val[index].companyName);
+
+       });
       
     });
+    this.filteredOptions = this.form.controls.comname.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || '')),
+    );
   }
 
-  form = new FormGroup({
-    type: new FormControl(''),
-    name: new FormControl(''),
-  });
-  filterontype() {
-    // this.allcompanies=this.allcompaniescopy.pipe(map(companies => companies!.filter(item => item.type==this.form.get('type')?.value)))
+  form=new FormGroup({
+    skill: new FormControl(''),
+    comname :new FormControl('')
+  
+  
+  
+  
+  })
+  get skill(){
+    return this.form.get('skill')?.value;
   }
-  filteronname() {
-    // this.allcompanies=this.allcompaniescopy.pipe(map(companies => companies!.filter(item => (item.companyName).startsWith( this.form.get('name')?.value+''))))
+  get comname(){
+    return this.form.get('comname')?.value;
   }
+  
+   
+  filter(){
+    console.log(this.form.get('skill')?.value)
+    if(this.form.get('skill')?.value){
+     this.userservice.getfilteredvolunteers(this.form?.get('skill')?.value,this.comname+'').subscribe((val)=>{
+      if(val != null)
+      this.alloportunities = val
+     console.log(val);
+     })}
+     }
+  
+    private _filter(value: string): string[] {
+      const filterValue = value.toLowerCase();
+  
+      return this.allcompanies.filter(option => option.toLowerCase().includes(filterValue));
+    }
 
   Apply(id: string) {
     console.log(id + 'act');

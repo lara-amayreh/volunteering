@@ -66,12 +66,22 @@ get city(){
 
  
 filter(){
+<<<<<<< HEAD
   console.log(this.form.get('skill')?.value);
    this.userservice.getfilteredvolunteers(this.form.get('skill')?.value,this.city+'').subscribe((val)=>{
     if(val != null)
     this.AllVolunteers = val
    console.log(val);
    })
+=======
+  console.log(this.form.get('skill')?.value)
+  if(this.form.get('skill')?.value){
+   this.userservice.getfilteredvolunteers(this.form?.get('skill')?.value,this.city+'').subscribe((val)=>{
+    if(val != null)
+    this.AllVolunteers = val
+   console.log(val);
+   })}
+>>>>>>> 79236132446034c752f2538a4f8b4116c8f7d0b2
    }
 
   private _filter(value: string): cities[] {

@@ -68,13 +68,18 @@ else
 
 
 
+<<<<<<< HEAD
  getfilteredvolunteers(skills:any,city:string){
     
+=======
+ getfilteredvolunteers(skills:string[] | any,city:string){
+>>>>>>> 79236132446034c752f2538a4f8b4116c8f7d0b2
   return this.firestore.collection<any>('users',
   ref=>{
     
    
 
+<<<<<<< HEAD
     if(city != ''){
       console.log(skills);
       return ref.where('role',"==",'person').where('city',"==",city);
@@ -93,6 +98,24 @@ else
     }
 
   
+=======
+    if(skills.length > 0 && city == '' ){
+      return ref.where('role',"==",'person').where('skills',"array-contains-any",skills);
+    }
+   else
+    if(skills.length > 0 && city != '' ){
+      return ref.where('role',"==",'person').where('skills',"array-contains-any",skills).where('city',"==",city);;
+    }
+   else if(skills.length == 0 && city != '' ){
+     return ref.where('role',"==",'person').where('city',"==",city);
+  }
+      else {        return  ref.where('role',"==",'person');
+
+      }
+    
+  }
+  
+>>>>>>> 79236132446034c752f2538a4f8b4116c8f7d0b2
   
  ).valueChanges({ "idField": 'id' });
  }

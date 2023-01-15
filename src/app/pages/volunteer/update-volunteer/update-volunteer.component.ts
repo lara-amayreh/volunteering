@@ -78,9 +78,16 @@ export class UpdateVolunteerComponent implements OnInit {
  
   ngOnInit(): void {
     this.authservice.userState$.subscribe((value)=>{
+<<<<<<< HEAD
      (value.skills)
      .forEach((skill:any)=>{
         this.skills.push(skill)});
+=======
+    //  (value.skills)
+    //  .forEach((skill:any)=>{
+    //     this.skills.push(skill)});
+
+>>>>>>> 79236132446034c752f2538a4f8b4116c8f7d0b2
         // (value.days).split(',')
         // .forEach((day:any)=>{
         //    this.aldays.push(day)});
@@ -149,7 +156,7 @@ export class UpdateVolunteerComponent implements OnInit {
   // days:new FormControl('',[Validators.required]),
   profileImg:new FormControl(''),
   
-  skills: new FormControl('',[Validators.required]),
+  // skills: new FormControl('',[Validators.required]),
     courses: new FormArray([]),
     // Daterange: new FormGroup({
     //   start: new FormControl(),
@@ -171,7 +178,7 @@ submit(){
     profileImg:this.downloadurl,
    experience:this.form.get('experience')?.value+'',
  courses:this.form.get('courses')?.value,
- skills:this.form.get('skills')?.value+'',
+//  skills:this.form.get('skills')?.value+'',
       
 
 
