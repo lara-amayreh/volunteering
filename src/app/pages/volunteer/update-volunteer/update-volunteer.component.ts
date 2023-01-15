@@ -78,16 +78,10 @@ export class UpdateVolunteerComponent implements OnInit {
  
   ngOnInit(): void {
     this.authservice.userState$.subscribe((value)=>{
-<<<<<<< HEAD
-     (value.skills)
-     .forEach((skill:any)=>{
-        this.skills.push(skill)});
-=======
     //  (value.skills)
     //  .forEach((skill:any)=>{
     //     this.skills.push(skill)});
 
->>>>>>> 79236132446034c752f2538a4f8b4116c8f7d0b2
         // (value.days).split(',')
         // .forEach((day:any)=>{
         //    this.aldays.push(day)});

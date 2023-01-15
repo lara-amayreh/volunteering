@@ -70,11 +70,7 @@ profileImg:new FormControl(''),
   email:new FormControl('',[Validators.required, Validators.email]),
   password:new FormControl('',[Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]),
   confirmPassword:new FormControl('',[Validators.required]),
-<<<<<<< HEAD
-  skill: new FormControl<string []|undefined>([],[Validators.required]),
-=======
   skill: new FormControl<string []>([],[Validators.required]),
->>>>>>> 79236132446034c752f2538a4f8b4116c8f7d0b2
   courses: new FormArray([]),
 range :new FormGroup({
   start: new FormControl('',[Validators.required]),
@@ -110,13 +106,8 @@ console.log(this.form.get('skill')?.value);
    this.form.get('days')?.value+'',
    this.form.get('experience')?.value+ '',
    this.form.get('courses')?.value as courses[],
-<<<<<<< HEAD
-   this.form.get('skill')?.value,
-   this.range?.value,
-=======
    this.form.get('skill')?.value!,
       this.range?.value,
->>>>>>> 79236132446034c752f2538a4f8b4116c8f7d0b2
    this.role,
    this.downloadurl,
 
