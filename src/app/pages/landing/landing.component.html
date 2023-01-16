@@ -6,8 +6,68 @@
  <div class="container">
     <div class="copportunities">
     <h1 class="heading">
-        Browse our opportunities
+        Latest opportunities
     </h1>
+
+    <div class="card-container">
+ 
+
+      <mat-card   [routerLink]="['./volunteer/opportunities',opportunity.id]"  class="Opportunity-card" *ngFor="let opportunity of latestopportunities$ | async; let i= index ;">
+        <mat-card-header class="avatar-headre">
+          <div>
+        </div>
+          <div class="p-avatar">
+              <div >
+                  <img class="avatar" mat-card-image [src]="opportunity.companyLogo" alt="company profile img"></div>
+                
+          <mat-card-subtitle class="title">{{opportunity.companyName}}</mat-card-subtitle>
+          </div>
+          <mat-divider></mat-divider>
+          <mat-card-title>{{opportunity.name}}</mat-card-title>
+  
+        </mat-card-header>
+          <mat-card-content>
+            <div class="content-container">
+              
+          <div class="item"><b>skills required:</b>
+            <mat-chip-listbox class="skills" aria-label="skills required">
+  
+              <mat-chip  *ngFor="let skill of (opportunity.skills)">
+                       {{skill}}
+              </mat-chip>
+              </mat-chip-listbox>
+            </div>
+          </div>
+       
+          </mat-card-content>
+          <mat-divider></mat-divider>
+        
+      
+          <mat-progress-bar 
+          class="item"
+          [value]="100*(opportunity.numberOfApplicants) /opportunity.numberOfVolunteers"
+          mode="determinate"
+          [bufferValue]="0">
+      </mat-progress-bar>
+         <div class="item">
+         {{opportunity.numberOfApplicants}}/ {{opportunity.numberOfVolunteers}} volunteers
+        </div>
+         <div class="apply">
+          <button [disabled]="chickapply(opportunity.applicantsIds,opportunity.active)" mat-raised-button *ngIf="role ==('person') && opportunity.numberOfApplicants < opportunity.numberOfVolunteers"  color="primary" (click)="Apply(opportunity.id+'')">Apply</button>
+        </div> 
+        <mat-card-footer>
+        <div class="item"><span>{{(opportunity.range.start).toDate()| date:'yyyy/MM/dd'}}</span> <span>  -  {{(opportunity.range.end).toDate()| date:'yyyy/MM/dd'}}</span>
+             
+        </div> 
+      </mat-card-footer>
+        </mat-card>
+      </div>
+
+
+
+
+
+
   </div>
   
 </div>

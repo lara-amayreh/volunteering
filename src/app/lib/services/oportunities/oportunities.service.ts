@@ -42,6 +42,8 @@ export class OportunitiesService {
       .valueChanges();
   }
 
+
+  
   getoportunityById(id: string): Observable<opportunity | undefined> {
     return this.opportunitiesCollection.doc(id).valueChanges();
   }

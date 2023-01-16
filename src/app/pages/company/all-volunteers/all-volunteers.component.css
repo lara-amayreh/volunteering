@@ -10,6 +10,21 @@
     border-radius: 50%;
 
   }
+  .search-card{
+
+    display: flex;
+    flex-wrap: nowrap;
+    max-height:200px;
+    position: fixed;
+    z-index: 5;
+    top:0px;
+    width: 100%;
+
+}
+.search-card form{
+    display: flex;
+    padding: 10px 5px;
+}
 .img{
     border-radius: 100%;
 
@@ -75,5 +90,9 @@
             z-index: 5;
             top:100px;
             right:30px;
+        }
+        .search-card form {
+            display: flex;
+            flex-direction: column;
         }
         }

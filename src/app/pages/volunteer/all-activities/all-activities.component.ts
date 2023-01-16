@@ -108,10 +108,6 @@ export class AllActivitiesComponent implements OnInit {
   
       this.alloportunities$ = this.oportunityservices.getfilteredopportunities(this.skill ,this.comname,this.type,this.range.value)
      
-
-
-
-     
      
      }
   
@@ -122,7 +118,7 @@ export class AllActivitiesComponent implements OnInit {
     }
 
   Apply(id: string) {
-    console.log(id + 'act');
+    
     this.activityid = id;
     let dialogRef = this.dialog.open(ApplyOnActivityComponent, {
       width: '700px',
@@ -133,9 +129,6 @@ export class AllActivitiesComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       console.log(result);
       if (result) {
-        // this.oportunityservices.countApplicant(this.activityid).subscribe((val)=>{
-        //   console.log(val.length);
-        //   this.counter = val.length
 
         console.log(this.counter);
       }
@@ -149,11 +142,5 @@ if((applicantsIds[i]==this.uid)|| !active)
 stat = true
 }
 return stat;
-// applicantsIds.forEach((val)=>{
-// if(val== this.uid || !active)
-// stat= true;
-
-// });
-// return stat;
   }
 }
