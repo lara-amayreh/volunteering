@@ -21,6 +21,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 
 
 
@@ -46,7 +48,8 @@ MatAutocompleteModule,
 MatDividerModule,
 MatProgressBarModule,
 MatTabsModule,
-MatBadgeModule
+MatBadgeModule,
+MatExpansionModule
 
 
 

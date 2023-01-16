@@ -24,7 +24,7 @@ import { LayoutComponent } from './lib/Components/layout/layout.component';
 import { NotificationComponent } from './lib/Components/notification/notification.component';
 import { AllActivitiesComponent } from './pages/volunteer/all-activities/all-activities.component';
 import { VolunteerModule } from './pages/volunteer/volunteer.module';
-
+import { FooterComponent } from './lib/Components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +37,7 @@ import { VolunteerModule } from './pages/volunteer/volunteer.module';
     PagenotfoundComponent,
     LayoutComponent,
     NotificationComponent,
+    FooterComponent,
     
     
     

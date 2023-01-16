@@ -8,6 +8,10 @@ header{
     font-size: 12px;
     
 } 
+.nav-links{
+    display: flex;
+    justify-content: space-between;
+}
 .notification{
     cursor: pointer;
     padding: 0;
@@ -22,6 +26,9 @@ gap:10px
 }
 .p-link{
     cursor: pointer;
+}
+.login{
+    align-self: flex-end;
 }
  .p-avatar{
 display: flex;

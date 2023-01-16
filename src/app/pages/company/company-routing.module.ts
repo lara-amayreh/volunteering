@@ -21,7 +21,7 @@ const routes: Routes = [
     {path:'opportunities', component:AllActivitiesComponent},
     {path:'organizations', component:AllCompaniesComponent},
     {path:'your-Activities', component:CompanyActivitiesComponent,pathMatch:'full'},
-    {path:'All-Volunteers', component:AllVolunteersComponent},
+    {path:'All-Volunteers', component:AllVolunteersComponent,canActivate: [AuthGuard]},
     {path:'All-Volunteers/details/:id', component: VolunteerDetailsComponent, canActivate: [AuthGuard]},
     {path:'your-Activities/:id', component: ActivityDetailsComponent, canActivate: [AuthGuard]},
 

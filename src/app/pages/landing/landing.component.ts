@@ -22,6 +22,8 @@ export class LandingComponent implements OnInit {
   activityid!:string;
  uid!:string;
  role!:string;
+ panelOpenState = false;
+
 
   ngOnInit(): void {
     this.auth.userState$.subscribe((user)=>{
