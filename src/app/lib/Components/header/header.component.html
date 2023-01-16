@@ -13,20 +13,40 @@
     <button mat-button routerLink="/volunteer/opportunities">
       OPPORTUNITIES
     </button>
-    <!-- <button mat-button routerLink="/contact">CONTACT</button>
-    <button mat-button routerLink="/about">ABOUT</button>
-   -->
     <div class="regestration">
       <div
         class="avatar-container"
         *ngIf="authService.userState$ | async as user; else loginButton"
       >
+      <div
+      [routerLink]="['/volunteer/profile', user.id]"
+      *ngIf="user.role == 'person'"
+    >
+      <div class="p-avatar">
+        <div class="avatar" [style.backgroundImage]="geturl()"></div>
+        <div class="p-link">
+          {{ email }}
+        </div>
+      </div>
+    </div>
+    <div
+      [routerLink]="['/company/profile', user.id]"
+      *ngIf="user.role == 'company'"
+    >
+      <div class="p-avatar">
+        <div class="avatar" [style.backgroundImage]="geturl()"></div>
+
+        <div class="p-link">
+          {{ email }}
+        </div>
+      </div>
+    </div>
         <icon
           class="notification"
           mat-button
           color="primary"
           (click)="openNotification()"
-          matBadge="8"
+          matBadge="1"
           matBadgeColor="warn"
         >
           <mat-icon>notifications</mat-icon>
@@ -34,29 +54,7 @@
       <button (click)="authService.signout()" mat-button class="btn-login">
         <mat-icon>logout</mat-icon>
       </button>
-      <div
-        [routerLink]="['/volunteer/profile', user.id]"
-        *ngIf="user.role == 'person'"
-      >
-        <div class="p-avatar">
-          <div class="avatar" [style.backgroundImage]="geturl()"></div>
-          <div class="p-link">
-            {{ email }}
-          </div>
-        </div>
-      </div>
-      <div
-        [routerLink]="['/company/profile', user.id]"
-        *ngIf="user.role == 'company'"
-      >
-        <div class="p-avatar">
-          <div class="avatar" [style.backgroundImage]="geturl()"></div>
-
-          <div class="p-link">
-            {{ email }}
-          </div>
-        </div>
-      </div>
+     
     </div>
     </div>
     <ng-template #loginButton>

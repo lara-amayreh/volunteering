@@ -121,7 +121,7 @@ export class OportunitiesService {
     type?: string | null,
     range?: any
   ) {
-    console.log(name, type, skills);
+    console.log(name, type, skills,range);
     //   if(skills.length > 0 || name != '' || type != '' || range!= null){
     //     console.log(range.start);
     //     return this.firestore.collection<opportunity>('oportunities',
@@ -206,6 +206,7 @@ export class OportunitiesService {
               if(type != null && type != ""){
                 condition  =  val.companyType == type ?? false;
               }
+             
               return condition;
           });
         })

@@ -11,6 +11,8 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { UpdateVolunteerComponent } from './update-volunteer/update-volunteer.component';
 import { ApplyOnActivityComponent } from './apply-on-activity/apply-on-activity.component';
 import { ActivityDetailsComponent } from '../company/activity-details/activity-details.component';
+import { LandingComponent } from '../landing/landing.component';
+import { AppModule } from 'src/app/app.module';
 @NgModule({
   declarations: [
     VolunteerDetailsComponent,
@@ -28,8 +30,12 @@ import { ActivityDetailsComponent } from '../company/activity-details/activity-d
     VolunteerRoutingModule,
     SharedModuleModule,
     LayoutModule,
+    
   ],
   exports:[
+    AllActivitiesComponent,
+
+    
   ]
 })
 export class VolunteerModule { }

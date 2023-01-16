@@ -1,6 +1,6 @@
 <div *ngIf="authServise.userState$ | async as user" class="p-avatar">
   <div class="avatar-container"
-    [routerLink]="['/person/profile', user.id]"
+    [routerLink]="['/volunteer/profile', user.id]"
     *ngIf="user.role == 'person'"
   >
     <div class="avatar" [style.backgroundImage]="geturl()"></div>

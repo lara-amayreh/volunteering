@@ -22,6 +22,8 @@ import { CommonModule } from '@angular/common';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { LayoutComponent } from './lib/Components/layout/layout.component';
 import { NotificationComponent } from './lib/Components/notification/notification.component';
+import { AllActivitiesComponent } from './pages/volunteer/all-activities/all-activities.component';
+import { VolunteerModule } from './pages/volunteer/volunteer.module';
 
 
 @NgModule({
@@ -35,6 +37,8 @@ import { NotificationComponent } from './lib/Components/notification/notificatio
     PagenotfoundComponent,
     LayoutComponent,
     NotificationComponent,
+    
+    
     
   
 
@@ -51,10 +55,12 @@ import { NotificationComponent } from './lib/Components/notification/notificatio
     AngularFireAuthModule,
     AngularFirestoreModule,
     CommonModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    
     
      ],
   providers: [
+    
 ],
   bootstrap: [AppComponent]
 })

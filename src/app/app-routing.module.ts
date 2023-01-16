@@ -5,6 +5,7 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { AboutComponent } from './pages/about/about.component';
 import { AuthGuard } from './lib/guards/auth.guard';
 import { LogedinGuard } from './lib/guards/logedin.guard';
+
 const routes: Routes = [
   {path:'', component:LandingComponent, pathMatch: 'full'},
   {path:'company', loadChildren: ()=> import('./pages/company/company.module').then((m)=> m.CompanyModule), 
