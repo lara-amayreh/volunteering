@@ -7,10 +7,15 @@
  }
  .logo{
   position: absolute;
-  top: 5px;
-  left: 100px;
+  top: 13px;
+  width: 10px;
+  left: 80px;
   cursor: pointer;
   font-size: 15px;
+  cursor: pointer;
+ }
+ .logo img{
+  cursor: pointer;
  }
 
 .head{
@@ -61,6 +66,10 @@ align-items: center;
     app-header{
 display: flex;
     }
+  
+ .logo img{
+  cursor: pointer;
+ }
   }
  
  

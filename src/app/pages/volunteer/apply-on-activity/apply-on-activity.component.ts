@@ -50,7 +50,6 @@ export class ApplyOnActivityComponent {
   });
 
   ngOnInit(): void {
-    console.log('test');
     this.auth.userState$.subscribe((val) => {
       if (val) {
         this.personid = val.id;

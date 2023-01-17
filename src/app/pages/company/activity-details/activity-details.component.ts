@@ -76,12 +76,7 @@ reject(uid:string,oportunityId:string){
         }
 
 
-      //   arr.forEach((value, index) => {
-      //     if(value == uid)
-      //   arr.splice(index,1);
-      //   console.log(arr);
-      // });
-       
+           
       this.opportunityservice.updatecount(oportunityId,arr.length, arr ,true);
     }
   }

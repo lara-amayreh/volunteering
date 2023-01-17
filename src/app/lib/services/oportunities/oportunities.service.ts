@@ -25,7 +25,6 @@ export class OportunitiesService {
 
   addOpportunity(opportunity: opportunity) {
     let addedOpportunity = this.opportunitiesCollection.add(opportunity);
-    console.log(addedOpportunity);
     return from(addedOpportunity);
   }
 
@@ -36,6 +35,8 @@ export class OportunitiesService {
       )
       .valueChanges({ idField: 'id' });
   }
+
+
   getAllOpportunities() {
     return this.firestore
       .collection<opportunity>('oportunities')
@@ -60,13 +61,31 @@ export class OportunitiesService {
       )
       .valueChanges();
   }
+  updateCompanyInfo(
+    activityid: string,
+    companyName: string,
+    companyLogo: string,
+    companyType: string
+  ) {
+    console.log(activityid,companyLogo,companyName,companyType);
+    return from(
+      this.opportunitiesCollection
+        .doc<opportunity>(activityid)
+        .update({
+          companyName: companyName,
+          companyLogo:companyLogo,
+          companyType: companyType,
+        })
+    );
+  }
+
+
   updatecount(
     activityid: string,
     numberOfApplicants: number,
     applicantsIds: string[],
     active: boolean
   ) {
-    // console.log(numberOfApplicants);
     return from(
       this.opportunitiesCollection
         .doc<opportunity>(activityid)
@@ -78,7 +97,6 @@ export class OportunitiesService {
     );
   }
   updateState(userid: string, state: MyEnum, activityid: string) {
-    // console.log(numberOfApplicants);
     return from(
       this.firestore
         .collection<apply>('oportunities/' + activityid + '/applicants')
@@ -103,7 +121,7 @@ export class OportunitiesService {
       )
       .valueChanges({ idField: 'id' });
   }
-  getUserOpportunities(userid: string): Observable<opportunity | any> {
+  getUserOpportunities(userid: string){
     return this.firestore
       .collection<opportunity>('oportunities', (ref) =>
         ref.where('applicantsIds', 'array-contains', userid)
@@ -116,6 +134,11 @@ export class OportunitiesService {
       this.opportunitiesCollection.doc<opportunity>(id).update({ id: id })
     );
   }
+  // updateApplicant(id: string) {
+  //   return from(
+  //     this.opportunitiesCollection.doc<opportunity>(id).update({ id: id })
+  //   );
+  // }
 
   getfilteredopportunities(
     skills?: string[] | any,
@@ -124,75 +147,9 @@ export class OportunitiesService {
     range?: any
   ) {
     console.log(name, type, skills,range);
-    //   if(skills.length > 0 || name != '' || type != '' || range!= null){
-    //     console.log(range.start);
-    //     return this.firestore.collection<opportunity>('oportunities',
-    //     ref=>{
-    //       if(range && skills.length >0 && type != '' && name != ''){
-    //         return ref.where('range',">=",range).where('companyType',"==",type)
-    //         .where('skills',"array-contains-any",skills).where('companyName',"==",name);
-    //       }
-    //       else
-    //       if(range && skills.length >0 && type != '' && name == ''){
-    //         return ref.where('range',">=",range).where('companyType',"==",type)
-    //         .where('skills',"array-contains-any",skills);
-
-    //         // return ref.where('skills',"array-contains-any",skills).where('companyType',"==",type);
-    //       }
-
-    //       else
-    //       if(skills.length == 0 && name == '' && type == '' && range ==null ){
-    //         return ref.where('range',">=",range).where('companyType',"==",type)
-    //         .where('skills',"array-contains-any",skills);
-
-    //         // return ref.where('skills',"array-contains-any",skills).where('companyType',"==",type);
-    //       }
-
-    //      else
-    //       if( skills.length == 0 && name != '' && type == '' ){
-    //         return ref.where('skills',"array-contains-any",skills).where('companyName',"==",name);
-    //       }
-    //      else  if(skills.length > 0 && name != ''){
-    //       return ref.where('companyName',"==",name).where('skills',"array-contains-any",skills);
-    //     }
-    //     else
-    //     if( skills.length > 0 && name == ''){
-    //       return ref.where('skills',"array-contains-any",skills);
-    //     }
-    //    else  if(skills.length == 0&& name == '' && type != '' ){
-    //     return ref.where('companyType',"==",type);
-    //   }
-    //   else
-
-    //       return ref.where('skills',"array-contains-any",skills).where('companyType',"==",type).where('companyName',"==",name);
-
-    //     }
-
-    //    ).valueChanges({ "idField": 'id' });
-    // }
-
-    return this.firestore
+       return this.firestore
       .collection<opportunity>('oportunities')
-      // , (ref) => {
-      //   let query: any;
-
-      //   if (name != '') {
-      //     query = (query ?? ref)
-      //       .where('companyName', '>=', name)
-      //       .where('companyName', '<=', name + '\uf8ff'); //this to search if text contains it
-      //   }
-      //   if (skills != '') {
-      //     query = (query ?? ref).where('skills', "array-contains-any", skills);
-      //   }
-      //   if (range != '') {
-      //     query = (query ?? ref).where('range.start', ">=", range.start)
-      //     .where('range.end', "<=", range.end);
-      //   }
-      //   if (type != '') {
-      //     query = (query ?? ref).where('companyName', '==', name);
-      //   }
-      //   return (query ?? ref);
-      // })
+     
       .valueChanges({ idField: 'id' }).pipe(
         map((data)=> {
           return data.filter((val)=>{
@@ -214,6 +171,5 @@ export class OportunitiesService {
         })
       );
 
-    // return this.getAllOpportunities().valueChanges();
   }
 }

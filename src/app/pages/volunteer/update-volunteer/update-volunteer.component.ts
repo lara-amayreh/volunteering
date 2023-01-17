@@ -2,7 +2,7 @@ import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core'
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { map, Observable, startWith } from 'rxjs';
+import { map, Observable, startWith, switchMap } from 'rxjs';
 import { courses, person } from 'src/app/lib/inteerfaces/person';
 import { AuthService } from 'src/app/lib/services/auth/auth.service';
 import { StorageService } from 'src/app/lib/services/storage/storage.service';
@@ -15,6 +15,8 @@ import { days } from 'src/assets/arrays/days';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { OportunitiesService } from 'src/app/lib/services/oportunities/oportunities.service';
+import { apply } from 'src/app/lib/inteerfaces/apply';
 
 @Component({
   selector: 'app-update-volunteer',
@@ -26,7 +28,7 @@ export class UpdateVolunteerComponent implements OnInit {
   role:string="person";
   experienceList=experience;
   person! :person;
-
+  userdetails!:person;
   persons$ !:Observable<person[]>;
   hide: boolean=true;
     Cities = data;  
@@ -41,53 +43,17 @@ export class UpdateVolunteerComponent implements OnInit {
   @ViewChild('skillInput')
   skillInput!: ElementRef<HTMLInputElement>;
 
-  constructor(private storage:StorageService, private afStorage :AngularFireStorage, private userservice:UserService, private authservice:AuthService,     private dialogRef: MatDialogRef<UpdateVolunteerComponent>, public firestore:AngularFirestore,
+  constructor( private opportunityservice:OportunitiesService, private storage:StorageService, private afStorage :AngularFireStorage, private userservice:UserService, private authservice:AuthService,     private dialogRef: MatDialogRef<UpdateVolunteerComponent>, public firestore:AngularFirestore,
  
       @Inject(MAT_DIALOG_DATA) public Data: {id: string, company:any})
        {this.filteredSkills = this.skillsCtrl.valueChanges.pipe(
         startWith(null),
         map((skill: string | null) => (skill ? this._filter(skill) : this.allSkills.slice())),
       );}
-  // ngOnInit(): void {
-  //   this.authservice.userState$.subscribe((value:any)=>{
-  //     if(value){
-  //     this.id =value.id;
-  //     console.log(value, 'on init');
-  //   this.form.patchValue({
-  //     fullName:value.fullName,
-  //     phoneNumber:value.phoneNumber,
-  //     city:value.city,
-  //     experience:value.experience,
-
-
-    
-
-  //   });
-  //   value.courses.forEach((val:any)=>{
-  //     this.addCourse(val);
-
-  //   })
-  // }
-
-
-    
-  //   })
-    
-    
-  // }
+  
  
   ngOnInit(): void {
     this.authservice.userState$.subscribe((value)=>{
-    //  (value.skills)
-    //  .forEach((skill:any)=>{
-    //     this.skills.push(skill)});
-
-        // (value.days).split(',')
-        // .forEach((day:any)=>{
-        //    this.aldays.push(day)});
-        // console.log(this.skills);
-        // this.aldays = value.days;
-
     (value.courses).forEach((val:courses)=>{
      this.addCourse(val)
       
@@ -98,7 +64,6 @@ export class UpdateVolunteerComponent implements OnInit {
       this.form.get('fullName')?.setValue(value.fullName);
       this.form.get('phoneNumber')?.setValue(value.phoneNumber);
       this.form.get('city')?.setValue(value.city);
-      // this.form.get('days')?.updateValueAndValidity(this.aldays as never);
       this.form.get('experience')?.setValue(value.experience);
       this.role = value.role;
       this.downloadurl = value.profileImg;
@@ -150,18 +115,11 @@ export class UpdateVolunteerComponent implements OnInit {
   // days:new FormControl('',[Validators.required]),
   profileImg:new FormControl(''),
   
-  // skills: new FormControl('',[Validators.required]),
-    courses: new FormArray([]),
-    // Daterange: new FormGroup({
-    //   start: new FormControl(),
-    //   end: new FormControl()
-
-    // })
+   courses: new FormArray([]),
+   
   
 })
-// unavailableDates(calenderDate:Date):boolean{
-//   return calenderDate < new Date();
-// }
+
 
 submit(){
   this.userservice.updateuser(this.id,(
@@ -177,6 +135,25 @@ submit(){
 
 
   } ))
+ this.authservice.userState$.subscribe((val)=>{
+  this.userdetails=val;
+ })
+this.opportunityservice.getUserOpportunities(this.id).subscribe((val)=>{
+val.forEach((applicant)=>{
+  console.log(this.userdetails);
+  this.opportunityservice.getvolunteer(this.userdetails?.id+'',applicant.id).subscribe((v)=>{
+    // console.log(v[0].id)
+  this.firestore.collection<apply>('oportunities/' + applicant.id + '/applicants')
+  .doc(v[0].id).update({userdetails:this.userdetails
+  }
+)
+})
+})})
+
+ 
+
+ 
+  
   this.dialogRef.close(true);
 
 

@@ -1,6 +1,9 @@
 <header>
   <div class="nav-links">
+    <a routerLink="./" class="logo"><img src="../../../../assets/images/logo(2).png" alt="logo"/></a>
+
     <button
+
       *ngIf="authService.userState$ && role == 'company'"
       mat-button
       routerLink="./company/All-Volunteers"

@@ -23,7 +23,7 @@ logo!:string;
 
   role: string="company";
    organization! :organization;
-  downloadurl:string='../../../../../assets/images/company.png';
+  downloadurl:string='../../../../../assets/images/company1.jpg';
   constructor( private afStorage: AngularFireStorage , public auth:AuthService , private router:Router , private storge:StorageService){}
   // organizations$ !:Observable<organization[]>;
 types=companytypes;

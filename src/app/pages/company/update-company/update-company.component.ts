@@ -71,7 +71,16 @@ this.authservice.userState$.subscribe((value)=>{
      
          
      })
-   
+   get name(){
+    return this.form.get('name')?.value+ '';
+   }
+  
+   get url(){
+    return this.form.get('url')?.value+ '';
+   }
+   get type(){
+    return this.form.get('type')?.value+ '';
+   }
      submit(){
 
       this.userservice.updateuser(this.data.id,
@@ -86,12 +95,10 @@ this.authservice.userState$.subscribe((value)=>{
 
 
         } );
-  this.opportunityservice.getUserOpportunities(this.data.id).subscribe((val)=>{
-    if(val as opportunity[])
+  this.opportunityservice.getOpportunities(this.data.id).subscribe((val)=>{
+    if(val)
     val.forEach((element:opportunity ) => {
-      this.firestore.collection<opportunity>('oportunitiy').doc(element.id).update({
-        // companyLogo:this.
-      })
+     this.opportunityservice.updateCompanyInfo(element.id+'',this.name,this.downloadurl,this.type)
   })
   });
 

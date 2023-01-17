@@ -31,7 +31,7 @@ password:new FormControl('',[Validators.required]),
     this.auth.userState$.subscribe((value)=>{
       if(value){
       this.role = value.role;
-      console.log(this.role);}
+    }
     })
     
         }
@@ -52,7 +52,6 @@ this.router.navigate(['volunteer/']);
 
 
       }).catch((error)=> {
-        console.log(error)
       });
     }
 

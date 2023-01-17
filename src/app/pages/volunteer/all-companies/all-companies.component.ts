@@ -30,7 +30,6 @@ this.userservice.getAllusersByRole('company').subscribe((val)=>{
   val.forEach((vall, index) => {
     if (!this.companiesNames.includes(vall.name+''))
     this.companiesNames?.push(vall.name+'');
-    console.log(this.companiesNames);
 
      });
 
