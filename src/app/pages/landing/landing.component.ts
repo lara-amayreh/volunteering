@@ -8,6 +8,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ApplyOnActivityComponent } from '../volunteer/apply-on-activity/apply-on-activity.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/lib/services/auth/auth.service';
+import { UserService } from 'src/app/lib/services/user/user.service';
+import { organization } from 'src/app/lib/inteerfaces/organization';
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
@@ -15,10 +17,13 @@ import { AuthService } from 'src/app/lib/services/auth/auth.service';
 
 })
 export class LandingComponent implements OnInit {
-  constructor( public dialog: MatDialog,
+  constructor( private userservice:UserService,public dialog: MatDialog,
     public auth: AuthService,public oportunityservices:OportunitiesService , private fs:AngularFirestore ){}
   alloportunities$! : Observable<opportunity[]>
   latestopportunities$!: Observable<opportunity[]>;
+  allorganizations$!:Observable<organization[]|undefined>;
+  latestOrg$!: Observable<organization[]>;
+
   activityid!:string;
  uid!:string;
  role!:string;
@@ -36,10 +41,15 @@ export class LandingComponent implements OnInit {
     ref=>ref
     .orderBy("range.start", "desc").where('range.start',">",new Date())
     .limit(3)).valueChanges({idField:"id"}); 
-    this.latestopportunities$.subscribe((v)=>{
-      console.log(v);
-    })
-
+    // this.latestopportunities$.subscribe((v)=>{
+    // })
+    this.allorganizations$=this.userservice.getAllusersByRole('company');
+    this.latestOrg$ = this.fs.collection<any>('users',
+    ref=>ref
+    .where('role',"==",'company')
+    .limit(2)).valueChanges({idField:"id"}); 
+    // this.latestopportunities$.subscribe((v)=>{
+    // })
 
   }
 

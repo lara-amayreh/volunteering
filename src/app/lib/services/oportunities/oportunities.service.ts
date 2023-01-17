@@ -33,7 +33,7 @@ export class OportunitiesService {
       .collection<opportunity>('oportunities', (ref) =>
         ref.where('userid', '==', userid)
       )
-      .valueChanges({ idField: 'id' });
+      .valueChanges();
   }
 
 

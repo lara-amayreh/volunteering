@@ -22,7 +22,7 @@ import { AddOpportunityComponent } from '../add-opportunity/add-opportunity.comp
 export class CompanyActivitiesComponent implements OnInit {
   @ViewChild('callAPIDialog')
   callAPIDialog!: TemplateRef<any>;
-   opportunities: opportunity[]=[];
+   opportunities!: Observable<opportunity[] | undefined>;
    userState$!:Observable<any>;
    profileImg!:string;
 cname!:string;
@@ -33,22 +33,19 @@ end!:string;
   constructor(public dialog: MatDialog,public oportunityservice:OportunitiesService,private authservice:AuthService) { }
   ngOnInit(): void {
   
-  this.authservice.userState$
+this.authservice.userState$
   .pipe(switchMap( (value) => {
   if(value){
 
-    return this.oportunityservice.getOpportunities(value?.id+'');
-
+    this.opportunities = this.oportunityservice.getOpportunities(value?.id+'');
+return this.opportunities
     }
     else
     return of(null);
    
-  })).subscribe((response)=>{
-    if(response)
- this.opportunities=response;
+  }))
  
-  })
-  
+    
   
   }
  

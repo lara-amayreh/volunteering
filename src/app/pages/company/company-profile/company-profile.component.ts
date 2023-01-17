@@ -2,10 +2,14 @@ import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of, switchMap } from 'rxjs';
+import { opportunity } from 'src/app/lib/inteerfaces/opportunity';
 import { organization } from 'src/app/lib/inteerfaces/organization';
 import { AuthService } from 'src/app/lib/services/auth/auth.service';
+import { OportunitiesService } from 'src/app/lib/services/oportunities/oportunities.service';
 import { OrganizationService } from 'src/app/lib/services/organization/organization.service';
 import { UserService } from 'src/app/lib/services/user/user.service';
+import { ApplyOnActivityComponent } from '../../volunteer/apply-on-activity/apply-on-activity.component';
+import { AddOpportunityComponent } from '../add-opportunity/add-opportunity.component';
 import { UpdateCompanyComponent } from '../update-company/update-company.component';
 
 @Component({
@@ -16,51 +20,67 @@ import { UpdateCompanyComponent } from '../update-company/update-company.compone
 export class CompanyProfileComponent {
   @ViewChild('callAPIDialog')
   callAPIDialog!: TemplateRef<any>;
-   organization!: organization;
-   public id:string='';
+   organization!: Observable<organization|undefined>;
+ id:string='';
    role!:string;
-   userid!:string;
-   organization$!: Observable <organization | undefined>;
+   uid!:string;
+   alloportunities$! : Observable<opportunity[]>;
+   opportunities!: Observable<opportunity[] | undefined>;
+   panelOpenState=true;
+   activityid!:string;
 
-  constructor(public dialog: MatDialog, private route:ActivatedRoute, private orgservice:OrganizationService, public userservice:UserService,public authservice:AuthService) 
-  { 
 
-    this.organization$ = this.route.paramMap.pipe(
+
+  constructor(public dialog: MatDialog, private route:ActivatedRoute, private opportunityservice:OportunitiesService, public userservice:UserService,public authservice:AuthService) 
+  {
+    
+    this.organization = this.route.paramMap.pipe(
       switchMap((value)=> {
         this.id = value.get('id')+'';
-        console.log(this.id);
-       
         return this.userservice.getuserById(this.id);
   
+
+
+}));
+  this.opportunityservice.getOpportunities(this.id).subscribe((d)=>{
+    console.log(d);
   
-      
-      }  )
-      )}
-      
-      ngOnInit(): void {
+  })
+
+    }
   
-        this.authservice.userState$.subscribe((value)=>{
-         if(value){
-         this.role = value.role;
-         this.userid =value.id 
-         console.log(this.userid);
-        }
-     })
+
         
+
+     addoportunity(){
+      // console.log(id);
+      let dialogRef = this.dialog.open(AddOpportunityComponent, {
+         width: '500px',
         
-       }
+       });
+       dialogRef.afterClosed().subscribe((result)=> {
+           console.log(result); 
+           
+   
+           //this.students = this.studentsService.getStudents();
+          
+       })
+   
+      
+     }
+        
+       
   
     
   
     
   
-geturl(){
+// geturl(){
  
-	let x= `url("${this.organization.profileImg}")` ;
-  return x;
-}
+// 	let x= `url("${this.organization.profileImg}")` ;
+//   return x;
+// }
   updateorganization(id:string){
-   console.log(id);
     let dialogRef = this.dialog.open(UpdateCompanyComponent, {
        width: '500px',
       data:{id:id,data:this.organization}
@@ -68,11 +88,36 @@ geturl(){
      dialogRef.afterClosed().subscribe((result)=> {
          console.log(result); 
  
-         //refresh table 
         
         
      })
  
     
    }
+   Apply(id: string) {
+    
+    this.activityid = id;
+    let dialogRef = this.dialog.open(ApplyOnActivityComponent, {
+      width: '700px',
+      height: '400px',
+
+      data: { id: id },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(result);
+      if (result) {
+
+      }
+      // this.person = result;
+    });
+  }
+
+   chickapply(applicantsIds:string[],active:boolean){
+    let stat:boolean = false;
+    for (let i = 0; i < applicantsIds.length ; i++) {
+    if((applicantsIds[i]==this.uid)|| !active)
+    stat = true
+    }
+    return stat;
+      }
 }

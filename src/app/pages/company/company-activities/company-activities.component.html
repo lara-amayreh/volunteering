@@ -6,7 +6,7 @@
       <mat-icon>add</mat-icon>
     </button>
   </div>
-    <mat-card [routerLink]="['./',opportunity.id]" *ngFor="let opportunity of opportunities" class="Opportunity-card">
+    <mat-card [routerLink]="['./',opportunity.id]" *ngFor="let opportunity of opportunities |async" class="Opportunity-card">
      
       <mat-card-header>
         <div class="header-container">

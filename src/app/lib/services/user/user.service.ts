@@ -14,8 +14,8 @@ this.usercollection = this.firestore.collection('users');
 
    }
 
-   getuser(userid:string):Observable<any>{
-return this.usercollection.doc(userid).valueChanges();   }
+//    getuser(userid:string):Observable<any>{
+// return this.usercollection.doc(userid).valueChanges({ "idField": 'id' });   }
 
    deleteuser(id: string){
     return from(this.usercollection.doc(id).delete());
