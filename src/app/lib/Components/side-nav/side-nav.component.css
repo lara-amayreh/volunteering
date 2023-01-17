@@ -28,6 +28,9 @@ cursor: pointer;
   border: 1px solid gray;
   cursor: pointer;
 }
+.home{
+color: rgb(230, 205, 63);
+}
 mat-icon {
   margin-right: 5px;
 }

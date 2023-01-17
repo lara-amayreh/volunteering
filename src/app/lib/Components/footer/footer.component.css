@@ -1,7 +1,8 @@
 .footer{
     width: 100%;;
-    background-color: rgb(30, 27, 27);
-    color:white;
+  background-color:#fafafa;;
+box-shadow: 0 0 5px gray;
+    color:black;
     height: 100px;
     position: relative; 
     display:grid;
@@ -10,18 +11,21 @@
     align-items: center;
     justify-content: center;
     margin-top: 50px;
-    font-size: 10px;
+    font-size: 15px;
 
 bottom: 0;
 }
 a{
     text-decoration: none;
     cursor: pointer;
-    color: white;
+    color:black;
+}
+h6{
+ color:   rgb(230, 205, 63);
+ font-size: 20px;
 }
 .contact{
 display: flex;
 flex-direction: column;
 gap: 10px;
-padding: 10px;
 }

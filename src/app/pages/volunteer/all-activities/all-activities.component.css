@@ -36,7 +36,7 @@ mat-divider{
 
 }
 mat-card-footer{
-    background-color: blue;
+    background-color:rgb(230, 205, 63);;
 padding: 0;
 text-align: center;
 color: white;
@@ -73,10 +73,13 @@ flex-direction: column;
 
 display: flex;    }
 
-
+.btn-yellow{
+    background-color:rgb(230, 205, 63);;
+color:white;
+}
 .apply{
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     padding: 5px 20px;
 }
 

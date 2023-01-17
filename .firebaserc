@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "capston-e6427"
+  },
+  "targets": {
+    "capston-e6427": {
+      "hosting": {
+        "volunteering": [
+          "capston-e6427"
+        ]
+      }
+    }
+  }
+}

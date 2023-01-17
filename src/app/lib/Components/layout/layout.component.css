@@ -44,8 +44,8 @@ align-items: center;
   mat-sidenav {
   
     width: 200px;
-    background-image: linear-gradient(to bottom, rgba(13, 66, 136), rgb(165, 194, 214));
-  color: white;
+    background-color: #efefef;
+  color: black;
     padding: 16px;
     text-align: center;
   }

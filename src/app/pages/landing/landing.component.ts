@@ -31,11 +31,12 @@ export class LandingComponent implements OnInit {
 
 
   ngOnInit(): void {
+    
     this.auth.userState$.subscribe((user)=>{
+      if(user){
       this.uid=user.id;
-      this.role=user.role;
-      
-    })
+      this.role=user.role;  
+    }})
     this.alloportunities$=this.oportunityservices.getAllOpportunities();
     this.latestopportunities$ = this.fs.collection<opportunity>('oportunities',
     ref=>ref
@@ -47,12 +48,13 @@ export class LandingComponent implements OnInit {
     this.latestOrg$ = this.fs.collection<any>('users',
     ref=>ref
     .where('role',"==",'company')
-    .limit(2)).valueChanges({idField:"id"}); 
+    .limit(4)).valueChanges({idField:"id"}); 
     // this.latestopportunities$.subscribe((v)=>{
     // })
+      }
+  
 
-  }
-
+  
 
   Apply(id: string) {
     
