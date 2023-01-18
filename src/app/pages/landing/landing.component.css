@@ -28,7 +28,7 @@
 }
 .org-sec .card-container{
     display: grid;
-    grid-template-columns: repeat(2,1fr); 
+    grid-template-columns: repeat(1,1fr); 
     gap: 20px;
     /* background-color: #fafafa;; */
     
@@ -42,7 +42,8 @@
 .wrap{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
+    padding: 10px;
 }
 .hed-div{
     padding: 20px 10px;
@@ -78,11 +79,12 @@ align-items: center;
 
 
 }
-mat-expansion-panel{
-    padding: 10px 20px;
-    margin: 10px;
-}
 
+mat-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
 .heading span{
     padding: 20px 0px;
@@ -109,6 +111,11 @@ mat-expansion-panel{
             gap: 20px;
             /* background-color: #fafafa;; */
             
+        }
+        .wrap{
+          
+            align-items: center;
+            padding: 15px;
         }
           mat-card{
             width: 700px;
@@ -157,7 +164,7 @@ mat-expansion-panel{
 }
 .org-sec .card-container{
     display: grid;
-    grid-template-columns: repeat(4,1fr); 
+    grid-template-columns: repeat(3,1fr); 
     gap: 20px;
     /* background-color: #fafafa;; */
     

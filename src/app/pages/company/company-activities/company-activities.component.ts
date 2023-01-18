@@ -23,27 +23,17 @@ export class CompanyActivitiesComponent implements OnInit {
   @ViewChild('callAPIDialog')
   callAPIDialog!: TemplateRef<any>;
    opportunities!: Observable<opportunity[] | undefined>;
-   userState$!:Observable<any>;
    profileImg!:string;
 cname!:string;
-
-
 start!:string;
 end!:string;
   constructor(public dialog: MatDialog,public oportunityservice:OportunitiesService,private authservice:AuthService) { }
   ngOnInit(): void {
-  
-this.authservice.userState$
-  .pipe(switchMap( (value) => {
-  if(value){
-
+  this.authservice.userState$.subscribe((value)=>{
     this.opportunities = this.oportunityservice.getOpportunities(value?.id+'');
-return this.opportunities
-    }
-    else
-    return of(null);
-   
-  }))
+
+  })
+
  
     
   
