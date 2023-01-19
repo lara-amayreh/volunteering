@@ -1,26 +1,17 @@
-<div class="container">
-  <h1>All Organizations</h1>
-  <div class="wrapper">
-   
-  
-  <div class="card-container">
-  <mat-card [routerLink]="['./profile',company.id]" *ngFor="let company of allcompanies">
-      <mat-card-header>
-        <mat-card-title>{{company.name}}</mat-card-title>
-        <mat-card-subtitle>{{company.type}}</mat-card-subtitle>
-      </mat-card-header>
-  <mat-divider></mat-divider>
-     <mat-card-content>
-      <img class="logo" mat-card-md-image [src]= 'company.profileImg' alt="company logo">
-      <mat-divider></mat-divider>
-     </mat-card-content>
-     <mat-card-footer>
-    </mat-card-footer>
-    </mat-card>
-  </div>
-  <mat-card class="search-card" >
-    <!-- (selectionChange)="filterontype()" (keyup)="filteronname()" -->
-      <mat-card-title><mat-icon>search</mat-icon>Filter Organizations</mat-card-title>
+
+
+
+
+
+
+
+<div class="cover">
+  <div class="search">
+    <div class="search-head">
+
+    <mat-icon (click)="search.classList.toggle('show')"> search </mat-icon></div>
+    <div #search class="show">
+<mat-card class="search-card" #search >
   <form [formGroup]="form" (ngsubmit)="filter()">
   <mat-form-field>
     <mat-label>Type</mat-label>
@@ -45,8 +36,43 @@
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
-  <button mat-raised-button type="submit" color="primary" (click)="filter()">Filter</button>
+  <button mat-raised-button type="submit" class="btn-yellow" (click)="filter()">Filter</button>
   </form>
   </mat-card>
+    </div>
   </div>
   </div>
+
+
+
+
+  <div class="hed-div">
+    <h1 class="heading">
+      All  <span>Companies</span>
+    </h1>
+      
+  
+  
+  </div> 
+    <section class="opportunities-sec">
+      <div class="container">
+       <div class="wrap">
+     
+         <div class="card-container">
+
+
+    <mat-card [routerLink]="['./profile',company.id]" *ngFor="let company of allcompanies">
+        <mat-card-header>
+          <mat-card-title>{{company.name}}</mat-card-title>
+          <mat-card-subtitle>{{company.type}}</mat-card-subtitle>
+        </mat-card-header>
+    <mat-divider></mat-divider>
+       <mat-card-content>
+        <img class="logo" mat-card-md-image [src]= 'company.profileImg' alt="company logo">
+        <mat-divider></mat-divider>
+       </mat-card-content>
+       <mat-card-footer>
+      </mat-card-footer>
+      </mat-card>
+    </div>
+    </div>

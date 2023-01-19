@@ -1,7 +1,7 @@
 
 
 <div mat-dialog-content class="form-container">
-    <h1>Add New Opportunity</h1>
+    <h1 >Add New <span class="yellow">Opportunity</span></h1>
         <form [formGroup]="form" (ngSubmit)="confirm()">
     
             <mat-form-field>
@@ -81,7 +81,7 @@
 
         <div mat-dialog-actions>
             <button mat-raised-button color="warn" mat-dialog-close>No</button>
-            <button  color="primary" [disabled]="form.invalid" mat-raised-button>Yes</button>
+            <button class="y-btn" [disabled]="form.invalid" mat-raised-button>Yes</button>
         
         </div>
         </form>

@@ -28,7 +28,7 @@ right: 5px;
 gap:10px
 }
 .p-link{
-    cursor: pointer;
+    cursor: pointer;font-size: 11px;
 }
 .login{
     align-self: flex-end;

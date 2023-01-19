@@ -5,14 +5,11 @@ box-shadow: 0 0 5px gray;
     color:black;
     height: 100px;
     position: relative; 
-    display:grid;
-    grid-template-columns: repeat(3,1fr);
+  display: flex;
     padding: 10px 15px;
-    align-items: center;
-    justify-content: center;
     margin-top: 50px;
-    font-size: 15px;
-
+    font-size: 12px;
+justify-content: space-between;
 bottom: 0;
 }
 a{
@@ -28,4 +25,11 @@ h6{
 display: flex;
 flex-direction: column;
 gap: 10px;
+}
+
+@media (min-width: 768px) {
+    .footer{
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+    }
 }

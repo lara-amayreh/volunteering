@@ -53,19 +53,19 @@ mat-card{
     justify-content: space-between;
 }
 .add{
-    position: fixed;
-    right: 10px;
-    display: flex;
-    margin-bottom: 10px;
-    align-self: flex-end;
-    z-index:100 ;
+   
+    background-color: rgb(230, 205, 63);
+
 }
 
 
 
 
 .hed-div{
-    padding: 20px 10px;
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
     background-color: white;
     height:100px;
     box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%);
@@ -100,7 +100,6 @@ align-items: center;
 .wrap{
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
     padding: 10px;
 }
 
@@ -177,27 +176,34 @@ img {
 
 
 @media (min-width: 768px) {
+    .card-container{
+        padding: 15px;
+        display: grid;
+        grid-template-columns: repeat(2,1fr); 
+        gap: 20px;
+        /* background-color: #fafafa;; */
+        
+    }
     .cover{
         width: 100%;
         height: 350px;
-      }
-      .opportunities-sec , .card-container{
+    }
+    .opportunities-sec{
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        /* justify-content: center; */
         gap:20px;
-      }
+    }
 
     .wrap{
 
-        align-items: center;
-        padding: 15px;
+        padding: 20px;
     }
-      mat-card{
-        width: 800px;
+    /* mat-card{
+    width: 800px;
 
 
-    }
+    } */
     .big-hedding h1{
         font-size: 40px;
         color: rgb(203 173 1);
@@ -219,19 +225,19 @@ img {
             align-items: center;
         }
 
-        mat-card{
+        /* mat-card{
             width: 700px;
 
 
-        }
+        } */
    
     
 
     .cover{
         width: 100%;
         height: 400px;
-      }
-      .big-hedding h1{
+    }
+    .big-hedding h1{
         font-size: 50px;
         color: rgb(203 173 1);
         font-family: 'Convergence', sans-serif;
