@@ -42,7 +42,6 @@ val.forEach((person)=>{
   geturl(index:number){
  if(this.allimages){
     let x= `url("${this.allimages[index]}")` ;
-    console.log(x);
     return x;
   }
 

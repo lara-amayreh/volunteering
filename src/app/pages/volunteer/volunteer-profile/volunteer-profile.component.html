@@ -1,7 +1,10 @@
 <div class="container" *ngIf="person$ |async as person">
   <mat-card class="card-item main-card">
     <mat-card-header>
-      <h3>{{person.fullName}} profile</h3>
+      <div class="img-container">
+        <img [src]="person.profileImg" class="card-item logo-img"/>
+        <div>{{person.fullName }}</div>
+        </div>
       <button *ngIf="role ==='person' && userid == person.id " mat-icon-button color="primary" (click)="updateprofile(id)">
         <mat-icon>edit</mat-icon>
       </button>

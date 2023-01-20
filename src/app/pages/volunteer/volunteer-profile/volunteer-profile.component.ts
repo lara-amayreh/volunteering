@@ -2,8 +2,10 @@ import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, switchMap } from 'rxjs';
+import { opportunity } from 'src/app/lib/inteerfaces/opportunity';
 import { person } from 'src/app/lib/inteerfaces/person';
 import { AuthService } from 'src/app/lib/services/auth/auth.service';
+import { OportunitiesService } from 'src/app/lib/services/oportunities/oportunities.service';
 import { OrganizationService } from 'src/app/lib/services/organization/organization.service';
 import { UserService } from 'src/app/lib/services/user/user.service';
 import { UpdateVolunteerComponent } from '../update-volunteer/update-volunteer.component';
@@ -17,23 +19,24 @@ export class VolunteerProfileComponent {
   @ViewChild('callAPIDialog')
   callAPIDialog!: TemplateRef<any>;
    person$!:Observable <person | undefined>;
+   opportunities$!:Observable <opportunity[] | undefined>;
    public id:string='';
    userid!:string;
 role!:string;
-  constructor(private route:ActivatedRoute, public dialog: MatDialog, private orgservice:OrganizationService, public userservice:UserService,public authservice:AuthService)
+  constructor(private opportunityservice:OportunitiesService,private route:ActivatedRoute, public dialog: MatDialog, private orgservice:OrganizationService, public userservice:UserService,public authservice:AuthService)
   {this.person$ = this.route.paramMap.pipe(
     switchMap((value)=> {
       this.id = value.get('id')+'';
-      // console.log(this.id);
-      return this.userservice.getuserById(this.id);
+          return this.userservice.getuserById(this.id);
 
 
     
     }  )
+
     )}
 
   ngOnInit(): void {
-  
+  this.opportunities$ = this.opportunityservice.getUserOpportunities(this.id);
     this.authservice.userState$.subscribe((value)=>{
       // console.log(value);
       if(value)
