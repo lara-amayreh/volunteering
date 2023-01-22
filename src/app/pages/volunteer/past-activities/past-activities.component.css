@@ -45,17 +45,21 @@ mat-divider{
 
 }
 mat-card-footer{
-    background-color: blue;
+    background-color: rgb(230, 205, 63);
 padding: 0;
 text-align: center;
 color: white;
+padding-top:5px;
+padding-bottom: 5px;
+margin-top: 5px;
+
 
 }
-
 .card-container{
     display: flex;
     flex-direction: column;
     gap: 15px;
+    padding: 20px 10px;
 }
 mat-card-title{
     font-size: 1.5rem;

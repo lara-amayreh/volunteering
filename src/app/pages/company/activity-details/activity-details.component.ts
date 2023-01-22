@@ -41,17 +41,20 @@ numberofapplicants:number=0;
   ngOnInit(): void {
    this.auth.userState$.subscribe((value)=>{
       if(value){
+        this.opportunityservice.getoportunityById(this.id).subscribe((ele)=>{
+          if(ele?.applicantsIds.includes(value.id)){
         this.userdetails=this.opportunityservice.getvolunteer(value.id,this.id);
         this.userdetails.subscribe((i)=>{
           console.log(i[0]);
-        });
+        })}
+        })}
       this.waitting = this.opportunityservice.getApplicantsByState(this.id,MyEnum.wait)
       this.approved = this.opportunityservice.getApplicantsByState(this.id,MyEnum.approve)
       this.rejected = this.opportunityservice.getApplicantsByState(this.id,MyEnum.reject)
       
 // this.userid=value.id;
-    }
     })
+    
     // this.opportunityservice.getoportunityById()
   }
 

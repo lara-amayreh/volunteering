@@ -20,7 +20,7 @@ const routes: Routes = [
     {path:'',component:LandingComponent,pathMatch:'full'},
     {path:'opportunities', component:AllActivitiesComponent},
     {path:'organizations', component:AllCompaniesComponent},
-    {path:'your-Activities', component:CompanyActivitiesComponent,pathMatch:'full'},
+    {path:'your-Activities', component:CompanyActivitiesComponent,pathMatch:'full', canActivate: [AuthGuard]},
     {path:'All-Volunteers', component:AllVolunteersComponent,canActivate: [AuthGuard]},
     {path:'All-Volunteers/details/:id', component: VolunteerDetailsComponent, canActivate: [AuthGuard]},
     {path:'your-Activities/:id', component: ActivityDetailsComponent, canActivate: [AuthGuard]},

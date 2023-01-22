@@ -1,13 +1,13 @@
 
 <div class="container" *ngIf="organization |async as user">
-    <mat-card>
+    <mat-card class="main-card">
         <mat-card-header>
 
 <div class="img-container">
 <img [src]="user.profileImg" class="card-item logo-img"/>
 <div>{{user.name }}</div>
 </div>
-<button *ngIf ="user.role == 'company' && user.id == id " mat-icon-button color="primary" (click)="updateorganization(id)"> 
+<button *ngIf="user.role =='company' && uid == user.id " mat-icon-button color="primary" (click)="updateorganization(id)">
     <mat-icon>edit</mat-icon></button>
 </mat-card-header>
 <mat-divider></mat-divider>
@@ -37,5 +37,74 @@
 </mat-card>
 
     </div>
+
+
+
+    <div class="hed-div">
+        <h1 class="heading">
+          Volunteering  <span>Activities</span>
+        </h1></div>
+      <!-- opportunities -->
+       
+      <section class="opportunities-sec">
+       <div class="container">
+        <div class="wrap">
+      
+          <div class="card-container">
+       
+      
+            <mat-card class="activity-card"  [routerLink]="['/volunteer/opportunities',opportunity.id]"  *ngFor="let opportunity of alloportunities$ | async; let i= index ;">
+              <mat-card-header class="avatar-headre">
+                <div>
+              </div>
+                <div class="p-avatar">
+                    <div >
+                        <img class="avatar" mat-card-image [src]="opportunity.companyLogo" alt="company profile img"></div>
+                      
+                <mat-card-subtitle class="title">{{opportunity.companyName}}</mat-card-subtitle>
+                </div>
+                <mat-divider></mat-divider>
+                <mat-card-title>{{opportunity.name}}</mat-card-title>
+        
+              </mat-card-header>
+                <mat-card-content>
+                  <div class="content-container">
+                    
+                <div class="item"><b>skills required:</b>
+                  <mat-chip-listbox class="skills" aria-label="skills required">
+        
+                    <mat-chip  *ngFor="let skill of (opportunity.skills)">
+                             {{skill}}
+                    </mat-chip>
+                    </mat-chip-listbox>
+                  </div>
+                </div>
+             
+                </mat-card-content>
+                <mat-divider></mat-divider>
+              
+            
+                <mat-progress-bar 
+                class="item"
+                [value]="100*(opportunity.numberOfApplicants) /opportunity.numberOfVolunteers"
+                mode="determinate"
+                [bufferValue]="0">
+            </mat-progress-bar>
+               <div class="item">
+               {{opportunity.numberOfApplicants}}/ {{opportunity.numberOfVolunteers}} volunteers
+              </div>
+              
+              <mat-card-footer>
+              <div class="item"><span>{{(opportunity.range.start).toDate()| date:'yyyy/MM/dd'}}</span> <span>  -  {{(opportunity.range.end).toDate()| date:'yyyy/MM/dd'}}</span>
+                   
+              </div> 
+            </mat-card-footer>
+              </mat-card>
+            </div>
+      
+       </div>
+      </div>
+      </section>
+      
 
     

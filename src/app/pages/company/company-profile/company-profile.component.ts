@@ -1,4 +1,4 @@
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of, switchMap } from 'rxjs';
@@ -17,7 +17,7 @@ import { UpdateCompanyComponent } from '../update-company/update-company.compone
   templateUrl: './company-profile.component.html',
   styleUrls: ['./company-profile.component.css']
 })
-export class CompanyProfileComponent {
+export class CompanyProfileComponent implements OnInit {
   @ViewChild('callAPIDialog')
   callAPIDialog!: TemplateRef<any>;
    organization!: Observable<organization|undefined>;
@@ -31,23 +31,27 @@ export class CompanyProfileComponent {
 
 
 
-  constructor(public dialog: MatDialog, private route:ActivatedRoute, private opportunityservice:OportunitiesService, public userservice:UserService,public authservice:AuthService) 
+  constructor(public dialog: MatDialog, private route:ActivatedRoute, private opportunityservice:OportunitiesService, public userservice:UserService,public authservice:AuthService)
+
   {
     
     this.organization = this.route.paramMap.pipe(
       switchMap((value)=> {
         this.id = value.get('id')+'';
+        this.alloportunities$=this.opportunityservice.getOpportunities(this.id);
         return this.userservice.getuserById(this.id);
   
 
 
 }));
-  this.opportunityservice.getOpportunities(this.id).subscribe((d)=>{
-    console.log(d);
-  
-  })
 
     }
+  ngOnInit(): void {
+    this.authservice.userState$.subscribe((v)=>{
+      this.uid=v.id;
+    })
+    
+  }
   
 
         

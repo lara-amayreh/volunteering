@@ -1,15 +1,16 @@
 .footer{
     width: 100%;;
-  background-color:#fafafa;;
-box-shadow: 0 0 5px gray;
+    background: whitesmoke;
+    box-shadow: 0 0 10px gray;
     color:black;
-    height: 100px;
+    min-height: 100px;
     position: relative; 
   display: flex;
-    padding: 10px 15px;
-    margin-top: 50px;
-    font-size: 12px;
+    padding: 20px 15px;
+    margin-top: 5px;
+    font-size:10px;
 justify-content: space-between;
+align-items:center;
 bottom: 0;
 }
 a{
@@ -19,7 +20,7 @@ a{
 }
 h6{
  color:   rgb(230, 205, 63);
- font-size: 20px;
+ font-size: 12px;
 }
 .contact{
 display: flex;
@@ -31,5 +32,9 @@ gap: 10px;
     .footer{
     display:grid;
     grid-template-columns: repeat(3,1fr);
+    font-size: 18px;
     }
+    h6{
+      font-size: 20px;
+     }
 }

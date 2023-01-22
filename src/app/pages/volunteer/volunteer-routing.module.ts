@@ -18,7 +18,7 @@ const routes: Routes = [
   {path:'',component:LandingComponent,pathMatch:'full'},
 
     {path:'opportunities', component:AllActivitiesComponent},
-    {path:'opportunities/:id', component: ActivityDetailsComponent},
+    {path:'opportunities/:id', component: ActivityDetailsComponent, canActivate: [AuthGuard]},
 
     {path:'organizations', component:AllCompaniesComponent,pathMatch:'full'},
     
@@ -34,7 +34,7 @@ const routes: Routes = [
       {path:'my-Activities/:id', component: ActivityDetailsComponent,pathMatch:"full", canActivate: [AuthGuard]},
 
   {path:'apply', component:ApplyOnActivityComponent,canActivate: [AuthGuard]},
-  {path:'profile/:id', component: VolunteerProfileComponent},
+  {path:'profile/:id', component: VolunteerProfileComponent, canActivate: [AuthGuard]},
       {path:'**', component: PagenotfoundComponent,pathMatch:"full"},
 
    

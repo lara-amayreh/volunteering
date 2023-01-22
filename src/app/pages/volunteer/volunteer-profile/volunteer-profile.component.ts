@@ -33,15 +33,17 @@ role!:string;
     
     }  )
 
+
     )}
 
   ngOnInit(): void {
-  this.opportunities$ = this.opportunityservice.getUserOpportunities(this.id);
     this.authservice.userState$.subscribe((value)=>{
       // console.log(value);
       if(value)
       this.role = value.role;
       this.userid = value.id;
+      this.opportunities$ = this.opportunityservice.getUserOpportunities(this.id);
+
     })
     
     

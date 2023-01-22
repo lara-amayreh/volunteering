@@ -1,4 +1,11 @@
+
+
 <div class="container" *ngIf="opportunity$ | async as opportunity">
+  
+ <div class="hed-div">
+  <h1 class="heading">
+    {{opportunity.name}}  <span>Details</span>
+  </h1></div>
   <mat-tab-group dynamicHeight >
       <mat-tab label="opportunity Details">
   
@@ -105,32 +112,46 @@
       </mat-tab>
     </mat-tab-group>
   <!-- user details -->
-  <!-- <div class="user" *ngIf="role=='person'">
-  <mat-card class="form-details" *ngIf="userdetails |async as applicant" >
+  <div  *ngIf="auth.userState$|async as user">
+  <div class="user" *ngIf="userdetails |async as applicant">
+      <div class="form-detailsdiv" *ngIf="applicant[0].uid==user.id" >
+        <div class="hed-div">
+          <h1 class="heading">
+            Application <span>Form</span>
+          </h1></div>
+  <mat-card class="form-details" >
     <mat-card-header class="form-details-header">
       <mat-card-title>Applicant Form Details:</mat-card-title>
     </mat-card-header>
       <mat-divider></mat-divider>
       <mat-card-content  class="form-details-content">
-        <div class="form-item"><span>What Can You Volunteer In ?</span>{{applicant.VolunteerIn}}</div>
-        <div class="form-item"><span>why Do You Want to Volunteer ?</span>{{applicant.whyApply}}</div>
-        <div class="icon-div form-item"><mat-icon color="primary"> date_range </mat-icon>Available Date: {{(volunteer.availabledate.start).toDate()| date:'yyyy/MM/dd'}}
-          <mat-icon color="primary">history</mat-icon> {{(applicant.availabledate.end).toDate()| date:'yyyy/MM/dd'}} </div>
+        <div class="form-item"><span>What Can You Volunteer In ?</span>{{applicant[0].VolunteerIn}}</div>
+        <div class="form-item"><span>why Do You Want to Volunteer ?</span>{{applicant[0].whyApply}}</div>
+        <div class="icon-div form-item"><mat-icon color="primary"> date_range </mat-icon>Available Date: {{(applicant[0].availabledate.start).toDate()| date:'yyyy/MM/dd'}}
+          <mat-icon color="primary">history</mat-icon> {{(applicant[0].availabledate.end).toDate()| date:'yyyy/MM/dd'}} </div>
          
 
       </mat-card-content>
    
   </mat-card>
+</div>
 
 
 
 
-</div> -->
+</div>
+</div>
+
 <!-- userdetails -->
   <mat-divider></mat-divider>
    <!-- second tab group -->
    <div class="second-tab-container" *ngIf="auth.userState$| async as user">
+    
     <mat-tab-group *ngIf="user.id == opportunity.userid" dynamicHeight >
+      <div class="hed-div">
+        <h1 class="heading">
+          Applicants <span>Details</span>
+        </h1></div>
         <mat-tab label="Waitting Requests" >
           <div class="details-box mat-elevation-z4"  *ngFor="let volunteer of  waitting|async" >
             <div class="c">
@@ -300,24 +321,7 @@
   
   
 
-<!-- <div class="details" *ngIf="role=='person' && user.id == opportunity.userid">
-    <mat-card class="form-details" *ngIf="userdetails[0] |async as  userdet">
-      <mat-card-header class="form-details-header">
-        <mat-card-title>Applicant Form Details:</mat-card-title>
-      </mat-card-header>
-        <mat-divider></mat-divider>
-        <mat-card-content  class="form-details-content">
-          <div class="form-item"><span>What Can You Volunteer In ?</span>{{userdet.VolunteerIn}}</div>
-          <div class="form-item"><span>why Do You Want to Volunteer ?</span>{{userdet.whyApply}}</div>
-          <div class="icon-div form-item"><mat-icon color="primary"> date_range </mat-icon>Available Date: {{(userdet.availabledate.start).toDate()| date:'yyyy/MM/dd'}}
-            <mat-icon color="primary">history</mat-icon> {{(userdet.availabledate.end).toDate()| date:'yyyy/MM/dd'}} </div>
-          <mat-card-actions>  <button (click)="reject(userdet.uid+'',userdet.oportunityId+'')" mat-raised-button color="warn">Reject</button></mat-card-actions> -->
 
-<!-- 
-        </mat-card-content>
-     
-    </mat-card>
-  </div> --> -->
   
   
 </div>
