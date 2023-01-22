@@ -42,12 +42,18 @@ password:new FormControl('',[Validators.required]),
       this.form.get('email')?.value+'',
       this.form.get('password')?.value+''
       ).then((user)=> {
-       if(this.role.includes("company"))
-this.router.navigate(['company/']);
-else
-if(this.role.includes("person"))
-
-this.router.navigate(['volunteer/']);
+        this.auth.userState$.subscribe((value)=>{
+          if(value){
+          this.role = value.role;
+          if(this.role.includes("company"))
+          this.router.navigate(['company/']);
+          else
+          if(this.role.includes("person"))
+          
+          this.router.navigate(['volunteer/']);
+        }
+        })
+      
 
 
 

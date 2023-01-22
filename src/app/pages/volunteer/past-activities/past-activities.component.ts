@@ -14,6 +14,7 @@ import { OportunitiesService } from 'src/app/lib/services/oportunities/oportunit
 export class PastActivitiesComponent implements OnInit {
   userid!:string;
   role!:string;
+  activitydetails$!:Observable <apply |undefined>;
   activities$!:Observable<opportunity[]|undefined>;
   constructor(private oportunityservice:OportunitiesService, public auth:AuthService, private fs:AngularFirestore ){}
   ngOnInit(): void {
@@ -21,7 +22,8 @@ export class PastActivitiesComponent implements OnInit {
       if(val){
 this.userid = val.id;
 this.role = val.role;
-this.activities$= this.oportunityservice.getUserOpportunities(this.userid)
+this.activities$= this.oportunityservice.getUserOpportunities(this.userid);
+
    } })
     }
 

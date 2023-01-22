@@ -2,8 +2,17 @@
 <div matRipple class="close" ><mat-icon (click)="closedialog()">
     close
 </mat-icon></div>
-<div class="container">
-
-
+<div class="container" *ngIf="role=='person'">
+<ul *ngIf="requests$">
+    <li *ngFor="let req of requests$" [routerLink]="['./volunteer/my-Activities',req.oportunityId]">
+Your Applicantion on <b>{{req.VolunteerIn}} </b>  was <b>{{req.state}}</b></li>
+</ul>
 
 </div>
+<div class="container" *ngIf="role=='company'">
+    <ul *ngIf="requests$">
+        <li *ngFor="let req of requests$" [routerLink]="['./company/my-Activities',req.oportunityId]">
+    Your Applicantion on <b>{{req.VolunteerIn}} </b>  was <b>{{req.state}}</b></li>
+    </ul>
+    
+    </div>

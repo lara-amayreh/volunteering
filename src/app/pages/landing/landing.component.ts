@@ -27,17 +27,15 @@ export class LandingComponent implements OnInit {
   activityid!:string;
  uid!:string;
  role!:string;
- panelOpenState = false;
 
 
   ngOnInit(): void {
     
-    this.auth.userState$.subscribe((user)=>{
-      if(user){
-      this.uid=user.id;
-      this.role=user.role;  
-    }})
+  
     this.alloportunities$=this.oportunityservices.getAllOpportunities();
+    this.alloportunities$.subscribe((g)=>{
+      console.log(g);
+    })
     this.latestopportunities$ = this.fs.collection<opportunity>('oportunities',
     ref=>ref
     .orderBy("range.start", "desc").where('range.start',">",new Date())
@@ -51,6 +49,12 @@ export class LandingComponent implements OnInit {
     .limit(4)).valueChanges({idField:"id"}); 
     // this.latestopportunities$.subscribe((v)=>{
     // })
+
+    this.auth.userState$.subscribe((user)=>{
+      if(user){
+      this.uid=user.id;
+      this.role=user.role;  
+    }});
       }
   
 

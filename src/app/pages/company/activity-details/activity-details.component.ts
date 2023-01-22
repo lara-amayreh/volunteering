@@ -17,6 +17,8 @@ export class ActivityDetailsComponent implements OnInit  {
   waitting!:Observable<apply[]>;
   approved!:Observable<apply[]>;
   rejected! :Observable<apply[]>;
+  userdetails! :Observable<apply[]>;
+
 numberofapplicants:number=0;
 
 
@@ -39,6 +41,10 @@ numberofapplicants:number=0;
   ngOnInit(): void {
    this.auth.userState$.subscribe((value)=>{
       if(value){
+        this.userdetails=this.opportunityservice.getvolunteer(value.id,this.id);
+        this.userdetails.subscribe((i)=>{
+          console.log(i[0]);
+        });
       this.waitting = this.opportunityservice.getApplicantsByState(this.id,MyEnum.wait)
       this.approved = this.opportunityservice.getApplicantsByState(this.id,MyEnum.approve)
       this.rejected = this.opportunityservice.getApplicantsByState(this.id,MyEnum.reject)

@@ -138,7 +138,9 @@
               <div class="item">
               {{opportunity.numberOfApplicants}}/ {{opportunity.numberOfVolunteers}} volunteers
              </div>
-             
+             <div class="apply">
+              <button [disabled]="chickapply(opportunity.applicantsIds,opportunity.active)" mat-raised-button *ngIf="role ==('person') && opportunity.numberOfApplicants < opportunity.numberOfVolunteers"  color="primary" (click)="Apply(opportunity.id+'')">Apply</button>
+            </div> 
              <mat-card-footer>
              <div class="item"><span>{{(opportunity.range.start).toDate()| date:'yyyy/MM/dd'}}</span> <span>  -  {{(opportunity.range.end).toDate()| date:'yyyy/MM/dd'}}</span>
                   

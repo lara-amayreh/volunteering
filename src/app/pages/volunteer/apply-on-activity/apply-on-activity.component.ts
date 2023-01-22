@@ -79,6 +79,8 @@ export class ApplyOnActivityComponent {
       .addApplicant(this.oportunity.id + '', {
         uid: this.personid,
         oportunityId: this.oportunity.id,
+        oportunityName:this.oportunity.name,
+
         VolunteerIn: this.form.get('volunteerin')?.value + '',
         whyApply: this.form.get('whyvolunteer')?.value + '',
         availabledate: this.range?.value,

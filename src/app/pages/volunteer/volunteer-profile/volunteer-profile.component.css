@@ -71,7 +71,7 @@ padding: 20px;
     }
     .main-card{
         box-shadow: 0 0 8px gray;
-    padding: 50px;
+    /* padding: 50px; */
     width: 700px;
     }
     .courses{

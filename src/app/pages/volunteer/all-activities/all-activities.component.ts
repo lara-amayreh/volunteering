@@ -130,7 +130,7 @@ export class AllActivitiesComponent implements OnInit {
       console.log(result);
       if (result) {
 
-        console.log(this.counter);
+        // console.log(this.counter);
       }
       // this.person = result;
     });
