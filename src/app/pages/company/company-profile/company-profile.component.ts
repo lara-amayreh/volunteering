@@ -6,7 +6,6 @@ import { opportunity } from 'src/app/lib/inteerfaces/opportunity';
 import { organization } from 'src/app/lib/inteerfaces/organization';
 import { AuthService } from 'src/app/lib/services/auth/auth.service';
 import { OportunitiesService } from 'src/app/lib/services/oportunities/oportunities.service';
-import { OrganizationService } from 'src/app/lib/services/organization/organization.service';
 import { UserService } from 'src/app/lib/services/user/user.service';
 import { ApplyOnActivityComponent } from '../../volunteer/apply-on-activity/apply-on-activity.component';
 import { AddOpportunityComponent } from '../add-opportunity/add-opportunity.component';

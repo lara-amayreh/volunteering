@@ -6,7 +6,6 @@ import { opportunity } from 'src/app/lib/inteerfaces/opportunity';
 import { person } from 'src/app/lib/inteerfaces/person';
 import { AuthService } from 'src/app/lib/services/auth/auth.service';
 import { OportunitiesService } from 'src/app/lib/services/oportunities/oportunities.service';
-import { OrganizationService } from 'src/app/lib/services/organization/organization.service';
 import { UserService } from 'src/app/lib/services/user/user.service';
 import { UpdateVolunteerComponent } from '../update-volunteer/update-volunteer.component';
 
@@ -23,7 +22,7 @@ export class VolunteerProfileComponent {
    public id:string='';
    userid!:string;
 role!:string;
-  constructor(private opportunityservice:OportunitiesService,private route:ActivatedRoute, public dialog: MatDialog, private orgservice:OrganizationService, public userservice:UserService,public authservice:AuthService)
+  constructor(private opportunityservice:OportunitiesService,private route:ActivatedRoute, public dialog: MatDialog, public userservice:UserService,public authservice:AuthService)
   {this.person$ = this.route.paramMap.pipe(
     switchMap((value)=> {
       this.id = value.get('id')+'';

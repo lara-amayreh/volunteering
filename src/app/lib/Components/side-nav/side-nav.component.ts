@@ -7,39 +7,33 @@ import { UserService } from '../../services/user/user.service';
 @Component({
   selector: 'app-side-nav',
   templateUrl: './side-nav.component.html',
-  styleUrls: ['./side-nav.component.css']
+  styleUrls: ['./side-nav.component.css'],
 })
 export class SideNavComponent implements OnInit {
-  role!:string;
-  profileImg:string='../../../../../assets/images/profile-img.png';
-email!:string;
-constructor(public authServise:AuthService, private userservice:UserService,private fireAuth:AngularFireAuth){}
-ngOnInit(): void {
-  
-  this.authServise.userState$.subscribe((value)=>{
-    if(value){
-      this.role=value.role;
+  role!: string;
+  profileImg: string = '../../../../../assets/images/profile-img.png';
+  email!: string;
+  constructor(
+    public authServise: AuthService,
+    private userservice: UserService,
+    private fireAuth: AngularFireAuth
+  ) {}
+  ngOnInit(): void {
+    this.authServise.userState$.subscribe((value) => {
+      if (value) {
+        this.role = value.role;
 
-      if(value.profileImg)
-this.profileImg=value.profileImg;
-    }
-  });
+        if (value.profileImg) this.profileImg = value.profileImg;
+      }
+    });
 
-  this.fireAuth.authState.subscribe((val)=>{
-    if(val)
-  this.email = val.email+'';})
-    }
- 
+    this.fireAuth.authState.subscribe((val) => {
+      if (val) this.email = val.email + '';
+    });
+  }
 
-  geturl(){
- 
-    let x= `url("${this.profileImg}")` ;
+  geturl() {
+    let x = `url("${this.profileImg}")`;
     return x;
   }
-  
- 
-  
-
-
-
 }

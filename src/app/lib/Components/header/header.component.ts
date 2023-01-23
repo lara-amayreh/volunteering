@@ -14,149 +14,89 @@ import { NotificationComponent } from '../notification/notification.component';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
   role!: string;
-  name!:string;
-  com!:any;
-  email!:string;
+  name!: string;
+  com!: any;
+  email!: string;
   @ViewChild('callAPIDialog')
   callAPIDialog!: TemplateRef<any>;
-  profileImg:string='../../../../../assets/images/profile-img.png';
-  userState$!:Observable<any>;
-  requests$:apply[]=[];
-  noi!:number|null;
-  uid!:string;
-  constructor(public dialog: MatDialog ,private oppoertunityservice:OportunitiesService , public authService: AuthService ,private fs:AngularFirestore, private fireAuth:AngularFireAuth){}
-  
-  
+  profileImg: string = '../../../../../assets/images/profile-img.png';
+  userState$!: Observable<any>;
+  requests$: apply[] = [];
+  noi!: number | null;
+  uid!: string;
+  constructor(
+    public dialog: MatDialog,
+    private oppoertunityservice: OportunitiesService,
+    public authService: AuthService,
+    private fs: AngularFirestore,
+    private fireAuth: AngularFireAuth
+  ) {}
+
   ngOnInit(): void {
-     this.authService.userState$.subscribe((val)=>{
-if(val){
-this.com=val;
-this.role=val.role;
-this.uid=val.id
-if(val.profileImg)
-this.profileImg=val.profileImg;
-if(this.role=='person'){
-this.oppoertunityservice.getUserOpportunities(val.id).subscribe((v)=>{
-  // console.log(v);
- v.forEach((valu)=>{
-  if(valu!=null)
- this.oppoertunityservice.getNotifications(valu.id+'',MyEnum.wait,val.id)
- .subscribe((not)=>{
-  if(!this.requests$.includes(not[0]) && not[0]!=null){
-this.requests$.push(not[0]);
-  // console.log(not);
-  this.noi=this.requests$.length;
-}
- 
- });
-//  console.log(this.requests$);
+    this.authService.userState$.subscribe((val) => {
+      if (val) {
+        this.com = val;
+        this.role = val.role;
+        this.uid = val.id;
+        if (val.profileImg) this.profileImg = val.profileImg;
+        if (this.role == 'person') {
+          this.oppoertunityservice
+            .getUserOpportunities(val.id)
+            .subscribe((v) => {
+              v.forEach((valu) => {
+                if (valu != null)
+                  this.oppoertunityservice
+                    .getNotifications(valu.id + '', MyEnum.wait, val.id)
+                    .subscribe((not) => {
+                      if (!this.requests$.includes(not[0]) && not[0] != null) {
+                        this.requests$.push(not[0]);
+                        this.noi = this.requests$.length;
+                      }
+                    });
+              });
+            });
+        }
+      }
 
- 
+      if (this.role == 'company') {
+        this.oppoertunityservice.getOpportunities(this.uid).subscribe((f) => {
+          f.forEach((va) => {
+            if (va != null)
+              this.oppoertunityservice
+                .getcompanynotifications(va.id + '', MyEnum.wait)
+                .subscribe((not) => {
+                  if (!this.requests$.includes(not[0]) && not[0] != null) {
+                    this.requests$.push(not[0]);
 
+                    this.noi = this.requests$.length;
+                  }
+                });
+          });
+        });
+      }
 
- 
- })
-
-
-
-}
-)}}
-
-if(this.role =='company'){
-this.oppoertunityservice.getOpportunities(this.uid).subscribe((f)=>{
-  // console.log(f);
-  f.forEach((va)=>{
-    if(va!=null)
-   this.oppoertunityservice.getcompanynotifications(va.id+'',MyEnum.wait)
-   .subscribe((not)=>{
-    // console.log(not[0]);
-    if(!this.requests$.includes(not[0]) && not[0]!=null){
-  this.requests$.push(not[0]);
-    
-    this.noi=this.requests$.length;
+      this.fireAuth.authState.subscribe((value) => {
+        if (value) this.email = value.email + '';
+      });
+    });
   }
-   
-   });
-  //  console.log(this.requests$);
-  
-   
-  
-  
-   
-   })
-})
 
-
-}
-
-
-
-
-
-
-
-
-
-// this.oppoertunityservice.getUserOpportunities(val.id).subscribe((v)=>{
-//  if(v!=null){
-//  v.forEach((valu)=>{
-//   if(valu!=null)
-//  this.oppoertunityservice.getNotifications(valu.id+'',MyEnum.wait,val.id)
-//  .subscribe((not)=>{
-//   if(not[0] != null){
-//   this.requests$.push(not[0]);
-//  console.log(this.requests$);
-//  this.noi=this.requests$.length;
-
-//   }
- 
-//  })
-
-
-
- 
-//  })
-//  console.log(this.requests$);
-
-
-// }}
-// )}
-     
-    this.fireAuth.authState.subscribe((value)=>{
-  if(value)
-this.email = value.email+'';
-
-
-     })
-
-    
-  
-
-    })}
-
-  
-  geturl(){
-    let x= `url("${this.profileImg}")` ;
+  geturl() {
+    let x = `url("${this.profileImg}")`;
     return x;
   }
-  openNotification(){
+  openNotification() {
     let dialogRef = this.dialog.open(NotificationComponent, {
       width: '700px',
-      height:'500px',
-      data:{request:this.requests$}
-     
+      height: '500px',
+      data: { request: this.requests$ },
     });
-    dialogRef.afterClosed().subscribe((result)=> {
-    this.noi=null;
-        
-
-        //this.students = this.studentsService.getStudents();
-       
-    })
-    
+    dialogRef.afterClosed().subscribe((result) => {
+      this.noi = null;
+    });
   }
 }

@@ -4,10 +4,7 @@ import {
   AngularFirestore,
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
-import { collection, collectionChanges, query } from '@angular/fire/firestore';
-import { Query, where } from '@firebase/firestore';
-import * as firebase from 'firebase/compat';
-import { from, map, Observable, of, switchMap } from 'rxjs';
+import { from, map, Observable } from 'rxjs';
 import { apply, MyEnum } from '../../inteerfaces/apply';
 import { opportunity, range } from '../../inteerfaces/opportunity';
 @Injectable({
@@ -35,8 +32,6 @@ export class OportunitiesService {
       )
       .valueChanges();
   }
- 
-
 
   getAllOpportunities() {
     return this.firestore
@@ -44,8 +39,6 @@ export class OportunitiesService {
       .valueChanges();
   }
 
-
-  
   getoportunityById(id: string): Observable<opportunity | undefined> {
     return this.opportunitiesCollection.doc(id).valueChanges();
   }
@@ -62,38 +55,36 @@ export class OportunitiesService {
       )
       .valueChanges();
   }
-  getNotifications(activityid: string, filterstate: MyEnum,userid:string) {
+  getNotifications(activityid: string, filterstate: MyEnum, userid: string) {
     return this.firestore
       .collection<apply>('oportunities/' + activityid + '/applicants', (ref) =>
-        ref.where('state', 'in', [MyEnum.approve,MyEnum.reject]).where('uid', '==', userid)
+        ref
+          .where('state', 'in', [MyEnum.approve, MyEnum.reject])
+          .where('uid', '==', userid)
       )
       .valueChanges();
   }
-  getcompanynotifications(activityid: string, filterstate: MyEnum){
+  getcompanynotifications(activityid: string, filterstate: MyEnum) {
     return this.firestore
-    .collection<apply>('oportunities/' + activityid + '/applicants', (ref) =>
-      ref.where('state', '==','waitting')
-    )
-    .valueChanges();
-}
+      .collection<apply>('oportunities/' + activityid + '/applicants', (ref) =>
+        ref.where('state', '==', 'waitting')
+      )
+      .valueChanges();
+  }
   updateCompanyInfo(
     activityid: string,
     companyName: string,
     companyLogo: string,
     companyType: string
   ) {
-    console.log(activityid,companyLogo,companyName,companyType);
     return from(
-      this.opportunitiesCollection
-        .doc<opportunity>(activityid)
-        .update({
-          companyName: companyName,
-          companyLogo:companyLogo,
-          companyType: companyType,
-        })
+      this.opportunitiesCollection.doc<opportunity>(activityid).update({
+        companyName: companyName,
+        companyLogo: companyLogo,
+        companyType: companyType,
+      })
     );
   }
-
 
   updatecount(
     activityid: string,
@@ -102,13 +93,11 @@ export class OportunitiesService {
     active: boolean
   ) {
     return from(
-      this.opportunitiesCollection
-        .doc<opportunity>(activityid)
-        .update({
-          numberOfApplicants: numberOfApplicants,
-          applicantsIds,
-          active: active,
-        })
+      this.opportunitiesCollection.doc<opportunity>(activityid).update({
+        numberOfApplicants: numberOfApplicants,
+        applicantsIds,
+        active: active,
+      })
     );
   }
   updateState(userid: string, state: MyEnum, activityid: string) {
@@ -136,7 +125,7 @@ export class OportunitiesService {
       )
       .valueChanges({ idField: 'id' });
   }
-  getUserOpportunities(userid: string){
+  getUserOpportunities(userid: string) {
     return this.firestore
       .collection<opportunity>('oportunities', (ref) =>
         ref.where('applicantsIds', 'array-contains', userid)
@@ -149,11 +138,6 @@ export class OportunitiesService {
       this.opportunitiesCollection.doc<opportunity>(id).update({ id: id })
     );
   }
-  // updateApplicant(id: string) {
-  //   return from(
-  //     this.opportunitiesCollection.doc<opportunity>(id).update({ id: id })
-  //   );
-  // }
 
   getfilteredopportunities(
     skills?: string[] | any,
@@ -161,40 +145,34 @@ export class OportunitiesService {
     type?: string | null,
     range?: any
   ) {
-   console.log(name, type, skills,range);
-       return this.firestore
+    return this.firestore
       .collection<opportunity>('oportunities')
-     
-      .valueChanges({ idField: 'id' }).pipe(
-        map((data)=> {
-          return data.filter((val)=>{
-              let condition = true;
-              if(name != null && name !=""){
-             console.log("name");
-                condition  =  val.companyName?.startsWith(name) ?? false;
-              }
-              if(skills != null && skills.length > 0){
-                // console.log(val.skills);
-                console.log("skills");
-
-                condition  =  skills?.every((skill: string)=> val.skills.indexOf(skill)!= -1  ) ?? false;
-                //for every skill in the array it will check if object .skills has it
-              }
-              if(type != null && type != ""){
-                console.log("type");
-
-                condition  =  val.companyType == type ?? false;
-              }
-              if(range.start != '' && range.end != ''){
-                console.log("range");
-             condition  =  ( val.range.start.toDate()<=range.end  && val.range.end.toDate() >=range.start)?? false;
-              }
-            //  console.log(condition);
-              return condition;
+      .valueChanges({ idField: 'id' })
+      .pipe(
+        map((data) => {
+          return data.filter((val) => {
+            let condition = true;
+            if (name != null && name != '') {
+              condition = val.companyName?.startsWith(name) ?? false;
+            }
+            if (skills != null && skills.length > 0) {
+              condition =
+                skills?.every(
+                  (skill: string) => val.skills.indexOf(skill) != -1
+                ) ?? false;
+            }
+            if (type != null && type != '') {
+              condition = val.companyType == type ?? false;
+            }
+            if (range.start != '' && range.end != '') {
+              condition =
+                (val.range.start.toDate() <= range.end &&
+                  val.range.end.toDate() >= range.start) ??
+                false;
+            }
+            return condition;
           });
         })
       );
-
-  }     
-
+  }
 }

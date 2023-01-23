@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { organization } from 'src/app/lib/inteerfaces/organization';
 import { AuthService } from 'src/app/lib/services/auth/auth.service';
-import { OrganizationService } from 'src/app/lib/services/organization/organization.service';
 import { map, Observable, startWith } from 'rxjs';
 import { companytypes } from 'src/assets/arrays/company-types';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -20,7 +19,7 @@ export class AllCompaniesComponent {
   filteredOptions!: Observable<string[]>;
 
 
-  constructor(private auth:AuthService,private organizationservice:OrganizationService,private userservice:UserService){}
+  constructor(private auth:AuthService,private userservice:UserService){}
   types=companytypes;
   
   ngOnInit(): void {

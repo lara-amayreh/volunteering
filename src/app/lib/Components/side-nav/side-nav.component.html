@@ -1,5 +1,6 @@
 <div *ngIf="authServise.userState$ | async as user" class="p-avatar">
-  <div class="avatar-container"
+  <div
+    class="avatar-container"
     [routerLink]="['/volunteer/profile', user.id]"
     *ngIf="user.role == 'person'"
   >
@@ -8,11 +9,12 @@
       {{ email }}
     </div>
   </div>
-  <div class="avatar-container"
+  <div
+    class="avatar-container"
     [routerLink]="['/company/profile', user.id]"
     *ngIf="user.role == 'company'"
   >
-  <div class="avatar" [style.backgroundImage]="geturl()"></div>
+    <div class="avatar" [style.backgroundImage]="geturl()"></div>
 
     <div class="p-link">
       {{ email }}
@@ -65,8 +67,13 @@
     <mat-icon>task</mat-icon>
     <span>My Activities</span>
   </button>
-  <button *ngIf="role == 'company'"  mat-button class="menu-button" routerLink="/company/All-Volunteers">
-        <mat-icon>groups</mat-icon>
+  <button
+    *ngIf="role == 'company'"
+    mat-button
+    class="menu-button"
+    routerLink="/company/All-Volunteers"
+  >
+    <mat-icon>groups</mat-icon>
     <span>Volunteers</span>
   </button>
 </div>

@@ -1,26 +1,31 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 20px;
+}
+
 .login {
   max-width: 550px;
-   box-shadow: 0 0 10px black;
-     border-radius: 5px;
-     padding: 10px;
-     margin: 20px auto;
- }
- 
- .login-form {
- 
-   width: 100%;
- }
- 
- .inputs-field {
-   width: 100%;
- }
- .card-h{
- padding-bottom: 20px;
- 
- }
- 
- mat-card-actions{
-   display: flex;
-   gap: 5px;
- }
- 
+  box-shadow: 0 0 10px black;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 20px auto;
+}
+
+.login-form {
+  width: 100%;
+}
+
+.inputs-field {
+  width: 100%;
+}
+.card-h {
+  padding-bottom: 20px;
+}
+
+mat-card-actions {
+  display: flex;
+  gap: 5px;
+}

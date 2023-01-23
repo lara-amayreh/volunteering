@@ -1,13 +1,14 @@
 <header>
   <div class="nav-links">
-    <a routerLink="./" class="logo"><img src="../../../../assets/images/logo.png" alt="logo"/></a>
+    <a routerLink="./" class="logo"
+      ><img src="../../../../assets/images/logo.png" alt="logo"
+    /></a>
     <button
-
       *ngIf="authService.userState$ && role == 'company'"
       mat-button
       routerLink="./company/All-Volunteers"
     >
-    VOLUNTEERS
+      VOLUNTEERS
     </button>
     <button mat-button routerLink="./volunteer/organizations">
       ORGANIZATIONS
@@ -20,29 +21,29 @@
         class="avatar-container"
         *ngIf="authService.userState$ | async as user; else loginButton"
       >
-      <div
-      [routerLink]="['/volunteer/profile', user.id]"
-      *ngIf="user.role == 'person'"
-    >
-      <div class="p-avatar">
-        <div class="avatar" [style.backgroundImage]="geturl()"></div>
-        <div class="p-link">
-          {{ email }}
+        <div
+          [routerLink]="['/volunteer/profile', user.id]"
+          *ngIf="user.role == 'person'"
+        >
+          <div class="p-avatar">
+            <div class="avatar" [style.backgroundImage]="geturl()"></div>
+            <div class="p-link">
+              {{ email }}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    <div
-      [routerLink]="['/company/profile', user.id]"
-      *ngIf="user.role == 'company'"
-    >
-      <div class="p-avatar">
-        <div class="avatar" [style.backgroundImage]="geturl()"></div>
+        <div
+          [routerLink]="['/company/profile', user.id]"
+          *ngIf="user.role == 'company'"
+        >
+          <div class="p-avatar">
+            <div class="avatar" [style.backgroundImage]="geturl()"></div>
 
-        <div class="p-link">
-          {{ email }}
+            <div class="p-link">
+              {{ email }}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
         <icon
           class="notification"
           mat-button
@@ -53,21 +54,21 @@
         >
           <mat-icon>notifications</mat-icon>
         </icon>
-      <button (click)="authService.signout()" mat-button class="btn-login">
-        <mat-icon>logout</mat-icon>
-      </button>
-     
+        <button (click)="authService.signout()" mat-button class="btn-login">
+          <mat-icon>logout</mat-icon>
+        </button>
+      </div>
     </div>
-    </div>
-    <ng-template #loginButton >
+    <ng-template #loginButton>
       <div class="login">
-      <button mat-button routerLink="/auth/login" class="btn-login">
-        login <mat-icon>login</mat-icon>
-      </button>
+        <button mat-button routerLink="/auth/login" class="btn-login">
+          login <mat-icon>login</mat-icon>
+        </button>
 
-      <button mat-button routerLink="/auth/register" class="btn-login">
-        signup<mat-icon>person-add-alt</mat-icon>
-      </button></div>
+        <button mat-button routerLink="/auth/register" class="btn-login">
+          signup<mat-icon>person-add-alt</mat-icon>
+        </button>
+      </div>
     </ng-template>
   </div>
 </header>

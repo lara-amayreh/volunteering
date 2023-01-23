@@ -6,15 +6,14 @@ import { PersonRegesterComponent } from './person-regester/person-regester.compo
 import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
- {path:'',component:RegisterComponent,pathMatch:"full"},
- {path:'person',component:PersonRegesterComponent},
- {path:'company',component:OrganaizationRegesterComponent},
- {path:'**',component:PagenotfoundComponent ,pathMatch:"full"},
-
+  { path: '', component: RegisterComponent, pathMatch: 'full' },
+  { path: 'person', component: PersonRegesterComponent },
+  { path: 'company', component: OrganaizationRegesterComponent },
+  { path: '**', component: PagenotfoundComponent, pathMatch: 'full' },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class RegestrationRoutingModule { }
+export class RegestrationRoutingModule {}

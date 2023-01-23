@@ -22,7 +22,6 @@ margin-top: 5px;
 .wrap{
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
     padding: 10px 28px 10px 10px;}
 .img-div{
     width: 100%;

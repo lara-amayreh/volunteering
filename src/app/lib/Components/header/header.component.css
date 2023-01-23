@@ -1,100 +1,89 @@
-header{
-    display: flex;
-    position: relative;
-    top: 0;
-    left: 0;
-   justify-content: flex-start;
-    align-items: center;
-    font-size: 20px;
-
-
-    
-} 
-.nav-links{
-    display: flex;
-    justify-content: space-between;
-
+header {
+  display: flex;
+  position: relative;
+  top: 0;
+  left: 0;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 20px;
 }
-.notification{
-    cursor: pointer;
-    padding-left: 5px;
+.nav-links {
+  display: flex;
+  justify-content: space-between;
 }
-.avatar-container{
-display: flex;
-justify-content: center;
-align-items: center;
-position: fixed;
-right: 5px;
-gap:10px
+.notification {
+  cursor: pointer;
+  padding-left: 5px;
 }
-.p-link{
-    cursor: pointer;font-size: 11px;
+.avatar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  right: 5px;
+  gap: 10px;
 }
-.login{
-    align-self: flex-end;
+.p-link {
+  cursor: pointer;
+  font-size: 11px;
 }
- .p-avatar{
-display: none;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-padding-bottom: 3px;
-cursor: pointer;
-
-} 
-button{
-    font-family: 'Convergence', sans-serif;
-
+.login {
+  align-self: flex-end;
 }
-.avatar{
-    border-radius: 100%;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-  }
-.btn-login{
-display: flex;
-align-items: center;
+.p-avatar {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 3px;
+  cursor: pointer;
 }
-.regestration{
-    display: flex;
-        align-items: center;
-        gap: 5px;
+button {
+  font-family: "Convergence", sans-serif;
+}
+.avatar {
+  border-radius: 100%;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+.btn-login {
+  display: flex;
+  align-items: center;
+}
+.regestration {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
-.login{
-    display: flex;
-    gap:5px;
-    position: fixed;
-    top: 10px;
-    right:10px;
+.login {
+  display: flex;
+  gap: 5px;
+  position: fixed;
+  top: 10px;
+  right: 10px;
 }
 
-
-
-.nav-links{
-    display: flex;
-    overflow: visible;
-    align-items: center;
-
-   
-
+.nav-links {
+  display: flex;
+  overflow: visible;
+  align-items: center;
 }
-header{
-    padding-left: 10px;
-
+header {
+  padding-left: 10px;
 }
-.nav-links button{
-    display: none;
+.nav-links button {
+  display: none;
 }
 @media (min-width: 768px) {
-    .nav-links button{
-        display: flex;
-    }
-    .p-avatar{
-        display: flex;
-    }
+  .nav-links button {
+    display: flex;
+  }
+  .p-avatar {
+    display: flex;
+  }
 }

@@ -4,22 +4,20 @@
   align-items: center;
   justify-content: flex-start;
   font-size: 1rem;
-
- 
 }
-.p-link{
+.p-link {
   font-size: 11px;
 }
-.avatar-container{
-display: flex;
-flex-direction: column;
-align-items: center;}
-.p-avatar{
-display: flex;
-flex-direction: column;
-align-items: center;
-cursor: pointer;
-
+.avatar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.p-avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
 }
 .avatar {
   border-radius: 100%;
@@ -31,8 +29,8 @@ cursor: pointer;
   border: 1px solid gray;
   cursor: pointer;
 }
-.home{
-color: rgb(230, 205, 63);
+.home {
+  color: rgb(230, 205, 63);
 }
 mat-icon {
   margin-right: 5px;
@@ -42,11 +40,11 @@ h4 {
   font-weight: normal;
 }
 mat-divider {
-width: 100%;
-margin-top: 10px;
-margin-bottom: 10px;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
   background-color: rgba(255, 255, 255, 0.5);
 }
-mat-sidenav-content{
+mat-sidenav-content {
   background-color: white;
 }
