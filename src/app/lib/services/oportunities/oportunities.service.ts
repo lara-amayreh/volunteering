@@ -35,6 +35,7 @@ export class OportunitiesService {
       )
       .valueChanges();
   }
+ 
 
 
   getAllOpportunities() {
@@ -68,7 +69,13 @@ export class OportunitiesService {
       )
       .valueChanges();
   }
-
+  getcompanynotifications(activityid: string, filterstate: MyEnum){
+    return this.firestore
+    .collection<apply>('oportunities/' + activityid + '/applicants', (ref) =>
+      ref.where('state', '==','waitting')
+    )
+    .valueChanges();
+}
   updateCompanyInfo(
     activityid: string,
     companyName: string,
@@ -154,7 +161,7 @@ export class OportunitiesService {
     type?: string | null,
     range?: any
   ) {
-    // console.log(name, type, skills,range);
+   console.log(name, type, skills,range);
        return this.firestore
       .collection<opportunity>('oportunities')
      
@@ -163,19 +170,24 @@ export class OportunitiesService {
           return data.filter((val)=>{
               let condition = true;
               if(name != null && name !=""){
-                condition  =  val.companyName?.includes(name) ?? false;
+             console.log("name");
+                condition  =  val.companyName?.startsWith(name) ?? false;
               }
-              if(skills != null && skills.length> 0){
+              if(skills != null && skills.length > 0){
                 // console.log(val.skills);
+                console.log("skills");
+
                 condition  =  skills?.every((skill: string)=> val.skills.indexOf(skill)!= -1  ) ?? false;
                 //for every skill in the array it will check if object .skills has it
               }
               if(type != null && type != ""){
+                console.log("type");
+
                 condition  =  val.companyType == type ?? false;
               }
-              if(Object.keys(range).length !=0){
-                console.log(range,val.range.start.toDate())
-              condition  =  ( val.range.start.toDate()<=range.end  && val.range.end.toDate() >=range.start)?? false;
+              if(range.start != '' && range.end != ''){
+                console.log("range");
+             condition  =  ( val.range.start.toDate()<=range.end  && val.range.end.toDate() >=range.start)?? false;
               }
             //  console.log(condition);
               return condition;

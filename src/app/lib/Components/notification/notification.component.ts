@@ -27,33 +27,35 @@ export class NotificationComponent implements OnInit{
     this.auth.userState$.subscribe((val)=>{
       if(val){
         this.role=val.role;
-      this.oppoertunityservice.getUserOpportunities(val.id).subscribe((v)=>{
-        console.log(v);
-       v.forEach((valu)=>{
-        if(valu!=null)
-       this.oppoertunityservice.getNotifications(valu.id+'',MyEnum.wait,val.id)
-       .subscribe((not)=>{
-        if(not[0] !=null){
-      this.requests$.push(not[0]);
-        console.log(not);}
+        this.requests$=this.data.request;
+      }})}
+      // this.oppoertunityservice.getUserOpportunities(val.id).subscribe((v)=>{
+      //   // console.log(v);
+      //  v.forEach((valu)=>{
+      //   if(valu!=null)
+      //  this.oppoertunityservice.getNotifications(valu.id+'',MyEnum.wait,val.id)
+      //  .subscribe((not)=>{
+      //   if(not[0] !=null){
+      // this.requests$.push(not[0]);
+      //   // console.log(not);
+      // }
        
-       });
-      //  console.log(this.requests$);
+      //  });
+      // //  console.log(this.requests$);
       
        
       
       
        
-       })
+      //  })
       
       
       
-      }
-      )}
+      // }
+      // )}
     
   
-    }
-    )}
+    
    
 
     

@@ -4,7 +4,15 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { data } from 'citiesNames';
-import { combineLatest, filter, map, Observable, of, startWith, switchMap } from 'rxjs';
+import {
+  combineLatest,
+  filter,
+  map,
+  Observable,
+  of,
+  startWith,
+  switchMap,
+} from 'rxjs';
 import { opportunity } from 'src/app/lib/inteerfaces/opportunity';
 import { organization } from 'src/app/lib/inteerfaces/organization';
 import { AuthService } from 'src/app/lib/services/auth/auth.service';
@@ -22,7 +30,7 @@ import { ApplyOnActivityComponent } from '../apply-on-activity/apply-on-activity
 export class AllActivitiesComponent implements OnInit {
   @ViewChild('callAPIDialog')
   callAPIDialog!: TemplateRef<any>;
-  alloportunities$!: Observable< opportunity[]>;
+  alloportunities$!: Observable<opportunity[]>;
   // alloportunities:any[]=[];
   activityid: string = '';
   role!: string;
@@ -32,9 +40,9 @@ export class AllActivitiesComponent implements OnInit {
   counter: number = 0;
   skills = allSkills;
   filteredOptions!: Observable<string[]>;
-  
-  allcompanies : string[]=[];
-  types=companytypes;
+
+  allcompanies: string[] = [];
+  types = companytypes;
 
   constructor(
     private af: AngularFirestore,
@@ -45,8 +53,6 @@ export class AllActivitiesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
-   
     // this.counter = this.oportunityservices.countApplicant(this.activityid);
     // this.types.push('All Types');
 
@@ -59,66 +65,60 @@ export class AllActivitiesComponent implements OnInit {
         //   this.counter = val.length});
       }
     });
-    this.alloportunities$=this.oportunityservices.getAllOpportunities();
-
+    this.alloportunities$ = this.oportunityservices.getAllOpportunities();
 
     this.alloportunities$.subscribe((val) => {
       val.forEach((vall, index) => {
-       if (!this.allcompanies.includes(vall.companyName+''))
-       this.allcompanies?.push(vall.companyName+'');
- 
-        });
-       
+        if (!this.allcompanies.includes(vall.companyName + ''))
+          this.allcompanies?.push(vall.companyName + '');
+      });
     });
     this.filteredOptions = this.form.controls.comname.valueChanges.pipe(
       startWith(''),
-      map(value => this._filter(value || '')),
+      map((value) => this._filter(value || ''))
     );
   }
 
-  form=new FormGroup({
+  form = new FormGroup({
     skill: new FormControl<string[]>([]),
-    comname :new FormControl(''),
+    comname: new FormControl(''),
     type: new FormControl(''),
     range: new FormGroup({
       start: new FormControl(''),
       end: new FormControl(''),
     }),
-   
-  
-  
-  
-  })
+  });
   get range(): FormGroup {
     return this.form.get('range') as FormGroup;
   }
-  get skill(){
+  get skill() {
     return this.form.get('skill')?.value;
   }
-  get comname(){
+  get comname() {
     return this.form.get('comname')?.value;
   }
-  get type(){
+  get type() {
     return this.form.get('type')?.value;
   }
-  
-   
-  filter(){
-    console.log((this.range.value.start));
-  
-      this.alloportunities$ = this.oportunityservices.getfilteredopportunities(this.skill ,this.comname,this.type,this.range.value)
-     
-     
-     }
-  
-    private _filter(value: string): string[] {
-      const filterValue = value.toLowerCase();
-  
-      return this.allcompanies.filter(option => option.toLowerCase().includes(filterValue));
-    }
+
+  filter() {
+    this.alloportunities$ = this.oportunityservices.getfilteredopportunities(
+      this.skill,
+      this.comname,
+      this.type,
+      this.range.value
+    );
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.allcompanies.filter((option) =>
+      option.toLowerCase().includes(filterValue)
+    );
+  }
 
   Apply(id: string) {
-    
     this.activityid = id;
     let dialogRef = this.dialog.open(ApplyOnActivityComponent, {
       width: '700px',
@@ -129,18 +129,16 @@ export class AllActivitiesComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       console.log(result);
       if (result) {
-
         // console.log(this.counter);
       }
       // this.person = result;
     });
   }
-  chickapply(applicantsIds:string[],active:boolean){
-let stat:boolean = false;
-for (let i = 0; i < applicantsIds.length ; i++) {
-if((applicantsIds[i]==this.uid)|| !active)
-stat = true
-}
-return stat;
+  chickapply(applicantsIds: string[], active: boolean) {
+    let stat: boolean = false;
+    for (let i = 0; i < applicantsIds.length; i++) {
+      if (applicantsIds[i] == this.uid || !active) stat = true;
+    }
+    return stat;
   }
 }

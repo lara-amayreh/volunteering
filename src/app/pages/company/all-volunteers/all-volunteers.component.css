@@ -93,9 +93,9 @@
 
 }
 .search{
-    position:relative;
+    position:fixed;
     z-index: 5;
-    top:10px;
+    top:100px;
     left:36%;
     width:150px;
 
@@ -194,10 +194,10 @@ padding: 15px;}
         }
        
         .search{
-            position:relative;
+            position:fixed;
             width:300px;
             z-index: 5;
-            top:10px;
+            top:100px;
             left:50%;
         
             

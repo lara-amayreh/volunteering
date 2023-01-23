@@ -24,7 +24,6 @@ export class AllCompaniesComponent {
   types=companytypes;
   
   ngOnInit(): void {
-    this.types.push('All Types');
 this.userservice.getAllusersByRole('company').subscribe((val)=>{
   this.allcompanies = val as organization[];
   val.forEach((vall, index) => {

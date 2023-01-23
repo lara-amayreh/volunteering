@@ -8,3 +8,31 @@
     flex-direction: column;
     gap:20px;
 align-items:center;}
+
+li:hover{
+    cursor: pointer;
+    
+}
+a{
+    background-color:white;
+    text-decoration: none;
+    padding-top: 15px;
+    /* font-size: 17px; */
+    font-family: 'Convergence', sans-serif;
+    outline: none;
+
+
+}
+li{
+    list-style-type:none;
+    outline: none;
+    width: 100%;
+}
+li:hover a:hover{
+    background-color:whitesmoke;
+}
+ul{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

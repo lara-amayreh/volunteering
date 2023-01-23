@@ -27,6 +27,7 @@ export class HeaderComponent implements OnInit {
   userState$!:Observable<any>;
   requests$:apply[]=[];
   noi!:number|null;
+  uid!:string;
   constructor(public dialog: MatDialog ,private oppoertunityservice:OportunitiesService , public authService: AuthService ,private fs:AngularFirestore, private fireAuth:AngularFireAuth){}
   
   
@@ -35,18 +36,19 @@ export class HeaderComponent implements OnInit {
 if(val){
 this.com=val;
 this.role=val.role;
+this.uid=val.id
 if(val.profileImg)
 this.profileImg=val.profileImg;
-
+if(this.role=='person'){
 this.oppoertunityservice.getUserOpportunities(val.id).subscribe((v)=>{
-  console.log(v);
+  // console.log(v);
  v.forEach((valu)=>{
   if(valu!=null)
  this.oppoertunityservice.getNotifications(valu.id+'',MyEnum.wait,val.id)
  .subscribe((not)=>{
   if(!this.requests$.includes(not[0]) && not[0]!=null){
 this.requests$.push(not[0]);
-  console.log(not);
+  // console.log(not);
   this.noi=this.requests$.length;
 }
  
@@ -62,7 +64,34 @@ this.requests$.push(not[0]);
 
 
 }
-)}
+)}}
+
+if(this.role =='company'){
+this.oppoertunityservice.getOpportunities(this.uid).subscribe((f)=>{
+  // console.log(f);
+  f.forEach((va)=>{
+    if(va!=null)
+   this.oppoertunityservice.getcompanynotifications(va.id+'',MyEnum.wait)
+   .subscribe((not)=>{
+    // console.log(not[0]);
+    if(!this.requests$.includes(not[0]) && not[0]!=null){
+  this.requests$.push(not[0]);
+    
+    this.noi=this.requests$.length;
+  }
+   
+   });
+  //  console.log(this.requests$);
+  
+   
+  
+  
+   
+   })
+})
+
+
+}
 
 
 
@@ -117,7 +146,8 @@ this.email = value.email+'';
   openNotification(){
     let dialogRef = this.dialog.open(NotificationComponent, {
       width: '700px',
-      height:'500px'
+      height:'500px',
+      data:{request:this.requests$}
      
     });
     dialogRef.afterClosed().subscribe((result)=> {

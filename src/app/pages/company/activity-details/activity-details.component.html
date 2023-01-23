@@ -33,6 +33,14 @@
           <div class="icon-div"><mat-icon color="primary"> volunteer_activism </mat-icon> {{opportunity.numberOfVolunteers}} Volunteers</div>
           <div class="icon-div"><mat-icon color="primary"> date_range </mat-icon> {{(opportunity.range.start).toDate()| date:'yyyy/MM/dd'}}
           <mat-icon color="primary">history</mat-icon> {{(opportunity.range.end).toDate()| date:'yyyy/MM/dd'}} </div>
+          <div class="icon-div skills"><mat-icon color="primary">checklist</mat-icon>
+            <mat-chip-listbox class="skills" aria-label="skills required">
+  
+              <mat-chip  *ngFor="let skill of (opportunity.skills)">
+                       {{skill}}
+              </mat-chip>
+              </mat-chip-listbox>
+            </div>
            <div *ngIf='opportunity.numberOfApplicants < opportunity.numberOfVolunteers' class="icon-div"><span class="active" ></span>Available</div>
            <div *ngIf='opportunity.numberOfApplicants >= opportunity.numberOfVolunteers' class="icon-div"><span  span class="notactive" ></span> Not Available</div>
            <mat-progress-bar 
@@ -41,17 +49,21 @@
            mode="determinate"
            [bufferValue]="0">
        </mat-progress-bar>
+       
           <div class="item">
           {{opportunity.numberOfApplicants}} / {{opportunity.numberOfVolunteers}} volunteers
          </div>
+         <div class="apply">
+          <button [disabled]="chickapply(opportunity.applicantsIds,opportunity.active)" mat-raised-button *ngIf="role ==('person') && opportunity.numberOfApplicants < opportunity.numberOfVolunteers"  color="primary" (click)="Apply(opportunity.id+'')">Apply</button>
+        </div> 
         </div>
          </mat-card>
           </div>
         <mat-card class="decribe">
           <mat-card-header class="details-card-header">
-            <mat-card-title>Description:</mat-card-title>
+            <mat-card-title>Description:</mat-card-title></mat-card-header>
             <mat-card-content>{{opportunity.description}}</mat-card-content>
-          </mat-card-header>
+          
         </mat-card>
     </div>
       </mat-tab>
@@ -102,7 +114,7 @@
                 <div class="form-item"><span>why Do You Want to Volunteer ?</span>{{volunteer.whyApply}}</div>
                 <div class="icon-div form-item"><mat-icon color="primary"> date_range </mat-icon>Available Date: {{(volunteer.availabledate.start).toDate()| date:'yyyy/MM/dd'}}
                   <mat-icon color="primary">history</mat-icon> {{(volunteer.availabledate.end).toDate()| date:'yyyy/MM/dd'}} </div>
-  
+
   
               </mat-card-content>
            
@@ -127,9 +139,14 @@
       <mat-card-content  class="form-details-content">
         <div class="form-item"><span>What Can You Volunteer In ?</span>{{applicant[0].VolunteerIn}}</div>
         <div class="form-item"><span>why Do You Want to Volunteer ?</span>{{applicant[0].whyApply}}</div>
-        <div class="icon-div form-item"><mat-icon color="primary"> date_range </mat-icon>Available Date: {{(applicant[0].availabledate.start).toDate()| date:'yyyy/MM/dd'}}
+        <div class="icon-div form-item"><mat-icon color="primary"> date_range </mat-icon>{{(applicant[0].availabledate.start).toDate()| date:'yyyy/MM/dd'}}
           <mat-icon color="primary">history</mat-icon> {{(applicant[0].availabledate.end).toDate()| date:'yyyy/MM/dd'}} </div>
-         
+          <div class="form-item icon-div"><span>Request Status: </span>{{applicant[0].state}}
+          <mat-icon class="approved" *ngIf="applicant[0].state =='approved'">check_circle </mat-icon>
+          <mat-icon color="worn" *ngIf="applicant[0].state =='rejected'">close </mat-icon>
+          <mat-icon class="waitting" *ngIf="applicant[0].state =='waitting'">pending </mat-icon>
+        </div>
+
 
       </mat-card-content>
    
@@ -146,12 +163,13 @@
   <mat-divider></mat-divider>
    <!-- second tab group -->
    <div class="second-tab-container" *ngIf="auth.userState$| async as user">
-    
-    <mat-tab-group *ngIf="user.id == opportunity.userid" dynamicHeight >
-      <div class="hed-div">
+    <div  *ngIf="user.id == opportunity.userid">
+    <div class="hed-div">
         <h1 class="heading">
           Applicants <span>Details</span>
         </h1></div>
+    <mat-tab-group dynamicHeight >
+      
         <mat-tab label="Waitting Requests" >
           <div class="details-box mat-elevation-z4"  *ngFor="let volunteer of  waitting|async" >
             <div class="c">
@@ -325,5 +343,5 @@
   
   
 </div>
-  
+  </div>
   
