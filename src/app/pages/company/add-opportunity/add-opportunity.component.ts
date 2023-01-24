@@ -3,12 +3,13 @@ import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { map, Observable, of, startWith, switchMap } from 'rxjs';
+import { map, Observable, of, startWith, Subscription, switchMap } from 'rxjs';
 import { opportunity } from 'src/app/lib/inteerfaces/opportunity';
 import { AuthService } from 'src/app/lib/services/auth/auth.service';
 import { OportunitiesService } from 'src/app/lib/services/oportunities/oportunities.service';
 import { allSkills } from 'src/assets/arrays/skills';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { UserService } from 'src/app/lib/services/user/user.service';
 
 
 @Component({
@@ -18,9 +19,16 @@ import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog
 })
 export class AddOpportunityComponent{
   numberOfVolunteers!:number
-  id:string='';
+  id!:string;
+  userid!:string;
+  numberofOpp:number=0;
+userstate!:Observable<any>;
+subscription!: Subscription;
+
+
+
   skills = allSkills;
-  constructor(private oportunityservice: OportunitiesService,private authservice:AuthService,
+  constructor(private userservice:UserService,private oportunityservice: OportunitiesService,private authservice:AuthService,
     private dialogRef: MatDialogRef<AddOpportunityComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any)
 
@@ -64,13 +72,14 @@ export class AddOpportunityComponent{
 
 
 confirm(){
-this.authservice.userState$
+this.userstate = this.authservice.userState$
 .pipe(switchMap( (value) => {
   if(value){
-    console.log(value);
+    this.numberofOpp = value.numberOfApps;
+    this.userid = value.id;
 return this.oportunityservice.addOpportunity({
   userid : value.id,
-id:this.id,
+// id:this.id,
   name:this.form.get('name')?.value +'',
   description:this.form.get('description')?.value+'',
   skills:   this.form.get('skill')?.value!,
@@ -82,23 +91,34 @@ id:this.id,
   active:true,
 applicantsIds:[],
 companyType:value.type,
+ creatDate:new Date(),
 })
 
 }
   
   else{
-  return of (null);}
-})).subscribe((value)=>{
-  if(!value)
-  alert("connot add opportunity");
-  else{
-  this.id = value.id;
-  this.oportunityservice.updatid(this.id);
-  console.log(value);}
-})
+  return of (null);}}))
+// })).subscribe((value)=>{
+//   if(value)
+//  {
+//   this.id = value.id;
+//   this.oportunityservice.updatid(this.id);
+// //  this.userservice.updateNumberOfOppo(this.userid,this.numberofOpp + 1);
+//   console.log(this.numberofOpp);}
+// })
+this.subscription = this.userstate.subscribe((value)=>{
+ if(value)
+{
+ this.id = value.id;
+ this.oportunityservice.updatid(this.id);
+   this.userservice.updateNumberOfOppo(this.userid,this.numberofOpp + 1);
+console.log(this.numberofOpp);}
 this.dialogRef.close(true);
 
 
+})}
+ngOnDestroy() {
+  this.subscription.unsubscribe()
 }
 get start(){
   return this.form.get('start');

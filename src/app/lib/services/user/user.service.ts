@@ -23,6 +23,12 @@ export class UserService {
       .doc(id)
       .update({ ...user });
   }
+  updateNumberOfOppo(id: string,numberof:number) {
+    return this.firestore
+      .collection('users')
+      .doc(id)
+      .update({numberOfApps:numberof});
+  }
   getuserById(id: string): Observable<any> {
 
     return this.usercollection.doc(id).valueChanges({ idField: 'id' });

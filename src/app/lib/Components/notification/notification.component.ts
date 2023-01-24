@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { OportunitiesService } from '../../services/oportunities/oportunities.service';
-import { filter, Observable } from 'rxjs';
+import { filter, Observable, Subscription } from 'rxjs';
 import { apply, MyEnum } from '../../inteerfaces/apply';
 import { V } from '@angular/cdk/keycodes';
 
@@ -20,6 +20,10 @@ import { V } from '@angular/cdk/keycodes';
 export class NotificationComponent implements OnInit {
   requests$: apply[] = [];
   role!: string;
+  userstate!:Observable<any>;
+
+  subscription!: Subscription;
+
   constructor(
     public auth: AuthService,
     private oppoertunityservice: OportunitiesService,
@@ -27,7 +31,8 @@ export class NotificationComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
   ngOnInit(): void {
-    this.auth.userState$.subscribe((val) => {
+   this.userstate = this.auth.userState$;
+   this.subscription = this.userstate.subscribe((val) => {
       if (val) {
         this.role = val.role;
         this.requests$ = this.data.request;
@@ -37,5 +42,13 @@ export class NotificationComponent implements OnInit {
 
   closedialog() {
     this.dialogRef.close(true);
+  }
+  // ngOnDestroy() {
+   
+  //   this.auth.userState$.unsubscribe();
+  // }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe()
   }
 }

@@ -4,7 +4,7 @@ import { Component,Input, TemplateRef, Injectable, ViewChild, OnInit } from '@an
 import { FormControl, NgForm, Validators,  FormBuilder, FormGroup  } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldControl } from '@angular/material/form-field';
-import { Observable, of, switchMap } from 'rxjs';
+import { Observable, of, Subscription, switchMap } from 'rxjs';
 import { AppComponent } from 'src/app/app.component';
 import { opportunity } from 'src/app/lib/inteerfaces/opportunity';
 import { AuthService } from 'src/app/lib/services/auth/auth.service';
@@ -27,9 +27,12 @@ export class CompanyActivitiesComponent implements OnInit {
 cname!:string;
 start!:string;
 end!:string;
+userstate!:Observable<any>;
+subscription!: Subscription;
   constructor(public dialog: MatDialog,public oportunityservice:OportunitiesService,private authservice:AuthService) { }
   ngOnInit(): void {
-  this.authservice.userState$.subscribe((value)=>{
+ this.userstate= this.authservice.userState$;
+ this.subscription=this.userstate.subscribe((value)=>{
     this.opportunities = this.oportunityservice.getOpportunities(value?.id+'');
 
   })
@@ -50,11 +53,13 @@ end!:string;
          console.log(result); 
          
  
-         //this.students = this.studentsService.getStudents();
         
      })
  
     
    }
+   ngOnDestroy() {
+    this.subscription.unsubscribe()
+  }
 
 }

@@ -38,6 +38,9 @@ export class CompanyProfileComponent implements OnInit {
       switchMap((value)=> {
         this.id = value.get('id')+'';
         this.alloportunities$=this.opportunityservice.getOpportunities(this.id);
+        this.authservice.userState$.subscribe((v)=>{
+          this.uid = v.id;
+        })
         return this.userservice.getuserById(this.id);
   
 
@@ -46,9 +49,7 @@ export class CompanyProfileComponent implements OnInit {
 
     }
   ngOnInit(): void {
-    this.authservice.userState$.subscribe((v)=>{
-      this.uid=v.id;
-    })
+   
     
   }
   

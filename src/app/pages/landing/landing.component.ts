@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AllActivitiesComponent } from '../volunteer/all-activities/all-activities.component';
 import { VolunteerModule } from '../volunteer/volunteer.module';
 import { opportunity } from 'src/app/lib/inteerfaces/opportunity';
@@ -23,7 +23,8 @@ export class LandingComponent implements OnInit {
   latestopportunities$!: Observable<opportunity[]>;
   allorganizations$!:Observable<organization[]|undefined>;
   latestOrg$!: Observable<organization[]>;
-
+  // userstate!:Observable<any>;
+  subscription!: Subscription;
   activityid!:string;
  uid!:string;
  role!:string;
@@ -33,8 +34,7 @@ export class LandingComponent implements OnInit {
     
   
     this.alloportunities$=this.oportunityservices.getAllOpportunities();
-    this.alloportunities$.subscribe((g)=>{
-      console.log(g);
+    this.subscription = this.alloportunities$.subscribe((g)=>{
     })
     this.latestopportunities$ = this.fs.collection<opportunity>('oportunities',
     ref=>ref
@@ -70,7 +70,6 @@ export class LandingComponent implements OnInit {
       data: { id: id },
     });
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
       if (result) {
 
       }
@@ -85,5 +84,7 @@ stat = true
 }
 return stat;
   }
-
+  ngOnDestroy() {
+    this.subscription.unsubscribe()
+  }
 }

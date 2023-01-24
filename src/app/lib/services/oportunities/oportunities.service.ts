@@ -21,6 +21,7 @@ export class OportunitiesService {
   }
 
   addOpportunity(opportunity: opportunity) {
+    console.log(opportunity);
     let addedOpportunity = this.opportunitiesCollection.add(opportunity);
     return from(addedOpportunity);
   }
@@ -53,7 +54,7 @@ export class OportunitiesService {
       .collection<apply>('oportunities/' + activityid + '/applicants', (ref) =>
         ref.where('state', '==', filterstate)
       )
-      .valueChanges();
+      .valueChanges({"idField":'id'});
   }
   getNotifications(activityid: string, filterstate: MyEnum, userid: string) {
     return this.firestore
@@ -62,14 +63,14 @@ export class OportunitiesService {
           .where('state', 'in', [MyEnum.approve, MyEnum.reject])
           .where('uid', '==', userid)
       )
-      .valueChanges();
+      .valueChanges({"idField":'id'});
   }
   getcompanynotifications(activityid: string, filterstate: MyEnum) {
     return this.firestore
       .collection<apply>('oportunities/' + activityid + '/applicants', (ref) =>
         ref.where('state', '==', 'waitting')
       )
-      .valueChanges();
+      .valueChanges({"idField":'id'});
   }
   updateCompanyInfo(
     activityid: string,
@@ -116,21 +117,21 @@ export class OportunitiesService {
       .collection('oportunities/' + activityid + '/applicants', (ref) =>
         ref.where('oportunityId', '==', activityid)
       )
-      .valueChanges();
+      .valueChanges({"idField":'id'});
   }
   getvolunteer(userid: string, activityid: string): Observable<apply | any> {
     return this.firestore
       .collection('oportunities/' + activityid + '/applicants', (ref) =>
         ref.where('uid', '==', userid)
       )
-      .valueChanges({ idField: 'id' });
+      .valueChanges({ "idField": 'id' });
   }
   getUserOpportunities(userid: string) {
     return this.firestore
       .collection<opportunity>('oportunities', (ref) =>
         ref.where('applicantsIds', 'array-contains', userid)
       )
-      .valueChanges({ idField: 'id' });
+      .valueChanges({ "idField": 'id' });
   }
 
   updatid(id: string) {

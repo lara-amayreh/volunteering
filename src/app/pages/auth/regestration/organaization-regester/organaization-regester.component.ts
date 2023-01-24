@@ -62,7 +62,10 @@ export class OrganaizationRegesterComponent implements OnInit {
         this.downloadurl,
         this.form.get('type')?.value + '',
         this.form.get('url')?.value + '',
-        this.role
+        this.role,
+        0
+       
+        
       )
       .then((user) => {
         this.router.navigate(['company/']);

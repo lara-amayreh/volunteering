@@ -2,8 +2,9 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable, of, switchMap } from 'rxjs';
+import { Observable, of, Subscription, switchMap } from 'rxjs';
 import { apply, MyEnum } from '../../inteerfaces/apply';
+import { opportunity } from '../../inteerfaces/opportunity';
 import { organization } from '../../inteerfaces/organization';
 import { person } from '../../inteerfaces/person';
 import { SharedModuleModule } from '../../material/shared-module.module';
@@ -25,9 +26,21 @@ export class HeaderComponent implements OnInit {
   callAPIDialog!: TemplateRef<any>;
   profileImg: string = '../../../../../assets/images/profile-img.png';
   userState$!: Observable<any>;
+  req$!: Observable<opportunity[] |undefined>;
+  notifications$!: Observable<apply[] |undefined>;
+  req$2!: Observable<opportunity[] |undefined>;
+  notifications2$!: Observable<apply[] |undefined>;
+sub2!:Subscription;
+sub3!:Subscription;
+sub4!:Subscription;
+sub5!:Subscription;
+
+
   requests$: apply[] = [];
   noi!: number | null;
   uid!: string;
+  subscription!: Subscription;
+
   constructor(
     public dialog: MatDialog,
     private oppoertunityservice: OportunitiesService,
@@ -37,21 +50,24 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.authService.userState$.subscribe((val) => {
+    this.userState$ = this.authService.userState$;
+   this.subscription= this.userState$.subscribe((val) => {
       if (val) {
         this.com = val;
         this.role = val.role;
         this.uid = val.id;
         if (val.profileImg) this.profileImg = val.profileImg;
         if (this.role == 'person') {
-          this.oppoertunityservice
-            .getUserOpportunities(val.id)
-            .subscribe((v) => {
+          this.req$ = this.oppoertunityservice
+            .getUserOpportunities(val.id);
+          this.sub2= this.req$.subscribe((v) => {
+            if(v)
               v.forEach((valu) => {
                 if (valu != null)
-                  this.oppoertunityservice
-                    .getNotifications(valu.id + '', MyEnum.wait, val.id)
-                    .subscribe((not) => {
+                  this.notifications$ = this.oppoertunityservice
+                    .getNotifications(valu.id + '', MyEnum.wait, val.id);
+                   this.sub3 = this.notifications$.subscribe((not) => {
+                    if(not)
                       if (!this.requests$.includes(not[0]) && not[0] != null) {
                         this.requests$.push(not[0]);
                         this.noi = this.requests$.length;
@@ -63,12 +79,15 @@ export class HeaderComponent implements OnInit {
       }
 
       if (this.role == 'company') {
-        this.oppoertunityservice.getOpportunities(this.uid).subscribe((f) => {
+        this.req$2=this.oppoertunityservice.getOpportunities(this.uid);
+        this.sub4 = this.req$2.subscribe((f) => {
+          if(f)
           f.forEach((va) => {
             if (va != null)
-              this.oppoertunityservice
-                .getcompanynotifications(va.id + '', MyEnum.wait)
-                .subscribe((not) => {
+             this.notifications2$= this.oppoertunityservice
+                .getcompanynotifications(va.id + '', MyEnum.wait);
+              this.sub5=this.notifications2$.subscribe((not) => {
+                if(not)
                   if (!this.requests$.includes(not[0]) && not[0] != null) {
                     this.requests$.push(not[0]);
 
@@ -98,5 +117,16 @@ export class HeaderComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       this.noi = null;
     });
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+    this.sub2.unsubscribe();
+    this.sub3.unsubscribe();
+    this.sub4.unsubscribe();
+    this.sub5.unsubscribe();
+
+
+
+
   }
 }

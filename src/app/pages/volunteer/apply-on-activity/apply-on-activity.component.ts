@@ -89,8 +89,6 @@ export class ApplyOnActivityComponent {
       .then((val) => {
         if (this.oportunity.applicantsIds == null)
           this.oportunity.applicantsIds = [];
-console.log(this.oportunity.applicantsIds);
-console.log(typeof(this.oportunity.applicantsIds));
      (this.oportunity.applicantsIds as Array<string>).push(this.personid);
         if(this.oportunity.numberOfApplicants < this.oportunity.numberOfVolunteers)
         this.oportunity.active = true;
