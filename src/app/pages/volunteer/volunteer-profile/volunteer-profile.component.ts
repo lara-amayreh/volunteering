@@ -1,7 +1,7 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, switchMap } from 'rxjs';
+import { Observable, Subscription, switchMap } from 'rxjs';
 import { opportunity } from 'src/app/lib/inteerfaces/opportunity';
 import { person } from 'src/app/lib/inteerfaces/person';
 import { AuthService } from 'src/app/lib/services/auth/auth.service';
@@ -19,6 +19,8 @@ export class VolunteerProfileComponent {
   callAPIDialog!: TemplateRef<any>;
    person$!:Observable <person | undefined>;
    opportunities$!:Observable <opportunity[] | undefined>;
+   userstate$!:Observable<any>;
+   sub!:Subscription;
    public id:string='';
    userid!:string;
 role!:string;
@@ -36,8 +38,8 @@ role!:string;
     )}
 
   ngOnInit(): void {
-    this.authservice.userState$.subscribe((value)=>{
-      // console.log(value);
+    this.userstate$=this.authservice.userState$;
+    this.sub = this.userstate$.subscribe((value)=>{
       if(value)
       this.role = value.role;
       this.userid = value.id;
@@ -67,6 +69,10 @@ role!:string;
    
       
      }
+     ngOnDestroy() {
+      this.sub.unsubscribe();
+    }
+
   }
   
 

@@ -49,12 +49,12 @@ subscription!: Subscription;
        width: '500px',
       
      });
-     dialogRef.afterClosed().subscribe((result)=> {
-         console.log(result); 
+    //  dialogRef.afterClosed().subscribe((result)=> {
+    //      console.log(result); 
          
  
         
-     })
+    //  })
  
     
    }

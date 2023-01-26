@@ -21,7 +21,6 @@ export class OportunitiesService {
   }
 
   addOpportunity(opportunity: opportunity) {
-    console.log(opportunity);
     let addedOpportunity = this.opportunitiesCollection.add(opportunity);
     return from(addedOpportunity);
   }
@@ -60,10 +59,10 @@ export class OportunitiesService {
     return this.firestore
       .collection<apply>('oportunities/' + activityid + '/applicants', (ref) =>
         ref
-          .where('state', 'in', [MyEnum.approve, MyEnum.reject])
+          .where('state', "!=",'waitting')
           .where('uid', '==', userid)
       )
-      .valueChanges({"idField":'id'});
+      .valueChanges();
   }
   getcompanynotifications(activityid: string, filterstate: MyEnum) {
     return this.firestore
@@ -72,6 +71,7 @@ export class OportunitiesService {
       )
       .valueChanges({"idField":'id'});
   }
+  
   updateCompanyInfo(
     activityid: string,
     companyName: string,

@@ -14,7 +14,7 @@ import { allSkills } from 'src/assets/arrays/skills';
   styleUrls: ['./all-volunteers.component.css']
 })
 export class AllVolunteersComponent implements OnInit {
-AllVolunteers!:person[];
+AllVolunteers!:Observable< person[]>;
 allimages:string[]=[];
 skills = allSkills;
 filteredOptions!: Observable<cities[]>;
@@ -30,24 +30,17 @@ ngOnInit(): void {
 
   this.auth.userState$.subscribe((value)=>{
     if(value){
-     this.userservice.getAllusersByRole('person').subscribe((val)=>{
-      if(val){
-this.AllVolunteers = val;
-console.log(val);
-val.forEach((person)=>{
-  this.allimages.push(person.profileImage)});
-      }
-    });}
-  })}
-  geturl(index:number){
- if(this.allimages){
-    let x= `url("${this.allimages[index]}")` ;
-    return x;
+   this.AllVolunteers=  this.userservice.getAllusersByRole('person');
+    }})
+//   geturl(index:number){
+//  if(this.allimages){
+//     let x = `url("${this.allimages[index]}")` ;
+//     return x;
+//   }
+
+//   return;
+// }
   }
-
-  return;
-}
-
 form=new FormGroup({
   skill: new FormControl(''),
   city :new FormControl('')
@@ -67,11 +60,9 @@ get city(){
 filter(){
   console.log(this.form.get('skill')?.value)
   if(this.form.get('skill')?.value){
-   this.userservice.getfilteredvolunteers(this.form?.get('skill')?.value,this.city+'').subscribe((val)=>{
-    if(val != null)
-    this.AllVolunteers = val
-   console.log(val);
-   })}
+  this.AllVolunteers= this.userservice.getfilteredvolunteers(this.form?.get('skill')?.value,this.city+'')
+  
+   }
    }
 
   private _filter(value: string): cities[] {

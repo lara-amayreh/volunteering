@@ -38,14 +38,15 @@ export class LandingComponent implements OnInit {
     })
     this.latestopportunities$ = this.fs.collection<opportunity>('oportunities',
     ref=>ref
-    .orderBy("range.start", "desc").where('range.start',">",new Date())
+    .orderBy("creatDate", "desc")
     .limit(3)).valueChanges({idField:"id"}); 
     // this.latestopportunities$.subscribe((v)=>{
     // })
+    
     this.allorganizations$=this.userservice.getAllusersByRole('company');
     this.latestOrg$ = this.fs.collection<any>('users',
     ref=>ref
-    .where('role',"==",'company')
+    .where('role',"==",'company').orderBy('numberOfApps',"desc")
     .limit(4)).valueChanges({idField:"id"}); 
     // this.latestopportunities$.subscribe((v)=>{
     // })

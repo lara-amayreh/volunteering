@@ -11,6 +11,7 @@ import {
   Observable,
   of,
   startWith,
+  Subscription,
   switchMap,
 } from 'rxjs';
 import { opportunity } from 'src/app/lib/inteerfaces/opportunity';
@@ -40,9 +41,12 @@ export class AllActivitiesComponent implements OnInit {
   counter: number = 0;
   skills = allSkills;
   filteredOptions!: Observable<string[]>;
-
+  userstate$!:Observable<any>;
+  oppo$!:Observable <opportunity[] |undefined>;
   allcompanies: string[] = [];
   types = companytypes;
+sub!:Subscription;
+sub2!:Subscription;
 
   constructor(
     private af: AngularFirestore,
@@ -56,7 +60,8 @@ export class AllActivitiesComponent implements OnInit {
     // this.counter = this.oportunityservices.countApplicant(this.activityid);
     // this.types.push('All Types');
 
-    this.auth.userState$.subscribe((val) => {
+   this.userstate$= this.auth.userState$;
+   this.sub=this.userstate$.subscribe((val) => {
       if (val) {
         this.role = val.role;
         this.uid = val.id;
@@ -67,7 +72,8 @@ export class AllActivitiesComponent implements OnInit {
     });
     this.alloportunities$ = this.oportunityservices.getAllOpportunities();
 
-    this.alloportunities$.subscribe((val) => {
+    this.sub2 = this.alloportunities$.subscribe((val) => {
+      if(val)
       val.forEach((vall, index) => {
         if (!this.allcompanies.includes(vall.companyName + ''))
           this.allcompanies?.push(vall.companyName + '');
@@ -140,5 +146,10 @@ export class AllActivitiesComponent implements OnInit {
       if (applicantsIds[i] == this.uid || !active) stat = true;
     }
     return stat;
+  }
+  ngOnDestroy() {
+    this.sub2.unsubscribe();
+    this.sub.unsubscribe();
+
   }
 }

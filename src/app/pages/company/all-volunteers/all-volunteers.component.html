@@ -57,7 +57,7 @@
       <div class="container">
        <div class="wrap">
  <div class="card-container">
-    <mat-card [routerLink]="['/volunteer/profile', volunteer.id]" *ngFor='let volunteer of  AllVolunteers; let i = index;' class="Opportunity-card">
+    <mat-card [routerLink]="['/volunteer/profile', volunteer.id]" *ngFor='let volunteer of  AllVolunteers|async; let i = index;' class="Opportunity-card">
       <mat-card-header>
           <div class="p-avatar">
               <div  class="img">

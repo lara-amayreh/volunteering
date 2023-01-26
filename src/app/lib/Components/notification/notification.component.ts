@@ -8,9 +8,8 @@ import {
 } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { OportunitiesService } from '../../services/oportunities/oportunities.service';
-import { filter, Observable, Subscription } from 'rxjs';
+import {Observable, Subscription } from 'rxjs';
 import { apply, MyEnum } from '../../inteerfaces/apply';
-import { V } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-notification',
@@ -18,7 +17,7 @@ import { V } from '@angular/cdk/keycodes';
   styleUrls: ['./notification.component.css'],
 })
 export class NotificationComponent implements OnInit {
-  requests$: apply[] = [];
+  requests$: any[] = [];
   role!: string;
   userstate!:Observable<any>;
 
@@ -35,7 +34,9 @@ export class NotificationComponent implements OnInit {
    this.subscription = this.userstate.subscribe((val) => {
       if (val) {
         this.role = val.role;
+        if(this.data.request)
         this.requests$ = this.data.request;
+        console.log(this.requests$);
       }
     });
   }
@@ -43,10 +44,7 @@ export class NotificationComponent implements OnInit {
   closedialog() {
     this.dialogRef.close(true);
   }
-  // ngOnDestroy() {
-   
-  //   this.auth.userState$.unsubscribe();
-  // }
+  
 
   ngOnDestroy() {
     this.subscription.unsubscribe()

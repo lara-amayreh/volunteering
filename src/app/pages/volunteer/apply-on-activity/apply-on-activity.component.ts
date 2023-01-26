@@ -15,7 +15,9 @@ import {
 import { opportunity } from 'src/app/lib/inteerfaces/opportunity';
 import { person } from 'src/app/lib/inteerfaces/person';
 import { MyEnum } from 'src/app/lib/inteerfaces/apply';
-import { toArray } from 'rxjs';
+import { Observable, switchMap, toArray } from 'rxjs';
+import { orgnotifications } from 'src/app/lib/inteerfaces/org-notifications';
+import { OrgnotificationService } from 'src/app/lib/services/notifications/orgnotification.service';
 
 @Component({
   selector: 'app-apply-on-activity',
@@ -23,15 +25,15 @@ import { toArray } from 'rxjs';
   styleUrls: ['./apply-on-activity.component.css'],
 })
 export class ApplyOnActivityComponent {
-  personid: string = '';
+  personid!: string;
   oportunity!: opportunity;
   userdetails!: person;
   startDate!: any;
   endDate!: any;
-
+opp!:Observable <opportunity | undefined>
   constructor(
     private oportunityservice: OportunitiesService,
-    private userservice: UserService,
+    private orgnotifservice:OrgnotificationService,
     private auth: AuthService,
     private dialogRef: MatDialogRef<UpdateVolunteerComponent>,
     public firestore: AngularFirestore,
@@ -50,20 +52,20 @@ export class ApplyOnActivityComponent {
   });
 
   ngOnInit(): void {
-    this.auth.userState$.subscribe((val) => {
+    this.opp = this.auth.userState$.pipe(
+      switchMap((val) => {
       if (val) {
         this.personid = val.id;
         this.userdetails = val;
+       
       }
-    });
-    this.oportunityservice.getoportunityById(this.data.id).subscribe((val) => {
+      return  this.oportunityservice.getoportunityById(this.data.id);
+    }));
+   this.opp.subscribe((val) => {
       if (val) {
-      
         this.oportunity = val;
         this.startDate = this.oportunity.range.start?.toDate();
-        this.endDate = this.oportunity.range.end?.toDate();
-
-       
+        this.endDate = this.oportunity.range.end?.toDate();       
       }
     });
   }
@@ -87,6 +89,7 @@ export class ApplyOnActivityComponent {
         state:MyEnum.wait,
       })
       .then((val) => {
+
         if (this.oportunity.applicantsIds == null)
           this.oportunity.applicantsIds = [];
      (this.oportunity.applicantsIds as Array<string>).push(this.personid);
@@ -94,8 +97,6 @@ export class ApplyOnActivityComponent {
         this.oportunity.active = true;
         else
         this.oportunity.active = false;
-
-
         this.oportunityservice.updatecount(
           this.oportunity.id + '',
           this.oportunity.numberOfApplicants + 1,
@@ -103,6 +104,19 @@ export class ApplyOnActivityComponent {
           this.oportunity.active,
 
         );
+//add notification
+this.orgnotifservice.addNotification({
+  uid:this.oportunity.userid,
+  opportunityName:this.oportunity.name,
+  opportunityId:this.oportunity.id,
+  notiDate:new Date(),
+  volunteerName:this.userdetails.fullName,
+  seenFlag:false,
+  
+
+
+})
+
       });
 
     if (this.form.valid) this.dialogRef.close(true);

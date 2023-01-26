@@ -2,14 +2,14 @@
   <mat-icon (click)="closedialog()"> close </mat-icon>
 </div>
 <div class="container" *ngIf="role == 'person'">
-  <ul *ngIf="requests$; else no">
+  <ul *ngIf="requests$.length > 0">
     <li
       *ngFor="let req of requests$"
-      [routerLink]="['./volunteer/my-Activities', req.oportunityId]"
+      [routerLink]="['/volunteer/my-Activities', req.opportunityId]"
     >
       <a
         ><mat-icon>checklist</mat-icon>Your Applicantion on
-        <b>{{ req.oportunityName }} </b> Opportunity  was <b>{{ req.state }}</b></a
+        <b>{{ req.opportunityName }} </b> Opportunity  was <b>{{ req.opportunityStatus }}</b>by <b>{{ req.companyName}}</b> company</a
       >
     </li>
   </ul>
@@ -19,11 +19,11 @@
   <ul *ngIf="requests$; else no">
     <li
       *ngFor="let req of requests$"
-      [routerLink]="['./company/your-Activities', req.oportunityId]"
+      [routerLink]="['/company/your-Activities', req.opportunityId]"
     >
       <a
-        ><mat-icon>checklist</mat-icon> <b>{{ req.userdetails.fullName }}</b
-        >Has requested to apply on <b>{{ req.oportunityName }} </b> Opportunity</a
+        ><mat-icon>checklist</mat-icon> <b>{{ req.volunteerName }}</b
+        >Has requested to apply on <b>{{ req.opportunityName }} </b> Opportunity</a
       >
     </li>
   </ul>
