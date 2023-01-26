@@ -143,7 +143,7 @@
           <mat-icon color="primary">history</mat-icon> {{(applicant[0].availabledate.end).toDate()| date:'yyyy/MM/dd'}} </div>
           <div class="form-item icon-div"><span>Request Status: </span>{{applicant[0].state}}
           <mat-icon class="approved" *ngIf="applicant[0].state =='approved'">check_circle </mat-icon>
-          <mat-icon color="worn" *ngIf="applicant[0].state =='rejected'">close </mat-icon>
+          <mat-icon color="warn" *ngIf="applicant[0].state =='rejected'">close </mat-icon>
           <mat-icon class="waitting" *ngIf="applicant[0].state =='waitting'">pending </mat-icon>
         </div>
 

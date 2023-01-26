@@ -20,7 +20,7 @@ export class CompanyProfileComponent implements OnInit {
   @ViewChild('callAPIDialog')
   callAPIDialog!: TemplateRef<any>;
    organization!: Observable<organization|undefined>;
- id:string='';
+ id!:string;
    role!:string;
    uid!:string;
    alloportunities$! : Observable<opportunity[]>;
@@ -36,13 +36,16 @@ export class CompanyProfileComponent implements OnInit {
     
     this.organization = this.route.paramMap.pipe(
       switchMap((value)=> {
+        if(value){
         this.id = value.get('id')+'';
         this.alloportunities$=this.opportunityservice.getOpportunities(this.id);
         this.authservice.userState$.subscribe((v)=>{
           this.uid = v.id;
         })
         return this.userservice.getuserById(this.id);
-  
+      }
+      else
+      return of(null);
 
 
 }));
@@ -62,13 +65,13 @@ export class CompanyProfileComponent implements OnInit {
          width: '500px',
         
        });
-       dialogRef.afterClosed().subscribe((result)=> {
-           console.log(result); 
+      //  dialogRef.afterClosed().subscribe((result)=> {
+      //      console.log(result); 
            
    
-           //this.students = this.studentsService.getStudents();
+      //      //this.students = this.studentsService.getStudents();
           
-       })
+      //  })
    
       
      }

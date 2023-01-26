@@ -58,8 +58,7 @@ sub5!:Subscription;
   ngOnInit(): void {
     this.userState$ = this.authService.userState$;
    this.subscription= this.userState$
-   .pipe(take(1), tap(val=> console.log(val)))
-   
+   .pipe(take(1))
    .subscribe((val) => {
       if (val) {
         this.com = val;
@@ -95,7 +94,8 @@ sub5!:Subscription;
         if(this.role=='person'){
           this.personNotifService.getNotification(this.uid).subscribe((notifications)=>{
             this.requests$ = notifications;
-            
+            this.noi=this.requests$.length;
+
           })
 
         }
@@ -104,6 +104,7 @@ sub5!:Subscription;
 if(this.role == 'company'){
   this.orgnotiservice.getNotification(this.uid).subscribe((notifications)=>{
     this.requests$ = notifications;
+    this.noi=this.requests$.length;
   })
 }
       }
@@ -151,15 +152,15 @@ if(this.role == 'company'){
       this.noi = null;
     });
   }
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-    this.sub2.unsubscribe();
-    this.sub3.unsubscribe();
-    this.sub4.unsubscribe();
-    this.sub5.unsubscribe();
+  // ngOnDestroy() {
+  //   this.subscription.unsubscribe();
+  //   this.sub2.unsubscribe();
+  //   this.sub3.unsubscribe();
+  //   this.sub4.unsubscribe();
+  //   this.sub5.unsubscribe();
 
 
 
 
-  }
+  // }
 }

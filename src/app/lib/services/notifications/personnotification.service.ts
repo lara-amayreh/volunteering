@@ -20,7 +20,7 @@ addNotification(notification:personNotifications){
 }
 getNotification(userid:string){
  return this.firestore.collection('personnotifications',
- (ref)=>ref.where('uid', '==',userid).orderBy('notiDate')
+ (ref)=>ref.where('uid', '==',userid).orderBy('notiDate','desc')
  ).valueChanges({'idField':"id"});
 }
 

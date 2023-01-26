@@ -20,7 +20,7 @@
     <div class="card-container">
  
 
-      <mat-card   [routerLink]="['./volunteer/opportunities',opportunity.id]"  class="Opportunity-card" *ngFor="let opportunity of latestopportunities$ | async; let i= index ;">
+      <mat-card   [routerLink]="['/volunteer/opportunities',opportunity.id]"  class="Opportunity-card" *ngFor="let opportunity of latestopportunities$ | async; let i= index ;">
         <mat-card-header class="avatar-headre">
           <div>
         </div>
@@ -104,7 +104,7 @@
       </mat-card-footer>
       </mat-card>
       </div>
-      <button routerLink="./volunteer/organizations" class="yellow-btn" mat-raised-button>View All Organizations</button>
+      <button routerLink="/volunteer/organizations" class="yellow-btn" mat-raised-button>View All Organizations</button>
 
       </div>
  </div>

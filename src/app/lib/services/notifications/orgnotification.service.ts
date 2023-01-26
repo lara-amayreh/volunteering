@@ -21,7 +21,7 @@ addNotification(notification:orgnotifications){
 }
 getNotification(userid:string){
  return this.firestore.collection('orgnotifications',
- (ref)=>ref.where('uid', '==',userid).orderBy('notiDate')
+ (ref)=>ref.where('uid', '==',userid).orderBy('notiDate','desc')
  ).valueChanges({'idField':"id"});
 }
 
