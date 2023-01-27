@@ -68,7 +68,7 @@
     </div>
       </mat-tab>
       <mat-tab label="Approved">
-        <div class=" mat-elevation-z4">
+        <div class=" mat-elevation-z4" *ngIf="approved">
           <div class="details-box mat-elevation-z4"  *ngFor="let volunteer of  approved|async" >
             <div class="c">
               <mat-card class="card-volunteer" [routerLink]="['/volunteer/profile', volunteer.uid]">
@@ -125,9 +125,10 @@
     </mat-tab-group>
   <!-- user details -->
   <div  *ngIf="auth.userState$|async as user">
-  <div class="user" *ngIf="userdetails |async as applicant">
-      <div class="form-detailsdiv" *ngIf="applicant[0].uid==user.id" >
-        <div class="hed-div">
+  <div class="user" *ngIf="volunteerform |async as applicant">
+
+      <div class="form-detailsdiv" *ngIf="applicant[0]" >
+        <div class="hed-div" *ngIf="applicant[0].uid == user.id" >
           <h1 class="heading">
             Application <span>Form</span>
           </h1></div>

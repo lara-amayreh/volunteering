@@ -58,52 +58,32 @@ sub5!:Subscription;
   ngOnInit(): void {
     this.userState$ = this.authService.userState$;
    this.subscription= this.userState$
-   .pipe(take(1))
+  //  .pipe(take(1))
    .subscribe((val) => {
       if (val) {
         this.com = val;
         this.role = val.role;
         this.uid = val.id;
-        if (val.profileImg) this.profileImg = val.profileImg;
-        // if (this.role == 'person') {
-        //   this.req$ = this.oppoertunityservice
-        //     .getUserOpportunities(val.id);  //this should be switchmap instead of nesting the subcribe function
-        //   this.sub2 = this.req$
-        //   .pipe(take(1), tap(val=> console.log(val)))
-        //   .subscribe((v) => {
-        //     if(v)
-        //       v.forEach((valu) => {
-        //         if (valu)
-        //           this.notifications$ = this.oppoertunityservice
-        //             .getNotifications(valu.id + '', MyEnum.wait, val.id);
-        //            this.sub3 = this.notifications$
-        //            .pipe(take(1), tap(val=> console.log(val)))
-        //            .subscribe((not) => {
-        //             if(not)
-        //             if(not[0] != undefined){
-        //               // if (!this.requests$.includes(not[0]) && not[0] != null)
-                       
-        //                 console.log(not[0]);
-        //                 this.requests$.push(not[0]);
-        //                 this.noi = this.requests$.length;
-        //               }
-        //             });
-        //       });
-        //     });
-        // }
+        if (val.profileImg)
+        this.profileImg = val.profileImg;
+
+
         if(this.role=='person'){
           this.personNotifService.getNotification(this.uid).subscribe((notifications)=>{
             this.requests$ = notifications;
+            if(this.requests$.length>0)
             this.noi=this.requests$.length;
+
 
           })
 
         }
-      
+
 
 if(this.role == 'company'){
   this.orgnotiservice.getNotification(this.uid).subscribe((notifications)=>{
     this.requests$ = notifications;
+    if(this.requests$.length>0)
     this.noi=this.requests$.length;
   })
 }
@@ -122,7 +102,7 @@ if(this.role == 'company'){
       //         .pipe(take(1), tap(val=> console.log(val)))
       //         .subscribe((not) => {
       //           if(not)
-      //             if (!this.requests$.includes(not[0]) && not[0] != null) 
+      //             if (!this.requests$.includes(not[0]) && not[0] != null)
       //             {
       //               this.requests$.push(not[0]);
       //               this.noi = this.requests$.length;

@@ -22,7 +22,6 @@ export class SideNavComponent implements OnInit {
     this.authServise.userState$.subscribe((value) => {
       if (value) {
         this.role = value.role;
-
         if (value.profileImg) this.profileImg = value.profileImg;
       }
     });

@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component,TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of, switchMap } from 'rxjs';
@@ -14,95 +14,58 @@ import { UpdateCompanyComponent } from '../update-company/update-company.compone
 @Component({
   selector: 'app-company-profile',
   templateUrl: './company-profile.component.html',
-  styleUrls: ['./company-profile.component.css']
+  styleUrls: ['./company-profile.component.css'],
 })
-export class CompanyProfileComponent implements OnInit {
+export class CompanyProfileComponent {
   @ViewChild('callAPIDialog')
   callAPIDialog!: TemplateRef<any>;
-   organization!: Observable<organization|undefined>;
- id!:string;
-   role!:string;
-   uid!:string;
-   alloportunities$! : Observable<opportunity[]>;
-   opportunities!: Observable<opportunity[] | undefined>;
-   panelOpenState=true;
-   activityid!:string;
+  organization!: Observable<organization | undefined>;
+  id!: string;
+  role!: string;
+  uid!: string;
+  alloportunities$!: Observable<opportunity[]>;
+  opportunities!: Observable<opportunity[] | undefined>;
+  panelOpenState = true;
+  activityid!: string;
 
-
-
-  constructor(public dialog: MatDialog, private route:ActivatedRoute, private opportunityservice:OportunitiesService, public userservice:UserService,public authservice:AuthService)
-
-  {
-    
+  constructor(
+    public dialog: MatDialog,
+    private route: ActivatedRoute,
+    private opportunityservice: OportunitiesService,
+    public userservice: UserService,
+    public authservice: AuthService
+  ) {
     this.organization = this.route.paramMap.pipe(
-      switchMap((value)=> {
-        if(value){
-        this.id = value.get('id')+'';
-        this.alloportunities$=this.opportunityservice.getOpportunities(this.id);
-        this.authservice.userState$.subscribe((v)=>{
-          this.uid = v.id;
-        })
-        return this.userservice.getuserById(this.id);
-      }
-      else
-      return of(null);
-
-
-}));
-
-    }
-  ngOnInit(): void {
-   
-    
+      switchMap((value) => {
+        if (value) {
+          this.id = value.get('id') + '';
+          this.alloportunities$ = this.opportunityservice.getOpportunities(
+            this.id
+          );
+          this.authservice.userState$.subscribe((v) => {
+            if (v) this.uid = v.id;
+          });
+          return this.userservice.getuserById(this.id);
+        } else return of(null);
+      })
+    );
   }
-  
 
-        
+  addoportunity() {
+    let dialogRef = this.dialog.open(AddOpportunityComponent, {
+      width: '500px',
+    });
+  }
 
-     addoportunity(){
-      // console.log(id);
-      let dialogRef = this.dialog.open(AddOpportunityComponent, {
-         width: '500px',
-        
-       });
-      //  dialogRef.afterClosed().subscribe((result)=> {
-      //      console.log(result); 
-           
-   
-      //      //this.students = this.studentsService.getStudents();
-          
-      //  })
-   
-      
-     }
-        
-       
-  
-    
-  
-    
-  
-// geturl(){
- 
-// 	let x= `url("${this.organization.profileImg}")` ;
-//   return x;
-// }
-  updateorganization(id:string){
+  updateorganization(id: string) {
     let dialogRef = this.dialog.open(UpdateCompanyComponent, {
-       width: '500px',
-      data:{id:id,data:this.organization}
-     });
-     dialogRef.afterClosed().subscribe((result)=> {
-         console.log(result); 
- 
-        
-        
-     })
- 
-    
-   }
-   Apply(id: string) {
-    
+      width: '500px',
+      data: { id: id, data: this.organization },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+    });
+  }
+  Apply(id: string) {
     this.activityid = id;
     let dialogRef = this.dialog.open(ApplyOnActivityComponent, {
       width: '700px',
@@ -113,18 +76,20 @@ export class CompanyProfileComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       console.log(result);
       if (result) {
-
+        window.alert("you are sucsessfully applied to the opportunity")
       }
+      else
+      window.alert("you are unsucsessfully applied to the opportunity")
+
       // this.person = result;
     });
   }
 
-   chickapply(applicantsIds:string[],active:boolean){
-    let stat:boolean = false;
-    for (let i = 0; i < applicantsIds.length ; i++) {
-    if((applicantsIds[i]==this.uid)|| !active)
-    stat = true
+  chickapply(applicantsIds: string[], active: boolean) {
+    let stat: boolean = false;
+    for (let i = 0; i < applicantsIds.length; i++) {
+      if (applicantsIds[i] == this.uid || !active) stat = true;
     }
     return stat;
-      }
+  }
 }

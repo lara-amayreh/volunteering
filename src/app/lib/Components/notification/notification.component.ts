@@ -36,7 +36,6 @@ export class NotificationComponent implements OnInit {
         this.role = val.role;
         if(this.data.request)
         this.requests$ = this.data.request;
-        console.log(this.requests$);
       }
     });
   }

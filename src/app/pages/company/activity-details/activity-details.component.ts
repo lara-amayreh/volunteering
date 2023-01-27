@@ -45,23 +45,24 @@ companyName!:string;
 numberofapplicants:number=0;
 role!:string;
 uid!:string;
-
+volunteerform!:Observable<apply[]>;
   id!: string;
   constructor(public dialog: MatDialog,private personnotsrvice:PersonnotificationService,
     public auth:AuthService, private opportunityservice:OportunitiesService, private route:ActivatedRoute){
    }
-  
+
    ngOnInit(): void {
     this.opportunity$ = this.route.paramMap.pipe(
       take(1),
       switchMap((value)=> {
         this.id = value.get('id')+'';
+
         return this.opportunityservice.getoportunityById(this.id);
-  
-  
-      
+
+
+
       }
-  
+
       )
     )
 this.auth.userState$.pipe(
@@ -70,35 +71,26 @@ this.auth.userState$.pipe(
   if(x){
 this.role = x.role;
 this.uid = x.id;
+this.volunteerform=this.opportunityservice.getvolunteer(x.id,this.id);
+
 this.companyName = x.name;
 this.waitting = this.opportunityservice.getApplicantsByState(this.id,MyEnum.wait);
 this.approved = this.opportunityservice.getApplicantsByState(this.id,MyEnum.approve);
 this.rejected = this.opportunityservice.getApplicantsByState(this.id,MyEnum.reject);
- 
+
+
 
 }
+
 return this.opportunityservice.getoportunityById(this.id)
   })).pipe(take(1)).subscribe((ele)=>{
-    if(ele?.applicantsIds.includes(this.uid)){
-      this.userdetails=this.opportunityservice.getvolunteer(this.uid,this.id);
-    
+    if(ele)
+ if(ele?.applicantsIds.length > 0)
+    {
+      this.userdetails =this.opportunityservice.getvolunteer(this.uid,this.id);
+
   }});
 
-
-//   this.sub4= this.userstate$.subscribe((value)=>{
-//       if(value){
-//         this.role=value.role;
-//         this.uid = value.id;
-//         this.opportunityservice.getoportunityById(this.id).subscribe((ele)=>{
-//           if(ele?.applicantsIds.includes(value.id)){
-//         this.userdetails=this.opportunityservice.getvolunteer(value.id,this.id);
-       
-//       }})}
-            
-// // this.userid=value.id;
-//     })
-    
-// 
   }
 
 
@@ -106,11 +98,11 @@ return this.opportunityservice.getoportunityById(this.id)
 approve(uid:string,oportunityId:string){
   this.volunteer$ = this.opportunityservice.getvolunteer(uid,oportunityId);
   this.sub1 = this.volunteer$.pipe(take(1)).subscribe((v)=>{
-if(v) 
+if(v)
    this.opportunityservice.updateState(v[0].id,MyEnum.approve,oportunityId);
    this.addPersonNotification(uid,this.companyName,
     v[0].oportunityName,v[0].oportunityId,MyEnum.approve,new Date(),false);
-   
+
    })
 }
 addPersonNotification(uid:string, cname:string,oppName:string,
@@ -132,12 +124,12 @@ this.sub2 = this.volunteerr$.pipe(take(1)).subscribe((v)=>{
     this.opportunityservice.updateState(v[0].id,MyEnum.reject,oportunityId);
     this.addPersonNotification(uid,this.companyName,
       v[0].oportunityName,v[0].oportunityId,MyEnum.reject,new Date(),false);
-     
+
      })
-  
+
    this.opportunityr$= this.opportunityservice.getoportunityById(oportunityId);
    this.sub3 = this.opportunityr$.pipe(take(1)).subscribe((oportunity)=>
-    { 
+    {
       if(oportunity){
         let arr:string[] = oportunity?.applicantsIds!;
         for (let i = 0; i < arr.length ; i++) {
@@ -145,10 +137,8 @@ this.sub2 = this.volunteerr$.pipe(take(1)).subscribe((v)=>{
           arr.splice(i,1);
         }
 
-
-           
       this.opportunityservice.updatecount(oportunityId,arr.length, arr ,true);
-      
+
     }
   }
     )
@@ -157,21 +147,14 @@ this.sub2 = this.volunteerr$.pipe(take(1)).subscribe((v)=>{
 
 }
 Apply(id: string) {
-    
-  // this.activityid = id;
+
   let dialogRef = this.dialog.open(ApplyOnActivityComponent, {
     width: '700px',
     height: '400px',
 
     data: { id: id },
   });
-  // dialogRef.afterClosed().subscribe((result) => {
-  //   // console.log(result);
-  //   if (result) {
-
-  //     // console.log(this.counter);
-  //   }
-  // });
+ 
 }
 chickapply(applicantsIds:string[],active:boolean){
 let stat:boolean = false;
@@ -183,11 +166,6 @@ return stat;
 }
  ngOnDestroy() {
 
- 
-//  this.sub1.unsubscribe();
-//   this.sub4.unsubscribe();
-//  this.sub3.unsubscribe();
-//  this.sub2.unsubscribe();
 
  }
 
