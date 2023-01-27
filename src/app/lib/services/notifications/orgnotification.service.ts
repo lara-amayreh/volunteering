@@ -9,7 +9,6 @@ export class OrgnotificationService {
   private notificationCollection: AngularFirestoreCollection<orgnotifications>;
   constructor(
     private firestore: AngularFirestore,
-    // private fireAuth: AngularFireAuth
   ) {
     this.notificationCollection =
       this.firestore.collection<orgnotifications>('orgnotifications');

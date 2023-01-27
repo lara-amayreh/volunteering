@@ -12,10 +12,7 @@ import { opportunity, range } from '../../inteerfaces/opportunity';
 })
 export class OportunitiesService {
   private opportunitiesCollection: AngularFirestoreCollection<opportunity>;
-  constructor(
-    private firestore: AngularFirestore,
-    private fireAuth: AngularFireAuth
-  ) {
+  constructor(private firestore: AngularFirestore) {
     this.opportunitiesCollection =
       this.firestore.collection<opportunity>('oportunities');
   }
@@ -30,17 +27,17 @@ export class OportunitiesService {
       .collection<opportunity>('oportunities', (ref) =>
         ref.where('userid', '==', userid)
       )
-      .valueChanges();
+      .valueChanges({ idField: 'id' });
   }
 
   getAllOpportunities() {
     return this.firestore
       .collection<opportunity>('oportunities')
-      .valueChanges();
+      .valueChanges({ idField: 'id' });
   }
 
   getoportunityById(id: string): Observable<opportunity | undefined> {
-    return this.opportunitiesCollection.doc(id).valueChanges();
+    return this.opportunitiesCollection.doc(id).valueChanges({ idField: 'id' });
   }
 
   addApplicant(activityid: string, obj: apply) {
@@ -53,25 +50,23 @@ export class OportunitiesService {
       .collection<apply>('oportunities/' + activityid + '/applicants', (ref) =>
         ref.where('state', '==', filterstate)
       )
-      .valueChanges({"idField":'id'});
+      .valueChanges({ idField: 'id' });
   }
   getNotifications(activityid: string, filterstate: MyEnum, userid: string) {
     return this.firestore
       .collection<apply>('oportunities/' + activityid + '/applicants', (ref) =>
-        ref
-          .where('state', "!=",'waitting')
-          .where('uid', '==', userid)
+        ref.where('state', '!=', 'waitting').where('uid', '==', userid)
       )
-      .valueChanges();
+      .valueChanges({ idField: 'id' });
   }
   getcompanynotifications(activityid: string, filterstate: MyEnum) {
     return this.firestore
       .collection<apply>('oportunities/' + activityid + '/applicants', (ref) =>
         ref.where('state', '==', 'waitting')
       )
-      .valueChanges({"idField":'id'});
+      .valueChanges({ idField: 'id' });
   }
-  
+
   updateCompanyInfo(
     activityid: string,
     companyName: string,
@@ -117,21 +112,21 @@ export class OportunitiesService {
       .collection('oportunities/' + activityid + '/applicants', (ref) =>
         ref.where('oportunityId', '==', activityid)
       )
-      .valueChanges({"idField":'id'});
+      .valueChanges({ idField: 'id' });
   }
   getvolunteer(userid: string, activityid: string): Observable<apply | any> {
     return this.firestore
       .collection('oportunities/' + activityid + '/applicants', (ref) =>
         ref.where('uid', '==', userid)
       )
-      .valueChanges({ "idField": 'id' });
+      .valueChanges({ idField: 'id' });
   }
   getUserOpportunities(userid: string) {
     return this.firestore
       .collection<opportunity>('oportunities', (ref) =>
         ref.where('applicantsIds', 'array-contains', userid)
       )
-      .valueChanges({ "idField": 'id' });
+      .valueChanges({ idField: 'id' });
   }
 
   updatid(id: string) {

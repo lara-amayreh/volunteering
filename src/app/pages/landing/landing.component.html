@@ -1,123 +1,152 @@
-
-
 <div class="cover">
-<div class="big-hedding">
- <h1 class="b-h1">We make</h1><h2 class="b-h2"> a life by what we give</h2>
-</div>
-
+  <div class="big-hedding">
+    <h1 class="b-h1">We make</h1>
+    <h2 class="b-h2">a life by what we give</h2>
+  </div>
 </div>
 
 <div class="hed-div">
-  <h1 class="heading">
-    Latest  <span>opportunities</span>
-  </h1></div>
-<!-- opportunities -->
- 
+  <h1 class="heading">Latest <span>opportunities</span></h1>
+</div>
+
 <section class="opportunities-sec">
- <div class="container">
-  <div class="wrap">
+  <div class="container">
+    <div class="wrap">
+      <div class="card-container">
+        <mat-card
+          [routerLink]="['/volunteer/opportunities', opportunity.id]"
+          class="Opportunity-card"
+          *ngFor="
+            let opportunity of latestopportunities$ | async;
+            let i = index
+          "
+        >
+          <mat-card-header class="avatar-headre">
+            <div></div>
+            <div class="p-avatar">
+              <div>
+                <img
+                  class="avatar"
+                  mat-card-image
+                  [src]="opportunity.companyLogo"
+                  alt="company profile img"
+                />
+              </div>
 
-    <div class="card-container">
- 
-
-      <mat-card   [routerLink]="['/volunteer/opportunities',opportunity.id]"  class="Opportunity-card" *ngFor="let opportunity of latestopportunities$ | async; let i= index ;">
-        <mat-card-header class="avatar-headre">
-          <div>
-        </div>
-          <div class="p-avatar">
-              <div >
-                  <img class="avatar" mat-card-image [src]="opportunity.companyLogo" alt="company profile img"></div>
-                
-          <mat-card-subtitle class="title">{{opportunity.companyName}}</mat-card-subtitle>
-          </div>
-          <mat-divider></mat-divider>
-          <mat-card-title>{{opportunity.name}}</mat-card-title>
-  
-        </mat-card-header>
+              <mat-card-subtitle class="title">{{
+                opportunity.companyName
+              }}</mat-card-subtitle>
+            </div>
+            <mat-divider></mat-divider>
+            <mat-card-title>{{ opportunity.name }}</mat-card-title>
+          </mat-card-header>
           <mat-card-content>
             <div class="content-container">
-              
-          <div class="item"><b>skills required:</b>
-            <mat-chip-listbox class="skills" aria-label="skills required">
-  
-              <mat-chip  *ngFor="let skill of (opportunity.skills)">
-                       {{skill}}
-              </mat-chip>
-              </mat-chip-listbox>
+              <div class="item">
+                <b>skills required:</b>
+                <mat-chip-listbox class="skills" aria-label="skills required">
+                  <mat-chip *ngFor="let skill of opportunity.skills">
+                    {{ skill }}
+                  </mat-chip>
+                </mat-chip-listbox>
+              </div>
             </div>
-          </div>
-       
           </mat-card-content>
           <mat-divider></mat-divider>
-        
-      
-          <mat-progress-bar 
-          class="item"
-          [value]="100*(opportunity.numberOfApplicants) /opportunity.numberOfVolunteers"
-          mode="determinate"
-          [bufferValue]="0">
-      </mat-progress-bar>
-         <div class="item">
-         {{opportunity.numberOfApplicants}}/ {{opportunity.numberOfVolunteers}} volunteers
-        </div>
-         <div class="apply">
-          <button [disabled]="chickapply(opportunity.applicantsIds,opportunity.active)" mat-raised-button *ngIf="role ==('person') && opportunity.numberOfApplicants < opportunity.numberOfVolunteers"  color="primary" (click)="Apply(opportunity.id+'')">Apply</button>
-        </div> 
-        <mat-card-footer>
-        <div class="item"><span>{{(opportunity.range.start).toDate()| date:'yyyy/MM/dd'}}</span> <span>  -  {{(opportunity.range.end).toDate()| date:'yyyy/MM/dd'}}</span>
-             
-        </div> 
-      </mat-card-footer>
+
+          <mat-progress-bar
+            class="item"
+            [value]="
+              (100 * opportunity.numberOfApplicants) /
+              opportunity.numberOfVolunteers
+            "
+            mode="determinate"
+            [bufferValue]="0"
+          >
+          </mat-progress-bar>
+          <div class="item">
+            {{ opportunity.numberOfApplicants }}/
+            {{ opportunity.numberOfVolunteers }} volunteers
+          </div>
+          <div class="apply">
+            <button
+              [disabled]="
+                chickapply(opportunity.applicantsIds, opportunity.active)
+              "
+              mat-raised-button
+              *ngIf="
+                role == 'person' &&
+                opportunity.numberOfApplicants < opportunity.numberOfVolunteers
+              "
+              color="primary"
+              (click)="Apply(opportunity.id + '')"
+            >
+              Apply
+            </button>
+          </div>
+          <mat-card-footer>
+            <div class="item">
+              <span>{{
+                opportunity.range.start.toDate() | date : "yyyy/MM/dd"
+              }}</span>
+              <span>
+                -
+                {{ opportunity.range.end.toDate() | date : "yyyy/MM/dd" }}</span
+              >
+            </div>
+          </mat-card-footer>
         </mat-card>
       </div>
 
-<button routerLink="/volunteer/opportunities" class="yellow-btn" mat-raised-button>View All Opportunities</button>
- </div>
-</div>
+      <button
+        routerLink="/volunteer/opportunities"
+        class="yellow-btn"
+        mat-raised-button
+      >
+        View All Opportunities
+      </button>
+    </div>
+  </div>
 </section>
 
-  
-
-<!-- organizations -->
 <div class="hed-div">
-  <h1 class="heading">
-    Top  <span>Organizations</span>
-  </h1></div>
+  <h1 class="heading">Top <span>Organizations</span></h1>
+</div>
 <section class="org-sec">
   <div class="container">
-   <div class="wrap">
- 
-     <div class="card-container">
-      <mat-card [routerLink]="['/company/profile',company.id]" *ngFor="let company of  allorganizations$ |async">
-        <mat-card-header>
-          <mat-card-title>{{company.name}}</mat-card-title>
-          <mat-card-subtitle>{{company.type}}</mat-card-subtitle>
-          <mat-card-subtitle>{{company.numberOfApps}} opportunities</mat-card-subtitle>
-
-        </mat-card-header>
-    <mat-divider></mat-divider>
-       <mat-card-content>
-        <img class="logo" mat-card-md-image [src]= 'company.profileImg' alt="company logo">
-        <mat-divider></mat-divider>
-       </mat-card-content>
-       <mat-card-footer>
-      </mat-card-footer>
-      </mat-card>
+    <div class="wrap">
+      <div class="card-container">
+        <mat-card
+          [routerLink]="['/company/profile', company.id]"
+          *ngFor="let company of allorganizations$ | async"
+        >
+          <mat-card-header>
+            <mat-card-title>{{ company.name }}</mat-card-title>
+            <mat-card-subtitle>{{ company.type }}</mat-card-subtitle>
+            <mat-card-subtitle
+              >{{ company.numberOfApps }} opportunities</mat-card-subtitle
+            >
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <mat-card-content>
+            <img
+              class="logo"
+              mat-card-md-image
+              [src]="company.profileImg"
+              alt="company logo"
+            />
+            <mat-divider></mat-divider>
+          </mat-card-content>
+          <mat-card-footer> </mat-card-footer>
+        </mat-card>
       </div>
-      <button routerLink="/volunteer/organizations" class="yellow-btn" mat-raised-button>View All Organizations</button>
-
-      </div>
- </div>
-  </section>
-
-
-
-<!-- organizations -->
-
-
-
-
-
-
-
-
+      <button
+        routerLink="/volunteer/organizations"
+        class="yellow-btn"
+        mat-raised-button
+      >
+        View All Organizations
+      </button>
+    </div>
+  </div>
+</section>

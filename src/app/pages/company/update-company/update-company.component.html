@@ -1,65 +1,86 @@
-
 <div mat-dialog-content class="form-container">
-   
-    <div class="form">
-        <h2>Update profile</h2>
-        <form [formGroup]="form" (ngSubmit)="submit()">
-    
-            <mat-form-field>
-                <mat-label>Company Name</mat-label>
-                <input name="name" matInput placeholder="enter company name" formControlName="name">
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>Type</mat-label>
-                <mat-select name="type" formControlName="type">
-                    <mat-option *ngFor="let type of types" [value]="type">
-                        {{type}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>phoneNumber</mat-label>
-                <input name="phoneNumber" type="number" matInput #phoneNumber placeholder="Ex. 0712345678"
-                formControlName="phoneNumber">
-                <mat-hint align="end">{{phoneNumber.value.length}} / 10</mat-hint>
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>Email</mat-label>
-                
-                <input type="email" name="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
-                           
-    
-            </mat-form-field>
-            <mat-form-field>
-                <textarea matInput formControlName="about" placeholder="Enter information about your company"></textarea>
-            </mat-form-field>
-            <mat-form-field>
-                <textarea matInput formControlName="adress" placeholder="Enter company Adress details"></textarea>
-            </mat-form-field>
-           <mat-form-field>
-            <mat-label>Website URL         
-            </mat-label>
-            <input matInput type="url" name="url" formControlName="url">
-            <mat-error>required field</mat-error>
-           </mat-form-field>
-           <div class="logo">
-    <label for="logo"> Logo*.........</label>
-    <div>
-    <img [src]="downloadurl" alt="profile image"  class="logo-div" >
-           <input  type="file" (change)="upload($event)" name="profileImg" acept="image/*" placeholder="upload logo.....">
+  <div class="form">
+    <h2>Update profile</h2>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <mat-form-field>
+        <mat-label>Company Name</mat-label>
+        <input
+          name="name"
+          matInput
+          placeholder="enter company name"
+          formControlName="name"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Type</mat-label>
+        <mat-select name="type" formControlName="type">
+          <mat-option *ngFor="let type of types" [value]="type">
+            {{ type }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>phoneNumber</mat-label>
+        <input
+          name="phoneNumber"
+          type="number"
+          matInput
+          #phoneNumber
+          placeholder="Ex. 0712345678"
+          formControlName="phoneNumber"
+        />
+        <mat-hint align="end">{{ phoneNumber.value.length }} / 10</mat-hint>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+
+        <input
+          type="email"
+          name="email"
+          matInput
+          formControlName="email"
+          placeholder="Ex. pat@example.com"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <textarea
+          matInput
+          formControlName="about"
+          placeholder="Enter information about your company"
+        ></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea
+          matInput
+          formControlName="adress"
+          placeholder="Enter company Adress details"
+        ></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Website URL </mat-label>
+        <input matInput type="url" name="url" formControlName="url" />
+        <mat-error>required field</mat-error>
+      </mat-form-field>
+      <div class="logo">
+        <label for="logo"> Logo*.........</label>
+        <div>
+          <img [src]="downloadurl" alt="profile image" class="logo-div" />
+          <input
+            type="file"
+            (change)="upload($event)"
+            name="profileImg"
+            acept="image/*"
+            placeholder="upload logo....."
+          />
         </div>
-            
-    </div>
-               
-    
-              </form>
-    
-    </div>
-       
+      </div>
+    </form>
+  </div>
 
-
-<div mat-dialog-actions>
+  <div mat-dialog-actions>
     <button mat-raised-button mat-dialog-close>No</button>
-    <button [disabled]="form.invalid" mat-raised-button  (click)="submit()">Yes</button>
-</div>
+    <button [disabled]="form.invalid" mat-raised-button (click)="submit()">
+      Yes
+    </button>
+  </div>
 </div>

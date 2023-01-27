@@ -30,15 +30,14 @@ export class HeaderComponent implements OnInit {
   callAPIDialog!: TemplateRef<any>;
   profileImg: string = '../../../../../assets/images/profile-img.png';
   userState$!: Observable<any>;
-  req$!: Observable<opportunity[] |undefined>;
-  notifications$!: Observable<apply[] |undefined>;
-  req$2!: Observable<opportunity[] |undefined>;
-  notifications2$!: Observable<apply[] |undefined>;
-sub2!:Subscription;
-sub3!:Subscription;
-sub4!:Subscription;
-sub5!:Subscription;
-
+  req$!: Observable<opportunity[] | undefined>;
+  notifications$!: Observable<apply[] | undefined>;
+  req$2!: Observable<opportunity[] | undefined>;
+  notifications2$!: Observable<apply[] | undefined>;
+  sub2!: Subscription;
+  sub3!: Subscription;
+  sub4!: Subscription;
+  sub5!: Subscription;
 
   requests$: any = [];
   noi!: number | null;
@@ -47,9 +46,9 @@ sub5!:Subscription;
 
   constructor(
     public dialog: MatDialog,
-    private personNotifService:PersonnotificationService,
+    private personNotifService: PersonnotificationService,
     private oppoertunityservice: OportunitiesService,
-    private orgnotiservice:OrgnotificationService,
+    private orgnotiservice: OrgnotificationService,
     public authService: AuthService,
     private fs: AngularFirestore,
     private fireAuth: AngularFireAuth
@@ -57,65 +56,38 @@ sub5!:Subscription;
 
   ngOnInit(): void {
     this.userState$ = this.authService.userState$;
-   this.subscription= this.userState$
-  //  .pipe(take(1))
-   .subscribe((val) => {
-      if (val) {
-        this.com = val;
-        this.role = val.role;
-        this.uid = val.id;
-        if (val.profileImg)
-        this.profileImg = val.profileImg;
+    this.subscription = this.userState$
+      //  .pipe(take(1))
+      .subscribe((val) => {
+        if (val) {
+          this.com = val;
+          this.role = val.role;
+          this.uid = val.id;
+          if (val.profileImg) this.profileImg = val.profileImg;
 
+          if (this.role == 'person') {
+            this.personNotifService
+              .getNotification(this.uid)
+              .subscribe((notifications) => {
+                this.requests$ = notifications;
+                if (this.requests$.length > 0) this.noi = this.requests$.length;
+              });
+          }
 
-        if(this.role=='person'){
-          this.personNotifService.getNotification(this.uid).subscribe((notifications)=>{
-            this.requests$ = notifications;
-            if(this.requests$.length>0)
-            this.noi=this.requests$.length;
-
-
-          })
-
+          if (this.role == 'company') {
+            this.orgnotiservice
+              .getNotification(this.uid)
+              .subscribe((notifications) => {
+                this.requests$ = notifications;
+                if (this.requests$.length > 0) this.noi = this.requests$.length;
+              });
+          }
         }
 
-
-if(this.role == 'company'){
-  this.orgnotiservice.getNotification(this.uid).subscribe((notifications)=>{
-    this.requests$ = notifications;
-    if(this.requests$.length>0)
-    this.noi=this.requests$.length;
-  })
-}
-      }
-      // if (this.role == 'company') {
-      //   this.req$2=this.oppoertunityservice.getOpportunities(this.uid);
-      //   this.sub4 = this.req$2
-      //   .pipe(take(1), tap(val=> console.log(val)))
-      //   .subscribe((f) => {
-      //     if(f)
-      //     f.forEach((va) => {
-      //       if (va != null)
-      //        this.notifications2$= this.oppoertunityservice
-      //           .getcompanynotifications(va.id + '', MyEnum.wait);
-      //         this.sub5=this.notifications2$
-      //         .pipe(take(1), tap(val=> console.log(val)))
-      //         .subscribe((not) => {
-      //           if(not)
-      //             if (!this.requests$.includes(not[0]) && not[0] != null)
-      //             {
-      //               this.requests$.push(not[0]);
-      //               this.noi = this.requests$.length;
-      //             }
-      //           });
-      //     });
-      //   });
-      // }
-
-      this.fireAuth.authState.subscribe((value) => {
-        if (value) this.email = value.email + '';
+        this.fireAuth.authState.subscribe((value) => {
+          if (value) this.email = value.email + '';
+        });
       });
-    });
   }
 
   geturl() {
@@ -132,15 +104,4 @@ if(this.role == 'company'){
       this.noi = null;
     });
   }
-  // ngOnDestroy() {
-  //   this.subscription.unsubscribe();
-  //   this.sub2.unsubscribe();
-  //   this.sub3.unsubscribe();
-  //   this.sub4.unsubscribe();
-  //   this.sub5.unsubscribe();
-
-
-
-
-  // }
 }

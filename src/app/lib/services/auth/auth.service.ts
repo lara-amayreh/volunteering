@@ -77,7 +77,7 @@ export class AuthService {
     type: string,
     url: string,
     role: string,
-    numberOfApps:number
+    numberOfApps: number
   ) {
     return this.fireAuth
       .createUserWithEmailAndPassword(email, password)
@@ -92,7 +92,7 @@ export class AuthService {
           type: type,
           email: email,
           role: role,
-          numberOfApps:numberOfApps,
+          numberOfApps: numberOfApps,
         };
         this.firestore.collection<any>('users').doc(val.user?.uid).set(user);
       });

@@ -11,71 +11,54 @@ import { allSkills } from 'src/assets/arrays/skills';
 @Component({
   selector: 'app-all-volunteers',
   templateUrl: './all-volunteers.component.html',
-  styleUrls: ['./all-volunteers.component.css']
+  styleUrls: ['./all-volunteers.component.css'],
 })
 export class AllVolunteersComponent implements OnInit {
-AllVolunteers!:Observable< person[]>;
-allimages:string[]=[];
-skills = allSkills;
-filteredOptions!: Observable<cities[]>;
+  AllVolunteers!: Observable<person[]>;
+  allimages: string[] = [];
+  skills = allSkills;
+  filteredOptions!: Observable<cities[]>;
 
-Allcities = data;
-constructor(private userservice:UserService,public auth:AuthService){}
-ngOnInit(): void {
-  this.filteredOptions = this.form.controls.city.valueChanges.pipe(
-    startWith(''),
-    map(value => this._filter(value || '')),
-  );
+  Allcities = data;
+  constructor(private userservice: UserService, public auth: AuthService) {}
+  ngOnInit(): void {
+    this.filteredOptions = this.form.controls.city.valueChanges.pipe(
+      startWith(''),
+      map((value) => this._filter(value || ''))
+    );
 
-
-  this.auth.userState$.subscribe((value)=>{
-    if(value){
-   this.AllVolunteers=  this.userservice.getAllusersByRole('person');
-    }})
-//   geturl(index:number){
-//  if(this.allimages){
-//     let x = `url("${this.allimages[index]}")` ;
-//     return x;
-//   }
-
-//   return;
-// }
+    this.auth.userState$.subscribe((value) => {
+      if (value) {
+        this.AllVolunteers = this.userservice.getAllusersByRole('person');
+      }
+    });
   }
-form=new FormGroup({
-  skill: new FormControl(''),
-  city :new FormControl('')
+  form = new FormGroup({
+    skill: new FormControl(''),
+    city: new FormControl(''),
+  });
+  get skill() {
+    return this.form.get('skill')?.value;
+  }
+  get city() {
+    return this.form.get('city')?.value;
+  }
 
-
-
-
-})
-get skill(){
-  return this.form.get('skill')?.value;
-}
-get city(){
-  return this.form.get('city')?.value;
-}
-
- 
-filter(){
-  console.log(this.form.get('skill')?.value)
-  if(this.form.get('skill')?.value){
-  this.AllVolunteers= this.userservice.getfilteredvolunteers(this.form?.get('skill')?.value,this.city+'')
-  
-   }
-   }
+  filter() {
+    console.log(this.form.get('skill')?.value);
+    if (this.form.get('skill')?.value) {
+      this.AllVolunteers = this.userservice.getfilteredvolunteers(
+        this.form?.get('skill')?.value,
+        this.city + ''
+      );
+    }
+  }
 
   private _filter(value: string): cities[] {
     const filterValue = value.toLowerCase();
 
-    return this.Allcities.filter(option => option.city.toLowerCase().includes(filterValue));
+    return this.Allcities.filter((option) =>
+      option.city.toLowerCase().includes(filterValue)
+    );
   }
 }
-
-
-
-
-
-  
-
-

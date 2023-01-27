@@ -20,12 +20,10 @@ export class NotificationComponent implements OnInit {
   requests$: any[] = [];
   role!: string;
   userstate!:Observable<any>;
-
   subscription!: Subscription;
 
   constructor(
     public auth: AuthService,
-    private oppoertunityservice: OportunitiesService,
     private dialogRef: MatDialogRef<NotificationComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}

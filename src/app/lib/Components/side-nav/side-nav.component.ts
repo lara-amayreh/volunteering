@@ -15,7 +15,6 @@ export class SideNavComponent implements OnInit {
   email!: string;
   constructor(
     public authServise: AuthService,
-    private userservice: UserService,
     private fireAuth: AngularFireAuth
   ) {}
   ngOnInit(): void {

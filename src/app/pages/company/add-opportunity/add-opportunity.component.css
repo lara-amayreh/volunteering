@@ -1,19 +1,19 @@
-.form-container{
-    display:flex;
-    flex-direction: column;
-    gap:10px;
-    padding-top:20px;
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 20px;
 }
-form{
-    padding: 20px 10px;
-    display:flex;
-    flex-direction: column;
-    gap:10px;
+form {
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
-.yellow{
-    color: rgb(203 173 1);
+.yellow {
+  color: rgb(203 173 1);
 }
-.y-btn{
-    background-color: rgb(203 173 1);
-    color:white;
+.y-btn {
+  background-color: rgb(203 173 1);
+  color: white;
 }

@@ -1,74 +1,63 @@
-
-
 <div class="hed-div">
-  <h1 class="heading">
-    My<span> Opportunities</span>
-  </h1>
-    
-</div> 
+  <h1 class="heading">My<span> Opportunities</span></h1>
+</div>
 
 <div class="container">
-
-
-  
-
-
   <div class="card-container">
- 
-
-    <mat-card   [routerLink]="['./',oppo.id]"  class="Opportunity-card" *ngFor="let oppo of activities$ |async as opportunity">
+    <mat-card
+      [routerLink]="['./', oppo.id]"
+      class="Opportunity-card"
+      *ngFor="let oppo of activities$ | async as opportunity"
+    >
       <mat-card-header class="avatar-headre">
-        <div>
-      </div>
+        <div></div>
         <div class="p-avatar">
-            <div >
-                <img class="avatar" mat-card-image [src]="oppo.companyLogo" alt="company profile img"></div>
-              
-        <mat-card-subtitle class="title">{{oppo.companyName}}</mat-card-subtitle>
+          <div>
+            <img
+              class="avatar"
+              mat-card-image
+              [src]="oppo.companyLogo"
+              alt="company profile img"
+            />
+          </div>
+
+          <mat-card-subtitle class="title">{{
+            oppo.companyName
+          }}</mat-card-subtitle>
         </div>
         <mat-divider></mat-divider>
-        <mat-card-title>{{oppo.name}}</mat-card-title>
-
+        <mat-card-title>{{ oppo.name }}</mat-card-title>
       </mat-card-header>
-        <mat-card-content>
-          <div class="content-container">
-            
-        <div class="item"><b>skills required:</b>
-          <mat-chip-listbox class="skills" aria-label="skills required">
-
-            <mat-chip  *ngFor="let skill of (oppo.skills)">
-                     {{skill}}
-            </mat-chip>
+      <mat-card-content>
+        <div class="content-container">
+          <div class="item">
+            <b>skills required:</b>
+            <mat-chip-listbox class="skills" aria-label="skills required">
+              <mat-chip *ngFor="let skill of oppo.skills">
+                {{ skill }}
+              </mat-chip>
             </mat-chip-listbox>
           </div>
         </div>
-     
-        </mat-card-content>
-        <mat-divider></mat-divider>
-      
-    
-        <mat-progress-bar 
+      </mat-card-content>
+      <mat-divider></mat-divider>
+
+      <mat-progress-bar
         class="item"
-        [value]="100*(oppo.numberOfApplicants) /oppo.numberOfVolunteers"
+        [value]="(100 * oppo.numberOfApplicants) / oppo.numberOfVolunteers"
         mode="determinate"
-        [bufferValue]="0">
-    </mat-progress-bar>
-       <div class="item">
-       {{oppo.numberOfApplicants}}/ {{oppo.numberOfVolunteers}} volunteers
+        [bufferValue]="0"
+      >
+      </mat-progress-bar>
+      <div class="item">
+        {{ oppo.numberOfApplicants }}/ {{ oppo.numberOfVolunteers }} volunteers
       </div>
-      <!-- <div class="apply">
-        <button [disabled]="chickapply(oppo.applicantsIds!,oppo.active)" mat-raised-button *ngIf="role ==('person') && oppo.numberOfApplicants < oppo.numberOfVolunteers"  color="primary" (click)="Apply(oppo.id+'')">Apply</button>
-      </div> -->
-      <mat-card-footer>
-      <div class="item"><span>{{(oppo.range.start).toDate()| date:'yyyy/MM/dd'}}</span> <span>  -  {{(oppo.range.end).toDate()| date:'yyyy/MM/dd'}}</span>
-           
-      </div> 
-    </mat-card-footer>
-      </mat-card>
-    </div>
-    </div>
-
-   
-      
-
-
+         <mat-card-footer>
+        <div class="item">
+          <span>{{ oppo.range.start.toDate() | date : "yyyy/MM/dd" }}</span>
+          <span> - {{ oppo.range.end.toDate() | date : "yyyy/MM/dd" }}</span>
+        </div>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</div>

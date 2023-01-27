@@ -1,11 +1,16 @@
-<div class="container" *ngIf="person$ |async as person">
+<div class="container" *ngIf="person$ | async as person">
   <mat-card class="card-item main-card">
     <mat-card-header>
       <div class="img-container">
-        <img [src]="person.profileImg" class="card-item logo-img"/>
-        <div>{{person.fullName }}</div>
-        </div>
-      <button *ngIf="role =='person' && userid == person.id " mat-icon-button color="primary" (click)="updateprofile(id)">
+        <img [src]="person.profileImg" class="card-item logo-img" />
+        <div>{{ person.fullName }}</div>
+      </div>
+      <button
+        *ngIf="role == 'person' && userid == person.id"
+        mat-icon-button
+        color="primary"
+        (click)="updateprofile(id)"
+      >
         <mat-icon>edit</mat-icon>
       </button>
     </mat-card-header>
@@ -15,11 +20,11 @@
         <h4>personal information</h4>
         <div class="card-item">
           <h5>Full Name :</h5>
-          {{person.fullName}}
+          {{ person.fullName }}
         </div>
         <div class="card-item">
           <h5>city :</h5>
-          {{person.city}}
+          {{ person.city }}
         </div>
 
         <mat-divider></mat-divider>
@@ -27,23 +32,23 @@
         <h4>Contact information</h4>
         <div class="card-item">
           <h5>phone Number :</h5>
-          {{person.phoneNumber}}
+          {{ person.phoneNumber }}
         </div>
 
         <mat-divider></mat-divider>
         <h4>Availability</h4>
         <div class="card-item">
           <h5>Available time:</h5>
-          {{person.range.start.toDate() | date:'yyyy/MM/dd'
-          }}<span> - {{ person.range.end.toDate() | date:'yyyy/MM/dd'}}</span>
+          {{ person.range.start.toDate() | date : "yyyy/MM/dd"
+          }}<span>
+            - {{ person.range.end.toDate() | date : "yyyy/MM/dd" }}</span
+          >
         </div>
 
         <mat-chip-listbox class="card-item" aria-label="days">
           <h5>Available days:</h5>
-          <mat-chip
-            color="primary"
-            *ngFor="let day of person.days.split(',') ">
-            {{day}}
+          <mat-chip color="primary" *ngFor="let day of person.days.split(',')">
+            {{ day }}
           </mat-chip>
         </mat-chip-listbox>
       </div>
@@ -52,11 +57,11 @@
       <h4>Qualifications</h4>
       <div class="card-item">
         <h5>job experience :</h5>
-        {{person.experience}}
+        {{ person.experience }}
       </div>
       <mat-chip-listbox class="card-item" aria-label="days">
         <h5>skills :</h5>
-        <mat-chip color="primary" *ngFor="let skill of person.skills ">
+        <mat-chip color="primary" *ngFor="let skill of person.skills">
           {{ skill }}
         </mat-chip>
       </mat-chip-listbox>
@@ -85,70 +90,82 @@
   </mat-card>
 </div>
 
-
-
 <div class="hed-div">
-  <h1 class="heading">
-    Volunteering  <span>Activities</span>
-  </h1></div>
+  <h1 class="heading">Volunteering <span>Activities</span></h1>
+</div>
 <!-- opportunities -->
- 
+
 <section class="opportunities-sec">
- <div class="container">
-  <div class="wrap">
+  <div class="container">
+    <div class="wrap">
+      <div class="card-container">
+        <mat-card
+          ngClass="activity-card"
+          [routerLink]="['/volunteer/opportunities', opportunity.id]"
+          class="Opportunity-card"
+          *ngFor="let opportunity of opportunities$ | async; let i = index"
+        >
+          <mat-card-header class="avatar-headre">
+            <div></div>
+            <div class="p-avatar">
+              <div>
+                <img
+                  class="avatar"
+                  mat-card-image
+                  [src]="opportunity.companyLogo"
+                  alt="company profile img"
+                />
+              </div>
 
-    <div class="card-container">
- 
-
-      <mat-card ngClass="activity-card"  [routerLink]="['/volunteer/opportunities',opportunity.id]"  class="Opportunity-card" *ngFor="let opportunity of opportunities$ | async; let i= index ;">
-        <mat-card-header class="avatar-headre">
-          <div>
-        </div>
-          <div class="p-avatar">
-              <div >
-                  <img class="avatar" mat-card-image [src]="opportunity.companyLogo" alt="company profile img"></div>
-                
-          <mat-card-subtitle class="title">{{opportunity.companyName}}</mat-card-subtitle>
-          </div>
-          <mat-divider></mat-divider>
-          <mat-card-title>{{opportunity.name}}</mat-card-title>
-  
-        </mat-card-header>
+              <mat-card-subtitle class="title">{{
+                opportunity.companyName
+              }}</mat-card-subtitle>
+            </div>
+            <mat-divider></mat-divider>
+            <mat-card-title>{{ opportunity.name }}</mat-card-title>
+          </mat-card-header>
           <mat-card-content>
             <div class="content-container">
-              
-          <div class="item"><b>skills required:</b>
-            <mat-chip-listbox class="skills" aria-label="skills required">
-  
-              <mat-chip  *ngFor="let skill of (opportunity.skills)">
-                       {{skill}}
-              </mat-chip>
-              </mat-chip-listbox>
+              <div class="item">
+                <b>skills required:</b>
+                <mat-chip-listbox class="skills" aria-label="skills required">
+                  <mat-chip *ngFor="let skill of opportunity.skills">
+                    {{ skill }}
+                  </mat-chip>
+                </mat-chip-listbox>
+              </div>
             </div>
-          </div>
-       
           </mat-card-content>
           <mat-divider></mat-divider>
-        
-      
-          <mat-progress-bar 
-          class="item"
-          [value]="100*(opportunity.numberOfApplicants) /opportunity.numberOfVolunteers"
-          mode="determinate"
-          [bufferValue]="0">
-      </mat-progress-bar>
-         <div class="item">
-         {{opportunity.numberOfApplicants}}/ {{opportunity.numberOfVolunteers}} volunteers
-        </div>
-        
-        <mat-card-footer>
-        <div class="item"><span>{{(opportunity.range.start).toDate()| date:'yyyy/MM/dd'}}</span> <span>  -  {{(opportunity.range.end).toDate()| date:'yyyy/MM/dd'}}</span>
-             
-        </div> 
-      </mat-card-footer>
+
+          <mat-progress-bar
+            class="item"
+            [value]="
+              (100 * opportunity.numberOfApplicants) /
+              opportunity.numberOfVolunteers
+            "
+            mode="determinate"
+            [bufferValue]="0"
+          >
+          </mat-progress-bar>
+          <div class="item">
+            {{ opportunity.numberOfApplicants }}/
+            {{ opportunity.numberOfVolunteers }} volunteers
+          </div>
+
+          <mat-card-footer>
+            <div class="item">
+              <span>{{
+                opportunity.range.start.toDate() | date : "yyyy/MM/dd"
+              }}</span>
+              <span>
+                -
+                {{ opportunity.range.end.toDate() | date : "yyyy/MM/dd" }}</span
+              >
+            </div>
+          </mat-card-footer>
         </mat-card>
       </div>
-
- </div>
-</div>
+    </div>
+  </div>
 </section>

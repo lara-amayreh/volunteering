@@ -3,7 +3,7 @@ import {
   AngularFirestore,
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
-import { from, Observable} from 'rxjs';
+import { from, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -12,7 +12,6 @@ export class UserService {
   constructor(private firestore: AngularFirestore) {
     this.usercollection = this.firestore.collection('users');
   }
-
 
   deleteuser(id: string) {
     return from(this.usercollection.doc(id).delete());
@@ -23,14 +22,13 @@ export class UserService {
       .doc(id)
       .update({ ...user });
   }
-  updateNumberOfOppo(id: string,numberof:number) {
+  updateNumberOfOppo(id: string, numberof: number) {
     return this.firestore
       .collection('users')
       .doc(id)
-      .update({numberOfApps:numberof});
+      .update({ numberOfApps: numberof });
   }
   getuserById(id: string): Observable<any> {
-
     return this.usercollection.doc(id).valueChanges({ idField: 'id' });
   }
   getAllusersByRole(role: string): Observable<any[]> {

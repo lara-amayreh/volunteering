@@ -1,4 +1,4 @@
-import { Component,TemplateRef, ViewChild } from '@angular/core';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of, switchMap } from 'rxjs';
@@ -62,8 +62,7 @@ export class CompanyProfileComponent {
       width: '500px',
       data: { id: id, data: this.organization },
     });
-    dialogRef.afterClosed().subscribe((result) => {
-    });
+    dialogRef.afterClosed().subscribe((result) => {});
   }
   Apply(id: string) {
     this.activityid = id;
@@ -76,12 +75,8 @@ export class CompanyProfileComponent {
     dialogRef.afterClosed().subscribe((result) => {
       console.log(result);
       if (result) {
-        window.alert("you are sucsessfully applied to the opportunity")
-      }
-      else
-      window.alert("you are unsucsessfully applied to the opportunity")
-
-      // this.person = result;
+        window.alert('you are sucsessfully applied to the opportunity');
+      } else window.alert('you are unsucsessfully applied to the opportunity');
     });
   }
 

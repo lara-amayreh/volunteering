@@ -41,43 +41,36 @@ export class AllActivitiesComponent implements OnInit {
   counter: number = 0;
   skills = allSkills;
   filteredOptions!: Observable<string[]>;
-  userstate$!:Observable<any>;
-  oppo$!:Observable <opportunity[] |undefined>;
+  userstate$!: Observable<any>;
+  oppo$!: Observable<opportunity[] | undefined>;
   allcompanies: string[] = [];
   types = companytypes;
-sub!:Subscription;
-sub2!:Subscription;
+  sub!: Subscription;
+  sub2!: Subscription;
 
   constructor(
     private af: AngularFirestore,
     public dialog: MatDialog,
     public auth: AuthService,
-    private oportunityservices: OportunitiesService,
-    private userservice: UserService
+    private oportunityservices: OportunitiesService
   ) {}
 
   ngOnInit(): void {
-    // this.counter = this.oportunityservices.countApplicant(this.activityid);
-    // this.types.push('All Types');
-
-   this.userstate$= this.auth.userState$;
-   this.sub=this.userstate$.subscribe((val) => {
+    this.userstate$ = this.auth.userState$;
+    this.sub = this.userstate$.subscribe((val) => {
       if (val) {
         this.role = val.role;
         this.uid = val.id;
-        // this.oportunityservices.countApplicant(this.activityid).subscribe((val)=>{
-        //   console.log(val.length);
-        //   this.counter = val.length});
       }
     });
     this.alloportunities$ = this.oportunityservices.getAllOpportunities();
 
     this.sub2 = this.alloportunities$.subscribe((val) => {
-      if(val)
-      val.forEach((vall, index) => {
-        if (!this.allcompanies.includes(vall.companyName + ''))
-          this.allcompanies?.push(vall.companyName + '');
-      });
+      if (val)
+        val.forEach((vall, index) => {
+          if (!this.allcompanies.includes(vall.companyName + ''))
+            this.allcompanies?.push(vall.companyName + '');
+        });
     });
     this.filteredOptions = this.form.controls.comname.valueChanges.pipe(
       startWith(''),
@@ -135,9 +128,7 @@ sub2!:Subscription;
     dialogRef.afterClosed().subscribe((result) => {
       console.log(result);
       if (result) {
-        // console.log(this.counter);
       }
-      // this.person = result;
     });
   }
   chickapply(applicantsIds: string[], active: boolean) {
@@ -150,6 +141,5 @@ sub2!:Subscription;
   ngOnDestroy() {
     this.sub2.unsubscribe();
     this.sub.unsubscribe();
-
   }
 }
