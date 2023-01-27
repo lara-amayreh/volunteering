@@ -45,8 +45,8 @@ export class AllVolunteersComponent implements OnInit {
   }
 
   filter() {
-    console.log(this.form.get('skill')?.value);
-    if (this.form.get('skill')?.value) {
+    // if (this.form.get('skill')?.value) {
+      {
       this.AllVolunteers = this.userservice.getfilteredvolunteers(
         this.form?.get('skill')?.value,
         this.city + ''

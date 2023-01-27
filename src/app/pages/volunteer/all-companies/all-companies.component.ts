@@ -52,13 +52,16 @@ export class AllCompaniesComponent {
     return this.form.get('type')?.value;
   }
   filter() {
+    console.log(this.name+ '',
+    this.type + '')
     this.userservice
       .getfilteredusers(
         'company',
-        this.name?.toLocaleLowerCase() + '',
+        this.name+'',
         this.type + ''
       )
       .subscribe((val) => {
+        console.log(val);
         this.allcompanies = val;
       });
   }

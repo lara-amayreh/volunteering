@@ -40,25 +40,21 @@ export class UserService {
   getfilteredusers(role: string, name: string, type: string) {
     return this.firestore
       .collection<any>('users', (ref) => {
-        if (type == 'All Types' && name != '') {
+        if (type !='' && name !='') {
           return ref
             .where('role', '==', role)
-            .where('name'.toLowerCase(), '==', name);
-        } else if (type == 'All Types') {
-          return ref.where('role', '==', role);
-        } else if (name != '' && type != '') {
+            .where('name', '==', name).where('type', '==', type);
+        
+        } else if (name != '') {
           return ref
             .where('role', '==', role)
-            .where('name'.toLowerCase(), '==', name + '')
-            .where('type', '==', type + '');
+            .where('name', '==', name)
         } else {
-          if (name != '' && type == '') {
+          if (type != '') {
             return ref
-              .where('role', '==', role)
-              .where('name'.toLowerCase(), '==', name);
-          } else if (name == '' && type != '') {
-            return ref.where('role', '==', role).where('type', '==', type);
-          } else {
+              .where('role', '==', role).where('type', '==', type);
+          }
+          else {
             return ref.where('role', '==', role);
           }
         }
@@ -67,18 +63,21 @@ export class UserService {
   }
 
   getfilteredvolunteers(skills: string[] | any, city: string) {
+    console.log(skills,city);
+
     return this.firestore
       .collection<any>('users', (ref) => {
-        if (skills.length > 0 && city == '') {
+        if (skills.length > 0 && city != '') {
           return ref
             .where('role', '==', 'person')
-            .where('skills', 'array-contains-any', skills);
-        } else if (skills.length > 0 && city != '') {
+            .where('skills', "array-contains-any", skills)
+             .where('city', '==', city);
+            
+        } else if (skills.length > 0) {
           return ref
             .where('role', '==', 'person')
-            .where('skills', 'array-contains-any', skills)
-            .where('city', '==', city);
-        } else if (skills.length == 0 && city != '') {
+            .where('skills', "array-contains-any", skills)
+        } else if (city != '') {
           return ref.where('role', '==', 'person').where('city', '==', city);
         } else {
           return ref.where('role', '==', 'person');
