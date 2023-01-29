@@ -22,7 +22,7 @@ import { AddOpportunityComponent } from '../add-opportunity/add-opportunity.comp
 export class CompanyActivitiesComponent implements OnInit {
   @ViewChild('callAPIDialog')
   callAPIDialog!: TemplateRef<any>;
-  opportunities!: Observable<opportunity[] | undefined>;
+  opportunities!: Observable<opportunity[] | null>;
   profileImg!: string;
   cname!: string;
   start!: string;
@@ -35,13 +35,15 @@ export class CompanyActivitiesComponent implements OnInit {
     private authservice: AuthService
   ) {}
   ngOnInit(): void {
-    this.userstate = this.authservice.userState$;
-    this.subscription = this.userstate.subscribe((value) => {
-      this.opportunities = this.oportunityservice.getOpportunities(
-        value?.id + ''
-      );
-    });
-  }
+    this.opportunities = this.authservice.userState$.pipe(
+      switchMap((value)=>{
+      if(value)
+      return this.oportunityservice.getOpportunities(value.id);
+      else return of(null);
+    }))
+
+
+     }
 
   addoportunity() {
     let dialogRef = this.dialog.open(AddOpportunityComponent, {
@@ -49,7 +51,5 @@ export class CompanyActivitiesComponent implements OnInit {
     });
    
   }
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
+
 }

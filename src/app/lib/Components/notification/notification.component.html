@@ -3,7 +3,7 @@
 </div>
 <div class="container" *ngIf="role == 'person'">
   <ul *ngIf="requests$.length > 0">
-    <li
+    <li 
       *ngFor="let req of requests$"
       [routerLink]="['./volunteer/opportunities', req.opportunityId]"
     >
@@ -17,13 +17,13 @@
 </div>
 <div class="container" *ngIf="role == 'company'">
   <ul *ngIf="requests$; else no">
-    <li
+    <li (click)="closedialog()"
       *ngFor="let req of requests$"
       [routerLink]="['/company/your-Activities', req.opportunityId]"
     >
       <a
         ><mat-icon>checklist</mat-icon> <b>{{ req.volunteerName }}</b
-        >   Has requested to apply on <b>{{ req.opportunityName }} </b> Opportunity</a
+        >   Has requested to apply on  <b>{{ req.opportunityName }} </b> Opportunity</a
       >
     </li>
   </ul>

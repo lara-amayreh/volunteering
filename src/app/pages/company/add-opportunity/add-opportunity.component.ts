@@ -88,7 +88,8 @@ export class AddOpportunityComponent implements OnDestroy {
         this.oportunityservice.updatid(this.id);
         this.userservice.updateNumberOfOppo(this.userid, this.numberofOpp + 1);
       }
-      this.dialogRef.close(true);
+      if (this.form.valid) this.dialogRef.close(true);
+    else this.dialogRef.close(false);
     });
   }
   ngOnDestroy() {
