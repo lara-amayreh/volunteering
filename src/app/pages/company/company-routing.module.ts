@@ -8,6 +8,7 @@ import { LandingComponent } from '../landing/landing.component';
 import { AllCompaniesComponent } from '../volunteer/all-companies/all-companies.component';
 import { AllVolunteersComponent } from './all-volunteers/all-volunteers.component';
 import { ActivityDetailsComponent } from './activity-details/activity-details.component';
+import { CompanyGuard } from 'src/app/lib/guards/company.guard';
 
 const routes: Routes = [
   {
@@ -20,18 +21,18 @@ const routes: Routes = [
         path: 'your-Activities',
         component: CompanyActivitiesComponent,
         pathMatch: 'full',
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard,CompanyGuard],
       },
       {
         path: 'All-Volunteers',
         component: AllVolunteersComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard,CompanyGuard],
       },
 
       {
         path: 'your-Activities/:id',
         component: ActivityDetailsComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard,CompanyGuard],
       },
     ],
   },

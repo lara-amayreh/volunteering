@@ -1,6 +1,7 @@
 import {
   Component,
   Inject,
+  OnDestroy,
 } from '@angular/core';
 import {
   FormControl,
@@ -23,7 +24,7 @@ import { UserService } from 'src/app/lib/services/user/user.service';
   templateUrl: './add-opportunity.component.html',
   styleUrls: ['./add-opportunity.component.css'],
 })
-export class AddOpportunityComponent {
+export class AddOpportunityComponent implements OnDestroy {
   numberOfVolunteers!: number;
   id!: string;
   userid!: string;
@@ -86,7 +87,6 @@ export class AddOpportunityComponent {
         this.id = value.id;
         this.oportunityservice.updatid(this.id);
         this.userservice.updateNumberOfOppo(this.userid, this.numberofOpp + 1);
-        console.log(this.numberofOpp);
       }
       this.dialogRef.close(true);
     });

@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   Inject,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -16,7 +17,7 @@ import { apply, MyEnum } from '../../inteerfaces/apply';
   templateUrl: './notification.component.html',
   styleUrls: ['./notification.component.css'],
 })
-export class NotificationComponent implements OnInit {
+export class NotificationComponent implements  OnInit , OnDestroy {
   requests$: any[] = [];
   role!: string;
   userstate!:Observable<any>;

@@ -10,6 +10,7 @@ import { PagenotfoundComponent } from '../pagenotfound/pagenotfound.component';
 import { PastActivitiesComponent } from './past-activities/past-activities.component';
 import { ActivityDetailsComponent } from '../company/activity-details/activity-details.component';
 import { CompanyProfileComponent } from '../company/company-profile/company-profile.component';
+import { VolunteerGuard } from 'src/app/lib/guards/volunteer.guard';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full' },
@@ -34,18 +35,13 @@ const routes: Routes = [
   {
     path: 'my-Activities',
     component: PastActivitiesComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard,VolunteerGuard],
   },
   {
     path: 'my-Activities/:id',
     component: ActivityDetailsComponent,
     pathMatch: 'full',
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'apply',
-    component: ApplyOnActivityComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard,,VolunteerGuard],
   },
   {
     path: 'profile/:id',
