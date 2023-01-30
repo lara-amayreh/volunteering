@@ -4,12 +4,22 @@
 }
 
 .container {
+  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 20px;
   align-items: center;
 }
-
+.hed-div {
+  padding: 20px 10px;
+  background-color: white;
+  height: 100px;
+  box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%);
+  margin-bottom: 3px;
+}
+.approved{
+  color :green;
+}
 li:hover {
   cursor: pointer;
 }

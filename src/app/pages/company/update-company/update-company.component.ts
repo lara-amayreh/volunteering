@@ -37,6 +37,7 @@ export class UpdateCompanyComponent implements OnInit {
 
   ngOnInit(): void {
     this.authservice.userState$.subscribe((value) => {
+    if(value){
       this.form.get('name')?.setValue(value.name);
       this.form.get('phoneNumber')?.setValue(value.phoneNumber);
       this.form.get('email')?.setValue(value.email);
@@ -45,7 +46,8 @@ export class UpdateCompanyComponent implements OnInit {
       this.role = value.role;
       this.downloadurl = value.profileImg;
       this.form.get('about')?.setValue(value.about);
-      this.form.get('adress')?.setValue(value.city) + '';
+      this.form.get('adress')?.setValue(value.city) + '';}
+
     });
   }
   types = companytypes;

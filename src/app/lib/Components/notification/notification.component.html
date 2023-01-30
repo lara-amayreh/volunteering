@@ -3,13 +3,22 @@
 </div>
 <div class="container" *ngIf="role == 'person'">
   <ul *ngIf="requests$.length > 0">
-    <li (click)="closedialog()"
+    <li class="hed-div" (click)="closedialog()"
       *ngFor="let req of requests$"
       [routerLink]="['./volunteer/opportunities', req.opportunityId]"
     >
       <a
-        ><mat-icon>checklist</mat-icon>  <span>Your Applicantion on</span>
-        <b>{{ req.opportunityName }} </b> Opportunity  was <b>{{ req.opportunityStatus }}</b>by <b>{{ req.companyName}}</b> company</a
+        ><span>Your Applicantion on  </span>
+        <b>{{ req.opportunityName }} </b> Opportunity  was  <b>{{ req.opportunityStatus }}</b>  by <b>{{ req.companyName}}</b>  company 
+        <mat-icon
+        class="approved"
+        *ngIf="req.opportunityStatus == 'approved'"
+        >check_circle
+      </mat-icon>
+      <mat-icon color="warn" *ngIf="req.opportunityStatus == 'rejected'"
+        >close
+      </mat-icon>
+        </a
       >
     </li>
   </ul>
@@ -17,13 +26,13 @@
 </div>
 <div class="container" *ngIf="role == 'company'">
   <ul *ngIf="requests$; else no">
-    <li (click)="closedialog()"
+    <li class="hed-div" (click)="closedialog()"
       *ngFor="let req of requests$"
       [routerLink]="['/company/your-Activities', req.opportunityId]"
     >
       <a
-        ><mat-icon>checklist</mat-icon> <b>{{ req.volunteerName }}</b
-        >   Has requested to apply on  <b>{{ req.opportunityName }} </b> Opportunity</a
+        > <b>{{ req.volunteerName }}</b
+        >   was requested to apply on  <b>{{ req.opportunityName }} </b> Opportunity</a
       >
     </li>
   </ul>

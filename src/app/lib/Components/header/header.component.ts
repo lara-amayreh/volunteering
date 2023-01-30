@@ -96,7 +96,7 @@ export class HeaderComponent implements OnInit {
   }
   openNotification() {
     let dialogRef = this.dialog.open(NotificationComponent, {
-      width: '700px',
+      width: '900px',
       height: '500px',
       data: { request: this.requests$ },
     });

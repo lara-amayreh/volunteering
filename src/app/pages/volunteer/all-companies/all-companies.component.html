@@ -57,17 +57,20 @@
     <mat-card [routerLink]="['./profile',company.id]" *ngFor="let company of allcompanies">
         <mat-card-header>
           <mat-card-title>{{company.name}}</mat-card-title>
-          <mat-card-subtitle>{{company.type}}</mat-card-subtitle>
-          <mat-card-subtitle>{{company.numberOfApps}} opportunities</mat-card-subtitle>
-
+        
         </mat-card-header>
     <mat-divider></mat-divider>
-       <mat-card-content>
-        <img class="logo" mat-card-md-image [src]= 'company.profileImg' alt="company logo">
+       <mat-card-content class="card-c">
+        <div class="company-logo hed-div">
+        <img class="logo" mat-card-sm-image [src]= 'company.profileImg' alt="company logo">
+      </div>
+      <div class="type">
+       <h3> {{company.type}}</h3>
+    <h3> {{company.numberOfApps}} opportunities</h3>
+
+      </div>
         <mat-divider></mat-divider>
        </mat-card-content>
-       <mat-card-footer>
-      </mat-card-footer>
-      </mat-card>
+           </mat-card>
     </div>
     </div>

@@ -63,8 +63,9 @@ mat-card-footer {
   width: 100%;
 }
 img {
-  border-radius: 100%;
-  width: 132px;
+  width: 150px;
+  height: 120px;
+  padding-bottom: 20px;
 }
 .card-item {
   display: flex;
