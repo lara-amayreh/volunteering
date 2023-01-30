@@ -19,7 +19,7 @@ export class AuthService {
     private firestore: AngularFirestore,
     private router: Router
   ) {}
-  userState$ = this.fireAuth.authState.pipe(
+  userState$: Observable<any> = this.fireAuth.authState.pipe(
     switchMap((value) => {
       if (!value) return of(null);
       else

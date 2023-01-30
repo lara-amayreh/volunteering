@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldControl } from '@angular/material/form-field';
-import { Observable, of, Subscription, switchMap } from 'rxjs';
+import { Observable, of, Subscription, switchMap, take } from 'rxjs';
 import { AppComponent } from 'src/app/app.component';
 import { opportunity } from 'src/app/lib/inteerfaces/opportunity';
 import { AuthService } from 'src/app/lib/services/auth/auth.service';
@@ -36,6 +36,7 @@ export class CompanyActivitiesComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.opportunities = this.authservice.userState$.pipe(
+      take(1),
       switchMap((value)=>{
       if(value)
       return this.oportunityservice.getOpportunities(value.id);
@@ -49,7 +50,9 @@ export class CompanyActivitiesComponent implements OnInit {
     let dialogRef = this.dialog.open(AddOpportunityComponent, {
       width: '500px',
     });
-   
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(result);
+    });
   }
 
 }

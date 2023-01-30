@@ -7,7 +7,14 @@ import {
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subscription, switchMap, take } from 'rxjs';
+import {
+  combineLatest,
+  Observable,
+  Subscription,
+  switchMap,
+  take,
+  tap,
+} from 'rxjs';
 
 import { apply, MyEnum } from 'src/app/lib/inteerfaces/apply';
 import { opportunity } from 'src/app/lib/inteerfaces/opportunity';
@@ -57,21 +64,21 @@ export class ActivityDetailsComponent implements OnInit {
     public auth: AuthService,
     private opportunityservice: OportunitiesService,
     private route: ActivatedRoute
-  ) {}
-
-  ngOnInit(): void {
+  ) {
+    console.log('activity details');
     this.opportunity$ = this.route.paramMap.pipe(
-      take(1),
       switchMap((value) => {
         this.id = value.get('id') + '';
 
         return this.opportunityservice.getoportunityById(this.id);
       })
     );
-    this.auth.userState$
+
+    combineLatest(this.auth.userState$, this.route.paramMap)
       .pipe(
-        take(1),
-        switchMap((x) => {
+        switchMap(([x, paramMap]) => {
+          this.id = paramMap.get('id') + '';
+
           if (x) {
             this.role = x.role;
             this.uid = x.id;
@@ -98,7 +105,6 @@ export class ActivityDetailsComponent implements OnInit {
           return this.opportunityservice.getoportunityById(this.id);
         })
       )
-      .pipe(take(1))
       .subscribe((ele) => {
         if (ele)
           if (ele?.applicantsIds.length > 0) {
@@ -110,9 +116,13 @@ export class ActivityDetailsComponent implements OnInit {
       });
   }
 
+  ngOnInit(): void {
+   
+  }
+
   approve(uid: string, oportunityId: string) {
     this.volunteer$ = this.opportunityservice.getvolunteer(uid, oportunityId);
-    this.sub1 = this.volunteer$.pipe(take(1)).subscribe((v) => {
+    this.sub1 = this.volunteer$.subscribe((v) => {
       if (v)
         this.opportunityservice.updateState(
           v[0].id,
@@ -151,7 +161,7 @@ export class ActivityDetailsComponent implements OnInit {
   }
   reject(uid: string, oportunityId: string) {
     this.volunteerr$ = this.opportunityservice.getvolunteer(uid, oportunityId);
-    this.sub2 = this.volunteerr$.pipe(take(1)).subscribe((v) => {
+    this.sub2 = this.volunteerr$.subscribe((v) => {
       if (v)
         this.opportunityservice.updateState(
           v[0].id,
@@ -171,7 +181,7 @@ export class ActivityDetailsComponent implements OnInit {
 
     this.opportunityr$ =
       this.opportunityservice.getoportunityById(oportunityId);
-    this.sub3 = this.opportunityr$.pipe(take(1)).subscribe((oportunity) => {
+    this.sub3 = this.opportunityr$.subscribe((oportunity) => {
       if (oportunity) {
         let arr: string[] = oportunity?.applicantsIds!;
         for (let i = 0; i < arr.length; i++) {

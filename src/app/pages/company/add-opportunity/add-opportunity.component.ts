@@ -8,7 +8,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Observable, of,Subscription, switchMap } from 'rxjs';
+import { Observable, of,Subscription, switchMap, take } from 'rxjs';
 import { AuthService } from 'src/app/lib/services/auth/auth.service';
 import { OportunitiesService } from 'src/app/lib/services/oportunities/oportunities.service';
 import { allSkills } from 'src/assets/arrays/skills';
@@ -56,6 +56,7 @@ export class AddOpportunityComponent implements OnDestroy {
 
   confirm() {
     this.userstate = this.authservice.userState$.pipe(
+      take(1),
       switchMap((value) => {
         if (value) {
           this.numberofOpp = value.numberOfApps;
@@ -82,18 +83,20 @@ export class AddOpportunityComponent implements OnDestroy {
         }
       })
     );
-    this.subscription = this.userstate.subscribe((value) => {
+    this.subscription = this.userstate
+    .pipe(take(1))
+    .subscribe((value) => {
       if (value) {
         this.id = value.id;
         this.oportunityservice.updatid(this.id);
         this.userservice.updateNumberOfOppo(this.userid, this.numberofOpp + 1);
       }
-      if (this.form.valid) this.dialogRef.close(true);
-    else this.dialogRef.close(false);
+      this.dialogRef.close(true);
     });
+
   }
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    // this.subscription.unsubscribe();
   }
   get start() {
     return this.form.get('start');

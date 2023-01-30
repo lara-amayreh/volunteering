@@ -126,9 +126,8 @@ export class AllActivitiesComponent implements OnInit {
       data: { id: id },
     });
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
-      if (result) {
-      }
+      // console.log(result);
+
     });
   }
   chickapply(applicantsIds: string[], active: boolean) {

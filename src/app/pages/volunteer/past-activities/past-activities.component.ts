@@ -20,6 +20,7 @@ export class PastActivitiesComponent implements OnInit {
   activities$!:Observable<opportunity[]|undefined>;
   constructor(private oportunityservice:OportunitiesService, public auth:AuthService, private fs:AngularFirestore ){}
   ngOnInit(): void {
+    console.log('ng on inti');
     this.userstate$ = this.auth.userState$;
     this.sub= this.userstate$.subscribe((val)=>{
       if(val){

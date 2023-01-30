@@ -3,7 +3,7 @@
 </div>
 <div class="container" *ngIf="role == 'person'">
   <ul *ngIf="requests$.length > 0">
-    <li 
+    <li (click)="closedialog()"
       *ngFor="let req of requests$"
       [routerLink]="['./volunteer/opportunities', req.opportunityId]"
     >
