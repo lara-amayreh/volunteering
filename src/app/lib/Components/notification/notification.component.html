@@ -3,13 +3,14 @@
 </div>
 <div class="container" *ngIf="role == 'person'">
   <ul *ngIf="requests$.length > 0">
-    <li class="hed-div" (click)="closedialog()"
+    <li [class.seen]="req.seenFlag"
+
+    class="hed-div" (click)="updateseen(req.id)"
       *ngFor="let req of requests$"
       [routerLink]="['./volunteer/opportunities', req.opportunityId]"
     >
-      <a
-        ><span>Your Applicantion on  </span>
-        <b>{{ req.opportunityName }} </b> Opportunity  was  <b>{{ req.opportunityStatus }}</b>  by <b>{{ req.companyName}}</b>  company 
+      <span>Your Applicantion on  
+        <b>{{ req.opportunityName }} </b> Opportunity  was  <b>{{ req.opportunityStatus }} </b>  by <b>{{ req.companyName}}</b>  company 
         <mat-icon
         class="approved"
         *ngIf="req.opportunityStatus == 'approved'"
@@ -17,23 +18,25 @@
       </mat-icon>
       <mat-icon color="warn" *ngIf="req.opportunityStatus == 'rejected'"
         >close
-      </mat-icon>
-        </a
-      >
+      </mat-icon> <b> {{calculateDiff(req.notiDate)}}</b>
+    </span>
+    
+
     </li>
   </ul>
   <ng-template #no><h4>No updates on your Requests</h4></ng-template>
 </div>
 <div class="container" *ngIf="role == 'company'">
   <ul *ngIf="requests$; else no">
-    <li class="hed-div" (click)="closedialog()"
+    <li class="hed-div" (click)="updateseen(req.id)"
       *ngFor="let req of requests$"
       [routerLink]="['/company/your-Activities', req.opportunityId]"
     >
-      <a
-        > <b>{{ req.volunteerName }}</b
-        >   was requested to apply on  <b>{{ req.opportunityName }} </b> Opportunity</a
-      >
+    <span>
+
+       <b>{{ req.volunteerName }}</b
+        >   was requested to apply on  <b>{{ req.opportunityName }} </b> Opportunity  <b> {{calculateDiff(req.notiDate)}}</b>
+      </span>
     </li>
   </ul>
   <ng-template #no> <h4>No pending Requests</h4></ng-template>

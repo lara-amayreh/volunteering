@@ -54,5 +54,12 @@ export class CompanyActivitiesComponent implements OnInit {
       console.log(result);
     });
   }
-
+  calculateDiff(sentDate: any){
+    var date1:any =sentDate.toDate();
+    var date2:any = new Date();
+    var diffDays:any = Math.floor((date2 - date1) / (1000 * 60 * 60 * 24));
+if(diffDays)
+    return diffDays +' Days ago';
+    else return Math.floor((date2 - date1) / (1000 * 60 * 60))+' Hours ago';
+}
 }

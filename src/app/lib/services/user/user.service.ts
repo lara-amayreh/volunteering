@@ -32,11 +32,27 @@ export class UserService {
     return this.usercollection.doc(id).valueChanges({ idField: 'id' });
   }
   getAllusersByRole(role: string): Observable<any[]> {
+    if(role=="company")
+    return this.firestore
+    .collection<any>('users', (ref) => ref.where('role', '==', role).orderBy('numberOfApps', 'desc')
+    )
+    .valueChanges({ idField: 'id' });
+    else
     return this.firestore
       .collection<any>('users', (ref) => ref.where('role', '==', role))
       .valueChanges({ idField: 'id' });
   }
+getTopCompanies(){
+  return this.firestore
+  .collection<any>('users', (ref) =>
+    ref
+      .where('role', '==', 'company')
+      .orderBy('numberOfApps', 'desc')
+      .limit(6)
+  )
+  .valueChanges({ idField: 'id' });
 
+}
   getfilteredusers(role: string, name: string, type: string) {
     return this.firestore
       .collection<any>('users', (ref) => {

@@ -30,7 +30,14 @@ this.activities$= this.oportunityservice.getUserOpportunities(this.userid);
 
    } })
     }
-
+    calculateDiff(sentDate: any){
+      var date1:any =sentDate.toDate();
+      var date2:any = new Date();
+      var diffDays:any = Math.floor((date2 - date1) / (1000 * 60 * 60 * 24));
+  if(diffDays)
+      return diffDays +' Days ago';
+      else return Math.floor((date2 - date1) / (1000 * 60 * 60))+' Hours ago';
+  }
     chickapply(applicantsIds:string[],active:boolean){
       let stat:boolean = false;
       applicantsIds.forEach((val)=>{

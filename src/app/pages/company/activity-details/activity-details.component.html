@@ -2,8 +2,8 @@
   <div class="hed-div">
     <h1 class="heading">{{ opportunity.name }} <span>Details</span></h1>
   </div>
-  <mat-tab-group dynamicHeight>
-    <mat-tab label="opportunity Details">
+  <mat-tab-group dynamicHeight class="first-tab">
+    <mat-tab  label="opportunity Details">
       <div class="mat-elevation-z4 first-box">
         <div class="wrapper">
           <div class="c">
@@ -252,12 +252,14 @@
       <div class="hed-div">
         <h1 class="heading">Applicants <span>Details</span></h1>
       </div>
-      <mat-tab-group dynamicHeight>
+     
+      <mat-tab-group dynamicHeight class="first-tab">
         <mat-tab label="Waitting Requests">
           <div
             class="details-box mat-elevation-z4"
             *ngFor="let volunteer of waitting | async"
           >
+          
             <div class="c">
               <mat-card
                 class="card-volunteer"
@@ -534,6 +536,7 @@
           </div>
         </mat-tab>
       </mat-tab-group>
+    
     </div>
   </div>
 </div>

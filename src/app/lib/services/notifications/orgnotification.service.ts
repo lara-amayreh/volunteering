@@ -18,6 +18,9 @@ addNotification(notification:orgnotifications){
   return this.notificationCollection.add(notification);
 
 }
+updateNotification(id: string) {
+  return this.notificationCollection.doc(id).update({seenFlag:true});
+}
 getNotification(userid:string){
  return this.firestore.collection('orgnotifications',
  (ref)=>ref.where('uid', '==',userid).orderBy('notiDate','desc')

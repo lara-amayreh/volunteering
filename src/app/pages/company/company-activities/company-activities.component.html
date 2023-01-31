@@ -16,23 +16,25 @@
           *ngFor="let opportunity of opportunities | async; let i = index"
         >
           <mat-card-header class="avatar-headre">
-            <div></div>
+            <mat-card-title>{{ opportunity.name }}</mat-card-title> 
+<mat-divider></mat-divider>
             <div class="p-avatar">
-              <div>
+              <div class="date">
                 <img
                   class="avatar"
-                  mat-card-image
                   [src]="opportunity.companyLogo"
                   alt="company profile img"
                 />
+                <div style="font-weight:bold;"><mat-icon>history</mat-icon>  {{calculateDiff(opportunity.creatDate)}} </div>
+  
               </div>
-
+  
               <mat-card-subtitle class="title">{{
                 opportunity.companyName
-              }}</mat-card-subtitle>
+              }} Company </mat-card-subtitle>
             </div>
             <mat-divider></mat-divider>
-            <mat-card-title>{{ opportunity.name }}</mat-card-title>
+  
           </mat-card-header>
           <mat-card-content>
             <div class="content-container">

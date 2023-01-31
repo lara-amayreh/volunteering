@@ -25,14 +25,21 @@ export class OportunitiesService {
   getOpportunities(userid: string) {
     return this.firestore
       .collection<opportunity>('oportunities', (ref) =>
-        ref.where('userid', '==', userid)
+        ref.where('userid', '==', userid).orderBy('creatDate', 'desc')
       )
       .valueChanges({ idField: 'id' });
   }
-
+getTopOpportunities(){
+ return this.firestore
+  .collection<opportunity>('oportunities', (ref) =>
+    ref.orderBy('creatDate', 'desc').limit(6)
+  )
+  .valueChanges({ idField: 'id' });
+}
   getAllOpportunities() {
     return this.firestore
-      .collection<opportunity>('oportunities')
+      .collection<opportunity>('oportunities', (ref) =>
+      ref.orderBy('creatDate', 'desc'))
       .valueChanges({ idField: 'id' });
   }
 

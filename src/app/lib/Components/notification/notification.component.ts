@@ -11,6 +11,8 @@ import { AuthService } from '../../services/auth/auth.service';
 import { OportunitiesService } from '../../services/oportunities/oportunities.service';
 import {Observable, Subscription } from 'rxjs';
 import { apply, MyEnum } from '../../inteerfaces/apply';
+import { PersonnotificationService } from '../../services/notifications/personnotification.service';
+import { OrgnotificationService } from '../../services/notifications/orgnotification.service';
 
 @Component({
   selector: 'app-notification',
@@ -25,6 +27,9 @@ export class NotificationComponent implements  OnInit , OnDestroy {
 
   constructor(
     public auth: AuthService,
+    private personNotifservice:PersonnotificationService,
+    private orgNotifservice:OrgnotificationService,
+
     private dialogRef: MatDialogRef<NotificationComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
@@ -47,4 +52,20 @@ export class NotificationComponent implements  OnInit , OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe()
   }
+  updateseen(id:string){
+this.personNotifservice.updateNotification(id);
+this.closedialog();
+  }
+  updatcompanyeseen(id:string){
+    this.orgNotifservice.updateNotification(id);
+    this.closedialog();
+      }
+  calculateDiff(sentDate: any){
+    var date1:any =sentDate.toDate();
+    var date2:any = new Date();
+    var diffDays:any = Math.floor((date2 - date1) / (1000 * 60 * 60 * 24));
+if(diffDays)
+    return diffDays +' Days ago';
+    else return Math.floor((date2 - date1) / (1000 * 60 * 60))+' Hours ago';
+}
 }

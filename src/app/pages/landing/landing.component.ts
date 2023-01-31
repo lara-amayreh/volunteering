@@ -32,22 +32,8 @@ export class LandingComponent implements OnInit {
 
   ngOnInit(): void {
     this.alloportunities$ = this.oportunityservices.getAllOpportunities();
-    this.subscription = this.alloportunities$.subscribe((g) => {});
-    this.latestopportunities$ = this.fs
-      .collection<opportunity>('oportunities', (ref) =>
-        ref.orderBy('creatDate', 'desc').limit(3)
-      )
-      .valueChanges({ idField: 'id' });
-    this.allorganizations$ = this.userservice.getAllusersByRole('company');
-    this.latestOrg$ = this.fs
-      .collection<any>('users', (ref) =>
-        ref
-          .where('role', '==', 'company')
-          .orderBy('numberOfApps', 'desc')
-          .limit(3)
-      )
-      .valueChanges({ idField: 'id' });
-
+    this.latestopportunities$ =this.oportunityservices.getTopOpportunities();
+    this.latestOrg$ = this.userservice.getTopCompanies();
     this.auth.userState$.subscribe((user) => {
       if (user) {
         this.uid = user.id;
@@ -69,6 +55,14 @@ export class LandingComponent implements OnInit {
       }
     });
   }
+  calculateDiff(sentDate: any){
+    var date1:any =sentDate.toDate();
+    var date2:any = new Date();
+    var diffDays:any = Math.floor((date2 - date1) / (1000 * 60 * 60 * 24));
+if(diffDays)
+    return diffDays +' Days ago';
+    else return Math.floor((date2 - date1) / (1000 * 60 * 60))+' Hours ago';
+}
   chickapply(applicantsIds: string[], active: boolean) {
     let stat: boolean = false;
     for (let i = 0; i < applicantsIds.length; i++) {

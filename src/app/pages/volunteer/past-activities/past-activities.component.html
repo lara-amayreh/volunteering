@@ -1,3 +1,6 @@
+
+<div class="cover">
+</div>
 <div class="hed-div">
   <h1 class="heading">My<span> Opportunities</span></h1>
 </div>
@@ -9,25 +12,27 @@
       class="Opportunity-card"
       *ngFor="let oppo of activities$ | async as opportunity"
     >
-      <mat-card-header class="avatar-headre">
-        <div></div>
-        <div class="p-avatar">
-          <div>
-            <img
-              class="avatar"
-              mat-card-image
-              [src]="oppo.companyLogo"
-              alt="company profile img"
-            />
-          </div>
+    <mat-card-header class="avatar-headre">
+      <mat-card-title>{{ oppo.name }}</mat-card-title> 
+<mat-divider></mat-divider>
+     <div class="p-avatar">
+       <div class="date">
+         <img
+           class="avatar"
+           [src]="oppo.companyLogo"
+           alt="company profile img"
+         />
+         <div><mat-icon>history</mat-icon> <b> {{calculateDiff(oppo.creatDate)}}</b> </div>
 
-          <mat-card-subtitle class="title">{{
-            oppo.companyName
-          }}</mat-card-subtitle>
-        </div>
-        <mat-divider></mat-divider>
-        <mat-card-title>{{ oppo.name }}</mat-card-title>
-      </mat-card-header>
+       </div>
+
+       <mat-card-subtitle class="title">{{
+         oppo.companyName
+       }} Company </mat-card-subtitle>
+     </div>
+     <mat-divider></mat-divider>
+
+   </mat-card-header>
       <mat-card-content>
         <div class="content-container">
           <div class="item">

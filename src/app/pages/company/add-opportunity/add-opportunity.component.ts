@@ -24,7 +24,7 @@ import { UserService } from 'src/app/lib/services/user/user.service';
   templateUrl: './add-opportunity.component.html',
   styleUrls: ['./add-opportunity.component.css'],
 })
-export class AddOpportunityComponent implements OnDestroy {
+export class AddOpportunityComponent {
   numberOfVolunteers!: number;
   id!: string;
   userid!: string;
@@ -95,9 +95,7 @@ export class AddOpportunityComponent implements OnDestroy {
     });
 
   }
-  ngOnDestroy() {
-    // this.subscription.unsubscribe();
-  }
+ 
   get start() {
     return this.form.get('start');
   }

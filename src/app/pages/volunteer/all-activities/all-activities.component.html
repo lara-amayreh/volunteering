@@ -110,25 +110,27 @@
           class="Opportunity-card"
           *ngFor="let opportunity of alloportunities$ | async; let i = index"
         >
-          <mat-card-header class="avatar-headre">
-            <div></div>
-            <div class="p-avatar">
-              <div>
-                <img
-                  class="avatar"
-                  mat-card-image
-                  [src]="opportunity.companyLogo"
-                  alt="company profile img"
-                />
-              </div>
+        <mat-card-header class="avatar-headre">
+           <mat-card-title>{{ opportunity.name }}</mat-card-title> 
+<mat-divider></mat-divider>
+          <div class="p-avatar">
+            <div class="date">
+              <img
+                class="avatar"
+                [src]="opportunity.companyLogo"
+                alt="company profile img"
+              />
+              <div><mat-icon>history</mat-icon> <b> {{calculateDiff(opportunity.creatDate)}}</b> </div>
 
-              <mat-card-subtitle class="title">{{
-                opportunity.companyName
-              }}</mat-card-subtitle>
             </div>
-            <mat-divider></mat-divider>
-            <mat-card-title>{{ opportunity.name }}</mat-card-title>
-          </mat-card-header>
+
+            <mat-card-subtitle class="title">{{
+              opportunity.companyName
+            }} Company </mat-card-subtitle>
+          </div>
+          <mat-divider></mat-divider>
+
+        </mat-card-header>
           <mat-card-content>
             <div class="content-container">
               <div class="item">
@@ -139,6 +141,7 @@
                   </mat-chip>
                 </mat-chip-listbox>
               </div>
+
             </div>
           </mat-card-content>
           <mat-divider></mat-divider>
@@ -154,7 +157,7 @@
           >
           </mat-progress-bar>
           <div class="item">
-            {{ opportunity.numberOfApplicants }}/
+            {{ opportunity.numberOfApplicants }} /
             {{ opportunity.numberOfVolunteers }} volunteers
           </div>
           <div class="apply">
