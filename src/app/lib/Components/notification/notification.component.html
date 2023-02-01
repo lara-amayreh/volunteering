@@ -5,7 +5,7 @@
   <ul *ngIf="requests$.length > 0">
     <li [class.seen]="req.seenFlag"
 
-    class="hed-div" (click)="updateseen(req.id)"
+    class="hed-div"
       *ngFor="let req of requests$"
       [routerLink]="['./volunteer/opportunities', req.opportunityId]"
     >
@@ -28,8 +28,8 @@
 </div>
 <div class="container" *ngIf="role == 'company'">
   <ul *ngIf="requests$; else no">
-    <li class="hed-div" (click)="updateseen(req.id)"
-      *ngFor="let req of requests$"
+    <li class="hed-div"
+       *ngFor="let req of requests$"
       [routerLink]="['/company/your-Activities', req.opportunityId]"
     >
     <span>

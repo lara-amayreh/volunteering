@@ -21,6 +21,7 @@ export class PersonnotificationService {
   updateNotification(id: string) {
     return this.notificationCollection.doc(id).update({seenFlag:true});
   }
+ 
   getNotification(userid: string) {
     return this.firestore
       .collection('personnotifications', (ref) =>

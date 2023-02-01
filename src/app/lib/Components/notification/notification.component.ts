@@ -40,6 +40,8 @@ export class NotificationComponent implements  OnInit , OnDestroy {
         this.role = val.role;
         if(this.data.request)
         this.requests$ = this.data.request;
+     
+     
       }
     });
   }
@@ -50,16 +52,16 @@ export class NotificationComponent implements  OnInit , OnDestroy {
   
 
   ngOnDestroy() {
-    this.subscription.unsubscribe()
+   this.subscription.unsubscribe()
   }
-  updateseen(id:string){
-this.personNotifservice.updateNotification(id);
-this.closedialog();
-  }
-  updatcompanyeseen(id:string){
-    this.orgNotifservice.updateNotification(id);
-    this.closedialog();
-      }
+//   updateseen(id:string){
+// this.personNotifservice.updateNotification(id);
+// this.closedialog();
+//   }
+  // updatcompanyeseen(id:string){
+  //   this.orgNotifservice.updateNotification(id);
+  //   this.closedialog();
+  //     }
   calculateDiff(sentDate: any){
     var date1:any =sentDate.toDate();
     var date2:any = new Date();

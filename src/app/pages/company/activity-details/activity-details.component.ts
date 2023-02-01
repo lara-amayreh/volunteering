@@ -212,5 +212,7 @@ export class ActivityDetailsComponent implements OnInit {
     }
     return stat;
   }
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    this.sub1.unsubscribe();
+  }
 }

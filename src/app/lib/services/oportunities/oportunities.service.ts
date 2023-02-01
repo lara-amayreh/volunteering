@@ -38,8 +38,7 @@ getTopOpportunities(){
 }
   getAllOpportunities() {
     return this.firestore
-      .collection<opportunity>('oportunities', (ref) =>
-      ref.orderBy('creatDate', 'desc'))
+      .collection<opportunity>('oportunities')
       .valueChanges({ idField: 'id' });
   }
 
