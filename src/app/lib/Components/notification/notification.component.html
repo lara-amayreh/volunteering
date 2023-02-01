@@ -3,7 +3,7 @@
 </div>
 <div class="container" *ngIf="role == 'person'">
   <ul *ngIf="requests$.length > 0">
-    <li [class.seen]="req.seenFlag"
+    <li [class.seen]="req.seenFlag" (click)="closedialog()"
 
     class="hed-div"
       *ngFor="let req of requests$"
@@ -28,7 +28,7 @@
 </div>
 <div class="container" *ngIf="role == 'company'">
   <ul *ngIf="requests$; else no">
-    <li class="hed-div"
+    <li class="hed-div" (click)="closedialog()"
        *ngFor="let req of requests$"
       [routerLink]="['/company/your-Activities', req.opportunityId]"
     >

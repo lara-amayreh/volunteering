@@ -101,6 +101,7 @@ export class HeaderComponent implements OnInit {
       data: { request: this.requests$ },
     });
     dialogRef.afterClosed().subscribe((result) => {
+      if(result)
       this.noi = null;
     });
   }

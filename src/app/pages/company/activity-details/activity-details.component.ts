@@ -122,7 +122,7 @@ export class ActivityDetailsComponent implements OnInit {
 
   approve(uid: string, oportunityId: string) {
     this.volunteer$ = this.opportunityservice.getvolunteer(uid, oportunityId);
-    this.sub1 = this.volunteer$.subscribe((v) => {
+    this.sub1 = this.volunteer$.pipe(take(1)).subscribe((v) => {
       if (v)
         this.opportunityservice.updateState(
           v[0].id,
@@ -161,7 +161,7 @@ export class ActivityDetailsComponent implements OnInit {
   }
   reject(uid: string, oportunityId: string) {
     this.volunteerr$ = this.opportunityservice.getvolunteer(uid, oportunityId);
-    this.sub2 = this.volunteerr$.subscribe((v) => {
+    this.sub2 = this.volunteerr$.pipe(take(1)).subscribe((v) => {
       if (v)
         this.opportunityservice.updateState(
           v[0].id,
@@ -212,7 +212,5 @@ export class ActivityDetailsComponent implements OnInit {
     }
     return stat;
   }
-  ngOnDestroy() {
-    this.sub1.unsubscribe();
-  }
+  ngOnDestroy() {}
 }

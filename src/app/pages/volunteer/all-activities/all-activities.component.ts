@@ -145,7 +145,7 @@ if(diffDays)
     return stat;
   }
   ngOnDestroy() {
-    this.sub2.unsubscribe();
-    this.sub.unsubscribe();
+    // this.sub2.unsubscribe();
+    // this.sub.unsubscribe();
   }
 }
